@@ -6,7 +6,7 @@ fun DependencyHandler.adapterDelegates() {
 }
 
 fun DependencyHandler.core() {
-    add("implementation", Libraries.Core.core)
+    add("implementation", Libraries.Core.coreKtx)
     add("implementation", Libraries.Core.appCompat)
     add("implementation", Libraries.Core.fragmentsKtx)
 }

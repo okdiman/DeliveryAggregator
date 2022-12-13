@@ -13,7 +13,7 @@ object Libraries {
 
     object Core {
         const val appCompat = "androidx.appcompat:appcompat:${Versions.androidxAppCompat}"
-        const val core = "androidx.core:core-ktx:${Versions.androidxCore}"
+        const val coreKtx = "androidx.core:core-ktx:${Versions.androidxCore}"
         const val customTabs = "androidx.browser:browser:${Versions.androidxBrowser}"
         const val fragmentsKtx =
             "androidx.fragment:fragment-ktx:${Versions.androidxFragments}"
@@ -28,6 +28,10 @@ object Libraries {
         const val recyclerView =
             "androidx.recyclerview:recyclerview:${Versions.androidxRecycler}"
         const val material = "com.google.android.material:material:${Versions.material}"
+    }
+
+    object Detekt {
+        const val core = "io.gitlab.arturbosch.detekt:detekt-cli:${Versions.detekt}"
     }
 
     object Database {

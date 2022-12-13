@@ -17,4 +17,5 @@ object Versions {
     const val gson = "2.10"
     const val adapterDelegates = "4.3.2"
     const val splashScreen = "1.0.0"
+    const val detekt = "1.22.0"
 }
