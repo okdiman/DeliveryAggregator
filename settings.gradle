@@ -16,6 +16,7 @@ rootProject.name = "Wildberries Delivery Aggregator"
 include(
         ":app",
         ":core",
+        ":core-ui",
         ":navigation",
         ":feature-auth:api",
         ":feature-auth:impl",

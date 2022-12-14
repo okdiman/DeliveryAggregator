@@ -9,5 +9,6 @@ android {
 }
 
 dependencies {
-    implementation(Libraries.Navigation.cicerone)
+    navigation()
+    implementation(project(Modules.auth_impl))
 }

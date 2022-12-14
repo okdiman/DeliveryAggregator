@@ -25,20 +25,31 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Settings.composeCompiler
+    }
     kotlinOptions {
         jvmTarget = Settings.kotlinJwm
     }
 }
 
 dependencies {
+    koin()
     core()
-    design()
-    implementation(project(Modules.navigation))
+    splash()
+    compose()
+    navigation()
+    viewModel()
     implementation(project(Modules.core))
+    implementation(project(Modules.core_ui))
     implementation(project(Modules.auth_api))
     implementation(project(Modules.auth_impl))
     implementation(project(Modules.profile_api))
     implementation(project(Modules.profile_impl))
     implementation(project(Modules.order_api))
     implementation(project(Modules.order_impl))
+    implementation(project(Modules.navigation))
 }

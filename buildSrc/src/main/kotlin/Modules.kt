@@ -1,6 +1,7 @@
 object Modules {
     const val app = ":app"
     const val core = ":core"
+    const val core_ui = ":core-ui"
     const val navigation = ":navigation"
     const val auth_api = ":feature-auth:api"
     const val auth_impl = ":feature-auth:impl"

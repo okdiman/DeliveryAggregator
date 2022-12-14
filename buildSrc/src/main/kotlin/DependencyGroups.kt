@@ -1,21 +1,10 @@
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
-fun DependencyHandler.adapterDelegates() {
-    add("implementation", Libraries.AdapterDelegates.core)
-    add("implementation", Libraries.AdapterDelegates.viewBindingExt)
-}
 
 fun DependencyHandler.core() {
     add("implementation", Libraries.Core.coreKtx)
-    add("implementation", Libraries.Core.appCompat)
-    add("implementation", Libraries.Core.fragmentsKtx)
-}
-
-fun DependencyHandler.design() {
-    add("implementation", Libraries.Design.cardView)
-    add("implementation", Libraries.Design.constraintLayout)
-    add("implementation", Libraries.Design.material)
-    add("implementation", Libraries.Design.recyclerView)
+    add("implementation", Libraries.Core.material)
+    add("implementation", Libraries.Core.lifecycle)
 }
 
 fun DependencyHandler.koin() {
@@ -34,10 +23,33 @@ fun DependencyHandler.retrofit() {
     add("implementation", Libraries.Retrofit.core)
 }
 
+fun DependencyHandler.compose() {
+    add("implementation", Libraries.Compose.composeActivity)
+    add("implementation", Libraries.Compose.ui)
+    add("implementation", Libraries.Compose.tooling)
+    add("implementation", Libraries.Compose.material)
+}
+
+fun DependencyHandler.coil() {
+    add("implementation", Libraries.Coil.compose)
+    add("implementation", Libraries.Coil.core)
+}
+
+fun DependencyHandler.splash() {
+    add("implementation", Libraries.Core.splashScreen)
+}
+
+fun DependencyHandler.json() {
+    add("implementation", Libraries.Json.gson)
+}
+
 fun DependencyHandler.viewModel() {
-    add("implementation", Libraries.ViewModel.common)
-    add("implementation", Libraries.ViewModel.extensions)
-    add("implementation", Libraries.ViewModel.lifecycleScope)
-    add("implementation", Libraries.ViewModel.livedataExt)
-    add("implementation", Libraries.ViewModel.viewModelScope)
+    add("implementation", Libraries.ViewModel.compose)
+    add("implementation", Libraries.ViewModel.core)
+    add("implementation", Libraries.ViewModel.odyssey)
+}
+
+fun DependencyHandler.navigation() {
+    add("implementation", Libraries.Navigation.compose)
+    add("implementation", Libraries.Navigation.core)
 }

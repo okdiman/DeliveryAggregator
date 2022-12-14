@@ -1,33 +1,23 @@
 object Libraries {
 
-    object AdapterDelegates {
-        const val core =
-            "com.hannesdorfmann:adapterdelegates4-kotlin-dsl:${Versions.adapterDelegates}"
-        const val viewBindingExt =
-            "com.hannesdorfmann:adapterdelegates4-kotlin-dsl-viewbinding:${Versions.adapterDelegates}"
+    object Compose {
+        const val ui = "androidx.compose.ui:ui:${Versions.compose}"
+        const val tooling = "androidx.compose.ui:ui-tooling-preview:${Versions.compose}"
+        const val material = "androidx.compose.material:material:${Versions.compose}"
+        const val composeActivity = "androidx.activity:activity-compose:${Versions.activityCompose}"
     }
 
     object Coil {
         const val core = "io.coil-kt:coil:${Versions.coil}"
+        const val compose = "io.coil-kt:coil-compose:${Versions.coil}"
     }
 
     object Core {
-        const val appCompat = "androidx.appcompat:appcompat:${Versions.androidxAppCompat}"
         const val coreKtx = "androidx.core:core-ktx:${Versions.androidxCore}"
-        const val customTabs = "androidx.browser:browser:${Versions.androidxBrowser}"
-        const val fragmentsKtx =
-            "androidx.fragment:fragment-ktx:${Versions.androidxFragments}"
+        const val material = "com.google.android.material:material:${Versions.material}"
         const val splashScreen =
             "androidx.core:core-splashscreen:${Versions.splashScreen}"
-    }
-
-    object Design {
-        const val cardView = "androidx.cardview:cardview:${Versions.androidxCardview}"
-        const val constraintLayout =
-            "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
-        const val recyclerView =
-            "androidx.recyclerview:recyclerview:${Versions.androidxRecycler}"
-        const val material = "com.google.android.material:material:${Versions.material}"
+        const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
     }
 
     object Detekt {
@@ -49,25 +39,19 @@ object Libraries {
         const val android = "io.insert-koin:koin-android:${Versions.koin}"
     }
 
-    object Navigation {
-        const val cicerone = "com.github.terrakok:cicerone:${Versions.cicerone}"
-    }
-
     object Retrofit {
         const val core = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         const val converter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     }
 
     object ViewModel {
-        const val extensions =
-            "androidx.lifecycle:lifecycle-extensions:${Versions.viewmodel}"
-        const val viewModelScope =
-            "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleExt}"
-        const val lifecycleScope =
-            "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycleExt}"
-        const val livedataExt =
-            "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycleExt}"
-        const val common =
-            "androidx.lifecycle:lifecycle-common-java8:${Versions.viewmodel}"
+        const val core = "com.adeo:kviewmodel:${Versions.kViewModel}"
+        const val compose = "com.adeo:kviewmodel-compose:${Versions.kViewModel}"
+        const val odyssey = "com.adeo:kviewmodel-odyssey:${Versions.kViewModel}"
+    }
+
+    object Navigation {
+        const val core = "io.github.alexgladkov:odyssey-core:${Versions.odyssey}"
+        const val compose = "io.github.alexgladkov:odyssey-compose:${Versions.odyssey}"
     }
 }
