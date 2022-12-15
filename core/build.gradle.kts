@@ -11,6 +11,7 @@ android {
 
 dependencies {
     core()
-    retrofit()
+    kotlin()
+    network()
     koin()
 }

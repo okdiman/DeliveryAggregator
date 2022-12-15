@@ -18,9 +18,19 @@ fun DependencyHandler.room() {
     add("kapt", Libraries.Database.compile)
 }
 
-fun DependencyHandler.retrofit() {
+fun DependencyHandler.network() {
     add("implementation", Libraries.Retrofit.converter)
     add("implementation", Libraries.Retrofit.core)
+    add("implementation", Libraries.Serialization.serialization)
+    add("implementation", Libraries.OkHttp.logging)
+    add("implementation", Libraries.OkHttp.base)
+}
+
+fun DependencyHandler.kotlin() {
+    add("implementation", Libraries.Kotlin.stdLib)
+    add("implementation", Libraries.Kotlin.coroutinesAndroid)
+    add("implementation", Libraries.Kotlin.coroutinesCore)
+    add("implementation", Libraries.Kotlin.coroutinesGms)
 }
 
 fun DependencyHandler.compose() {

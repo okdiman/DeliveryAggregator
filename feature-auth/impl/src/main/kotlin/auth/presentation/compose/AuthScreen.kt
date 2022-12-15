@@ -1,7 +1,7 @@
-package auth.presentation.compose.screen
+package auth.presentation.compose
 
 import androidx.compose.runtime.Composable
-import auth.presentation.compose.view.AuthView
+import auth.presentation.compose.AuthView
 import auth.presentation.viewmodel.AuthViewModel
 import auth.presentation.viewmodel.model.AuthAction
 import com.adeo.kviewmodel.compose.observeAsState

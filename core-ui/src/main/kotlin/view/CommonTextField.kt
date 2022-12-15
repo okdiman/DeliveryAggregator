@@ -48,8 +48,15 @@ fun CommonTextField(
         textStyle = textStyle,
         keyboardOptions = keyboardOptions,
         visualTransformation = visualTransformation,
-        onValueChange = {
-            onValueChanged(it.take(maxChar))
+        onValueChange = { value ->
+            when {
+                isPhone -> {
+                    onValueChanged(value.filter { it.isDigit() }.take(maxChar))
+                }
+                else -> {
+                    onValueChanged(value.take(maxChar))
+                }
+            }
         }
     ) { innerTextField ->
         TextFieldDefaults.TextFieldDecorationBox(

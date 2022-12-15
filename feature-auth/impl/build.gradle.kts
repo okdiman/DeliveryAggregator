@@ -18,7 +18,7 @@ dependencies {
     koin()
     coil()
     compose()
-    retrofit()
+    network()
     navigation()
     viewModel()
     implementation(project(Modules.auth_api))

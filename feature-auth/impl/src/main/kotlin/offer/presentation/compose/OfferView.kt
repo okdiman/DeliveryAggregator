@@ -1,4 +1,4 @@
-package offer.presentation
+package offer.presentation.compose
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -12,15 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.alexgladkov.odyssey.compose.local.LocalRootController
+import offer.presentation.viewmodel.model.OfferEvent
+import offer.presentation.viewmodel.model.OfferState
 import theme.Theme
 import trinity_monsters.wildberries_delivery_aggregator.feature_auth.impl.R
 
 @Composable
-fun OfferScreen() {
-    val rootController = LocalRootController.current
+fun OfferView(viewState: OfferState, eventHandler: (OfferEvent) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -28,7 +29,7 @@ fun OfferScreen() {
         IconButton(
             modifier = Modifier.padding(start = 4.dp),
             onClick = {
-                rootController.popBackStack()
+                eventHandler(OfferEvent.OnBackClick)
             }) {
             Icon(painter = painterResource(id = R.drawable.back_ic), contentDescription = "")
         }
@@ -44,17 +45,17 @@ fun OfferScreen() {
         Spacer(modifier = Modifier.height(12.dp))
         Text(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp),
-            text = "Настоящий документ (далее – Политика) определяет цели и общие принципы обработки персональных данных, " +
-                    "а также реализуемые меры защиты персональных данных. Политика является общедоступным документом оператора " +
-                    "и предусматривает возможность ознакомления с ней любых лиц. Политика действует бессрочно после утверждения " +
-                    "и до ее замены новой версией. В Политике используются термины и определения в соответствии с их значениями, " +
-                    "как они определены в ФЗ-152 \"О персональных данных Обработка персональных данных Оператора осуществляется " +
-                    "с соблюдением принципов и условий, предусмотренных настоящей Политикой и законодательством Российской Федерации " +
-                    "в области персональных данных",
+            text = viewState.offer,
             style = Theme.fonts.regular.copy(
                 fontSize = 16.sp,
                 color = Theme.colors.textPrimaryColor
             )
         )
     }
+}
+
+@Preview
+@Composable
+fun OfferView_Preview() {
+    OfferView(viewState = OfferState(offer = "test offer"), eventHandler = {})
 }

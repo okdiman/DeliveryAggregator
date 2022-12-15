@@ -1,10 +1,9 @@
 package data.model.request
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
-class SignInRequest(
-    @SerializedName("code")
+@Serializable
+data class SignInRequest(
     val code: Int,
-    @SerializedName("phone")
     val phone: String
 )

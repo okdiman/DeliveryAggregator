@@ -17,6 +17,7 @@ android {
 
 dependencies {
     compose()
+    koin()
     viewModel()
     implementation(project(Modules.core))
 }

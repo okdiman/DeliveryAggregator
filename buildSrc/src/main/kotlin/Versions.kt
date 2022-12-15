@@ -13,4 +13,8 @@ object Versions {
     const val lifecycle = "2.5.1"
     const val kViewModel = "0.11"
     const val odyssey = "1.0.1"
+    const val serialization = "1.3.3"
+    const val okhttp = "4.10.0"
+    const val kotlin = "1.7.10"
+    const val kotlinCoroutines = "1.5.2"
 }

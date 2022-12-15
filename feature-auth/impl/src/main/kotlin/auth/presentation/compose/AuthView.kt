@@ -1,4 +1,4 @@
-package auth.presentation.compose.view
+package auth.presentation.compose
 
 import ActionButton
 import androidx.compose.foundation.Image
@@ -71,7 +71,6 @@ fun AuthView(viewState: AuthState, eventHandler: (AuthEvent) -> Unit) {
                 text = viewState.phone,
                 textStyle = Theme.fonts.bold.copy(fontSize = 24.sp),
                 hint = stringResource(id = R.string.phone_hint),
-                enabled = !viewState.isLoading,
                 onValueChanged = {
                     eventHandler(AuthEvent.PhoneChanged(it))
                 },

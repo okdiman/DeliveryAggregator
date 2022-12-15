@@ -1,7 +1,7 @@
 package auth.navigation
 
-import auth.presentation.compose.screen.AuthScreen
-import offer.presentation.OfferScreen
+import auth.presentation.compose.AuthScreen
+import offer.presentation.compose.OfferScreen
 import ru.alexgladkov.odyssey.compose.extensions.flow
 import ru.alexgladkov.odyssey.compose.extensions.screen
 import ru.alexgladkov.odyssey.compose.navigation.RootComposeBuilder

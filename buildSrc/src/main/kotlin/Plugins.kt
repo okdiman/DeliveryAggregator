@@ -3,4 +3,5 @@ object Plugins {
     const val library = "com.android.library"
     const val kotlin = "org.jetbrains.kotlin.android"
     const val kotlinParcelize = "kotlin-parcelize"
+    const val serialization = "org.jetbrains.kotlin.plugin.serialization"
 }

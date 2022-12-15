@@ -4,7 +4,8 @@ import BaseViewModel
 import auth.presentation.viewmodel.model.AuthAction
 import auth.presentation.viewmodel.model.AuthEvent
 import auth.presentation.viewmodel.model.AuthState
-import data.AuthRepository
+import domain.model.VerifyCodeModel
+import domain.usecase.GetVerifyCodeUseCase
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
@@ -12,7 +13,7 @@ class AuthViewModel : BaseViewModel<AuthState, AuthAction, AuthEvent>(
     initialState = AuthState()
 ), KoinComponent {
 
-    private val repository: AuthRepository by inject()
+    private val getVerifyCode by inject<GetVerifyCodeUseCase>()
 
     override fun obtainEvent(viewEvent: AuthEvent) {
         when (viewEvent) {
@@ -55,7 +56,7 @@ class AuthViewModel : BaseViewModel<AuthState, AuthAction, AuthEvent>(
     private fun onEntranceButtonClick() {
         launchJob(onFinally = { viewState = viewState.copy(isLoading = false) }) {
             viewState = viewState.copy(isLoading = true)
-//            repository.signIn()
+            getVerifyCode(VerifyCodeModel(viewState.phone))
         }
     }
 

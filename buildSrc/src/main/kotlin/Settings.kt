@@ -8,4 +8,5 @@ object Settings {
     const val kotlin = "1.7.10"
     const val kotlinJwm = "1.8"
     const val composeCompiler = "1.3.1"
+    const val serializationPlugin = "1.7.10"
 }

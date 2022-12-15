@@ -1,9 +1,8 @@
 package data.model.request
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
-@JvmInline
-value class SendVerifyCodeRequest(
-    @SerializedName("phone")
+@Serializable
+data class SendVerifyCodeRequest(
     val phone: String
 )

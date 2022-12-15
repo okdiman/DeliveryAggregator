@@ -1,9 +1,10 @@
 package trinity_monsters.wildberries_delivery_aggregator.di
 
-import auth.di.authModule
-import di.networkModule
+import di.authModule
+import di.coreModules
+import di.coreUiiModule
 
 fun applicationModules() = listOf(
-    networkModule(),
-    authModule()
-)
+    authModule(),
+    coreUiiModule()
+) + coreModules()
