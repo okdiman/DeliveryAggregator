@@ -5,7 +5,7 @@ import offer.presentation.OfferScreen
 import ru.alexgladkov.odyssey.compose.extensions.flow
 import ru.alexgladkov.odyssey.compose.extensions.screen
 import ru.alexgladkov.odyssey.compose.navigation.RootComposeBuilder
-import utils.NavigationTree
+import navigation.NavigationTree
 
 fun RootComposeBuilder.authFlow() {
     flow(NavigationTree.Auth.AuthFlow.name) {

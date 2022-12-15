@@ -8,7 +8,7 @@ import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
-import utils.NavigationTree
+import navigation.NavigationTree
 
 @Composable
 fun AuthScreen() {

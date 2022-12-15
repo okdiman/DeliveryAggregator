@@ -6,7 +6,6 @@ object Settings {
     const val minSdk = 23
     const val gradle = "7.3.1"
     const val kotlin = "1.7.10"
-    const val composePlugin = "1.2.0"
     const val kotlinJwm = "1.8"
     const val composeCompiler = "1.3.1"
 }

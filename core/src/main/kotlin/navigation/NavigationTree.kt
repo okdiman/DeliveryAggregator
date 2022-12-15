@@ -1,4 +1,4 @@
-package utils
+package navigation
 
 object NavigationTree {
     enum class Auth {

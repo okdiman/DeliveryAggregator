@@ -1,5 +1,3 @@
-import Settings.minSdk
-
 plugins {
     id(Plugins.kotlin)
     id(Plugins.library)

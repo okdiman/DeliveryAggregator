@@ -10,6 +10,8 @@ fun DeliveryAggregatorTheme(
     CompositionLocalProvider(
         LocalShapeProvider provides shapes,
         LocalColorProvider provides palette,
+        LocalGradientProvider provides gradients,
+        LocalFontProvider provides fonts,
         content = content
     )
 }
@@ -21,4 +23,10 @@ object Theme {
     val shapes: DeliveryAggregatorShapes
         @Composable
         get() = LocalShapeProvider.current
+    val gradients: DeliveryAggregatorGradients
+        @Composable
+        get() = LocalGradientProvider.current
+    val fonts: DeliveryAggregatorFonts
+        @Composable
+        get() = LocalFontProvider.current
 }

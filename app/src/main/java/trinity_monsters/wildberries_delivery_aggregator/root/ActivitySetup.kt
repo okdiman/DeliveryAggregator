@@ -8,7 +8,7 @@ import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import ru.alexgladkov.odyssey.compose.navigation.RootComposeBuilder
 import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalNavigator
 import theme.DeliveryAggregatorTheme
-import utils.NavigationTree
+import navigation.NavigationTree
 
 fun ComponentActivity.setupThemedNavigation() {
     val rootController =

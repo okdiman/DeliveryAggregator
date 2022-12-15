@@ -18,4 +18,5 @@ android {
 dependencies {
     compose()
     viewModel()
+    implementation(project(Modules.core))
 }
