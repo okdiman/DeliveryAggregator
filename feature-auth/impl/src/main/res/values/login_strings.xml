@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enter_phone">Введите номер телефона</string>
+    <string name="phone_prefix">+7</string>
+    <string name="phone_hint">(985)111-22-33</string>
+    <string name="agreement">Я соглашаюсь с условиями оферты</string>
+    <string name="read_offer">Прочитать условия</string>
+    <string name="entrance">Войти</string>
+</resources>

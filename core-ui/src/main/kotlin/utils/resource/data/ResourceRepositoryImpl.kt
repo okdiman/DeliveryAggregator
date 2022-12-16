@@ -12,4 +12,8 @@ class ResourceRepositoryImpl(
             it.reader().readText()
         }
     }
+
+    override fun getString(resId: Int): String {
+        return context.resources.getString(resId)
+    }
 }

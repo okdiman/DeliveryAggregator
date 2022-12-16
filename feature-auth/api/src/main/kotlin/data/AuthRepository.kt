@@ -1,11 +1,11 @@
 package data
 
-import data.model.request.SignInRequest
 import data.model.request.SignUpRequest
+import domain.model.SignInModel
 import domain.model.VerifyCodeModel
 
 interface AuthRepository {
-    suspend fun getVerifyCode(request: VerifyCodeModel)
-    suspend fun signIn(request: SignInRequest)
-    suspend fun signUp(request: SignUpRequest)
+    suspend fun getVerifyCode(model: VerifyCodeModel)
+    suspend fun signIn(model: SignInModel)
+    suspend fun signUp(model: SignUpRequest)
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="verify_title_start">Сейчас вам поступит звонок на телефон</string>
+    <string name="verify_title_end">
+        Поднимать звонок не нужно.\nВведите 4 последние цифры телефона
+    </string>
+    <string name="code_hint">00-00</string>
+    <string name="code_error">Неверный код</string>
+    <string name="call_again">Позвонить еще раз</string>
+    <string name="send_code_again_timer">Запросить новый код можно через </string>
+    <string name="seconds"> сек.</string>
+</resources>

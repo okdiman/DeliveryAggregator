@@ -17,7 +17,8 @@ private fun baseFontStyle(
     weight: FontWeight = FontWeight.Normal,
 ): TextStyle = TextStyle(
     fontWeight = weight,
-    fontFamily = sfUiDisplay
+    fontFamily = sfUiDisplay,
+    color = palette.textPrimaryColor
 )
 
 private val sfUiDisplay = FontFamily(

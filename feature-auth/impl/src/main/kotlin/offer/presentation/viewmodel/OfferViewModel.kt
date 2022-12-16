@@ -32,6 +32,5 @@ class OfferViewModel : BaseViewModel<OfferState, OfferAction, OfferEvent>(
 
     private fun onBackCLick() {
         viewAction = OfferAction.OpenPreviousScreen
-        resetAction()
     }
 }

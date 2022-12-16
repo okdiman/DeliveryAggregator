@@ -5,6 +5,7 @@ import di.coreModules
 import di.coreUiiModule
 
 fun applicationModules() = listOf(
-    authModule(),
     coreUiiModule()
-) + coreModules()
+) +
+        coreModules() +
+        authModule()

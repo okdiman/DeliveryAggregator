@@ -18,9 +18,10 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import theme.Theme
-import utils.PhoneVisualTransformation
+import utils.DigitVisualTransformation
+import utils.Mask
 
-@Suppress("LongParameterList")
+@Suppress("LongParameterList", "LongMethod")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CommonTextField(
@@ -30,6 +31,7 @@ fun CommonTextField(
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     isSecure: Boolean = false,
     isPhone: Boolean = false,
+    isCode: Boolean = false,
     maxChar: Int = Int.MAX_VALUE,
     enabled: Boolean = true,
     singleLine: Boolean = false,
@@ -39,19 +41,27 @@ fun CommonTextField(
     val interactionSource = remember { MutableInteractionSource() }
     val visualTransformation = when {
         isSecure -> PasswordVisualTransformation()
-        isPhone -> PhoneVisualTransformation()
+        isPhone -> DigitVisualTransformation(
+            mask = Mask.PHONE,
+            maxChar = maxChar
+        )
+        isCode -> DigitVisualTransformation(
+            mask = Mask.CODE,
+            maxChar = maxChar
+        )
         else -> VisualTransformation.None
     }
     BasicTextField(
         modifier = Modifier
             .fillMaxWidth(),
         value = text,
+        enabled = enabled,
         textStyle = textStyle,
         keyboardOptions = keyboardOptions,
         visualTransformation = visualTransformation,
         onValueChange = { value ->
             when {
-                isPhone -> {
+                isPhone || isCode -> {
                     onValueChanged(value.filter { it.isDigit() }.take(maxChar))
                 }
                 else -> {

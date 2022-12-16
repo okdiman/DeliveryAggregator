@@ -33,23 +33,17 @@ fun OfferView(viewState: OfferState, eventHandler: (OfferEvent) -> Unit) {
             }) {
             Icon(painter = painterResource(id = R.drawable.back_ic), contentDescription = "")
         }
-        Spacer(modifier = Modifier.height(14.dp))
+        Spacer(modifier = Modifier.height(30.dp))
         Text(
             modifier = Modifier.padding(start = 16.dp),
             text = stringResource(id = R.string.offer),
-            style = Theme.fonts.bold.copy(
-                fontSize = 24.sp,
-                color = Theme.colors.textPrimaryColor
-            )
+            style = Theme.fonts.bold.copy(fontSize = 24.sp)
         )
         Spacer(modifier = Modifier.height(12.dp))
         Text(
             modifier = Modifier.padding(start = 16.dp, end = 16.dp),
             text = viewState.offer,
-            style = Theme.fonts.regular.copy(
-                fontSize = 16.sp,
-                color = Theme.colors.textPrimaryColor
-            )
+            style = Theme.fonts.regular.copy(fontSize = 16.sp)
         )
     }
 }

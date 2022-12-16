@@ -1,7 +1,10 @@
+package trinity_monsters.wildberries_delivery_aggregator.root
+
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.CompositionLocalProvider
 import com.adeo.kviewmodel.odyssey.setupWithViewModels
+import generateGraph
 import ru.alexgladkov.odyssey.compose.base.Navigator
 import ru.alexgladkov.odyssey.compose.extensions.setupWithActivity
 import ru.alexgladkov.odyssey.compose.local.LocalRootController

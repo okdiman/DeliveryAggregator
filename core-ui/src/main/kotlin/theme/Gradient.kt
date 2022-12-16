@@ -6,7 +6,8 @@ import androidx.compose.ui.graphics.Color
 import utils.LinearGradient
 
 data class DeliveryAggregatorGradients(
-    val actionButtonGradient: Brush
+    val actionButtonGradient: Brush,
+    val progressBarGradient: Brush
 )
 
 val gradients = DeliveryAggregatorGradients(
@@ -18,6 +19,13 @@ val gradients = DeliveryAggregatorGradients(
             Color(0xFFA4C241)
         ),
         angleInDegrees = 9f
+    ),
+    progressBarGradient = LinearGradient(
+        colors = listOf(
+            Color(0xFF3D81D7),
+            Color(0xFF6BA0E4)
+        ),
+        angleInDegrees = 90f
     )
 )
 
