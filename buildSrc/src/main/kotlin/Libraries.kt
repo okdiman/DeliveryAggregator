@@ -50,7 +50,7 @@ object Libraries {
     }
 
     object Serialization {
-        const val serialization =
+        const val core =
             "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.serialization}"
     }
 

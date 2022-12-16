@@ -40,93 +40,113 @@ fun AuthView(viewState: AuthState, eventHandler: (AuthEvent) -> Unit) {
             .fillMaxSize()
             .padding(bottom = 12.dp, end = 12.dp)
     ) {
-        Spacer(modifier = Modifier.height(48.dp))
-        Image(
-            modifier = Modifier
-                .padding(start = 16.dp)
-                .size(48.dp),
-            painter = painterResource(R.drawable.auth_phone_ic),
-            contentDescription = "poster"
+        TitleBlock()
+        PhoneBlock(viewState = viewState, eventHandler = eventHandler)
+        AgreementBlock(viewState = viewState, eventHandler = eventHandler)
+        ButtonBlock(viewState = viewState, eventHandler = eventHandler)
+    }
+}
+
+@Composable
+private fun TitleBlock() {
+    Spacer(modifier = Modifier.height(48.dp))
+    Image(
+        modifier = Modifier
+            .padding(start = 16.dp)
+            .size(48.dp),
+        painter = painterResource(R.drawable.auth_phone_ic),
+        contentDescription = "poster"
+    )
+    Spacer(modifier = Modifier.height(12.dp))
+    Text(
+        modifier = Modifier.padding(start = 16.dp),
+        text = stringResource(R.string.enter_phone),
+        style = Theme.fonts.regular.copy(
+            fontSize = 16.sp,
+            color = Theme.colors.textPrimaryColor
         )
-        Spacer(modifier = Modifier.height(12.dp))
+    )
+    Spacer(modifier = Modifier.height(12.dp))
+}
+
+@Composable
+private fun PhoneBlock(viewState: AuthState, eventHandler: (AuthEvent) -> Unit) {
+    Row(modifier = Modifier.padding(start = 16.dp)) {
         Text(
-            modifier = Modifier.padding(start = 16.dp),
-            text = stringResource(R.string.enter_phone),
-            style = Theme.fonts.regular.copy(
-                fontSize = 16.sp,
+            text = stringResource(id = R.string.phone_prefix),
+            style = Theme.fonts.bold.copy(
+                fontSize = 24.sp,
                 color = Theme.colors.textPrimaryColor
             )
         )
-        Spacer(modifier = Modifier.height(12.dp))
-        Row(modifier = Modifier.padding(start = 16.dp)) {
+        Spacer(modifier = Modifier.width(4.dp))
+        CommonTextField(
+            text = viewState.phone,
+            textStyle = Theme.fonts.bold.copy(fontSize = 24.sp),
+            hint = stringResource(id = R.string.phone_hint),
+            onValueChanged = {
+                eventHandler(AuthEvent.PhoneChanged(it))
+            },
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+            isPhone = true,
+            maxChar = 10
+        )
+    }
+}
+
+@Composable
+private fun AgreementBlock(viewState: AuthState, eventHandler: (AuthEvent) -> Unit) {
+    Row(
+        modifier = Modifier
+            .padding(start = 4.dp)
+            .fillMaxWidth()
+    ) {
+        Checkbox(
+            checked = viewState.isAgreementChecked,
+            colors = CheckboxDefaults.colors(
+                checkedColor = Theme.colors.textPrimaryColor
+            ),
+            onCheckedChange = {
+                eventHandler(AuthEvent.OnAgreementClick)
+            })
+        Column {
+            Spacer(modifier = Modifier.height(12.dp))
             Text(
-                text = stringResource(id = R.string.phone_prefix),
-                style = Theme.fonts.bold.copy(
-                    fontSize = 24.sp,
+                text = stringResource(id = R.string.agreement),
+                style = Theme.fonts.regular.copy(
+                    fontSize = 16.sp,
                     color = Theme.colors.textPrimaryColor
                 )
             )
-            Spacer(modifier = Modifier.width(4.dp))
-            CommonTextField(
-                text = viewState.phone,
-                textStyle = Theme.fonts.bold.copy(fontSize = 24.sp),
-                hint = stringResource(id = R.string.phone_hint),
-                onValueChanged = {
-                    eventHandler(AuthEvent.PhoneChanged(it))
+            Text(
+                modifier = Modifier.clickable {
+                    eventHandler(AuthEvent.OnOfferCLick)
                 },
-                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                isPhone = true,
-                maxChar = 10
+                text = stringResource(id = R.string.read_offer),
+                style = Theme.fonts.regular.copy(
+                    fontSize = 16.sp,
+                    color = Theme.colors.textPrimaryColor,
+                    textDecoration = TextDecoration.Underline
+                )
             )
         }
-        Row(
-            modifier = Modifier
-                .padding(start = 4.dp)
-                .fillMaxWidth()
+    }
+}
+
+@Composable
+private fun ButtonBlock(viewState: AuthState, eventHandler: (AuthEvent) -> Unit) {
+    Box(
+        modifier = Modifier
+            .padding(start = 16.dp)
+            .fillMaxSize(),
+        contentAlignment = Alignment.BottomCenter
+    ) {
+        ActionButton(
+            text = stringResource(id = R.string.entrance),
+            enabled = viewState.isButtonEnabled,
+            gradient = Theme.gradients.actionButtonGradient
         ) {
-            Checkbox(
-                checked = viewState.isAgreementChecked,
-                colors = CheckboxDefaults.colors(
-                    checkedColor = Theme.colors.textPrimaryColor
-                ),
-                onCheckedChange = {
-                    eventHandler(AuthEvent.OnAgreementClick)
-                })
-            Column {
-                Spacer(modifier = Modifier.height(12.dp))
-                Text(
-                    text = stringResource(id = R.string.agreement),
-                    style = Theme.fonts.regular.copy(
-                        fontSize = 16.sp,
-                        color = Theme.colors.textPrimaryColor
-                    )
-                )
-                Text(
-                    modifier = Modifier.clickable {
-                        eventHandler(AuthEvent.OnOfferCLick)
-                    },
-                    text = stringResource(id = R.string.read_offer),
-                    style = Theme.fonts.regular.copy(
-                        fontSize = 16.sp,
-                        color = Theme.colors.textPrimaryColor,
-                        textDecoration = TextDecoration.Underline
-                    )
-                )
-            }
-        }
-        Box(
-            modifier = Modifier
-                .padding(start = 16.dp)
-                .fillMaxSize(),
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            ActionButton(
-                text = stringResource(id = R.string.entrance),
-                enabled = viewState.isButtonEnabled,
-                gradient = Theme.gradients.actionButtonGradient
-            ) {
-                eventHandler(AuthEvent.OnEntranceButtonCLick)
-            }
+            eventHandler(AuthEvent.OnEntranceButtonCLick)
         }
     }
 }

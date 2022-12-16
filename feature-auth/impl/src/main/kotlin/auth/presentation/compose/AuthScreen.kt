@@ -1,14 +1,13 @@
 package auth.presentation.compose
 
 import androidx.compose.runtime.Composable
-import auth.presentation.compose.AuthView
 import auth.presentation.viewmodel.AuthViewModel
 import auth.presentation.viewmodel.model.AuthAction
 import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
+import navigation.NavigationTree
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
-import navigation.NavigationTree
 
 @Composable
 fun AuthScreen() {

@@ -97,7 +97,7 @@ complexity:
     threshold: 15
   ComplexCondition:
     active: true
-    threshold: 4
+    threshold: 5
   ComplexInterface:
     active: false
     threshold: 10
@@ -125,7 +125,7 @@ complexity:
     ignoredLabels: [ ]
   LargeClass:
     active: true
-    threshold: 600
+    threshold: 400
   LongMethod:
     active: true
     threshold: 60
@@ -167,7 +167,7 @@ complexity:
   TooManyFunctions:
     active: true
     excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
-    thresholdInFiles: 11
+    thresholdInFiles: 100
     thresholdInClasses: 11
     thresholdInInterfaces: 11
     thresholdInObjects: 11
@@ -179,7 +179,7 @@ complexity:
 coroutines:
   active: true
   GlobalCoroutineUsage:
-    active: false
+    active: true
   InjectDispatcher:
     active: true
     dispatcherNames:
@@ -241,7 +241,7 @@ exceptions:
       - 'toString'
   InstanceOfCheckForException:
     active: true
-    excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
+    excludes: [ '**/test/**', '**/androidTest/**' ]
   NotImplementedDeclaration:
     active: false
   ObjectExtendsThrowable:
@@ -304,7 +304,7 @@ exceptions:
 naming:
   active: true
   BooleanPropertyNaming:
-    active: false
+    active: true
     allowedPattern: '^(is|has|are)'
     ignoreOverridden: true
   ClassNaming:
@@ -323,13 +323,13 @@ naming:
     active: false
     forbiddenName: [ ]
   FunctionMaxLength:
-    active: false
+    active: true
     maximumFunctionNameLength: 30
   FunctionMinLength:
     active: false
     minimumFunctionNameLength: 3
   FunctionNaming:
-    active: true
+    active: false
     excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
     functionPattern: '[a-z][a-zA-Z0-9]*'
     excludeClassPattern: '$^'
@@ -347,7 +347,7 @@ naming:
     active: false
     parameterPattern: '[a-z][A-Za-z0-9]*|_'
   MatchingDeclarationName:
-    active: true
+    active: false
     mustBeFirst: true
   MemberNameEqualsClassName:
     active: true
@@ -564,8 +564,8 @@ style:
     active: true
     maxJumpCount: 1
   MagicNumber:
-    active: true
-    excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**', '**/*.kts' ]
+    active: false # Jetpack Compose
+    excludes: [ ',**/utils/**, **/theme/**, **/test/**', '**/androidTest/**', '**/*.kts' ]
     ignoreNumbers:
       - '-1'
       - '0'

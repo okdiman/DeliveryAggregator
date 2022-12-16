@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import theme.Theme
 import utils.PhoneVisualTransformation
 
+@Suppress("LongParameterList")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CommonTextField(

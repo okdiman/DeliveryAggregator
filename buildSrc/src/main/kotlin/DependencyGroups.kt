@@ -21,7 +21,7 @@ fun DependencyHandler.room() {
 fun DependencyHandler.network() {
     add("implementation", Libraries.Retrofit.converter)
     add("implementation", Libraries.Retrofit.core)
-    add("implementation", Libraries.Serialization.serialization)
+    add("implementation", Libraries.Serialization.core)
     add("implementation", Libraries.OkHttp.logging)
     add("implementation", Libraries.OkHttp.base)
 }

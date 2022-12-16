@@ -1,4 +1,5 @@
 import com.adeo.kviewmodel.BaseSharedViewModel
+import java.io.IOException
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 import kotlinx.coroutines.cancel
@@ -8,7 +9,9 @@ import kotlinx.coroutines.launch
 abstract class BaseViewModel<State : Any, Action, Event>(initialState: State) :
     BaseSharedViewModel<State, Action, Event>(initialState) {
 
-    override fun obtainEvent(viewEvent: Event) {}
+    override fun obtainEvent(viewEvent: Event) {
+        // nothing
+    }
 
     fun launchJob(
         context: CoroutineContext = EmptyCoroutineContext,
@@ -19,7 +22,7 @@ abstract class BaseViewModel<State : Any, Action, Event>(initialState: State) :
         viewModelScope.launch(context) {
             try {
                 job()
-            } catch (t: Throwable) {
+            } catch (t: IOException) {
                 onError(t)
             } finally {
                 onFinally()
