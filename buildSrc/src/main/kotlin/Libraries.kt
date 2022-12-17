@@ -74,4 +74,8 @@ object Libraries {
         const val base = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
         const val logging = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
     }
+
+    object Security {
+        const val crypto = "androidx.security:security-crypto:${Versions.crypto}"
+    }
 }

@@ -1,6 +1,8 @@
 package presentation
 
-@JvmInline
-value class VerifyParameters(
+import androidx.compose.runtime.Immutable
+
+@Immutable
+class VerifyParameters(
     val phone: String
 )

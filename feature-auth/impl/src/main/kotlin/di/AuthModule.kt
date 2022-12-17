@@ -1,11 +1,13 @@
 package di
 
+import login.di.loginModule
 import offer.di.offerModule
-import login.di.startModule
+import root.di.rootModule
 import verify.di.verifyModule
 
 fun authModule() = listOf(
-    startModule(),
+    loginModule(),
     offerModule(),
-    verifyModule()
+    verifyModule(),
+    rootModule()
 )

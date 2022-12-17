@@ -53,6 +53,10 @@ fun DependencyHandler.json() {
     add("implementation", Libraries.Json.gson)
 }
 
+fun DependencyHandler.security() {
+    add("implementation", Libraries.Security.crypto)
+}
+
 fun DependencyHandler.viewModel() {
     add("implementation", Libraries.ViewModel.compose)
     add("implementation", Libraries.ViewModel.core)

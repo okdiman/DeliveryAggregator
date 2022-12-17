@@ -14,4 +14,5 @@ dependencies {
     kotlin()
     network()
     koin()
+    security()
 }

@@ -89,6 +89,7 @@ private fun CodeBlock(viewState: VerifyState, eventHandler: (VerifyEvent) -> Uni
             eventHandler(VerifyEvent.TickerFinished)
         }
     }
+    Spacer(modifier = Modifier.height(12.dp))
     Box(modifier = Modifier.padding(start = 16.dp)) {
         CommonTextField(
             text = viewState.code,

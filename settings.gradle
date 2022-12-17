@@ -20,6 +20,8 @@ include(
         ":navigation",
         ":feature-auth:api",
         ":feature-auth:impl",
+        ":feature-registration:api",
+        ":feature-registration:impl",
         ":feature-profile:api",
         ":feature-profile:impl",
         ":feature-order:api",

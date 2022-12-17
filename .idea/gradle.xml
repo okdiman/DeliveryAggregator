@@ -23,6 +23,9 @@
             <option value="$PROJECT_DIR$/feature-profile" />
             <option value="$PROJECT_DIR$/feature-profile/api" />
             <option value="$PROJECT_DIR$/feature-profile/impl" />
+            <option value="$PROJECT_DIR$/feature-registration" />
+            <option value="$PROJECT_DIR$/feature-registration/api" />
+            <option value="$PROJECT_DIR$/feature-registration/impl" />
             <option value="$PROJECT_DIR$/navigation" />
           </set>
         </option>

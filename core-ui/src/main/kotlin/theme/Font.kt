@@ -9,7 +9,7 @@ import trinity_monsters.wildberries_delivery_aggregator.core_ui.R
 
 data class DeliveryAggregatorFonts(
     val regular: TextStyle = baseFontStyle(FontWeight.Normal),
-    val semibold: TextStyle = baseFontStyle(FontWeight.SemiBold),
+    val semiBold: TextStyle = baseFontStyle(FontWeight.SemiBold),
     val bold: TextStyle = baseFontStyle(FontWeight.Bold)
 )
 
