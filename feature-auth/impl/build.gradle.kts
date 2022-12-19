@@ -23,6 +23,7 @@ dependencies {
     security()
     viewModel()
     implementation(project(Modules.auth_api))
+    implementation(project(Modules.registration_api))
     implementation(project(Modules.core))
     implementation(project(Modules.core_ui))
 }

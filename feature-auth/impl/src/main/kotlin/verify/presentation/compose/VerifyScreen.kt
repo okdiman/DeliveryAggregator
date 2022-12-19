@@ -3,8 +3,12 @@ package verify.presentation.compose
 import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
+import navigation.NavigationTree
+import presentation.CompanyParameters
 import presentation.VerifyParameters
+import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
+import ru.alexgladkov.odyssey.core.LaunchFlag
 import verify.presentation.viewmodel.VerifyViewModel
 import verify.presentation.viewmodel.model.VerifyAction
 import verify.presentation.viewmodel.model.VerifyEvent
@@ -27,7 +31,11 @@ fun VerifyScreen(parameters: VerifyParameters) {
 
             }
             is VerifyAction.OpenRegistrationFlow -> {
-
+                rootController.findRootController().present(
+                    screen = NavigationTree.Registration.RegistrationFlow.name,
+                    params = CompanyParameters(code = state.value.code, phone = parameters.phone),
+                    launchFlag = LaunchFlag.SingleNewTask
+                )
             }
             else -> {}
         }

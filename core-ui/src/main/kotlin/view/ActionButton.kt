@@ -15,7 +15,7 @@ import theme.Theme
 
 @Composable
 fun ActionButton(
-    gradient: Brush,
+    gradient: Brush = Theme.gradients.actionButtonGradient,
     enabled: Boolean = true,
     text: String,
     onClick: () -> Unit

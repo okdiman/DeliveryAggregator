@@ -6,6 +6,6 @@ object NavigationTree {
     }
 
     enum class Registration {
-        RegistrationFlow
+        RegistrationFlow, Company, Bank, Transport, User
     }
 }

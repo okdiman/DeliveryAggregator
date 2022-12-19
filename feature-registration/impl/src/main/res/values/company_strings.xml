@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="company_name">Название организации</string>
+    <string name="company_name_hint">ООО “Подари Жизнь”</string>
+    <string name="inn">ИНН</string>
+    <string name="inn_hint">6449013711</string>
+    <string name="kpp">КПП</string>
+    <string name="kpp_hint">644901001</string>
+    <string name="ogrn">ОГРН</string>
+    <string name="ogrn_hint">1053600591197</string>
+    <string name="legal_address">Юридический адрес</string>
+    <string name="address_hint">142100, Московская область…</string>
+    <string name="actual_address">Фактический адрес</string>
+</resources>

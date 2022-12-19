@@ -7,6 +7,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -27,9 +28,20 @@ import utils.Mask
 fun CommonTextField(
     text: String,
     hint: String,
-    textStyle: TextStyle = TextStyle.Default,
+    textStyle: TextStyle = Theme.fonts.regular,
+    hintStyle: TextStyle = Theme.fonts.bold.copy(
+        color = Theme.colors.hintColor,
+        fontSize = 24.sp
+    ),
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     isSecure: Boolean = false,
+    colors: TextFieldColors = TextFieldDefaults.textFieldColors(
+        textColor = Theme.colors.textPrimaryColor,
+        focusedIndicatorColor = Color.Transparent,
+        unfocusedIndicatorColor = Color.Transparent,
+        backgroundColor = Color.White,
+        cursorColor = Color.Black
+    ),
     isPhone: Boolean = false,
     isCode: Boolean = false,
     maxChar: Int = Int.MAX_VALUE,
@@ -77,21 +89,13 @@ fun CommonTextField(
             singleLine = singleLine,
             enabled = enabled,
             trailingIcon = trailingIcon,
-            colors = TextFieldDefaults.textFieldColors(
-                textColor = Theme.colors.textPrimaryColor,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                backgroundColor = Color.White,
-                cursorColor = Color.Black
-            ),
+            colors = colors,
             interactionSource = interactionSource,
             contentPadding = PaddingValues(0.dp),
             placeholder = {
                 Text(
                     text = hint,
-                    color = Theme.colors.hintColor,
-                    fontSize = 24.sp,
-                    style = Theme.fonts.bold
+                    style = hintStyle
                 )
             }
         )

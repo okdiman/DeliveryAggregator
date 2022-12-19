@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="registration_step">Шаг %1s из 4</string>
+    <string name="continue_button">Далее</string>
+    <string name="organization_info">Данные организации</string>
+</resources>

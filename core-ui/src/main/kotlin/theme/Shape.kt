@@ -7,13 +7,13 @@ import androidx.compose.ui.unit.dp
 
 data class DeliveryAggregatorShapes(
     val small: Shape,
-    val medium: Shape,
+    val textFields: Shape,
     val roundedButton: Shape
 )
 
 val shapes = DeliveryAggregatorShapes(
     small = RoundedCornerShape(5.dp),
-    medium = RoundedCornerShape(8.dp),
+    textFields = RoundedCornerShape(8.dp),
     roundedButton = RoundedCornerShape(40.dp)
 )
 
