@@ -13,6 +13,7 @@ object RegistrationConstants {
         const val MAX_OGRN_CHARS = 13
         const val MIN_ADDRESS_CHARS = 5
         const val MIN_NAME_CHARS = 2
+        const val MAX_NAME_CHARS = 50
     }
 
     const val HINT_ALPHA = 0.7f

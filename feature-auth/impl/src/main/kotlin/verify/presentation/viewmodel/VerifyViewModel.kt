@@ -19,7 +19,6 @@ class VerifyViewModel(
 ) : BaseViewModel<VerifyState, VerifyAction, VerifyEvent>(
     initialState = VerifyState()
 ), KoinComponent {
-
     private val getVerifyTitle by inject<GetVerifyTitleUseCase>()
     private val signIn by inject<SignInUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
@@ -30,21 +29,11 @@ class VerifyViewModel(
 
     override fun obtainEvent(viewEvent: VerifyEvent) {
         when (viewEvent) {
-            is VerifyEvent.OnCodeChanged -> {
-                onCodeChanged(viewEvent.code)
-            }
-            is VerifyEvent.OnBackClick -> {
-                onBackClick()
-            }
-            is VerifyEvent.OnRetryCallClick -> {
-                onRetryCallClick()
-            }
-            is VerifyEvent.TickerFinished -> {
-                onTickerFinished()
-            }
-            is VerifyEvent.ResetAction -> {
-                viewAction = null
-            }
+            is VerifyEvent.OnCodeChanged -> onCodeChanged(viewEvent.code)
+            is VerifyEvent.OnBackClick -> onBackClick()
+            is VerifyEvent.OnRetryCallClick -> onRetryCallClick()
+            is VerifyEvent.TickerFinished -> onTickerFinished()
+            is VerifyEvent.ResetAction -> viewAction = null
         }
     }
 

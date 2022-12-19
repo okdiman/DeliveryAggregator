@@ -25,6 +25,7 @@ import organization.company.presentation.viewmodel.model.CompanyEvent
 import organization.company.presentation.viewmodel.model.CompanyState
 import root.RegistrationConstants.Limits.MAX_INN_CHARS
 import root.RegistrationConstants.Limits.MAX_KPP_CHARS
+import root.RegistrationConstants.Limits.MAX_NAME_CHARS
 import root.RegistrationConstants.Limits.MAX_OGRN_CHARS
 import root.RegistrationConstants.Step.ONE
 import root.presentation.RegistrationTextField
@@ -68,14 +69,15 @@ private fun CompanyTextFieldsBlock(
 ) {
     RegistrationTextField(
         title = stringResource(R.string.company_name),
-        text = state.name,
-        hint = stringResource(R.string.company_name_hint)
+        state = state.companyName,
+        hint = stringResource(R.string.company_name_hint),
+        maxChar = MAX_NAME_CHARS
     ) {
         eventHandler(CompanyEvent.OnNameChanged(it))
     }
     RegistrationTextField(
         title = stringResource(R.string.inn),
-        text = state.inn,
+        state = state.inn,
         hint = stringResource(R.string.inn_hint),
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = MAX_INN_CHARS
@@ -84,7 +86,7 @@ private fun CompanyTextFieldsBlock(
     }
     RegistrationTextField(
         title = stringResource(R.string.kpp),
-        text = state.kpp,
+        state = state.kpp,
         hint = stringResource(R.string.kpp_hint),
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = MAX_KPP_CHARS
@@ -93,7 +95,7 @@ private fun CompanyTextFieldsBlock(
     }
     RegistrationTextField(
         title = stringResource(R.string.ogrn),
-        text = state.ogrn,
+        state = state.ogrn,
         hint = stringResource(R.string.ogrn_hint),
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = MAX_OGRN_CHARS
@@ -102,20 +104,19 @@ private fun CompanyTextFieldsBlock(
     }
     RegistrationTextField(
         title = stringResource(R.string.legal_address),
-        text = state.legalAddress,
+        state = state.legalAddress,
         hint = stringResource(R.string.address_hint)
     ) {
         eventHandler(CompanyEvent.OnLegalAddressChanged(it))
     }
     RegistrationTextField(
-        modifier = Modifier
-            .padding(bottom = 120.dp),
         title = stringResource(R.string.actual_address),
-        text = state.actualAddress,
+        state = state.actualAddress,
         hint = stringResource(R.string.address_hint)
     ) {
         eventHandler(CompanyEvent.OnActualAddressChanged(it))
     }
+    Spacer(modifier = Modifier.height(120.dp))
 }
 
 @Composable

@@ -10,14 +10,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import root.RegistrationConstants.HINT_ALPHA
+import state.registration.CompanyParamState
 import theme.Theme
 import view.TitledTextField
 
+@Suppress("LongParameterList")
 @Composable
 fun RegistrationTextField(
     modifier: Modifier = Modifier,
     title: String,
-    text: String,
+    state: CompanyParamState,
     hint: String,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     maxChar: Int = Int.MAX_VALUE,
@@ -27,8 +29,8 @@ fun RegistrationTextField(
     TitledTextField(
         modifier = modifier,
         title = title,
-        text = text,
         hint = hint,
+        state = state,
         hintStyle = Theme.fonts.regular.copy(
             fontSize = 16.sp,
             color = Theme.colors.textPrimaryColor.copy(alpha = HINT_ALPHA)
@@ -37,7 +39,8 @@ fun RegistrationTextField(
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             backgroundColor = Theme.colors.hintBackgroundColor,
-            cursorColor = Color.Black
+            cursorColor = Color.Black,
+            errorIndicatorColor = Theme.colors.errorColor
         ),
         keyboardOptions = keyboardOptions,
         maxChar = maxChar

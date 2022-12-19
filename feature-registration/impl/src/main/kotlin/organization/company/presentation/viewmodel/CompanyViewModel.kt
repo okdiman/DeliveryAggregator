@@ -10,36 +10,21 @@ import root.RegistrationConstants.Limits.MAX_OGRN_CHARS
 import root.RegistrationConstants.Limits.MIN_ADDRESS_CHARS
 import root.RegistrationConstants.Limits.MIN_NAME_CHARS
 
+@Suppress("TooManyFunctions")
 class CompanyViewModel : BaseViewModel<CompanyState, CompanyAction, CompanyEvent>(
     initialState = CompanyState()
 ) {
 
     override fun obtainEvent(viewEvent: CompanyEvent) {
         when (viewEvent) {
-            is CompanyEvent.OnNameChanged -> {
-                onNameChanged(viewEvent.name)
-            }
-            is CompanyEvent.OnInnChanged -> {
-                onInnChanged(viewEvent.inn)
-            }
-            is CompanyEvent.OnKppChanged -> {
-                onKppChanged(viewEvent.kpp)
-            }
-            is CompanyEvent.OnOgrnChanged -> {
-                onOgrnChanged(viewEvent.ogrn)
-            }
-            is CompanyEvent.OnLegalAddressChanged -> {
-                onLegalAddressChanged(viewEvent.legalAddress)
-            }
-            is CompanyEvent.OnActualAddressChanged -> {
-                onActualAddressChanged(viewEvent.actualAddress)
-            }
-            is CompanyEvent.OnContinueButtonClick -> {
-                onContinueButtonClick()
-            }
-            is CompanyEvent.ResetAction -> {
-                onResetAction()
-            }
+            is CompanyEvent.OnNameChanged -> onNameChanged(viewEvent.name)
+            is CompanyEvent.OnInnChanged -> onInnChanged(viewEvent.inn)
+            is CompanyEvent.OnKppChanged -> onKppChanged(viewEvent.kpp)
+            is CompanyEvent.OnOgrnChanged -> onOgrnChanged(viewEvent.ogrn)
+            is CompanyEvent.OnLegalAddressChanged -> onLegalAddressChanged(viewEvent.legalAddress)
+            is CompanyEvent.OnActualAddressChanged -> onActualAddressChanged(viewEvent.actualAddress)
+            is CompanyEvent.OnContinueButtonClick -> onContinueButtonClick()
+            is CompanyEvent.ResetAction -> onResetAction()
         }
     }
 
@@ -53,53 +38,59 @@ class CompanyViewModel : BaseViewModel<CompanyState, CompanyAction, CompanyEvent
 
     private fun onActualAddressChanged(newActualAddress: String) {
         viewState = viewState.copy(
-            actualAddress = newActualAddress,
+            actualAddress = viewState.actualAddress.copy(
+                text = newActualAddress,
+                isAddressError = !isActualAddressFilled(newActualAddress)
+            ),
             isContinueButtonEnabled = isContinueButtonEnabled(actualAddress = newActualAddress)
         )
     }
 
     private fun onLegalAddressChanged(newLegalAddress: String) {
         viewState = viewState.copy(
-            legalAddress = newLegalAddress,
+            legalAddress = viewState.legalAddress.copy(
+                text = newLegalAddress,
+                isAddressError = !isLegalAddressFilled(newLegalAddress)
+            ),
             isContinueButtonEnabled = isContinueButtonEnabled(legalAddress = newLegalAddress)
         )
     }
 
     private fun onOgrnChanged(newOgrn: String) {
         viewState = viewState.copy(
-            ogrn = newOgrn,
+            ogrn = viewState.ogrn.copy(text = newOgrn, isOgrnError = !isOgrnFilled(newOgrn)),
             isContinueButtonEnabled = isContinueButtonEnabled(ogrn = newOgrn)
         )
     }
 
     private fun onKppChanged(newKpp: String) {
         viewState = viewState.copy(
-            kpp = newKpp,
+            kpp = viewState.kpp.copy(text = newKpp, isKppError = !isKppFilled(newKpp)),
             isContinueButtonEnabled = isContinueButtonEnabled(kpp = newKpp)
         )
     }
 
     private fun onInnChanged(newInn: String) {
         viewState = viewState.copy(
-            inn = newInn,
+            inn = viewState.inn.copy(text = newInn, isInnError = !isInnFilled(newInn)),
             isContinueButtonEnabled = isContinueButtonEnabled(inn = newInn)
         )
     }
 
     private fun onNameChanged(newName: String) {
         viewState = viewState.copy(
-            name = newName,
+            companyName = viewState.companyName.copy(text = newName, isNameError = !isNameFilled(newName)),
             isContinueButtonEnabled = isContinueButtonEnabled(name = newName)
         )
     }
 
     private fun isContinueButtonEnabled(
-        inn: String = viewState.inn,
-        kpp: String = viewState.kpp,
-        ogrn: String = viewState.ogrn,
-        name: String = viewState.name,
-        legalAddress: String = viewState.legalAddress,
-        actualAddress: String = viewState.actualAddress
+        inn: String = viewState.inn.text,
+        kpp: String = viewState.kpp.text,
+        ogrn: String = viewState.ogrn.text,
+        name: String = viewState.companyName.text,
+        legalAddress: String = viewState.legalAddress.text,
+        actualAddress: String = viewState.actualAddress.text
     ): Boolean {
         return isInnFilled(inn) && isKppFilled(kpp) && isOgrnFilled(ogrn) && isNameFilled(name) &&
                 isLegalAddressFilled(legalAddress) && isActualAddressFilled(actualAddress)

@@ -13,27 +13,16 @@ import org.koin.core.component.inject
 class LoginViewModel : BaseViewModel<LoginState, LoginAction, LoginEvent>(
     initialState = LoginState()
 ), KoinComponent {
-
     private val getVerifyCode by inject<GetCodeUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
 
     override fun obtainEvent(viewEvent: LoginEvent) {
         when (viewEvent) {
-            is LoginEvent.OnAgreementClick -> {
-                onAgreementClick()
-            }
-            is LoginEvent.OnOfferCLick -> {
-                onOfferClick()
-            }
-            is LoginEvent.OnEntranceButtonCLick -> {
-                onEntranceButtonClick()
-            }
-            is LoginEvent.PhoneChanged -> {
-                onPhoneChanged(viewEvent.phone)
-            }
-            is LoginEvent.ResetAction -> {
-                viewAction = null
-            }
+            is LoginEvent.OnAgreementClick -> onAgreementClick()
+            is LoginEvent.OnOfferCLick -> onOfferClick()
+            is LoginEvent.OnEntranceButtonCLick -> onEntranceButtonClick()
+            is LoginEvent.PhoneChanged -> onPhoneChanged(viewEvent.phone)
+            is LoginEvent.ResetAction -> viewAction = null
         }
     }
 
