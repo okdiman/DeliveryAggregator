@@ -1,4 +1,4 @@
-package view
+package root.presentation
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,7 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import state.registration.CompanyParamState
+import root.presentation.model.RegistrationParamState
 import theme.Theme
 
 @Suppress("LongParameterList")
@@ -26,8 +26,14 @@ import theme.Theme
 fun TitledTextField(
     modifier: Modifier = Modifier,
     title: String,
-    state: CompanyParamState,
+    state: RegistrationParamState,
     hint: String,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    isDigits: Boolean = false,
+    maxChar: Int = Int.MAX_VALUE,
+    enabled: Boolean = true,
+    singleLine: Boolean = false,
+    onValueChanged: (String) -> Unit,
     textStyle: TextStyle = Theme.fonts.regular.copy(
         fontSize = 16.sp
     ),
@@ -42,12 +48,6 @@ fun TitledTextField(
         backgroundColor = Color.White,
         cursorColor = Color.Black
     ),
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    isDigits: Boolean = false,
-    maxChar: Int = Int.MAX_VALUE,
-    enabled: Boolean = true,
-    singleLine: Boolean = false,
-    onValueChanged: (String) -> Unit
 ) {
     val isFocused = remember {
         mutableStateOf(false)
@@ -71,17 +71,17 @@ fun TitledTextField(
         isError = state.isError && !isFocused.value,
         value = state.stateText,
         enabled = enabled,
+        textStyle = textStyle,
+        keyboardOptions = keyboardOptions,
+        singleLine = singleLine,
+        colors = colors,
+        shape = Theme.shapes.textFields,
         placeholder = {
             Text(
                 text = hint,
                 style = hintStyle
             )
         },
-        textStyle = textStyle,
-        keyboardOptions = keyboardOptions,
-        singleLine = singleLine,
-        colors = colors,
-        shape = Theme.shapes.textFields,
         onValueChange = { value ->
             when {
                 isDigits -> {

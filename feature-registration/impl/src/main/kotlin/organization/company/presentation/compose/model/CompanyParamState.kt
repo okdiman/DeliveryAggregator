@@ -1,17 +1,18 @@
-package state.registration
+package organization.company.presentation.compose.model
 
 import androidx.annotation.StringRes
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R
+import root.presentation.model.RegistrationParamState
+import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
 
 sealed class CompanyParamState(
-    val stateText: String,
-    val isError: Boolean,
-    @StringRes val stateError: Int
-) {
+    override val stateText: String,
+    override val isError: Boolean,
+    @StringRes override val stateError: Int
+) : RegistrationParamState(stateText, isError, stateError) {
     data class NameState(
         val text: String = "",
         val isNameError: Boolean = false,
-        @StringRes val error: Int = R.string.company_name_error
+        @StringRes val error: Int = R.string.few_symbols_error
     ) : CompanyParamState(text, isNameError, error)
 
     data class InnState(
@@ -35,12 +36,12 @@ sealed class CompanyParamState(
     data class ActualAddressState(
         val text: String = "",
         val isAddressError: Boolean = false,
-        @StringRes val error: Int = R.string.address_error
+        @StringRes val error: Int = R.string.few_symbols_error
     ) : CompanyParamState(text, isAddressError, error)
 
     data class LegalAddressState(
         val text: String = "",
         val isAddressError: Boolean = false,
-        @StringRes val error: Int = R.string.address_error
+        @StringRes val error: Int = R.string.few_symbols_error
     ) : CompanyParamState(text, isAddressError, error)
 }

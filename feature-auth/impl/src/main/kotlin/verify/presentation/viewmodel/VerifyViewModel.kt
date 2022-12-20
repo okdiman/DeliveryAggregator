@@ -33,7 +33,7 @@ class VerifyViewModel(
             is VerifyEvent.OnBackClick -> onBackClick()
             is VerifyEvent.OnRetryCallClick -> onRetryCallClick()
             is VerifyEvent.TickerFinished -> onTickerFinished()
-            is VerifyEvent.ResetAction -> viewAction = null
+            is VerifyEvent.ResetAction -> onResetAction()
         }
     }
 

@@ -4,9 +4,9 @@ import BaseViewModel
 import organization.company.presentation.viewmodel.model.CompanyAction
 import organization.company.presentation.viewmodel.model.CompanyEvent
 import organization.company.presentation.viewmodel.model.CompanyState
-import root.RegistrationConstants.Limits.MAX_INN_CHARS
-import root.RegistrationConstants.Limits.MAX_KPP_CHARS
-import root.RegistrationConstants.Limits.MAX_OGRN_CHARS
+import root.RegistrationConstants.Limits.INN_CHARS
+import root.RegistrationConstants.Limits.KPP_CHARS
+import root.RegistrationConstants.Limits.OGRN_CHARS
 import root.RegistrationConstants.Limits.MIN_ADDRESS_CHARS
 import root.RegistrationConstants.Limits.MIN_NAME_CHARS
 
@@ -26,10 +26,6 @@ class CompanyViewModel : BaseViewModel<CompanyState, CompanyAction, CompanyEvent
             is CompanyEvent.OnContinueButtonClick -> onContinueButtonClick()
             is CompanyEvent.ResetAction -> onResetAction()
         }
-    }
-
-    private fun onResetAction() {
-        viewAction = null
     }
 
     private fun onContinueButtonClick() {
@@ -79,7 +75,10 @@ class CompanyViewModel : BaseViewModel<CompanyState, CompanyAction, CompanyEvent
 
     private fun onNameChanged(newName: String) {
         viewState = viewState.copy(
-            companyName = viewState.companyName.copy(text = newName, isNameError = !isNameFilled(newName)),
+            companyName = viewState.companyName.copy(
+                text = newName,
+                isNameError = !isNameFilled(newName)
+            ),
             isContinueButtonEnabled = isContinueButtonEnabled(name = newName)
         )
     }
@@ -96,9 +95,9 @@ class CompanyViewModel : BaseViewModel<CompanyState, CompanyAction, CompanyEvent
                 isLegalAddressFilled(legalAddress) && isActualAddressFilled(actualAddress)
     }
 
-    private fun isInnFilled(inn: String) = inn.length == MAX_INN_CHARS
-    private fun isKppFilled(kpp: String) = kpp.length == MAX_KPP_CHARS
-    private fun isOgrnFilled(ogrn: String) = ogrn.length == MAX_OGRN_CHARS
+    private fun isInnFilled(inn: String) = inn.length == INN_CHARS
+    private fun isKppFilled(kpp: String) = kpp.length == KPP_CHARS
+    private fun isOgrnFilled(ogrn: String) = ogrn.length == OGRN_CHARS
     private fun isNameFilled(name: String) = name.length >= MIN_NAME_CHARS
     private fun isLegalAddressFilled(legalAddress: String) =
         legalAddress.length >= MIN_ADDRESS_CHARS

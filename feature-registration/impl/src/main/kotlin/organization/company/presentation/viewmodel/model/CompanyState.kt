@@ -1,6 +1,6 @@
 package organization.company.presentation.viewmodel.model
 
-import state.registration.CompanyParamState
+import organization.company.presentation.compose.model.CompanyParamState
 
 data class CompanyState(
     val companyName: CompanyParamState.NameState = CompanyParamState.NameState(),

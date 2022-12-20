@@ -22,7 +22,7 @@ class LoginViewModel : BaseViewModel<LoginState, LoginAction, LoginEvent>(
             is LoginEvent.OnOfferCLick -> onOfferClick()
             is LoginEvent.OnEntranceButtonCLick -> onEntranceButtonClick()
             is LoginEvent.PhoneChanged -> onPhoneChanged(viewEvent.phone)
-            is LoginEvent.ResetAction -> viewAction = null
+            is LoginEvent.ResetAction -> onResetAction()
         }
     }
 

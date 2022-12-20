@@ -1,8 +1,10 @@
 package root.navigation
 
 import navigation.NavigationTree
+import organization.bank.presentation.compose.BankScreen
 import organization.company.presentation.compose.CompanyScreen
-import presentation.CompanyParameters
+import presentation.parameters.BankParameters
+import presentation.parameters.CompanyParameters
 import ru.alexgladkov.odyssey.compose.extensions.flow
 import ru.alexgladkov.odyssey.compose.extensions.screen
 import ru.alexgladkov.odyssey.compose.navigation.RootComposeBuilder
@@ -12,8 +14,8 @@ fun RootComposeBuilder.registrationFlow() {
         screen(NavigationTree.Registration.Company.name) { parameters ->
             CompanyScreen(parameters as CompanyParameters)
         }
-        screen(NavigationTree.Registration.Bank.name) {
-
+        screen(NavigationTree.Registration.Bank.name) { parameters ->
+            BankScreen(parameters as BankParameters)
         }
         screen(NavigationTree.Registration.Transport.name) {
 

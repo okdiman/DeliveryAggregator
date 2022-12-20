@@ -1,9 +1,9 @@
-package presentation
+package presentation.model
 
 import androidx.compose.runtime.Immutable
 
 @Immutable
-class CompanyParameters(
+class DefaultUserModel(
     val code: String,
     val phone: String
 )

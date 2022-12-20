@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="company_name_error">Введено недостаточное количество символов</string>
-    <string name="inn_error">Номер ИНН должен содержать 10 символов.</string>
-    <string name="kpp_error">Номер КПП должен содержать 9 символов.</string>
-    <string name="ogrn_error">Номер ОГРН содержит 13 символов.</string>
-    <string name="address_error">Введено недостаточное количество символов.</string>
-</resources>

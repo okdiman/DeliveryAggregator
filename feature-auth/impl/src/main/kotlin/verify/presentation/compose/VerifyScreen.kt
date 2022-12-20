@@ -4,8 +4,9 @@ import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
 import navigation.NavigationTree
-import presentation.CompanyParameters
 import presentation.VerifyParameters
+import presentation.model.DefaultUserModel
+import presentation.parameters.CompanyParameters
 import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import ru.alexgladkov.odyssey.core.LaunchFlag
@@ -33,7 +34,12 @@ fun VerifyScreen(parameters: VerifyParameters) {
             is VerifyAction.OpenRegistrationFlow -> {
                 rootController.findRootController().present(
                     screen = NavigationTree.Registration.RegistrationFlow.name,
-                    params = CompanyParameters(code = state.value.code, phone = parameters.phone),
+                    params = CompanyParameters(
+                        DefaultUserModel(
+                            code = state.value.code,
+                            phone = parameters.phone
+                        )
+                    ),
                     launchFlag = LaunchFlag.SingleNewTask
                 )
             }

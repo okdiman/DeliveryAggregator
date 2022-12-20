@@ -7,7 +7,9 @@ import navigation.NavigationTree
 import organization.company.presentation.viewmodel.CompanyViewModel
 import organization.company.presentation.viewmodel.model.CompanyAction
 import organization.company.presentation.viewmodel.model.CompanyEvent
-import presentation.CompanyParameters
+import presentation.model.DefaultCompanyModel
+import presentation.parameters.BankParameters
+import presentation.parameters.CompanyParameters
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 
@@ -23,7 +25,18 @@ fun CompanyScreen(parameters: CompanyParameters) {
         when (action.value) {
             is CompanyAction.OpenNextStep -> {
                 rootController.push(
-                    screen = NavigationTree.Registration.Bank.name
+                    screen = NavigationTree.Registration.Bank.name,
+                    params = BankParameters(
+                        user = parameters.user,
+                        company = DefaultCompanyModel(
+                            companyName = state.value.companyName.text,
+                            inn = state.value.inn.text,
+                            kpp = state.value.kpp.text,
+                            ogrn = state.value.ogrn.text,
+                            legalAddress = state.value.legalAddress.text,
+                            actualAddress = state.value.actualAddress.text
+                        )
+                    )
                 )
                 viewModel.obtainEvent(CompanyEvent.ResetAction)
             }

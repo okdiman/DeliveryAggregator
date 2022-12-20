@@ -30,6 +30,10 @@ abstract class BaseViewModel<State : Any, Action, Event>(initialState: State) :
         }
     }
 
+    fun onResetAction() {
+        viewAction = null
+    }
+
     override fun onCleared() {
         super.onCleared()
         viewModelScope.coroutineContext.cancel()

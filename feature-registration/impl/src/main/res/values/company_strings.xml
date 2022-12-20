@@ -11,4 +11,7 @@
     <string name="legal_address">Юридический адрес</string>
     <string name="address_hint">142100, Московская область…</string>
     <string name="actual_address">Фактический адрес</string>
+    <string name="inn_error">Номер ИНН должен содержать 10 символов.</string>
+    <string name="kpp_error">Номер КПП должен содержать 9 символов.</string>
+    <string name="ogrn_error">Номер ОГРН содержит 13 символов.</string>
 </resources>
