@@ -1,9 +1,9 @@
 package presentation.parameters
 
 import androidx.compose.runtime.Immutable
-import presentation.model.DefaultUserModel
+import presentation.model.RegistrationStartUserModel
 
 @Immutable
 class CompanyParameters(
-    val user: DefaultUserModel
+    val user: RegistrationStartUserModel
 )

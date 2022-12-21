@@ -25,9 +25,7 @@ class OfferViewModel : BaseViewModel<OfferState, OfferAction, OfferEvent>(
     }
 
     private fun getOffer() {
-        viewState = viewState.copy(
-            offer = getOfferData(),
-        )
+        viewState = viewState.copy(offer = getOfferData())
     }
 
     private fun onBackCLick() {

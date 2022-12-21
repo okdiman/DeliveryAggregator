@@ -1,13 +1,14 @@
 package transport.presentation.viewmodel
 
 import BaseViewModel
-import root.RegistrationConstants.Limits.CAR_BRAND_MIN_CHARS
-import root.RegistrationConstants.Limits.CAR_INFO_MIN_CHARS
-import root.RegistrationConstants.Limits.LICENCE_PLATE_MIN_CHARS
-import root.RegistrationConstants.Limits.MIN_ADDRESS_CHARS
+import root.RegistrationConstants.Limits.Common.MIN_ADDRESS_CHARS
+import root.RegistrationConstants.Limits.Transport.CAR_BRAND_MIN_CHARS
+import root.RegistrationConstants.Limits.Transport.CAR_INFO_MIN_CHARS
+import root.RegistrationConstants.Limits.Transport.LICENCE_PLATE_MIN_CHARS
 import transport.presentation.viewmodel.model.TransportAction
 import transport.presentation.viewmodel.model.TransportEvent
 import transport.presentation.viewmodel.model.TransportState
+import utils.isTextFieldFilled
 
 class TransportViewModel : BaseViewModel<TransportState, TransportAction, TransportEvent>(
     initialState = TransportState()
@@ -111,7 +112,6 @@ class TransportViewModel : BaseViewModel<TransportState, TransportAction, Transp
                 isTextFieldFilled(carCapacity, CAR_INFO_MIN_CHARS)
     }
 
-    private fun isTextFieldFilled(newText: String, minChar: Int) = newText.length >= minChar
     private fun isLicencePlateFilled(licencePlate: String) =
         licencePlate.length >= LICENCE_PLATE_MIN_CHARS
 }

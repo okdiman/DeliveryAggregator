@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="registration_step">Шаг %1s из 4</string>
-    <string name="continue_button">Далее</string>
+    <string name="create_acc_button">Создать аккаунт</string>
     <string name="organization_info">Данные организации</string>
     <string name="few_symbols_error">Введено недостаточное количество символов</string>
 </resources>

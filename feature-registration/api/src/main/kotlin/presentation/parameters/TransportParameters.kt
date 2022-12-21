@@ -1,13 +1,13 @@
 package presentation.parameters
 
 import androidx.compose.runtime.Immutable
-import presentation.model.DefaultBankModel
-import presentation.model.DefaultCompanyModel
-import presentation.model.DefaultUserModel
+import presentation.model.RegistrationBankModel
+import presentation.model.RegistrationCompanyModel
+import presentation.model.RegistrationStartUserModel
 
 @Immutable
 class TransportParameters(
-    val user: DefaultUserModel,
-    val company: DefaultCompanyModel,
-    val bank: DefaultBankModel
+    val user: RegistrationStartUserModel,
+    val company: RegistrationCompanyModel,
+    val bank: RegistrationBankModel
 )

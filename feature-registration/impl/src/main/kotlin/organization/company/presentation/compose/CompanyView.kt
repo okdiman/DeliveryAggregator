@@ -1,5 +1,6 @@
 package organization.company.presentation.compose
 
+import ActionButton
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -16,11 +17,10 @@ import androidx.compose.ui.unit.dp
 import organization.company.presentation.viewmodel.model.CompanyEvent
 import organization.company.presentation.viewmodel.model.CompanyState
 import root.RegistrationConstants
-import root.RegistrationConstants.Limits.INN_CHARS
-import root.RegistrationConstants.Limits.KPP_CHARS
-import root.RegistrationConstants.Limits.MAX_NAME_CHARS
-import root.RegistrationConstants.Limits.OGRN_CHARS
-import root.presentation.RegistrationButton
+import root.RegistrationConstants.Limits.Common.MAX_NAME_CHARS
+import root.RegistrationConstants.Limits.Company.INN_CHARS
+import root.RegistrationConstants.Limits.Company.KPP_CHARS
+import root.RegistrationConstants.Limits.Company.OGRN_CHARS
 import root.presentation.RegistrationTextField
 import root.presentation.TitleRegistrationView
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
@@ -39,7 +39,7 @@ fun CompanyView(state: CompanyState, eventHandler: (CompanyEvent) -> Unit) {
         )
         CompanyTextFieldsBlock(state, eventHandler)
     }
-    RegistrationButton(isEnabled = state.isContinueButtonEnabled) {
+    ActionButton(enabled = state.isContinueButtonEnabled) {
         eventHandler(CompanyEvent.OnContinueButtonClick)
     }
 }

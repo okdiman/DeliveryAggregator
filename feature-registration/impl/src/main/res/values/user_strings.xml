@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="user_title">Личные данные</string>
+    <string name="user_name">Имя</string>
+    <string name="user_name_hint">Введите ваше имя</string>
+    <string name="user_surname">Фамилия</string>
+    <string name="user_surname_hint">Введите вашу фамилию</string>
+    <string name="user_second_name">Отчество</string>
+    <string name="user_second_name_hint">Введите ваше отчество</string>
+    <string name="user_email">Email</string>
+    <string name="user_email_hint">Введите email</string>
+    <string name="user_email_error">Некорректная электронная почта</string>
+</resources>

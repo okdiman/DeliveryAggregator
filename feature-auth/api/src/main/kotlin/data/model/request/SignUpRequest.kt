@@ -9,6 +9,7 @@ data class SignUpRequest(
     val email: String,
     val name: String,
     val surname: String,
+    val secondName: String,
     val inn: String,
     val kpp: String,
     val ogrn: String,

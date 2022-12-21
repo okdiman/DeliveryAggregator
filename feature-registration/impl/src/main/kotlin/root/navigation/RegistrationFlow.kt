@@ -6,10 +6,12 @@ import organization.company.presentation.compose.CompanyScreen
 import presentation.parameters.BankParameters
 import presentation.parameters.CompanyParameters
 import presentation.parameters.TransportParameters
+import presentation.parameters.UserParameters
 import ru.alexgladkov.odyssey.compose.extensions.flow
 import ru.alexgladkov.odyssey.compose.extensions.screen
 import ru.alexgladkov.odyssey.compose.navigation.RootComposeBuilder
 import transport.presentation.compose.TransportScreen
+import user.presentation.compose.UserScreen
 
 fun RootComposeBuilder.registrationFlow() {
     flow(NavigationTree.Registration.RegistrationFlow.name) {
@@ -22,8 +24,8 @@ fun RootComposeBuilder.registrationFlow() {
         screen(NavigationTree.Registration.Transport.name) { parameters ->
             TransportScreen(parameters as TransportParameters)
         }
-        screen(NavigationTree.Registration.User.name) {
-
+        screen(NavigationTree.Registration.User.name) { parameters ->
+            UserScreen(parameters as UserParameters)
         }
     }
 }

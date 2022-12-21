@@ -3,7 +3,7 @@ package root.data
 import data.model.request.SendVerifyCodeRequest
 import data.model.request.SignInRequest
 import data.model.request.SignUpRequest
-import data.model.response.SignInResponse
+import data.model.response.AuthSuccessResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 
@@ -16,10 +16,10 @@ interface AuthApi {
     @POST("/auth/sign-in")
     suspend fun signIn(
         @Body request: SignInRequest
-    ): SignInResponse
+    ): AuthSuccessResponse
 
     @POST("/auth/contractor/sign-up")
     suspend fun signUp(
         @Body request: SignUpRequest
-    )
+    ): AuthSuccessResponse
 }

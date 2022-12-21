@@ -1,5 +1,6 @@
 package transport.presentation.compose
 
+import ActionButton
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -14,12 +15,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import root.RegistrationConstants
-import root.RegistrationConstants.Limits.CAR_BRAND_MAX_CHARS
-import root.RegistrationConstants.Limits.CAR_CAPACITY_MAX_CHARS
-import root.RegistrationConstants.Limits.CAR_CATEGORY_MAX_CHARS
-import root.RegistrationConstants.Limits.LICENCE_PLATE_MAX_CHARS
-import root.RegistrationConstants.Limits.MAX_NAME_CHARS
-import root.presentation.RegistrationButton
+import root.RegistrationConstants.Limits.Common.MAX_NAME_CHARS
+import root.RegistrationConstants.Limits.Transport.CAR_BRAND_MAX_CHARS
+import root.RegistrationConstants.Limits.Transport.CAR_CAPACITY_MAX_CHARS
+import root.RegistrationConstants.Limits.Transport.CAR_CATEGORY_MAX_CHARS
+import root.RegistrationConstants.Limits.Transport.LICENCE_PLATE_MAX_CHARS
 import root.presentation.RegistrationTextField
 import root.presentation.TitleRegistrationView
 import transport.presentation.viewmodel.model.TransportEvent
@@ -42,7 +42,7 @@ fun TransportView(state: TransportState, eventHandler: (TransportEvent) -> Unit)
         )
         TransportTextFieldsBlock(state = state, eventHandler = eventHandler)
     }
-    RegistrationButton(isEnabled = state.isContinueButtonEnabled) {
+    ActionButton(enabled = state.isContinueButtonEnabled) {
         eventHandler(TransportEvent.OnContinueButtonClick)
     }
 }

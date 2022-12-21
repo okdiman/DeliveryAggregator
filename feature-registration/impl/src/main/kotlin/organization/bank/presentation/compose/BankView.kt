@@ -1,5 +1,6 @@
 package organization.bank.presentation.compose
 
+import ActionButton
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -16,10 +17,9 @@ import androidx.compose.ui.unit.dp
 import organization.bank.presentation.viewmodel.model.BankEvent
 import organization.bank.presentation.viewmodel.model.BankState
 import root.RegistrationConstants
-import root.RegistrationConstants.Limits.BANK_ACC_CHARS
-import root.RegistrationConstants.Limits.BIK_CHARS
-import root.RegistrationConstants.Limits.MAX_NAME_CHARS
-import root.presentation.RegistrationButton
+import root.RegistrationConstants.Limits.Bank.BANK_ACC_CHARS
+import root.RegistrationConstants.Limits.Bank.BIK_CHARS
+import root.RegistrationConstants.Limits.Common.MAX_NAME_CHARS
 import root.presentation.RegistrationTextField
 import root.presentation.TitleRegistrationView
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
@@ -40,7 +40,7 @@ fun BankView(state: BankState, eventHandler: (BankEvent) -> Unit) {
         )
         BankTextFieldsBlock(state, eventHandler)
     }
-    RegistrationButton(isEnabled = state.isContinueButtonEnabled) {
+    ActionButton(enabled = state.isContinueButtonEnabled) {
         eventHandler(BankEvent.OnContinueButtonClick)
     }
 }

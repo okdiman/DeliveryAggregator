@@ -3,7 +3,7 @@ package presentation.model
 import androidx.compose.runtime.Immutable
 
 @Immutable
-class DefaultBankModel(
+class RegistrationBankModel(
     val paymentAcc: String,
     val corrAcc: String,
     val bik: String,

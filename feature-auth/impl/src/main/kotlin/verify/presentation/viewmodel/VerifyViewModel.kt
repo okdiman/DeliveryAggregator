@@ -9,6 +9,8 @@ import network.exceptions.UnauthorizedException
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import presentation.VerifyParameters
+import root.AuthConstants.Limits.MAX_CODE_CHARS
+import utils.isTextFieldFilled
 import verify.domain.GetVerifyTitleUseCase
 import verify.presentation.viewmodel.model.VerifyAction
 import verify.presentation.viewmodel.model.VerifyEvent
@@ -38,13 +40,11 @@ class VerifyViewModel(
     }
 
     private fun onTickerFinished() {
-        viewState =
-            viewState.copy(isRetryButtonAvailable = true, isTimerVisible = false)
+        viewState = viewState.copy(isRetryButtonAvailable = true, isTimerVisible = false)
     }
 
     private fun onRetryCallClick() {
-        viewState =
-            viewState.copy(isRetryButtonAvailable = false, isTimerVisible = true)
+        viewState = viewState.copy(isRetryButtonAvailable = false, isTimerVisible = true)
     }
 
     private fun onBackClick() {
@@ -52,7 +52,7 @@ class VerifyViewModel(
     }
 
     private fun onCodeChanged(code: String) {
-        val isCodeFilled = code.length == FULL_CODE
+        val isCodeFilled = isTextFieldFilled(code, MAX_CODE_CHARS)
         viewState = viewState.copy(code = code, isLoading = isCodeFilled, isCodeError = false)
         if (isCodeFilled) {
             launchJob(context = appDispatchers.network, onError = {
@@ -71,9 +71,5 @@ class VerifyViewModel(
                 viewAction = VerifyAction.OpenMainFlow
             }
         }
-    }
-
-    companion object {
-        private const val FULL_CODE = 4
     }
 }

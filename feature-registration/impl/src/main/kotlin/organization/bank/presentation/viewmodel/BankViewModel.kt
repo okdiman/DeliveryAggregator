@@ -4,9 +4,10 @@ import BaseViewModel
 import organization.bank.presentation.viewmodel.model.BankAction
 import organization.bank.presentation.viewmodel.model.BankEvent
 import organization.bank.presentation.viewmodel.model.BankState
-import root.RegistrationConstants.Limits.BANK_ACC_CHARS
-import root.RegistrationConstants.Limits.BIK_CHARS
-import root.RegistrationConstants.Limits.MIN_NAME_CHARS
+import root.RegistrationConstants.Limits.Bank.BANK_ACC_CHARS
+import root.RegistrationConstants.Limits.Bank.BIK_CHARS
+import root.RegistrationConstants.Limits.Common.MIN_NAME_CHARS
+import utils.isTextFieldFilled
 
 class BankViewModel : BaseViewModel<BankState, BankAction, BankEvent>(
     initialState = BankState()
@@ -36,7 +37,7 @@ class BankViewModel : BaseViewModel<BankState, BankAction, BankEvent>(
         viewState = viewState.copy(
             paymentAcc = viewState.paymentAcc.copy(
                 text = newPayment,
-                isPaymentAccError = !isPaymentAccFilled(newPayment)
+                isPaymentAccError = !isTextFieldFilled(newPayment, BANK_ACC_CHARS)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(paymentAcc = newPayment)
         )
@@ -46,7 +47,7 @@ class BankViewModel : BaseViewModel<BankState, BankAction, BankEvent>(
         viewState = viewState.copy(
             corrAcc = viewState.corrAcc.copy(
                 text = newCorr,
-                isCorrAccError = !isCorrAccFilled(newCorr)
+                isCorrAccError = !isTextFieldFilled(newCorr, BANK_ACC_CHARS)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(corrAcc = newCorr)
         )
@@ -56,7 +57,7 @@ class BankViewModel : BaseViewModel<BankState, BankAction, BankEvent>(
         viewState = viewState.copy(
             bik = viewState.bik.copy(
                 text = newBik,
-                isBikError = !isBikFilled(newBik)
+                isBikError = !isTextFieldFilled(newBik, BIK_CHARS)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(bik = newBik)
         )
@@ -66,7 +67,7 @@ class BankViewModel : BaseViewModel<BankState, BankAction, BankEvent>(
         viewState = viewState.copy(
             bankName = viewState.bankName.copy(
                 text = newName,
-                isBankNameError = !isNameFilled(newName)
+                isBankNameError = !isTextFieldFilled(newName, MIN_NAME_CHARS)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(name = newName)
         )
@@ -77,13 +78,7 @@ class BankViewModel : BaseViewModel<BankState, BankAction, BankEvent>(
         corrAcc: String = viewState.corrAcc.text,
         bik: String = viewState.bik.text,
         name: String = viewState.bankName.text,
-    ): Boolean {
-        return isPaymentAccFilled(paymentAcc) && isCorrAccFilled(corrAcc) && isBikFilled(bik) &&
-                isNameFilled(name)
-    }
-
-    private fun isPaymentAccFilled(paymentAcc: String) = paymentAcc.length == BANK_ACC_CHARS
-    private fun isCorrAccFilled(corrAcc: String) = corrAcc.length == BANK_ACC_CHARS
-    private fun isBikFilled(bik: String) = bik.length == BIK_CHARS
-    private fun isNameFilled(name: String) = name.length >= MIN_NAME_CHARS
+    ) = isTextFieldFilled(paymentAcc, BANK_ACC_CHARS) &&
+            isTextFieldFilled(corrAcc, BANK_ACC_CHARS) && isTextFieldFilled(bik, BIK_CHARS) &&
+            isTextFieldFilled(name, MIN_NAME_CHARS)
 }

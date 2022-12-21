@@ -26,6 +26,7 @@ import utils.Mask
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CommonTextField(
+    modifier: Modifier = Modifier,
     text: String,
     hint: String,
     textStyle: TextStyle = Theme.fonts.regular,
@@ -64,8 +65,9 @@ fun CommonTextField(
         else -> VisualTransformation.None
     }
     BasicTextField(
-        modifier = Modifier
-            .fillMaxWidth(),
+        modifier = modifier.then(
+            Modifier.fillMaxWidth()
+        ),
         value = text,
         enabled = enabled,
         textStyle = textStyle,

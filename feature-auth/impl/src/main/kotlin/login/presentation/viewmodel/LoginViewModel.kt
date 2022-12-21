@@ -9,6 +9,8 @@ import login.presentation.viewmodel.model.LoginEvent
 import login.presentation.viewmodel.model.LoginState
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import root.AuthConstants.Limits.MAX_PHONE_CHARS
+import utils.isTextFieldFilled
 
 class LoginViewModel : BaseViewModel<LoginState, LoginAction, LoginEvent>(
     initialState = LoginState()
@@ -36,9 +38,7 @@ class LoginViewModel : BaseViewModel<LoginState, LoginAction, LoginEvent>(
     private fun onPhoneChanged(newPhone: String) {
         viewState = viewState.copy(
             phone = newPhone,
-            isButtonEnabled = isButtonEnabled(
-                phone = newPhone
-            )
+            isButtonEnabled = isButtonEnabled(phone = newPhone)
         )
     }
 
@@ -49,18 +49,12 @@ class LoginViewModel : BaseViewModel<LoginState, LoginAction, LoginEvent>(
     private fun onEntranceButtonClick() {
         launchJob(appDispatchers.network) {
             getVerifyCode(VerifyCodeModel(viewState.phone))
+            viewAction = LoginAction.OpenVerifyScreen
         }
-        viewAction = LoginAction.OpenVerifyScreen
     }
 
     private fun isButtonEnabled(
         isAgreementChecked: Boolean = viewState.isAgreementChecked,
         phone: String = viewState.phone
-    ): Boolean {
-        return isAgreementChecked && phone.length == PHONE_LENGTH
-    }
-
-    companion object {
-        private const val PHONE_LENGTH = 10
-    }
+    ) = isAgreementChecked && isTextFieldFilled(phone, MAX_PHONE_CHARS)
 }

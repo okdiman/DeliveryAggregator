@@ -18,6 +18,7 @@ dependencies {
     compose()
     viewModel()
     navigation()
+    koin()
     implementation(project(Modules.auth_api))
     implementation(project(Modules.registration_api))
     implementation(project(Modules.core))

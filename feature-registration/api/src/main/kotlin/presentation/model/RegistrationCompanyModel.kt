@@ -3,7 +3,7 @@ package presentation.model
 import androidx.compose.runtime.Immutable
 
 @Immutable
-class DefaultCompanyModel(
+class RegistrationCompanyModel(
     val companyName: String,
     val inn: String,
     val kpp: String,

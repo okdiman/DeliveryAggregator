@@ -3,7 +3,7 @@ package presentation.model
 import androidx.compose.runtime.Immutable
 
 @Immutable
-class DefaultUserModel(
+class RegistrationStartUserModel(
     val code: String,
     val phone: String
 )

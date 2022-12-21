@@ -5,7 +5,7 @@ import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
 import navigation.NavigationTree
 import presentation.VerifyParameters
-import presentation.model.DefaultUserModel
+import presentation.model.RegistrationStartUserModel
 import presentation.parameters.CompanyParameters
 import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
@@ -35,7 +35,7 @@ fun VerifyScreen(parameters: VerifyParameters) {
                 rootController.findRootController().present(
                     screen = NavigationTree.Registration.RegistrationFlow.name,
                     params = CompanyParameters(
-                        DefaultUserModel(
+                        RegistrationStartUserModel(
                             code = state.value.code,
                             phone = parameters.phone
                         )

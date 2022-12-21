@@ -8,4 +8,8 @@ object NavigationTree {
     enum class Registration {
         RegistrationFlow, Company, Bank, Transport, User
     }
+
+    enum class Main {
+        MainFlow, Routes, Profile
+    }
 }

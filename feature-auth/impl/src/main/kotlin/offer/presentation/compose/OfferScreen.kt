@@ -16,7 +16,6 @@ fun OfferScreen() {
         OfferView(viewState = state.value) { event ->
             viewModel.obtainEvent(event)
         }
-
         when (action.value) {
             is OfferAction.OpenPreviousScreen -> {
                 rootController.popBackStack()

@@ -7,7 +7,7 @@ import navigation.NavigationTree
 import organization.company.presentation.viewmodel.CompanyViewModel
 import organization.company.presentation.viewmodel.model.CompanyAction
 import organization.company.presentation.viewmodel.model.CompanyEvent
-import presentation.model.DefaultCompanyModel
+import presentation.model.RegistrationCompanyModel
 import presentation.parameters.BankParameters
 import presentation.parameters.CompanyParameters
 import ru.alexgladkov.odyssey.compose.extensions.push
@@ -28,7 +28,7 @@ fun CompanyScreen(parameters: CompanyParameters) {
                     screen = NavigationTree.Registration.Bank.name,
                     params = BankParameters(
                         user = parameters.user,
-                        company = DefaultCompanyModel(
+                        company = RegistrationCompanyModel(
                             companyName = state.value.companyName.text,
                             inn = state.value.inn.text,
                             kpp = state.value.kpp.text,

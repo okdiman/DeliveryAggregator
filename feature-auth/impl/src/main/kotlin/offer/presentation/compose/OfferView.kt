@@ -9,7 +9,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import offer.presentation.viewmodel.model.OfferEvent
@@ -23,25 +22,18 @@ fun OfferView(viewState: OfferState, eventHandler: (OfferEvent) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .padding(top = 8.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
     ) {
         BackButton { eventHandler(OfferEvent.OnBackClick) }
         Spacer(modifier = Modifier.height(30.dp))
         Text(
-            modifier = Modifier.padding(start = 16.dp),
             text = stringResource(id = R.string.offer),
             style = Theme.fonts.bold.copy(fontSize = 24.sp)
         )
         Spacer(modifier = Modifier.height(12.dp))
         Text(
-            modifier = Modifier.padding(start = 16.dp, end = 16.dp),
             text = viewState.offer,
             style = Theme.fonts.regular.copy(fontSize = 16.sp)
         )
     }
-}
-
-@Preview
-@Composable
-fun OfferView_Preview() {
-    OfferView(viewState = OfferState(offer = "test offer"), eventHandler = {})
 }

@@ -1,11 +1,11 @@
 package presentation.parameters
 
 import androidx.compose.runtime.Immutable
-import presentation.model.DefaultCompanyModel
-import presentation.model.DefaultUserModel
+import presentation.model.RegistrationCompanyModel
+import presentation.model.RegistrationStartUserModel
 
 @Immutable
 class BankParameters(
-    val user: DefaultUserModel,
-    val company: DefaultCompanyModel
+    val user: RegistrationStartUserModel,
+    val company: RegistrationCompanyModel
 )

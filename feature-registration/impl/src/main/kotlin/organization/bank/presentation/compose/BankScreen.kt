@@ -7,7 +7,7 @@ import navigation.NavigationTree
 import organization.bank.presentation.viewmodel.BankViewModel
 import organization.bank.presentation.viewmodel.model.BankAction
 import organization.bank.presentation.viewmodel.model.BankEvent
-import presentation.model.DefaultBankModel
+import presentation.model.RegistrationBankModel
 import presentation.parameters.BankParameters
 import presentation.parameters.TransportParameters
 import ru.alexgladkov.odyssey.compose.extensions.push
@@ -29,7 +29,7 @@ fun BankScreen(parameters: BankParameters) {
                     params = TransportParameters(
                         user = parameters.user,
                         company = parameters.company,
-                        bank = DefaultBankModel(
+                        bank = RegistrationBankModel(
                             paymentAcc = state.value.paymentAcc.text,
                             corrAcc = state.value.corrAcc.text,
                             bik = state.value.bik.text,

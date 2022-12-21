@@ -4,13 +4,13 @@ import BaseViewModel
 import organization.company.presentation.viewmodel.model.CompanyAction
 import organization.company.presentation.viewmodel.model.CompanyEvent
 import organization.company.presentation.viewmodel.model.CompanyState
-import root.RegistrationConstants.Limits.INN_CHARS
-import root.RegistrationConstants.Limits.KPP_CHARS
-import root.RegistrationConstants.Limits.OGRN_CHARS
-import root.RegistrationConstants.Limits.MIN_ADDRESS_CHARS
-import root.RegistrationConstants.Limits.MIN_NAME_CHARS
+import root.RegistrationConstants.Limits.Common.MIN_ADDRESS_CHARS
+import root.RegistrationConstants.Limits.Common.MIN_NAME_CHARS
+import root.RegistrationConstants.Limits.Company.INN_CHARS
+import root.RegistrationConstants.Limits.Company.KPP_CHARS
+import root.RegistrationConstants.Limits.Company.OGRN_CHARS
+import utils.isTextFieldFilled
 
-@Suppress("TooManyFunctions")
 class CompanyViewModel : BaseViewModel<CompanyState, CompanyAction, CompanyEvent>(
     initialState = CompanyState()
 ) {
@@ -36,7 +36,7 @@ class CompanyViewModel : BaseViewModel<CompanyState, CompanyAction, CompanyEvent
         viewState = viewState.copy(
             actualAddress = viewState.actualAddress.copy(
                 text = newActualAddress,
-                isAddressError = !isActualAddressFilled(newActualAddress)
+                isAddressError = !isTextFieldFilled(newActualAddress, MIN_ADDRESS_CHARS)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(actualAddress = newActualAddress)
         )
@@ -46,7 +46,7 @@ class CompanyViewModel : BaseViewModel<CompanyState, CompanyAction, CompanyEvent
         viewState = viewState.copy(
             legalAddress = viewState.legalAddress.copy(
                 text = newLegalAddress,
-                isAddressError = !isLegalAddressFilled(newLegalAddress)
+                isAddressError = !isTextFieldFilled(newLegalAddress, MIN_ADDRESS_CHARS)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(legalAddress = newLegalAddress)
         )
@@ -54,21 +54,30 @@ class CompanyViewModel : BaseViewModel<CompanyState, CompanyAction, CompanyEvent
 
     private fun onOgrnChanged(newOgrn: String) {
         viewState = viewState.copy(
-            ogrn = viewState.ogrn.copy(text = newOgrn, isOgrnError = !isOgrnFilled(newOgrn)),
+            ogrn = viewState.ogrn.copy(
+                text = newOgrn,
+                isOgrnError = !isTextFieldFilled(newOgrn, OGRN_CHARS)
+            ),
             isContinueButtonEnabled = isContinueButtonEnabled(ogrn = newOgrn)
         )
     }
 
     private fun onKppChanged(newKpp: String) {
         viewState = viewState.copy(
-            kpp = viewState.kpp.copy(text = newKpp, isKppError = !isKppFilled(newKpp)),
+            kpp = viewState.kpp.copy(
+                text = newKpp,
+                isKppError = !isTextFieldFilled(newKpp, KPP_CHARS)
+            ),
             isContinueButtonEnabled = isContinueButtonEnabled(kpp = newKpp)
         )
     }
 
     private fun onInnChanged(newInn: String) {
         viewState = viewState.copy(
-            inn = viewState.inn.copy(text = newInn, isInnError = !isInnFilled(newInn)),
+            inn = viewState.inn.copy(
+                text = newInn,
+                isInnError = !isTextFieldFilled(newInn, INN_CHARS)
+            ),
             isContinueButtonEnabled = isContinueButtonEnabled(inn = newInn)
         )
     }
@@ -77,7 +86,7 @@ class CompanyViewModel : BaseViewModel<CompanyState, CompanyAction, CompanyEvent
         viewState = viewState.copy(
             companyName = viewState.companyName.copy(
                 text = newName,
-                isNameError = !isNameFilled(newName)
+                isNameError = !isTextFieldFilled(newName, MIN_NAME_CHARS)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(name = newName)
         )
@@ -90,18 +99,8 @@ class CompanyViewModel : BaseViewModel<CompanyState, CompanyAction, CompanyEvent
         name: String = viewState.companyName.text,
         legalAddress: String = viewState.legalAddress.text,
         actualAddress: String = viewState.actualAddress.text
-    ): Boolean {
-        return isInnFilled(inn) && isKppFilled(kpp) && isOgrnFilled(ogrn) && isNameFilled(name) &&
-                isLegalAddressFilled(legalAddress) && isActualAddressFilled(actualAddress)
-    }
-
-    private fun isInnFilled(inn: String) = inn.length == INN_CHARS
-    private fun isKppFilled(kpp: String) = kpp.length == KPP_CHARS
-    private fun isOgrnFilled(ogrn: String) = ogrn.length == OGRN_CHARS
-    private fun isNameFilled(name: String) = name.length >= MIN_NAME_CHARS
-    private fun isLegalAddressFilled(legalAddress: String) =
-        legalAddress.length >= MIN_ADDRESS_CHARS
-
-    private fun isActualAddressFilled(actualAddress: String) =
-        actualAddress.length >= MIN_ADDRESS_CHARS
+    ) = isTextFieldFilled(actualAddress, MIN_ADDRESS_CHARS) &&
+            isTextFieldFilled(legalAddress, MIN_ADDRESS_CHARS) &&
+            isTextFieldFilled(ogrn, OGRN_CHARS) && isTextFieldFilled(kpp, KPP_CHARS) &&
+            isTextFieldFilled(inn, INN_CHARS) && isTextFieldFilled(name, MIN_NAME_CHARS)
 }
