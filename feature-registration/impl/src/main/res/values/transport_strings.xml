@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="transport_title">Транспорт</string>
+    <string name="license_plate">Госномер</string>
+    <string name="license_plate_hint">A123AA00</string>
+    <string name="license_plate_error">Номер автомобиля должен содержать  от 8 до 9 символов.</string>
+    <string name="departure_address">Место отправления автомобиля</string>
+    <string name="departure_address_hint">Введите адрес</string>
+    <string name="car_brand">Марка автомобиля</string>
+    <string name="car_brand_hint">Honda</string>
+    <string name="car_category">Категория автомобиля</string>
+    <string name="car_category_hint">C</string>
+    <string name="car_load_capacity">Грузоподъемность фактическая (тонн)</string>
+    <string name="car_load_capacity_hint">2,5</string>
+    <string name="car_capacity">Количество вместимости паллет/шт</string>
+    <string name="car_capacity_hint">6</string>
+    <string name="car_capacity_subtitle">Размер 120х80 см</string>
+</resources>

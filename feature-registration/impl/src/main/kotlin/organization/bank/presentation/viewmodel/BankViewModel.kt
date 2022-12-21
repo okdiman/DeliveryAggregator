@@ -35,7 +35,8 @@ class BankViewModel : BaseViewModel<BankState, BankAction, BankEvent>(
     private fun onPaymentAccChanged(newPayment: String) {
         viewState = viewState.copy(
             paymentAcc = viewState.paymentAcc.copy(
-                text = newPayment
+                text = newPayment,
+                isPaymentAccError = !isPaymentAccFilled(newPayment)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(paymentAcc = newPayment)
         )
@@ -44,7 +45,8 @@ class BankViewModel : BaseViewModel<BankState, BankAction, BankEvent>(
     private fun onCorrAccChanged(newCorr: String) {
         viewState = viewState.copy(
             corrAcc = viewState.corrAcc.copy(
-                text = newCorr
+                text = newCorr,
+                isCorrAccError = !isCorrAccFilled(newCorr)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(corrAcc = newCorr)
         )
@@ -53,7 +55,8 @@ class BankViewModel : BaseViewModel<BankState, BankAction, BankEvent>(
     private fun onBikChanged(newBik: String) {
         viewState = viewState.copy(
             bik = viewState.bik.copy(
-                text = newBik
+                text = newBik,
+                isBikError = !isBikFilled(newBik)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(bik = newBik)
         )
@@ -62,7 +65,8 @@ class BankViewModel : BaseViewModel<BankState, BankAction, BankEvent>(
     private fun onBankNameChanged(newName: String) {
         viewState = viewState.copy(
             bankName = viewState.bankName.copy(
-                text = newName
+                text = newName,
+                isBankNameError = !isNameFilled(newName)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(name = newName)
         )

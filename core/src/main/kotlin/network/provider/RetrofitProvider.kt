@@ -17,6 +17,6 @@ class RetrofitProvider(
     }
 
     private companion object {
-        const val baseUrl = "http://51.250.75.204:8080"
+        const val baseUrl = "http://51.250.79.83:8080"
     }
 }

@@ -17,15 +17,22 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import theme.Theme
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import view.BackButton
 
 @Composable
 fun TitleRegistrationView(
+    isBackButtonVisible: Boolean = false,
+    onButtonClick: () -> Unit = {},
     step: Int,
     @DrawableRes imageRes: Int,
     @StringRes titleRes: Int
 ) {
-    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+    Box(modifier = Modifier.fillMaxWidth()) {
+        if (isBackButtonVisible) {
+            BackButton { onButtonClick() }
+        }
         Text(
+            modifier = Modifier.align(Alignment.Center),
             text = String.format(
                 stringResource(R.string.registration_step),
                 step

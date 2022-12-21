@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -32,19 +30,14 @@ import trinity_monsters.wildberries_delivery_aggregator.feature_auth.impl.R
 import utils.formatTicks
 import verify.presentation.viewmodel.model.VerifyEvent
 import verify.presentation.viewmodel.model.VerifyState
+import view.BackButton
 import view.CommonTextField
 import view.ProgressIndicator
 
 @Composable
 fun VerifyView(viewState: VerifyState, eventHandler: (VerifyEvent) -> Unit) {
     Column {
-        IconButton(
-            modifier = Modifier.padding(start = 4.dp),
-            onClick = {
-                eventHandler(VerifyEvent.OnBackClick)
-            }) {
-            Icon(painter = painterResource(id = R.drawable.back_ic), contentDescription = "")
-        }
+        BackButton { eventHandler(VerifyEvent.OnBackClick) }
         Spacer(modifier = Modifier.height(30.dp))
         InfoBlock(viewState = viewState)
         CodeBlock(viewState = viewState, eventHandler = eventHandler)

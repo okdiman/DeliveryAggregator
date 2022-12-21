@@ -2,6 +2,8 @@ package organization.bank.presentation.compose
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -16,7 +18,7 @@ import organization.bank.presentation.viewmodel.model.BankState
 import root.RegistrationConstants
 import root.RegistrationConstants.Limits.BANK_ACC_CHARS
 import root.RegistrationConstants.Limits.BIK_CHARS
-import root.RegistrationConstants.Limits.MIN_NAME_CHARS
+import root.RegistrationConstants.Limits.MAX_NAME_CHARS
 import root.presentation.RegistrationButton
 import root.presentation.RegistrationTextField
 import root.presentation.TitleRegistrationView
@@ -30,6 +32,8 @@ fun BankView(state: BankState, eventHandler: (BankEvent) -> Unit) {
             .verticalScroll(rememberScrollState())
     ) {
         TitleRegistrationView(
+            isBackButtonVisible = true,
+            onButtonClick = { eventHandler(BankEvent.OnBackButtonClick) },
             step = RegistrationConstants.Step.TWO,
             imageRes = R.drawable.organization_info_ic,
             titleRes = R.string.organization_info
@@ -77,8 +81,9 @@ fun BankTextFieldsBlock(state: BankState, eventHandler: (BankEvent) -> Unit) {
         title = stringResource(R.string.bank_name),
         state = state.bankName,
         hint = stringResource(R.string.bank_name_hint),
-        maxChar = MIN_NAME_CHARS
+        maxChar = MAX_NAME_CHARS
     ) {
         eventHandler(BankEvent.OnBankNameChanged(it))
     }
+    Spacer(modifier = Modifier.height(120.dp))
 }
