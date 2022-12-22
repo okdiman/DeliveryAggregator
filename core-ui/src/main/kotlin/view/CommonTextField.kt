@@ -19,8 +19,9 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import theme.Theme
+import utils.CommonConstants.MASK.CODE
+import utils.CommonConstants.MASK.PHONE
 import utils.DigitVisualTransformation
-import utils.Mask
 
 @Suppress("LongParameterList", "LongMethod")
 @OptIn(ExperimentalMaterialApi::class)
@@ -55,11 +56,11 @@ fun CommonTextField(
     val visualTransformation = when {
         isSecure -> PasswordVisualTransformation()
         isPhone -> DigitVisualTransformation(
-            mask = Mask.PHONE,
+            mask = PHONE,
             maxChar = maxChar
         )
         isCode -> DigitVisualTransformation(
-            mask = Mask.CODE,
+            mask = CODE,
             maxChar = maxChar
         )
         else -> VisualTransformation.None

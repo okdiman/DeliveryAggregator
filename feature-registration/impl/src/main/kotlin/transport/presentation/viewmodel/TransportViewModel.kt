@@ -32,7 +32,10 @@ class TransportViewModel : BaseViewModel<TransportState, TransportAction, Transp
         viewState = viewState.copy(
             licencePlate = viewState.licencePlate.copy(
                 text = newLicencePlate,
-                isLicencePlateError = !isTextFieldFilled(newLicencePlate, LICENCE_PLATE_MIN_CHARS)
+                isLicencePlateError = !isTextFieldFilled(
+                    newLicencePlate,
+                    LICENCE_PLATE_MIN_CHARS
+                )
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(licencePlate = newLicencePlate)
         )
