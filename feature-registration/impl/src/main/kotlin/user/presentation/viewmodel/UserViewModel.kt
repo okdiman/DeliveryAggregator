@@ -1,7 +1,6 @@
 package user.presentation.viewmodel
 
 import BaseViewModel
-import android.util.Patterns
 import coroutines.AppDispatchers
 import domain.usecase.SignUpUseCase
 import org.koin.core.component.KoinComponent
@@ -12,6 +11,7 @@ import user.presentation.mapper.SignUpModelMapper
 import user.presentation.viewmodel.model.UserAction
 import user.presentation.viewmodel.model.UserEvent
 import user.presentation.viewmodel.model.UserState
+import utils.isEmailCorrect
 import utils.isTextFieldFilled
 
 class UserViewModel(
@@ -93,8 +93,4 @@ class UserViewModel(
         email: String = viewState.email.text
     ) = isTextFieldFilled(name, MIN_NAME_CHARS) && isTextFieldFilled(surname, MIN_NAME_CHARS) &&
             isTextFieldFilled(secondName, MIN_NAME_CHARS) && isEmailCorrect(email)
-
-    private fun isEmailCorrect(email: String): Boolean {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    }
 }

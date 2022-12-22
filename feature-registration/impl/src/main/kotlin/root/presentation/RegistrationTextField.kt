@@ -10,8 +10,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import root.RegistrationConstants.HINT_ALPHA
-import root.presentation.model.RegistrationParamState
 import theme.Theme
+import view.TitledTextField
+import view.model.DefaultParamState
 
 @Suppress("LongParameterList")
 @Composable
@@ -19,7 +20,9 @@ fun RegistrationTextField(
     modifier: Modifier = Modifier,
     title: String,
     isDigits: Boolean = false,
-    state: RegistrationParamState,
+    state: DefaultParamState,
+    readOnly: Boolean = false,
+    trailingIcon: @Composable (() -> Unit)? = null,
     hint: String,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     maxChar: Int = Int.MAX_VALUE,
@@ -32,6 +35,8 @@ fun RegistrationTextField(
         hint = hint,
         state = state,
         isDigits = isDigits,
+        readOnly = readOnly,
+        trailingIcon = trailingIcon,
         keyboardOptions = keyboardOptions,
         maxChar = maxChar,
         hintStyle = Theme.fonts.regular.copy(

@@ -1,8 +1,8 @@
-package root.presentation.model
+package view.model
 
 import androidx.annotation.StringRes
 
-open class RegistrationParamState(
+open class DefaultParamState(
     open val stateText: String,
     open val isError: Boolean,
     @StringRes open val stateError: Int

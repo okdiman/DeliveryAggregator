@@ -1,4 +1,4 @@
-package root.presentation
+package view
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,16 +18,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import root.presentation.model.RegistrationParamState
 import theme.Theme
+import view.model.DefaultParamState
 
 @Suppress("LongParameterList")
 @Composable
 fun TitledTextField(
     modifier: Modifier = Modifier,
     title: String,
-    state: RegistrationParamState,
+    state: DefaultParamState,
     hint: String,
+    readOnly: Boolean = false,
+    trailingIcon: @Composable (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     isDigits: Boolean = false,
     maxChar: Int = Int.MAX_VALUE,
@@ -59,7 +61,6 @@ fun TitledTextField(
             color = Theme.colors.textThirdColor
         )
     )
-    Spacer(modifier = Modifier.height(4.dp))
     OutlinedTextField(
         modifier = modifier.then(
             Modifier
@@ -76,6 +77,8 @@ fun TitledTextField(
         singleLine = singleLine,
         colors = colors,
         shape = Theme.shapes.textFields,
+        readOnly = readOnly,
+        trailingIcon = trailingIcon,
         placeholder = {
             Text(
                 text = hint,
@@ -94,6 +97,7 @@ fun TitledTextField(
         }
     )
     if (state.isError && !isFocused.value) {
+        Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = stringResource(state.stateError), style = Theme.fonts.regular.copy(
                 color = Theme.colors.errorColor,

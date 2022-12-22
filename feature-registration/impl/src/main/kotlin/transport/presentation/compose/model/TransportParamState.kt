@@ -1,14 +1,14 @@
 package transport.presentation.compose.model
 
 import androidx.annotation.StringRes
-import root.presentation.model.RegistrationParamState
+import view.model.DefaultParamState
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
 
 sealed class TransportParamState(
     override val stateText: String,
     override val isError: Boolean,
     @StringRes override val stateError: Int
-) : RegistrationParamState(stateText, isError, stateError) {
+) : DefaultParamState(stateText, isError, stateError) {
     data class LicencePlateState(
         val text: String = "",
         val isLicencePlateError: Boolean = false,

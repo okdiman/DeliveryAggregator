@@ -1,14 +1,14 @@
 package user.presentation.compose.model
 
 import androidx.annotation.StringRes
-import root.presentation.model.RegistrationParamState
+import view.model.DefaultParamState
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
 
 sealed class UserParamState(
     override val stateText: String,
     override val isError: Boolean,
     @StringRes override val stateError: Int
-) : RegistrationParamState(stateText, isError, stateError) {
+) : DefaultParamState(stateText, isError, stateError) {
     data class NameState(
         val text: String = "",
         val isNameError: Boolean = false,

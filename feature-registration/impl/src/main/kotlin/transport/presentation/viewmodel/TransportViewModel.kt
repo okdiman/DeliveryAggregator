@@ -32,7 +32,7 @@ class TransportViewModel : BaseViewModel<TransportState, TransportAction, Transp
         viewState = viewState.copy(
             licencePlate = viewState.licencePlate.copy(
                 text = newLicencePlate,
-                isLicencePlateError = !isLicencePlateFilled(newLicencePlate)
+                isLicencePlateError = !isTextFieldFilled(newLicencePlate, LICENCE_PLATE_MIN_CHARS)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(licencePlate = newLicencePlate)
         )
@@ -104,14 +104,11 @@ class TransportViewModel : BaseViewModel<TransportState, TransportAction, Transp
         carLoadCapacity: String = viewState.carLoadCapacity.text,
         carCapacity: String = viewState.carCapacity.text
     ): Boolean {
-        return isLicencePlateFilled(licencePlate) &&
+        return isTextFieldFilled(licencePlate, LICENCE_PLATE_MIN_CHARS) &&
                 isTextFieldFilled(departureAddress, MIN_ADDRESS_CHARS) &&
                 isTextFieldFilled(carBrand, CAR_BRAND_MIN_CHARS) &&
                 isTextFieldFilled(carCategory, CAR_INFO_MIN_CHARS) &&
                 isTextFieldFilled(carLoadCapacity, CAR_INFO_MIN_CHARS) &&
                 isTextFieldFilled(carCapacity, CAR_INFO_MIN_CHARS)
     }
-
-    private fun isLicencePlateFilled(licencePlate: String) =
-        licencePlate.length >= LICENCE_PLATE_MIN_CHARS
 }
