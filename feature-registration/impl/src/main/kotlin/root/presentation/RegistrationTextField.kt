@@ -18,15 +18,18 @@ import view.model.DefaultParamState
 @Composable
 fun RegistrationTextField(
     modifier: Modifier = Modifier,
-    title: String,
+    hasTitle: Boolean = true,
+    title: String = "",
     isDigits: Boolean = false,
     state: DefaultParamState,
+    enabled: Boolean = true,
     readOnly: Boolean = false,
     trailingIcon: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
     hint: String,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     maxChar: Int = Int.MAX_VALUE,
-    onValueChanged: (String) -> Unit
+    onValueChanged: (String) -> Unit = {}
 ) {
     Spacer(modifier = Modifier.height(24.dp))
     TitledTextField(
@@ -34,9 +37,12 @@ fun RegistrationTextField(
         title = title,
         hint = hint,
         state = state,
+        enabled = enabled,
+        hasTitle = hasTitle,
         isDigits = isDigits,
         readOnly = readOnly,
         trailingIcon = trailingIcon,
+        leadingIcon = leadingIcon,
         keyboardOptions = keyboardOptions,
         maxChar = maxChar,
         hintStyle = Theme.fonts.regular.copy(
@@ -48,7 +54,9 @@ fun RegistrationTextField(
             unfocusedIndicatorColor = Color.Transparent,
             backgroundColor = Theme.colors.hintBackgroundColor,
             cursorColor = Color.Black,
-            errorIndicatorColor = Theme.colors.errorColor
+            errorIndicatorColor = Theme.colors.errorColor,
+            disabledIndicatorColor = Color.Transparent,
+            disabledTrailingIconColor = Color.Black
         ),
         onValueChanged = { onValueChanged(it) }
     )

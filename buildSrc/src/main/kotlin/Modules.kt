@@ -5,6 +5,8 @@ object Modules {
     const val navigation = ":navigation"
     const val auth_api = ":feature-auth:api"
     const val auth_impl = ":feature-auth:impl"
+    const val address_api = ":feature-address:api"
+    const val address_impl = ":feature-address:impl"
     const val registration_api = ":feature-registration:api"
     const val registration_impl = ":feature-registration:impl"
     const val profile_api = ":feature-profile:api"

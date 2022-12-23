@@ -25,5 +25,7 @@ include(
         ":feature-profile:api",
         ":feature-profile:impl",
         ":feature-order:api",
-        ":feature-order:impl"
+        ":feature-order:impl",
+        ":feature-address:api",
+        ":feature-address:impl"
 )

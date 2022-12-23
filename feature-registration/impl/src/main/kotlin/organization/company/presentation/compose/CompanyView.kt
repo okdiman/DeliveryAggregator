@@ -1,6 +1,7 @@
 package organization.company.presentation.compose
 
 import ActionButton
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -9,8 +10,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -24,6 +27,7 @@ import root.RegistrationConstants.Limits.Company.OGRN_CHARS
 import root.presentation.RegistrationTextField
 import root.presentation.TitleRegistrationView
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
 @Composable
 fun CompanyView(state: CompanyState, eventHandler: (CompanyEvent) -> Unit) {
@@ -55,7 +59,7 @@ private fun CompanyTextFieldsBlock(
         hint = stringResource(R.string.company_name_hint),
         maxChar = MAX_NAME_CHARS
     ) {
-        eventHandler(CompanyEvent.OnNameChanged(it))
+        eventHandler(CompanyEvent.OnCompanyNameChanged(it))
     }
     RegistrationTextField(
         title = stringResource(R.string.inn),
@@ -88,18 +92,30 @@ private fun CompanyTextFieldsBlock(
         eventHandler(CompanyEvent.OnOgrnChanged(it))
     }
     RegistrationTextField(
+        modifier = Modifier.clickable { eventHandler(CompanyEvent.OnLegalAddressClick) },
         title = stringResource(R.string.legal_address),
+        enabled = false,
+        trailingIcon = {
+            Icon(
+                painter = painterResource(id = R_core.drawable.chevron_ic),
+                contentDescription = null
+            )
+        },
         state = state.legalAddress,
         hint = stringResource(R.string.address_hint)
-    ) {
-        eventHandler(CompanyEvent.OnLegalAddressChanged(it))
-    }
+    )
     RegistrationTextField(
+        modifier = Modifier.clickable { eventHandler(CompanyEvent.OnActualAddressClick) },
         title = stringResource(R.string.actual_address),
+        enabled = false,
+        trailingIcon = {
+            Icon(
+                painter = painterResource(id = R_core.drawable.chevron_ic),
+                contentDescription = null
+            )
+        },
         state = state.actualAddress,
         hint = stringResource(R.string.address_hint)
-    ) {
-        eventHandler(CompanyEvent.OnActualAddressChanged(it))
-    }
+    )
     Spacer(modifier = Modifier.height(120.dp))
 }

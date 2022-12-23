@@ -55,4 +55,6 @@ dependencies {
     implementation(project(Modules.order_api))
     implementation(project(Modules.order_impl))
     implementation(project(Modules.navigation))
+    implementation(project(Modules.address_api))
+    implementation(project(Modules.address_impl))
 }

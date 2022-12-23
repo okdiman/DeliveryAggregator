@@ -1,9 +1,21 @@
 package organization.company.presentation.viewmodel
 
 import BaseViewModel
+import coroutines.AppDispatchers
+import data.AddressConstants.DEBOUNCE
+import data.AddressConstants.MIN_CHARS_FOR_SUGGEST
+import domain.model.AddressSuggestRequestModel
+import domain.usecase.GetSuggestByQueryUseCase
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import organization.company.presentation.viewmodel.model.CompanyAction
 import organization.company.presentation.viewmodel.model.CompanyEvent
 import organization.company.presentation.viewmodel.model.CompanyState
+import presentation.AddressUiModel
+import presentation.mapper.AddressSuggestUiMapper
+import presentation.parameters.CompanyParameters
 import root.RegistrationConstants.Limits.Common.MIN_ADDRESS_CHARS
 import root.RegistrationConstants.Limits.Common.MIN_NAME_CHARS
 import root.RegistrationConstants.Limits.Company.INN_CHARS
@@ -11,45 +23,86 @@ import root.RegistrationConstants.Limits.Company.KPP_CHARS
 import root.RegistrationConstants.Limits.Company.OGRN_CHARS
 import utils.isTextFieldFilled
 
-class CompanyViewModel : BaseViewModel<CompanyState, CompanyAction, CompanyEvent>(
-    initialState = CompanyState()
-) {
+class CompanyViewModel(
+    private val parameters: CompanyParameters
+) : BaseViewModel<CompanyState, CompanyAction, CompanyEvent>(initialState = CompanyState()),
+    KoinComponent {
+
+    private val getSuggestByQuery by inject<GetSuggestByQueryUseCase>()
+    private val appDispatchers by inject<AppDispatchers>()
+    private val addressUiMapper by inject<AddressSuggestUiMapper>()
+
+    private var suggestJob: Job? = null
 
     override fun obtainEvent(viewEvent: CompanyEvent) {
         when (viewEvent) {
-            is CompanyEvent.OnNameChanged -> onNameChanged(viewEvent.name)
+            is CompanyEvent.OnCompanyNameChanged -> onNameChanged(viewEvent.name)
             is CompanyEvent.OnInnChanged -> onInnChanged(viewEvent.inn)
             is CompanyEvent.OnKppChanged -> onKppChanged(viewEvent.kpp)
             is CompanyEvent.OnOgrnChanged -> onOgrnChanged(viewEvent.ogrn)
-            is CompanyEvent.OnLegalAddressChanged -> onLegalAddressChanged(viewEvent.legalAddress)
-            is CompanyEvent.OnActualAddressChanged -> onActualAddressChanged(viewEvent.actualAddress)
+            is CompanyEvent.OnLegalAddressClick -> onLegalAddressClick()
+            is CompanyEvent.OnActualAddressClick -> onActualAddressClick()
             is CompanyEvent.OnContinueButtonClick -> onContinueButtonClick()
-            is CompanyEvent.ResetAction -> onResetAction()
+            is CompanyEvent.OnLegalSuggestAddressClick -> onLegalAddressSuggestClick(viewEvent.address)
+            is CompanyEvent.OnActualSuggestAddressClick -> onActualAddressSuggestClick(viewEvent.address)
+            is CompanyEvent.OnBSAddressChanged -> onBsAddressChanged(viewEvent.bsAddress)
+            is CompanyEvent.ResetAction -> {
+                onResetAction()
+                resetSuggests()
+            }
         }
+    }
+
+    private fun onBsAddressChanged(address: String) {
+        loadSuggests(address)
+        viewState = viewState.copy(
+            bsAddress = viewState.bsAddress.copy(
+                text = address
+            )
+        )
+    }
+
+    private fun onLegalAddressSuggestClick(address: AddressUiModel) {
+        viewState = viewState.copy(
+            legalAddress = viewState.legalAddress.copy(
+                text = address.value,
+                address = address,
+                isAddressError = address.house.isEmpty()
+            ),
+            bsAddress = viewState.bsAddress.copy(
+                text = address.subtitle
+            ),
+            isContinueButtonEnabled = isContinueButtonEnabled(legalAddress = address.value)
+        )
+    }
+
+    private fun onActualAddressSuggestClick(address: AddressUiModel) {
+        viewState = viewState.copy(
+            actualAddress = viewState.actualAddress.copy(
+                text = address.value,
+                address = address
+            ),
+            bsAddress = viewState.bsAddress.copy(
+                text = address.subtitle
+            ),
+            isContinueButtonEnabled = isContinueButtonEnabled(actualAddress = address.value)
+        )
+    }
+
+    private fun resetSuggests() {
+        viewState = viewState.copy(addressList = emptyList())
+    }
+
+    private fun onLegalAddressClick() {
+        viewAction = CompanyAction.OpenSelectLegalAddress
+    }
+
+    private fun onActualAddressClick() {
+        viewAction = CompanyAction.OpenSelectActualAddress
     }
 
     private fun onContinueButtonClick() {
         viewAction = CompanyAction.OpenNextStep
-    }
-
-    private fun onActualAddressChanged(newActualAddress: String) {
-        viewState = viewState.copy(
-            actualAddress = viewState.actualAddress.copy(
-                text = newActualAddress,
-                isAddressError = !isTextFieldFilled(newActualAddress, MIN_ADDRESS_CHARS)
-            ),
-            isContinueButtonEnabled = isContinueButtonEnabled(actualAddress = newActualAddress)
-        )
-    }
-
-    private fun onLegalAddressChanged(newLegalAddress: String) {
-        viewState = viewState.copy(
-            legalAddress = viewState.legalAddress.copy(
-                text = newLegalAddress,
-                isAddressError = !isTextFieldFilled(newLegalAddress, MIN_ADDRESS_CHARS)
-            ),
-            isContinueButtonEnabled = isContinueButtonEnabled(legalAddress = newLegalAddress)
-        )
     }
 
     private fun onOgrnChanged(newOgrn: String) {
@@ -90,6 +143,25 @@ class CompanyViewModel : BaseViewModel<CompanyState, CompanyAction, CompanyEvent
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(name = newName)
         )
+    }
+
+    private fun loadSuggests(query: String) {
+        suggestJob?.cancel()
+        if (query.length >= MIN_CHARS_FOR_SUGGEST) {
+            suggestJob = launchJob(appDispatchers.network) {
+                delay(DEBOUNCE)
+                val suggests = getSuggestByQuery(
+                    AddressSuggestRequestModel(
+                        query = query,
+                        code = parameters.user.code.toInt(),
+                        phone = parameters.user.phone
+                    )
+                )
+                viewState = viewState.copy(addressList = addressUiMapper.map(suggests))
+            }
+        } else {
+            viewState = viewState.copy(addressList = emptyList())
+        }
     }
 
     private fun isContinueButtonEnabled(

@@ -25,11 +25,13 @@ import view.model.DefaultParamState
 @Composable
 fun TitledTextField(
     modifier: Modifier = Modifier,
+    hasTitle: Boolean = true,
     title: String,
     state: DefaultParamState,
     hint: String,
     readOnly: Boolean = false,
     trailingIcon: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     isDigits: Boolean = false,
     maxChar: Int = Int.MAX_VALUE,
@@ -54,13 +56,15 @@ fun TitledTextField(
     val isFocused = remember {
         mutableStateOf(false)
     }
-    Text(
-        text = title,
-        style = Theme.fonts.regular.copy(
-            fontSize = 16.sp,
-            color = Theme.colors.textThirdColor
+    if (hasTitle) {
+        Text(
+            text = title,
+            style = Theme.fonts.regular.copy(
+                fontSize = 16.sp,
+                color = Theme.colors.textThirdColor
+            )
         )
-    )
+    }
     OutlinedTextField(
         modifier = modifier.then(
             Modifier
@@ -69,6 +73,7 @@ fun TitledTextField(
                     isFocused.value = it.isFocused
                 }
         ),
+        maxLines = 1,
         isError = state.isError && !isFocused.value,
         value = state.stateText,
         enabled = enabled,
@@ -79,6 +84,7 @@ fun TitledTextField(
         shape = Theme.shapes.textFields,
         readOnly = readOnly,
         trailingIcon = trailingIcon,
+        leadingIcon = leadingIcon,
         placeholder = {
             Text(
                 text = hint,
@@ -101,7 +107,7 @@ fun TitledTextField(
         Text(
             text = stringResource(state.stateError), style = Theme.fonts.regular.copy(
                 color = Theme.colors.errorColor,
-                fontSize = 12.sp
+                fontSize = 12.sp,
             )
         )
     }

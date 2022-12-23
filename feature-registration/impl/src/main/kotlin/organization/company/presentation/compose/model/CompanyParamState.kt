@@ -1,8 +1,9 @@
 package organization.company.presentation.compose.model
 
 import androidx.annotation.StringRes
-import view.model.DefaultParamState
+import presentation.AddressUiModel
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import view.model.DefaultParamState
 
 sealed class CompanyParamState(
     override val stateText: String,
@@ -35,13 +36,22 @@ sealed class CompanyParamState(
 
     data class ActualAddressState(
         val text: String = "",
+        val address: AddressUiModel? = null,
         val isAddressError: Boolean = false,
-        @StringRes val error: Int = R.string.few_symbols_error
+        @StringRes val error: Int = R.string.incorrect_address
     ) : CompanyParamState(text, isAddressError, error)
 
     data class LegalAddressState(
         val text: String = "",
+        val address: AddressUiModel? = null,
         val isAddressError: Boolean = false,
-        @StringRes val error: Int = R.string.few_symbols_error
+        @StringRes val error: Int = R.string.incorrect_address
     ) : CompanyParamState(text, isAddressError, error)
+
+    data class BsAddressState(
+        val text: String = "",
+        val address: AddressUiModel? = null,
+        val isBsAddressError: Boolean = false,
+        @StringRes val error: Int = R.string.incorrect_address
+    ) : CompanyParamState(text, isBsAddressError, error)
 }

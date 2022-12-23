@@ -4,4 +4,5 @@
     <string name="create_acc_button">Создать аккаунт</string>
     <string name="organization_info">Данные организации</string>
     <string name="few_symbols_error">Введено недостаточное количество символов</string>
+    <string name="incorrect_address">Выберете адрес из списка</string>
 </resources>

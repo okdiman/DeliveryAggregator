@@ -1,5 +1,6 @@
 package theme
 
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 
@@ -7,13 +8,15 @@ import androidx.compose.runtime.CompositionLocalProvider
 fun DeliveryAggregatorTheme(
     content: @Composable () -> Unit
 ) {
-    CompositionLocalProvider(
-        LocalShapeProvider provides shapes,
-        LocalColorProvider provides palette,
-        LocalGradientProvider provides gradients,
-        LocalFontProvider provides fonts,
-        content = content
-    )
+    MaterialTheme {
+        CompositionLocalProvider(
+            LocalShapeProvider provides shapes,
+            LocalColorProvider provides palette,
+            LocalGradientProvider provides gradients,
+            LocalFontProvider provides fonts,
+            content = content
+        )
+    }
 }
 
 object Theme {
