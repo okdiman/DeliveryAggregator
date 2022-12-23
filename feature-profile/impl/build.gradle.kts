@@ -9,5 +9,8 @@ android {
 }
 
 dependencies {
-
+    navigation()
+    compose()
+    implementation(project(Modules.core))
+    implementation(project(Modules.core_ui))
 }
