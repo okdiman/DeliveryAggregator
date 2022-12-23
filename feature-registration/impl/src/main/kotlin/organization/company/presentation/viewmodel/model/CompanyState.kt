@@ -11,6 +11,6 @@ data class CompanyState(
     val legalAddress: CompanyParamState.LegalAddressState = CompanyParamState.LegalAddressState(),
     val actualAddress: CompanyParamState.ActualAddressState = CompanyParamState.ActualAddressState(),
     val bsAddress: CompanyParamState.BsAddressState = CompanyParamState.BsAddressState(),
-    val addressList: List<AddressUiModel> = emptyList(),
+    val suggests: List<AddressUiModel> = emptyList(),
     val isContinueButtonEnabled: Boolean = false
 )

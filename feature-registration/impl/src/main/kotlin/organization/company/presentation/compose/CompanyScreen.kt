@@ -1,18 +1,24 @@
 package organization.company.presentation.compose
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
+import data.AddressConstants
 import navigation.NavigationTree
 import organization.company.presentation.viewmodel.CompanyViewModel
 import organization.company.presentation.viewmodel.model.CompanyAction
 import organization.company.presentation.viewmodel.model.CompanyEvent
+import organization.company.presentation.viewmodel.model.CompanyState
+import presentation.AddressUiModel
 import presentation.model.RegistrationCompanyModel
 import presentation.parameters.BankParameters
 import presentation.parameters.CompanyParameters
-import root.presentation.ObtainBSScreenAction
+import root.presentation.RegistrationAddressBSScreen
+import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
+import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
 
 @Composable
 fun CompanyScreen(parameters: CompanyParameters) {
@@ -64,4 +70,32 @@ fun CompanyScreen(parameters: CompanyParameters) {
             else -> {}
         }
     }
+}
+
+@Composable
+fun ObtainBSScreenAction(
+    state: State<CompanyState>,
+    onChangeEvent: (String) -> Unit,
+    onSuggestClick: (AddressUiModel) -> Unit,
+    onFinishEvent: () -> Unit
+) {
+    val rootController = LocalRootController.current
+    rootController.findModalController().present(
+        modalSheetConfiguration = ModalSheetConfiguration(
+            maxHeight = AddressConstants.SCREEN_MAX_HEIGHT,
+            cornerRadius = AddressConstants.SCREEN_CORNER_RADIUS,
+            closeOnBackdropClick = false,
+            closeOnSwipe = false
+        )
+    ) {
+        RegistrationAddressBSScreen(
+            state = state.value.bsAddress,
+            suggests = state.value.suggests,
+            onClearClick = { onChangeEvent("") },
+            onTextFieldChanged = { onChangeEvent(it) }
+        ) {
+            onSuggestClick(it)
+        }
+    }
+    onFinishEvent()
 }

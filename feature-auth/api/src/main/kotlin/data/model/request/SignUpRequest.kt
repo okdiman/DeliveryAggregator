@@ -1,5 +1,6 @@
 package data.model.request
 
+import domain.model.AddressSignUpModel
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -21,7 +22,7 @@ data class SignUpRequest(
     val bank: String,
     val organisationName: String,
     val carPlate: String,
-    val address: String,
+    val address: AddressSignUpModel,
     val carModel: String,
     val carCategory: String,
     val carLoadCapacity: Int,

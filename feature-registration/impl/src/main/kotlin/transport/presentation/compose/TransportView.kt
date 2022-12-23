@@ -1,6 +1,7 @@
 package transport.presentation.compose
 
 import ActionButton
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -9,13 +10,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import root.RegistrationConstants
-import root.RegistrationConstants.Limits.Common.MAX_NAME_CHARS
 import root.RegistrationConstants.Limits.Transport.CAR_BRAND_MAX_CHARS
 import root.RegistrationConstants.Limits.Transport.CAR_CAPACITY_MAX_CHARS
 import root.RegistrationConstants.Limits.Transport.CAR_CATEGORY_MAX_CHARS
@@ -25,6 +27,7 @@ import root.presentation.TitleRegistrationView
 import transport.presentation.viewmodel.model.TransportEvent
 import transport.presentation.viewmodel.model.TransportState
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
 @Composable
 fun TransportView(state: TransportState, eventHandler: (TransportEvent) -> Unit) {
@@ -58,13 +61,18 @@ fun TransportTextFieldsBlock(state: TransportState, eventHandler: (TransportEven
         eventHandler(TransportEvent.OnLicencePlateChanged(it))
     }
     RegistrationTextField(
+        modifier = Modifier.clickable { eventHandler(TransportEvent.OnDepartAddressClick) },
         title = stringResource(R.string.departure_address),
         state = state.departureAddress,
         hint = stringResource(R.string.departure_address_hint),
-        maxChar = MAX_NAME_CHARS
-    ) {
-        eventHandler(TransportEvent.OnDepartureAddressChanged(it))
-    }
+        enabled = false,
+        trailingIcon = {
+            Icon(
+                painter = painterResource(id = R_core.drawable.chevron_ic),
+                contentDescription = null
+            )
+        }
+    )
     RegistrationTextField(
         title = stringResource(R.string.car_brand),
         state = state.carBrand,

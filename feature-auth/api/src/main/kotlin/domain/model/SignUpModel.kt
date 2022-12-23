@@ -18,7 +18,7 @@ class SignUpModel(
     val bank: String,
     val organisationName: String,
     val carPlate: String,
-    val address: String,
+    val address: AddressSignUpModel,
     val carModel: String,
     val carCategory: String,
     val carLoadCapacity: Int,

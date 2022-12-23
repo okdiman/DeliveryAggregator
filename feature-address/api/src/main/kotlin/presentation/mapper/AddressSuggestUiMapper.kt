@@ -37,8 +37,8 @@ class AddressSuggestUiMapper {
                 street = street,
                 house = model.data.house,
                 city = city,
-                geo_lon = model.data.geo_lon,
-                geo_lat = model.data.geo_lat,
+                geoLon = model.data.geo_lon,
+                geoLat = model.data.geo_lat,
                 subtitle = subtitle
             )
         }.take(MAX_SUGGESTS)

@@ -1,5 +1,6 @@
 package user.presentation.mapper
 
+import domain.model.AddressSignUpModel
 import domain.model.SignUpModel
 import presentation.parameters.UserParameters
 import user.presentation.viewmodel.model.UserState
@@ -21,7 +22,13 @@ class SignUpModelMapper {
             actualAddress = parameters.company.actualAddress.orEmpty(),
             checkingAccount = parameters.bank.paymentAcc,
             correspondentAccount = parameters.bank.corrAcc,
-            address = parameters.transport.departureAddress,
+            address = AddressSignUpModel(
+                geoLon = parameters.transport.departureAddress.geoLon,
+                geoLat = parameters.transport.departureAddress.geoLat,
+                city = parameters.transport.departureAddress.city,
+                street = parameters.transport.departureAddress.street,
+                house = parameters.transport.departureAddress.house
+            ),
             organisationName = parameters.company.companyName,
             bank = parameters.bank.bankName,
             carLoadCapacity = parameters.transport.carLoadCapacity.toInt(),

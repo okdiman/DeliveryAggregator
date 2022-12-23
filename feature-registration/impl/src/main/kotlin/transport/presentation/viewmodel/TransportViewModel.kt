@@ -1,6 +1,17 @@
 package transport.presentation.viewmodel
 
 import BaseViewModel
+import coroutines.AppDispatchers
+import data.AddressConstants
+import domain.model.AddressSuggestRequestModel
+import domain.usecase.GetSuggestByQueryUseCase
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import presentation.AddressUiModel
+import presentation.mapper.AddressSuggestUiMapper
+import presentation.parameters.TransportParameters
 import root.RegistrationConstants.Limits.Common.MIN_ADDRESS_CHARS
 import root.RegistrationConstants.Limits.Transport.CAR_BRAND_MIN_CHARS
 import root.RegistrationConstants.Limits.Transport.CAR_INFO_MIN_CHARS
@@ -10,22 +21,49 @@ import transport.presentation.viewmodel.model.TransportEvent
 import transport.presentation.viewmodel.model.TransportState
 import utils.isTextFieldFilled
 
-class TransportViewModel : BaseViewModel<TransportState, TransportAction, TransportEvent>(
-    initialState = TransportState()
-) {
+class TransportViewModel(
+    private val parameters: TransportParameters
+) : BaseViewModel<TransportState, TransportAction, TransportEvent>(initialState = TransportState()),
+    KoinComponent {
+
+    private val getSuggestByQuery by inject<GetSuggestByQueryUseCase>()
+    private val appDispatchers by inject<AppDispatchers>()
+    private val addressUiMapper by inject<AddressSuggestUiMapper>()
+
+    private var suggestJob: Job? = null
 
     override fun obtainEvent(viewEvent: TransportEvent) {
         when (viewEvent) {
             is TransportEvent.OnLicencePlateChanged -> onLicencePlateChanged(viewEvent.licencePlate)
-            is TransportEvent.OnDepartureAddressChanged -> onDepartureAddressChanged(viewEvent.departureAddress)
+            is TransportEvent.OnBSAddressChanged -> onBsAddressChanged(viewEvent.bsAddress)
             is TransportEvent.OnCarBrandChanged -> onCarBrandChanged(viewEvent.carBrand)
             is TransportEvent.OnCarLoadCapacityChanged -> onCarLoadCapacityChanged(viewEvent.carLoadCapacity)
             is TransportEvent.OnCarCategoryChanged -> onCarCategoryChanged(viewEvent.carCategory)
             is TransportEvent.OnCarCapacityChanged -> onCarCapacityChanged(viewEvent.carCapacity)
             is TransportEvent.OnBackButtonClick -> onBackButtonClick()
             is TransportEvent.OnContinueButtonClick -> onContinueButtonClick()
+            is TransportEvent.OnDepartAddressClick -> onDepartAddressClick()
+            is TransportEvent.OnSuggestAddressClick -> onSuggestAddressClick(viewEvent.address)
             is TransportEvent.ResetAction -> onResetAction()
         }
+    }
+
+    private fun onDepartAddressClick() {
+        viewAction = TransportAction.OpenDepartureAddressBs
+    }
+
+    private fun onSuggestAddressClick(address: AddressUiModel) {
+        viewState = viewState.copy(
+            departureAddress = viewState.departureAddress.copy(
+                text = address.value,
+                address = address,
+                isDepartureAddressError = address.house.isEmpty()
+            ),
+            bsAddress = viewState.bsAddress.copy(
+                text = address.subtitle
+            ),
+            isContinueButtonEnabled = isContinueButtonEnabled(departureAddress = address.value)
+        )
     }
 
     private fun onLicencePlateChanged(newLicencePlate: String) {
@@ -41,13 +79,12 @@ class TransportViewModel : BaseViewModel<TransportState, TransportAction, Transp
         )
     }
 
-    private fun onDepartureAddressChanged(newDepartureAddress: String) {
+    private fun onBsAddressChanged(address: String) {
+        loadSuggests(address)
         viewState = viewState.copy(
-            departureAddress = viewState.departureAddress.copy(
-                text = newDepartureAddress,
-                isDepartureAddressError = !isTextFieldFilled(newDepartureAddress, MIN_ADDRESS_CHARS)
-            ),
-            isContinueButtonEnabled = isContinueButtonEnabled(departureAddress = newDepartureAddress)
+            bsAddress = viewState.bsAddress.copy(
+                text = address
+            )
         )
     }
 
@@ -97,6 +134,25 @@ class TransportViewModel : BaseViewModel<TransportState, TransportAction, Transp
 
     private fun onContinueButtonClick() {
         viewAction = TransportAction.OpenNextStep
+    }
+
+    private fun loadSuggests(query: String) {
+        suggestJob?.cancel()
+        if (query.length >= AddressConstants.MIN_CHARS_FOR_SUGGEST) {
+            suggestJob = launchJob(appDispatchers.network) {
+                delay(AddressConstants.DEBOUNCE)
+                val suggests = getSuggestByQuery(
+                    AddressSuggestRequestModel(
+                        query = query,
+                        code = parameters.user.code.toInt(),
+                        phone = parameters.user.phone
+                    )
+                )
+                viewState = viewState.copy(suggests = addressUiMapper.map(suggests))
+            }
+        } else {
+            viewState = viewState.copy(suggests = emptyList())
+        }
     }
 
     private fun isContinueButtonEnabled(

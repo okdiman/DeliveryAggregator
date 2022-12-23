@@ -5,7 +5,7 @@ import androidx.compose.runtime.Immutable
 @Immutable
 class RegistrationTransportModel(
     val licencePlate: String,
-    val departureAddress: String,
+    val departureAddress: DepartureAddressModel,
     val carBrand: String,
     val carCategory: String,
     val carLoadCapacity: String,

@@ -90,7 +90,7 @@ class CompanyViewModel(
     }
 
     private fun resetSuggests() {
-        viewState = viewState.copy(addressList = emptyList())
+        viewState = viewState.copy(suggests = emptyList())
     }
 
     private fun onLegalAddressClick() {
@@ -157,10 +157,10 @@ class CompanyViewModel(
                         phone = parameters.user.phone
                     )
                 )
-                viewState = viewState.copy(addressList = addressUiMapper.map(suggests))
+                viewState = viewState.copy(suggests = addressUiMapper.map(suggests))
             }
         } else {
-            viewState = viewState.copy(addressList = emptyList())
+            viewState = viewState.copy(suggests = emptyList())
         }
     }
 
