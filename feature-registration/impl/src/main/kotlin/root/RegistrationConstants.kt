@@ -11,6 +11,7 @@ object RegistrationConstants {
     object Limits {
         object Company {
             const val INN_CHARS = 12
+            const val INN_MIN_CHARS = 10
             const val KPP_CHARS = 9
             const val OGRN_CHARS = 13
         }

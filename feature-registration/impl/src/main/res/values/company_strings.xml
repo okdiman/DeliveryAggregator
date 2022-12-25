@@ -4,7 +4,7 @@
     <string name="company_name_hint">ООО “Подари Жизнь”</string>
     <string name="inn">ИНН</string>
     <string name="inn_hint">6449013711</string>
-    <string name="inn_error">Номер ИНН должен содержать 10 символов.</string>
+    <string name="inn_error">Номер ИНН должен содержать от 10 до 12 символов.</string>
     <string name="kpp">КПП</string>
     <string name="kpp_hint">644901001</string>
     <string name="kpp_error">Номер КПП должен содержать 9 символов.</string>

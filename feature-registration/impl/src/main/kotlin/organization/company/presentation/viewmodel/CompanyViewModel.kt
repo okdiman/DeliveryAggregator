@@ -19,6 +19,7 @@ import presentation.parameters.CompanyParameters
 import root.RegistrationConstants.Limits.Common.MIN_ADDRESS_CHARS
 import root.RegistrationConstants.Limits.Common.MIN_NAME_CHARS
 import root.RegistrationConstants.Limits.Company.INN_CHARS
+import root.RegistrationConstants.Limits.Company.INN_MIN_CHARS
 import root.RegistrationConstants.Limits.Company.KPP_CHARS
 import root.RegistrationConstants.Limits.Company.OGRN_CHARS
 import utils.isTextFieldFilled
@@ -129,7 +130,7 @@ class CompanyViewModel(
         viewState = viewState.copy(
             inn = viewState.inn.copy(
                 text = newInn,
-                isInnError = !isTextFieldFilled(newInn, INN_CHARS)
+                isInnError = !isTextFieldFilled(newInn, INN_MIN_CHARS)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(inn = newInn)
         )
