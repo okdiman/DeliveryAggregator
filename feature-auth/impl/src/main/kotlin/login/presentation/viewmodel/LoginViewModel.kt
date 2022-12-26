@@ -9,7 +9,7 @@ import login.presentation.viewmodel.model.LoginEvent
 import login.presentation.viewmodel.model.LoginState
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import root.AuthConstants.Limits.MAX_PHONE_CHARS
+import utils.CommonConstants.LIMITS.MAX_PHONE_CHARS
 import utils.isTextFieldFilled
 
 class LoginViewModel : BaseViewModel<LoginState, LoginAction, LoginEvent>(

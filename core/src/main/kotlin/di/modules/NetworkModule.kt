@@ -2,6 +2,7 @@ package di.modules
 
 import network.interceptor.CurlLoggingInterceptor
 import network.interceptor.ErrorInterceptor
+import network.interceptor.HeadersInterceptor
 import network.provider.OkHttpClientBuilderProvider
 import network.provider.RetrofitProvider
 import okhttp3.OkHttpClient
@@ -19,6 +20,7 @@ fun networkModule() = module {
     single {
         OkHttpClientBuilderProvider(
             get(),
+            get(),
             get()
         ).provide()
     }
@@ -27,4 +29,5 @@ fun networkModule() = module {
     }
     factory { ErrorInterceptor() }
     factory { CurlLoggingInterceptor() }
+    factory { HeadersInterceptor(get()) }
 }

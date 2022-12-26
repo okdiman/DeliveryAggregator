@@ -2,13 +2,13 @@ package root.data
 
 import android.content.SharedPreferences
 import coroutines.AppDispatchers
-import data.datastore.AuthLocalDataStore
+import data.datasource.AuthLocalDataSource
 import kotlinx.coroutines.withContext
 
-class AuthLocalDataStoreImpl(
+class AuthLocalDataSourceImpl(
     private val sharedPreferences: SharedPreferences,
     private val dispatchers: AppDispatchers
-) : AuthLocalDataStore {
+) : AuthLocalDataSource {
 
     override suspend fun saveToken(token: String) {
         withContext(dispatchers.storage) {
@@ -19,6 +19,12 @@ class AuthLocalDataStoreImpl(
     }
 
     override suspend fun getToken(): String? {
+        return withContext(dispatchers.storage) {
+            sharedPreferences.getString(USER_TOKEN, null)
+        }
+    }
+
+    override fun getTokenSync(): String? {
         return sharedPreferences.getString(USER_TOKEN, null)
     }
 

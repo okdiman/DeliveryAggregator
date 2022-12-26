@@ -29,7 +29,10 @@ fun VerifyScreen(parameters: VerifyParameters) {
                 viewModel.obtainEvent(VerifyEvent.ResetAction)
             }
             is VerifyAction.OpenMainFlow -> {
-
+                rootController.findRootController().present(
+                    screen = NavigationTree.Main.MainFlow.name,
+                    launchFlag = LaunchFlag.SingleNewTask
+                )
             }
             is VerifyAction.OpenRegistrationFlow -> {
                 rootController.findRootController().present(

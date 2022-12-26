@@ -2,11 +2,12 @@ package data.model.response
 
 import com.google.gson.annotations.SerializedName
 
+@Suppress("LongParameterList")
 class AddressSuggestDetailedDto(
     @SerializedName("geo_lat")
-    val geo_lat: String,
+    val geoLat: String,
     @SerializedName("geo_lon")
-    val geo_lon: String,
+    val geoLon: String,
     @SerializedName("city_with_type")
     val city: String,
     @SerializedName("city_district_with_type")

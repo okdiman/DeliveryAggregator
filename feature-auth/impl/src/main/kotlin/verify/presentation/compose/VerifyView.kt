@@ -48,8 +48,7 @@ fun VerifyView(viewState: VerifyState, eventHandler: (VerifyEvent) -> Unit) {
             ProgressIndicator(
                 modifier = Modifier
                     .padding(start = 16.dp, top = 19.dp)
-                    .width(54.dp),
-                gradient = Theme.gradients.progressBarGradient
+                    .width(54.dp)
             )
         }
     }
@@ -65,7 +64,7 @@ private fun InfoBlock(viewState: VerifyState) {
     Spacer(modifier = Modifier.height(12.dp))
     Text(
         text = viewState.title,
-        style = Theme.fonts.regular.copy(fontSize = 16.sp)
+        style = Theme.fonts.regular
     )
 }
 
@@ -121,7 +120,7 @@ private fun CodeBlock(viewState: VerifyState, eventHandler: (VerifyEvent) -> Uni
                 eventHandler(VerifyEvent.OnRetryCallClick)
             },
             text = stringResource(id = R.string.call_again),
-            style = Theme.fonts.bold.copy(fontSize = 16.sp)
+            style = Theme.fonts.bold
         )
     }
     LaunchedEffect(Unit) {

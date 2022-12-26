@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import root.RegistrationConstants.HINT_ALPHA
 import theme.Theme
 import view.TitledTextField
@@ -46,7 +45,6 @@ fun RegistrationTextField(
         keyboardOptions = keyboardOptions,
         maxChar = maxChar,
         hintStyle = Theme.fonts.regular.copy(
-            fontSize = 16.sp,
             color = Theme.colors.textPrimaryColor.copy(alpha = HINT_ALPHA)
         ),
         colors = TextFieldDefaults.textFieldColors(

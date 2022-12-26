@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
+import theme.Theme
 import view.ProgressBarConstants.DefaultAnimationDelay
 import view.ProgressBarConstants.DefaultAnimationDuration
 import view.ProgressBarConstants.DefaultBallCount
@@ -30,7 +31,7 @@ import view.ProgressBarConstants.DefaultStartDelay
 @Composable
 fun ProgressIndicator(
     modifier: Modifier = Modifier,
-    gradient: Brush,
+    gradient: Brush = Theme.gradients.progressBarGradient,
     animationDuration: Int = DefaultAnimationDuration,
     animationDelay: Int = DefaultAnimationDelay,
     startDelay: Int = DefaultStartDelay,

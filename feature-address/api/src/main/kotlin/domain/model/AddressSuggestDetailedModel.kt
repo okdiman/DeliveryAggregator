@@ -1,8 +1,8 @@
 package domain.model
 
 data class AddressSuggestDetailedModel(
-    val geo_lat: String,
-    val geo_lon: String,
+    val geoLat: String,
+    val geoLon: String,
     val city: String,
     val district: String,
     val street: String,

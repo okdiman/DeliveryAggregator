@@ -33,7 +33,7 @@ fun OfferView(viewState: OfferState, eventHandler: (OfferEvent) -> Unit) {
         Spacer(modifier = Modifier.height(12.dp))
         Text(
             text = viewState.offer,
-            style = Theme.fonts.regular.copy(fontSize = 16.sp)
+            style = Theme.fonts.regular
         )
     }
 }

@@ -3,8 +3,11 @@ package user.presentation.compose
 import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
+import navigation.NavigationTree
 import presentation.parameters.UserParameters
+import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
+import ru.alexgladkov.odyssey.core.LaunchFlag
 import user.presentation.viewmodel.UserViewModel
 import user.presentation.viewmodel.model.UserAction
 import user.presentation.viewmodel.model.UserEvent
@@ -24,7 +27,10 @@ fun UserScreen(parameters: UserParameters) {
                 viewModel.obtainEvent(UserEvent.ResetAction)
             }
             is UserAction.OpenMainFlow -> {
-
+                rootController.findRootController().present(
+                    screen = NavigationTree.Main.MainFlow.name,
+                    launchFlag = LaunchFlag.SingleNewTask
+                )
             }
             else -> {}
         }

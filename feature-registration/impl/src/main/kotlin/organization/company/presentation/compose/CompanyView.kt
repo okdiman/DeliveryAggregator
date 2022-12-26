@@ -58,9 +58,7 @@ private fun CompanyTextFieldsBlock(
         state = state.companyName,
         hint = stringResource(R.string.company_name_hint),
         maxChar = MAX_NAME_CHARS
-    ) {
-        eventHandler(CompanyEvent.OnCompanyNameChanged(it))
-    }
+    ) { eventHandler(CompanyEvent.OnCompanyNameChanged(it)) }
     RegistrationTextField(
         title = stringResource(R.string.inn),
         state = state.inn,
@@ -68,9 +66,7 @@ private fun CompanyTextFieldsBlock(
         hint = stringResource(R.string.inn_hint),
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = INN_CHARS
-    ) {
-        eventHandler(CompanyEvent.OnInnChanged(it))
-    }
+    ) { eventHandler(CompanyEvent.OnInnChanged(it)) }
     RegistrationTextField(
         title = stringResource(R.string.kpp),
         state = state.kpp,
@@ -78,9 +74,7 @@ private fun CompanyTextFieldsBlock(
         hint = stringResource(R.string.kpp_hint),
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = KPP_CHARS
-    ) {
-        eventHandler(CompanyEvent.OnKppChanged(it))
-    }
+    ) { eventHandler(CompanyEvent.OnKppChanged(it)) }
     RegistrationTextField(
         title = stringResource(R.string.ogrn),
         state = state.ogrn,
@@ -88,9 +82,7 @@ private fun CompanyTextFieldsBlock(
         hint = stringResource(R.string.ogrn_hint),
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = OGRN_CHARS
-    ) {
-        eventHandler(CompanyEvent.OnOgrnChanged(it))
-    }
+    ) { eventHandler(CompanyEvent.OnOgrnChanged(it)) }
     RegistrationTextField(
         modifier = Modifier.clickable { eventHandler(CompanyEvent.OnLegalAddressClick) },
         title = stringResource(R.string.legal_address),

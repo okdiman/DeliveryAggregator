@@ -10,8 +10,8 @@ class AddressSuggestMapper {
             AddressSuggestModel(
                 value = suggest.value,
                 data = AddressSuggestDetailedModel(
-                    geo_lat = suggest.data.geo_lat,
-                    geo_lon = suggest.data.geo_lon,
+                    geoLat = suggest.data.geoLat,
+                    geoLon = suggest.data.geoLon,
                     city = suggest.data.city,
                     street = suggest.data.street,
                     house = suggest.data.house,

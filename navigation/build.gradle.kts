@@ -23,4 +23,6 @@ dependencies {
     implementation(project(Modules.auth_impl))
     implementation(project(Modules.registration_api))
     implementation(project(Modules.registration_impl))
+    implementation(project(Modules.profile_api))
+    implementation(project(Modules.profile_impl))
 }

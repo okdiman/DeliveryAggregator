@@ -38,12 +38,9 @@ fun TitledTextField(
     enabled: Boolean = true,
     singleLine: Boolean = false,
     onValueChanged: (String) -> Unit,
-    textStyle: TextStyle = Theme.fonts.regular.copy(
-        fontSize = 16.sp
-    ),
+    textStyle: TextStyle = Theme.fonts.regular,
     hintStyle: TextStyle = Theme.fonts.bold.copy(
-        color = Theme.colors.hintColor,
-        fontSize = 16.sp
+        color = Theme.colors.hintColor
     ),
     colors: TextFieldColors = TextFieldDefaults.textFieldColors(
         textColor = Theme.colors.textPrimaryColor,
@@ -60,7 +57,6 @@ fun TitledTextField(
         Text(
             text = title,
             style = Theme.fonts.regular.copy(
-                fontSize = 16.sp,
                 color = Theme.colors.textThirdColor
             )
         )

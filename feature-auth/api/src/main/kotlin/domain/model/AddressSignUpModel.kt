@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
 
 @Serializable
-class AddressSignUpModel(
+data class AddressSignUpModel(
     @SerializedName("geo_lat")
     val geoLat: String,
     @SerializedName("geo_lon")

@@ -1,5 +1,6 @@
 package domain.model
 
+@Suppress("LongParameterList")
 class SignUpModel(
     val code: Int,
     val phone: String,

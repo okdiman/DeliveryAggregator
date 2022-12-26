@@ -17,6 +17,7 @@ import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConf
 import transport.presentation.viewmodel.TransportViewModel
 import transport.presentation.viewmodel.model.TransportAction
 import transport.presentation.viewmodel.model.TransportEvent
+import transport.presentation.viewmodel.model.TransportState
 
 @Composable
 fun TransportScreen(parameters: TransportParameters) {
@@ -31,25 +32,7 @@ fun TransportScreen(parameters: TransportParameters) {
             is TransportAction.OpenNextStep -> {
                 rootController.push(
                     screen = NavigationTree.Registration.User.name,
-                    params = UserParameters(
-                        user = parameters.user,
-                        company = parameters.company,
-                        bank = parameters.bank,
-                        transport = RegistrationTransportModel(
-                            licencePlate = state.value.licencePlate.text,
-                            departureAddress = DepartureAddressModel(
-                                geoLon = state.value.departureAddress.address?.geoLon.orEmpty(),
-                                geoLat = state.value.departureAddress.address?.geoLat.orEmpty(),
-                                city = state.value.departureAddress.address?.city.orEmpty(),
-                                street = state.value.departureAddress.address?.street.orEmpty(),
-                                house = state.value.departureAddress.address?.house.orEmpty()
-                            ),
-                            carBrand = state.value.carBrand.text,
-                            carCategory = state.value.carCategory.text,
-                            carLoadCapacity = state.value.carLoadCapacity.text,
-                            carCapacity = state.value.carCapacity.text
-                        )
-                    )
+                    params = getUserParameters(parameters, state.value)
                 )
                 viewModel.obtainEvent(TransportEvent.ResetAction)
             }
@@ -85,3 +68,24 @@ fun TransportScreen(parameters: TransportParameters) {
         }
     }
 }
+
+private fun getUserParameters(parameters: TransportParameters, state: TransportState) =
+    UserParameters(
+        user = parameters.user,
+        company = parameters.company,
+        bank = parameters.bank,
+        transport = RegistrationTransportModel(
+            licencePlate = state.licencePlate.text,
+            departureAddress = DepartureAddressModel(
+                geoLon = state.departureAddress.address?.geoLon.orEmpty(),
+                geoLat = state.departureAddress.address?.geoLat.orEmpty(),
+                city = state.departureAddress.address?.city.orEmpty(),
+                street = state.departureAddress.address?.street.orEmpty(),
+                house = state.departureAddress.address?.house.orEmpty()
+            ),
+            carBrand = state.carBrand.text,
+            carCategory = state.carCategory.text,
+            carLoadCapacity = state.carLoadCapacity.text,
+            carCapacity = state.carCapacity.text
+        )
+    )

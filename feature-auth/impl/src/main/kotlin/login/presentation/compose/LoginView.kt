@@ -30,9 +30,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import login.presentation.viewmodel.model.LoginEvent
 import login.presentation.viewmodel.model.LoginState
-import root.AuthConstants.Limits.MAX_PHONE_CHARS
 import theme.Theme
 import trinity_monsters.wildberries_delivery_aggregator.feature_auth.impl.R
+import utils.CommonConstants.LIMITS.MAX_PHONE_CHARS
 import view.CommonTextField
 
 @Composable
@@ -64,7 +64,7 @@ private fun TitleBlock() {
     Spacer(modifier = Modifier.height(12.dp))
     Text(
         text = stringResource(R.string.enter_phone),
-        style = Theme.fonts.regular.copy(fontSize = 16.sp)
+        style = Theme.fonts.regular
     )
 }
 
@@ -116,7 +116,7 @@ private fun AgreementBlock(viewState: LoginState, eventHandler: (LoginEvent) -> 
         Column {
             Text(
                 text = stringResource(id = R.string.agreement),
-                style = Theme.fonts.regular.copy(fontSize = 16.sp)
+                style = Theme.fonts.regular
             )
             Text(
                 modifier = Modifier.clickable {
@@ -124,7 +124,6 @@ private fun AgreementBlock(viewState: LoginState, eventHandler: (LoginEvent) -> 
                 },
                 text = stringResource(id = R.string.read_offer),
                 style = Theme.fonts.regular.copy(
-                    fontSize = 16.sp,
                     textDecoration = TextDecoration.Underline
                 )
             )

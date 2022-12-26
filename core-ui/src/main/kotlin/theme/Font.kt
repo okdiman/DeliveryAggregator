@@ -5,6 +5,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R
 
 data class DeliveryAggregatorFonts(
@@ -18,7 +19,8 @@ private fun baseFontStyle(
 ): TextStyle = TextStyle(
     fontWeight = weight,
     fontFamily = sfUiDisplay,
-    color = palette.textPrimaryColor
+    color = palette.textPrimaryColor,
+    fontSize = 16.sp
 )
 
 val sfUiDisplay = FontFamily(

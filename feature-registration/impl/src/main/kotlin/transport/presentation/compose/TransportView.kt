@@ -57,9 +57,7 @@ fun TransportTextFieldsBlock(state: TransportState, eventHandler: (TransportEven
         state = state.licencePlate,
         hint = stringResource(R.string.license_plate_hint),
         maxChar = LICENCE_PLATE_MAX_CHARS
-    ) {
-        eventHandler(TransportEvent.OnLicencePlateChanged(it))
-    }
+    ) { eventHandler(TransportEvent.OnLicencePlateChanged(it)) }
     RegistrationTextField(
         modifier = Modifier.clickable { eventHandler(TransportEvent.OnDepartAddressClick) },
         title = stringResource(R.string.departure_address),
@@ -78,17 +76,13 @@ fun TransportTextFieldsBlock(state: TransportState, eventHandler: (TransportEven
         state = state.carBrand,
         hint = stringResource(R.string.car_brand_hint),
         maxChar = CAR_BRAND_MAX_CHARS
-    ) {
-        eventHandler(TransportEvent.OnCarBrandChanged(it))
-    }
+    ) { eventHandler(TransportEvent.OnCarBrandChanged(it)) }
     RegistrationTextField(
         title = stringResource(R.string.car_category),
         state = state.carCategory,
         hint = stringResource(R.string.car_category_hint),
         maxChar = CAR_CATEGORY_MAX_CHARS
-    ) {
-        eventHandler(TransportEvent.OnCarCategoryChanged(it))
-    }
+    ) { eventHandler(TransportEvent.OnCarCategoryChanged(it)) }
     RegistrationTextField(
         title = stringResource(R.string.car_load_capacity),
         state = state.carLoadCapacity,
@@ -96,9 +90,7 @@ fun TransportTextFieldsBlock(state: TransportState, eventHandler: (TransportEven
         isDigits = true,
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = CAR_CAPACITY_MAX_CHARS
-    ) {
-        eventHandler(TransportEvent.OnCarLoadCapacityChanged(it))
-    }
+    ) { eventHandler(TransportEvent.OnCarLoadCapacityChanged(it)) }
     RegistrationTextField(
         title = stringResource(R.string.car_capacity),
         state = state.carCapacity,
@@ -106,8 +98,6 @@ fun TransportTextFieldsBlock(state: TransportState, eventHandler: (TransportEven
         isDigits = true,
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = CAR_CAPACITY_MAX_CHARS
-    ) {
-        eventHandler(TransportEvent.OnCarCapacityChanged(it))
-    }
+    ) { eventHandler(TransportEvent.OnCarCapacityChanged(it)) }
     Spacer(modifier = Modifier.height(120.dp))
 }

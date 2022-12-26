@@ -45,4 +45,14 @@ class DigitVisualTransformation(
         override fun transformedToOriginal(offset: Int): Int =
             offset - mask.take(offset).count { it != numberChar }
     }
+
+    companion object {
+        fun create(
+            maskNumber: Char = '0',
+            mask: String,
+            maxChar: Int
+        ): DigitVisualTransformation {
+            return DigitVisualTransformation(maskNumber, mask, maxChar)
+        }
+    }
 }

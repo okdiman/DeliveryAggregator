@@ -1,8 +1,13 @@
 package flow
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import navigation.NavigationTree
-import ru.alexgladkov.odyssey.compose.extensions.bottomNavigation
+import root.presentation.compose.ProfileScreen
+import ru.alexgladkov.odyssey.compose.extensions.customNavigation
 import ru.alexgladkov.odyssey.compose.extensions.screen
 import ru.alexgladkov.odyssey.compose.extensions.tab
 import ru.alexgladkov.odyssey.compose.navigation.RootComposeBuilder
@@ -11,7 +16,7 @@ import tabs.BottomNavigationTab
 import trinity_monsters.wildberries_delivery_aggregator.navigation.R
 
 fun RootComposeBuilder.mainFlow() {
-    bottomNavigation(
+    customNavigation(
         name = NavigationTree.Main.MainFlow.name,
         tabsNavModel = BottomConfiguration()
     ) {
@@ -22,7 +27,9 @@ fun RootComposeBuilder.mainFlow() {
             )
         ) {
             screen(NavigationTree.Main.Routes.name) {
-                Text(text = "routes")
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(text = "Рейсы")
+                }
             }
         }
         tab(
@@ -32,7 +39,7 @@ fun RootComposeBuilder.mainFlow() {
             )
         ) {
             screen(NavigationTree.Main.Profile.name) {
-                Text(text = "profile")
+                ProfileScreen()
             }
         }
     }

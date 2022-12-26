@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Divider
@@ -38,7 +39,6 @@ fun RegistrationAddressBSScreen(
 ) {
     val rootController = LocalRootController.current
     val scrollState = rememberLazyListState()
-    val coroutineScope = rememberCoroutineScope()
     LazyColumn(
         state = scrollState,
         modifier = Modifier
@@ -84,47 +84,54 @@ fun RegistrationAddressBSScreen(
             )
             Spacer(modifier = Modifier.height(24.dp))
         }
-        items(suggests) {
-            Column(
-                modifier = Modifier.clickable {
-                    onSuggestClick(it)
-                    if (it.house.isNotEmpty()) {
-                        rootController.findModalController().popBackStack(null)
-                    } else {
-                        coroutineScope.launch {
-                            scrollState.animateScrollToItem(0)
-                        }
-                    }
+        items(suggests) { SuggestsItem(scrollState, it, onSuggestClick) }
+    }
+}
+
+@Composable
+private fun SuggestsItem(
+    scrollState: LazyListState,
+    item: AddressUiModel,
+    onSuggestClick: (AddressUiModel) -> Unit
+) {
+    val rootController = LocalRootController.current
+    val coroutineScope = rememberCoroutineScope()
+    Column(
+        modifier = Modifier.clickable {
+            onSuggestClick(item)
+            if (item.house.isNotEmpty()) {
+                rootController.findModalController().popBackStack(null)
+            } else {
+                coroutineScope.launch {
+                    scrollState.animateScrollToItem(0)
                 }
-            ) {
-                Row {
-                    Icon(
-                        painter = painterResource(id = R_core.drawable.geolocation_ic),
-                        contentDescription = null
-                    )
-                    Spacer(modifier = Modifier.width(12.dp))
-                    Column {
-                        Text(
-                            text = it.subtitle,
-                            style = Theme.fonts.regular.copy(
-                                fontSize = 16.sp
-                            )
-                        )
-                        Text(
-                            text = it.city, style = Theme.fonts.regular.copy(
-                                fontSize = 14.sp,
-                                color = Theme.colors.textFourthColor
-                            )
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.height(12.dp))
-                Divider(
-                    modifier = Modifier.padding(start = 36.dp),
-                    color = Theme.colors.dividerColor
-                )
-                Spacer(modifier = Modifier.height(12.dp))
             }
         }
+    ) {
+        Row {
+            Icon(
+                painter = painterResource(id = R_core.drawable.geolocation_ic),
+                contentDescription = null
+            )
+            Spacer(modifier = Modifier.width(12.dp))
+            Column {
+                Text(
+                    text = item.subtitle,
+                    style = Theme.fonts.regular
+                )
+                Text(
+                    text = item.city, style = Theme.fonts.regular.copy(
+                        fontSize = 14.sp,
+                        color = Theme.colors.textFourthColor
+                    )
+                )
+            }
+        }
+        Spacer(modifier = Modifier.height(12.dp))
+        Divider(
+            modifier = Modifier.padding(start = 36.dp),
+            color = Theme.colors.dividerColor
+        )
+        Spacer(modifier = Modifier.height(12.dp))
     }
 }

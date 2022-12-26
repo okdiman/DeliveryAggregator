@@ -12,4 +12,8 @@ object NavigationTree {
     enum class Main {
         MainFlow, Routes, Profile
     }
+
+    enum class Profile {
+        Offer, Edit, DepartureAddress, Support, Exit, Transport
+    }
 }
