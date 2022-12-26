@@ -1,4 +1,4 @@
-package root.navigation
+package flow
 
 import navigation.NavigationTree
 import organization.bank.presentation.compose.BankScreen

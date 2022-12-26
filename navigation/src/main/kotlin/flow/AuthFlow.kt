@@ -1,4 +1,4 @@
-package root.navigation
+package flow
 
 import login.presentation.compose.LoginScreen
 import navigation.NavigationTree

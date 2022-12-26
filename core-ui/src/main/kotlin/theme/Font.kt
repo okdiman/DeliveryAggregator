@@ -21,7 +21,7 @@ private fun baseFontStyle(
     color = palette.textPrimaryColor
 )
 
-private val sfUiDisplay = FontFamily(
+val sfUiDisplay = FontFamily(
     Font(R.font.sf_ui_display_regular),
     Font(R.font.sf_ui_display_semibold, weight = FontWeight.SemiBold),
     Font(R.font.sf_ui_display_bold, weight = FontWeight.Bold)
