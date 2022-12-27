@@ -4,6 +4,7 @@ import ActionButton
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -40,7 +41,7 @@ fun BankView(state: BankState, eventHandler: (BankEvent) -> Unit) {
         )
         BankTextFieldsBlock(state, eventHandler)
     }
-    ActionButton(enabled = state.isContinueButtonEnabled) {
+    ActionButton(modifier = Modifier.fillMaxSize(), enabled = state.isContinueButtonEnabled) {
         eventHandler(BankEvent.OnContinueButtonClick)
     }
 }

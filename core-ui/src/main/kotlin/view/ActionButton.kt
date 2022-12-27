@@ -2,7 +2,6 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -23,6 +22,7 @@ import trinity_monsters.wildberries_delivery_aggregator.core_ui.R
 
 @Composable
 fun ActionButton(
+    modifier: Modifier = Modifier,
     @StringRes textRes: Int = R.string.continue_button,
     gradient: Brush = Theme.gradients.actionButtonGradient,
     alignment: Alignment = Alignment.BottomCenter,
@@ -31,9 +31,10 @@ fun ActionButton(
     onClick: () -> Unit
 ) {
     Box(
-        modifier = Modifier
-            .padding(padding)
-            .fillMaxSize(),
+        modifier = modifier.then(
+            Modifier
+                .padding(padding)
+        ),
         contentAlignment = alignment
     ) {
         TextButton(

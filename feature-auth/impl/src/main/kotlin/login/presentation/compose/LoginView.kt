@@ -46,6 +46,7 @@ fun LoginView(viewState: LoginState, eventHandler: (LoginEvent) -> Unit) {
         PhoneBlock(viewState = viewState, eventHandler = eventHandler)
         AgreementBlock(viewState = viewState, eventHandler = eventHandler)
         ActionButton(
+            modifier = Modifier.fillMaxSize(),
             textRes = R.string.entrance,
             enabled = viewState.isButtonEnabled,
             padding = PaddingValues(0.dp)

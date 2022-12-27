@@ -1,5 +1,6 @@
 package root.presentation.compose
 
+import ErrorScreen
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -38,6 +39,9 @@ fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Unit) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 ProgressIndicator()
             }
+        }
+        state.isError -> {
+            ErrorScreen { eventHandler(ProfileEvent.OnRetryClick) }
         }
         else -> {
             LazyColumn(

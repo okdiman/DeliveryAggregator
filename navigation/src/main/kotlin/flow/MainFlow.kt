@@ -6,6 +6,7 @@ import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import navigation.NavigationTree
+import offer.presentation.compose.OfferScreen
 import root.presentation.compose.ProfileScreen
 import ru.alexgladkov.odyssey.compose.extensions.customNavigation
 import ru.alexgladkov.odyssey.compose.extensions.screen
@@ -42,5 +43,8 @@ fun RootComposeBuilder.mainFlow() {
                 ProfileScreen()
             }
         }
+    }
+    screen(NavigationTree.Profile.Offer.name) {
+        OfferScreen()
     }
 }
