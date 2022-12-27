@@ -1,15 +1,18 @@
 package root.presentation.compose
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
 import root.presentation.viewmodel.ProfileViewModel
 import root.presentation.viewmodel.model.ProfileAction
 import root.presentation.viewmodel.model.ProfileEvent
+import utils.openNotificationSettings
 
 @Composable
 fun ProfileScreen() {
 //    val rootController = LocalRootController.current
+    val context = LocalContext.current
     ViewModel(factory = { ProfileViewModel() }) { viewModel ->
         val state = viewModel.viewStates().observeAsState()
         val action = viewModel.viewActions().observeAsState()
@@ -38,7 +41,7 @@ fun ProfileScreen() {
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             is ProfileAction.OpenNotificationsSettings -> {
-
+                openNotificationSettings(context)
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             is ProfileAction.OpenExitFromAccount -> {

@@ -19,5 +19,6 @@ dependencies {
     compose()
     koin()
     viewModel()
+    navigation()
     implementation(project(Modules.core))
 }

@@ -14,4 +14,7 @@ object CommonConstants {
     object LIMITS {
         const val MAX_PHONE_CHARS = 10
     }
+
+    const val APP_PACKAGE = "app_package"
+    const val APP_UID = "app_uid"
 }

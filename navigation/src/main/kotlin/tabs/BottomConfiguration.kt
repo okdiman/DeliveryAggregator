@@ -1,23 +1,17 @@
 package tabs
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import ru.alexgladkov.odyssey.compose.navigation.bottom_bar_navigation.BottomNavConfiguration
+import navigation.NavigationTree
+import ru.alexgladkov.odyssey.compose.navigation.bottom_bar_navigation.CustomNavConfiguration
 import ru.alexgladkov.odyssey.compose.navigation.bottom_bar_navigation.TabsNavModel
-import theme.Theme
+import view.CustomBottomBarNavigator
 
-class BottomConfiguration : TabsNavModel<BottomNavConfiguration>() {
-    override val navConfiguration: BottomNavConfiguration
+class BottomConfiguration : TabsNavModel<CustomNavConfiguration>() {
+    override val navConfiguration: CustomNavConfiguration
         @Composable
         get() {
-            return BottomNavConfiguration(
-                elevation = 25.dp,
-                backgroundColor = Color.White,
-                unselectedColor = Theme.colors.textPrimaryColor.copy(
-                    alpha = 0.3f
-                ),
-                selectedColor = Theme.colors.textPrimaryColor
-            )
+            return CustomNavConfiguration {
+                CustomBottomBarNavigator(startScreen = NavigationTree.Main.Routes.name)
+            }
         }
 }
