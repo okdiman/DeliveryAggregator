@@ -2,6 +2,8 @@ package root.di
 
 import data.ProfileRepository
 import data.mapper.ProfileModelMapper
+import domain.GetMaskedPhoneUseCase
+import editing.domain.GetMaskedPhoneUseCaseImpl
 import editing.domain.UpdateProfileUseCase
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -16,6 +18,7 @@ fun profileModule() = module {
     factory { ProfileModelMapper() }
     factory { GetProfileUseCase(get()) }
     factory { UpdateProfileUseCase(get()) }
-    factory { ProfileUiMapper() }
+    factory { ProfileUiMapper(get()) }
     factory<ProfileRepository> { ProfileRepositoryImpl(get(), get(), get()) }
+    factory<GetMaskedPhoneUseCase> { GetMaskedPhoneUseCaseImpl() }
 }

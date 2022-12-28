@@ -38,7 +38,7 @@ fun TitledTextField(
     enabled: Boolean = true,
     singleLine: Boolean = false,
     onValueChanged: (String) -> Unit,
-    textStyle: TextStyle = Theme.fonts.regular,
+    textStyle: TextStyle,
     hintStyle: TextStyle = Theme.fonts.bold.copy(
         color = Theme.colors.hintColor
     ),

@@ -23,6 +23,7 @@ import ru.alexgladkov.odyssey.compose.controllers.MultiStackRootController
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import theme.Theme
 
+@Suppress("LongMethod")
 @Composable
 fun CustomBottomBarNavigator(startScreen: String?) {
     val rootController = LocalRootController.current as MultiStackRootController
