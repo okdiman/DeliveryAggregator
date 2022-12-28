@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="company_name">Название организации</string>
     <string name="company_name_hint">ООО “Подари Жизнь”</string>
     <string name="inn">ИНН</string>
     <string name="inn_hint">6449013711</string>

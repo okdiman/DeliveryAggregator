@@ -3,6 +3,7 @@ package organization.company.presentation.compose.model
 import androidx.annotation.StringRes
 import presentation.AddressUiModel
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 import view.model.DefaultParamState
 
 sealed class CompanyParamState(
@@ -13,7 +14,7 @@ sealed class CompanyParamState(
     data class NameState(
         val text: String = "",
         val isNameError: Boolean = false,
-        @StringRes val error: Int = R.string.few_symbols_error
+        @StringRes val error: Int = R_core.string.few_symbols_error
     ) : CompanyParamState(text, isNameError, error)
 
     data class InnState(

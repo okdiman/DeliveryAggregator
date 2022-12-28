@@ -5,9 +5,11 @@ import androidx.compose.ui.platform.LocalContext
 import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
 import navigation.NavigationTree
+import presentation.EditProfileParameters
 import root.presentation.viewmodel.ProfileViewModel
 import root.presentation.viewmodel.model.ProfileAction
 import root.presentation.viewmodel.model.ProfileEvent
+import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import utils.openNotificationSettings
 
@@ -27,7 +29,10 @@ fun ProfileScreen() {
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             is ProfileAction.OpenEditProfile -> {
-//                rootController.push(NavigationTree.Profile.Edit.name)
+                rootController.findRootController().push(
+                    screen = NavigationTree.Profile.Edit.name,
+                    params = EditProfileParameters(viewModel.getProfileModel())
+                )
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             is ProfileAction.OpenDepartureAddress -> {
@@ -35,7 +40,7 @@ fun ProfileScreen() {
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             is ProfileAction.OpenOffer -> {
-                rootController.findRootController().launch(NavigationTree.Profile.Offer.name)
+                rootController.findRootController().push(NavigationTree.Profile.Offer.name)
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             is ProfileAction.OpenSupport -> {

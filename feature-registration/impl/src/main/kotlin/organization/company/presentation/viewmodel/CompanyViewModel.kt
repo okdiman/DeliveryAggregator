@@ -16,12 +16,12 @@ import organization.company.presentation.viewmodel.model.CompanyState
 import presentation.AddressUiModel
 import presentation.mapper.AddressSuggestUiMapper
 import presentation.parameters.CompanyParameters
-import root.RegistrationConstants.Limits.Common.MIN_ADDRESS_CHARS
-import root.RegistrationConstants.Limits.Common.MIN_NAME_CHARS
 import root.RegistrationConstants.Limits.Company.INN_CHARS
 import root.RegistrationConstants.Limits.Company.INN_MIN_CHARS
 import root.RegistrationConstants.Limits.Company.KPP_CHARS
 import root.RegistrationConstants.Limits.Company.OGRN_CHARS
+import utils.CommonConstants.LIMITS.Common.MIN_ADDRESS_CHARS
+import utils.CommonConstants.LIMITS.Common.MIN_NAME_CHARS
 import utils.isTextFieldFilled
 
 class CompanyViewModel(

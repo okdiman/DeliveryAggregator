@@ -3,6 +3,7 @@ package organization.bank.presentation.compose.model
 import androidx.annotation.StringRes
 import view.model.DefaultParamState
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
 sealed class BankParamState(
     override val stateText: String,
@@ -30,6 +31,6 @@ sealed class BankParamState(
     data class BankNameState(
         val text: String = "",
         val isBankNameError: Boolean = false,
-        @StringRes val error: Int = R.string.few_symbols_error
+        @StringRes val error: Int = R_core.string.few_symbols_error
     ) : BankParamState(text, isBankNameError, error)
 }

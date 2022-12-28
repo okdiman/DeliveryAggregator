@@ -13,14 +13,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import root.RegistrationConstants.Limits.Common.MAX_NAME_CHARS
-import root.RegistrationConstants.Limits.User.MAX_USER_NAME_CHARS
 import root.RegistrationConstants.Step.FOUR
-import root.presentation.RegistrationTextField
+import view.StandardTextField
 import root.presentation.TitleRegistrationView
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
 import user.presentation.viewmodel.model.UserEvent
 import user.presentation.viewmodel.model.UserState
+import utils.CommonConstants.LIMITS.Common.MAX_NAME_CHARS
+import utils.CommonConstants.LIMITS.User.MAX_USER_NAME_CHARS
+import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
 @Composable
 fun UserView(state: UserState, eventHandler: (UserEvent) -> Unit) {
@@ -32,7 +33,7 @@ fun UserView(state: UserState, eventHandler: (UserEvent) -> Unit) {
         TitleRegistrationView(
             step = FOUR,
             imageRes = R.drawable.user_info_ic,
-            titleRes = R.string.user_title,
+            titleRes = R_core.string.user_title,
             isBackButtonVisible = true,
             onButtonClick = { eventHandler(UserEvent.OnBackClick) }
         )
@@ -47,34 +48,34 @@ fun UserView(state: UserState, eventHandler: (UserEvent) -> Unit) {
 
 @Composable
 fun UserTextFieldsBlock(state: UserState, eventHandler: (UserEvent) -> Unit) {
-    RegistrationTextField(
-        title = stringResource(R.string.user_name),
+    StandardTextField(
+        title = stringResource(R_core.string.user_name),
         state = state.name,
-        hint = stringResource(R.string.user_name_hint),
+        hint = stringResource(R_core.string.user_name_hint),
         maxChar = MAX_USER_NAME_CHARS
     ) {
         eventHandler(UserEvent.OnNameChanged(it))
     }
-    RegistrationTextField(
-        title = stringResource(R.string.user_surname),
+    StandardTextField(
+        title = stringResource(R_core.string.user_surname),
         state = state.surname,
-        hint = stringResource(R.string.user_surname_hint),
+        hint = stringResource(R_core.string.user_surname_hint),
         maxChar = MAX_USER_NAME_CHARS
     ) {
         eventHandler(UserEvent.OnSurnameChanged(it))
     }
-    RegistrationTextField(
-        title = stringResource(R.string.user_second_name),
+    StandardTextField(
+        title = stringResource(R_core.string.user_second_name),
         state = state.secondName,
-        hint = stringResource(R.string.user_second_name_hint),
+        hint = stringResource(R_core.string.user_second_name_hint),
         maxChar = MAX_USER_NAME_CHARS
     ) {
         eventHandler(UserEvent.OnSecondNameChanged(it))
     }
-    RegistrationTextField(
-        title = stringResource(R.string.user_email),
+    StandardTextField(
+        title = stringResource(R_core.string.user_email),
         state = state.email,
-        hint = stringResource(R.string.user_email_hint),
+        hint = stringResource(R_core.string.user_email_hint),
         maxChar = MAX_NAME_CHARS
     ) {
         eventHandler(UserEvent.OnEmailChanged(it))

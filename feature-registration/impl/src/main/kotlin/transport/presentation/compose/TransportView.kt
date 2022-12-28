@@ -19,15 +19,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import root.RegistrationConstants
-import root.RegistrationConstants.Limits.Transport.CAR_BRAND_MAX_CHARS
-import root.RegistrationConstants.Limits.Transport.CAR_CAPACITY_MAX_CHARS
-import root.RegistrationConstants.Limits.Transport.CAR_CATEGORY_MAX_CHARS
-import root.RegistrationConstants.Limits.Transport.LICENCE_PLATE_MAX_CHARS
-import root.presentation.RegistrationTextField
+import view.StandardTextField
 import root.presentation.TitleRegistrationView
 import transport.presentation.viewmodel.model.TransportEvent
 import transport.presentation.viewmodel.model.TransportState
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import utils.CommonConstants.LIMITS.Transport.CAR_BRAND_MAX_CHARS
+import utils.CommonConstants.LIMITS.Transport.CAR_CAPACITY_MAX_CHARS
+import utils.CommonConstants.LIMITS.Transport.CAR_CATEGORY_MAX_CHARS
+import utils.CommonConstants.LIMITS.Transport.LICENCE_PLATE_MAX_CHARS
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
 @Composable
@@ -53,13 +53,13 @@ fun TransportView(state: TransportState, eventHandler: (TransportEvent) -> Unit)
 
 @Composable
 fun TransportTextFieldsBlock(state: TransportState, eventHandler: (TransportEvent) -> Unit) {
-    RegistrationTextField(
+    StandardTextField(
         title = stringResource(R.string.license_plate),
         state = state.licencePlate,
         hint = stringResource(R.string.license_plate_hint),
         maxChar = LICENCE_PLATE_MAX_CHARS
     ) { eventHandler(TransportEvent.OnLicencePlateChanged(it)) }
-    RegistrationTextField(
+    StandardTextField(
         modifier = Modifier.clickable { eventHandler(TransportEvent.OnDepartAddressClick) },
         title = stringResource(R.string.departure_address),
         state = state.departureAddress,
@@ -72,19 +72,19 @@ fun TransportTextFieldsBlock(state: TransportState, eventHandler: (TransportEven
             )
         }
     )
-    RegistrationTextField(
+    StandardTextField(
         title = stringResource(R.string.car_brand),
         state = state.carBrand,
         hint = stringResource(R.string.car_brand_hint),
         maxChar = CAR_BRAND_MAX_CHARS
     ) { eventHandler(TransportEvent.OnCarBrandChanged(it)) }
-    RegistrationTextField(
+    StandardTextField(
         title = stringResource(R.string.car_category),
         state = state.carCategory,
         hint = stringResource(R.string.car_category_hint),
         maxChar = CAR_CATEGORY_MAX_CHARS
     ) { eventHandler(TransportEvent.OnCarCategoryChanged(it)) }
-    RegistrationTextField(
+    StandardTextField(
         title = stringResource(R.string.car_load_capacity),
         state = state.carLoadCapacity,
         hint = stringResource(R.string.car_load_capacity_hint),
@@ -92,7 +92,7 @@ fun TransportTextFieldsBlock(state: TransportState, eventHandler: (TransportEven
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = CAR_CAPACITY_MAX_CHARS
     ) { eventHandler(TransportEvent.OnCarLoadCapacityChanged(it)) }
-    RegistrationTextField(
+    StandardTextField(
         title = stringResource(R.string.car_capacity),
         state = state.carCapacity,
         hint = stringResource(R.string.car_capacity_hint),

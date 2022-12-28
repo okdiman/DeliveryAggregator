@@ -29,6 +29,7 @@
             <option value="$PROJECT_DIR$/feature-registration" />
             <option value="$PROJECT_DIR$/feature-registration/api" />
             <option value="$PROJECT_DIR$/feature-registration/impl" />
+            <option value="$PROJECT_DIR$/feature-splash-screen" />
             <option value="$PROJECT_DIR$/navigation" />
           </set>
         </option>

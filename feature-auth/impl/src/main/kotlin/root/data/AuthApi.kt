@@ -5,6 +5,7 @@ import data.model.request.SignInRequest
 import data.model.request.SignUpRequest
 import data.model.response.AuthSuccessResponse
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface AuthApi {
@@ -22,4 +23,10 @@ interface AuthApi {
     suspend fun signUp(
         @Body request: SignUpRequest
     ): AuthSuccessResponse
+
+    /**
+     * возвращает инфу о токене, но пока она не нужна
+     */
+    @GET("/auth/me")
+    suspend fun getAuthInfo()
 }

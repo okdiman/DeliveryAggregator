@@ -20,10 +20,10 @@ import organization.bank.presentation.viewmodel.model.BankState
 import root.RegistrationConstants
 import root.RegistrationConstants.Limits.Bank.BANK_ACC_CHARS
 import root.RegistrationConstants.Limits.Bank.BIK_CHARS
-import root.RegistrationConstants.Limits.Common.MAX_NAME_CHARS
-import root.presentation.RegistrationTextField
 import root.presentation.TitleRegistrationView
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import utils.CommonConstants.LIMITS.Common.MAX_NAME_CHARS
+import view.StandardTextField
 
 @Composable
 fun BankView(state: BankState, eventHandler: (BankEvent) -> Unit) {
@@ -48,7 +48,7 @@ fun BankView(state: BankState, eventHandler: (BankEvent) -> Unit) {
 
 @Composable
 fun BankTextFieldsBlock(state: BankState, eventHandler: (BankEvent) -> Unit) {
-    RegistrationTextField(
+    StandardTextField(
         title = stringResource(R.string.payment_acc),
         state = state.paymentAcc,
         hint = stringResource(R.string.payment_acc_hint),
@@ -58,7 +58,7 @@ fun BankTextFieldsBlock(state: BankState, eventHandler: (BankEvent) -> Unit) {
     ) {
         eventHandler(BankEvent.OnPaymentAccChanged(it))
     }
-    RegistrationTextField(
+    StandardTextField(
         title = stringResource(R.string.corr_acc),
         state = state.corrAcc,
         isDigits = true,
@@ -68,7 +68,7 @@ fun BankTextFieldsBlock(state: BankState, eventHandler: (BankEvent) -> Unit) {
     ) {
         eventHandler(BankEvent.OnCorrAccChanged(it))
     }
-    RegistrationTextField(
+    StandardTextField(
         title = stringResource(R.string.bik),
         state = state.bik,
         hint = stringResource(R.string.bik_hint),
@@ -78,7 +78,7 @@ fun BankTextFieldsBlock(state: BankState, eventHandler: (BankEvent) -> Unit) {
     ) {
         eventHandler(BankEvent.OnBikChanged(it))
     }
-    RegistrationTextField(
+    StandardTextField(
         title = stringResource(R.string.bank_name),
         state = state.bankName,
         hint = stringResource(R.string.bank_name_hint),

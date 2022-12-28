@@ -32,7 +32,7 @@ import login.presentation.viewmodel.model.LoginEvent
 import login.presentation.viewmodel.model.LoginState
 import theme.Theme
 import trinity_monsters.wildberries_delivery_aggregator.feature_auth.impl.R
-import utils.CommonConstants.LIMITS.MAX_PHONE_CHARS
+import utils.CommonConstants.LIMITS.Common.MAX_PHONE_CHARS
 import view.CommonTextField
 
 @Composable

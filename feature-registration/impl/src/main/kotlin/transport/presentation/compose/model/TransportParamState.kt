@@ -3,6 +3,7 @@ package transport.presentation.compose.model
 import androidx.annotation.StringRes
 import presentation.AddressUiModel
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 import view.model.DefaultParamState
 
 sealed class TransportParamState(
@@ -20,31 +21,31 @@ sealed class TransportParamState(
         val text: String = "",
         val address: AddressUiModel? = null,
         val isDepartureAddressError: Boolean = false,
-        @StringRes val error: Int = R.string.few_symbols_error
+        @StringRes val error: Int = R_core.string.few_symbols_error
     ) : TransportParamState(text, isDepartureAddressError, error)
 
     data class CarBrandState(
         val text: String = "",
         val isCarBrandError: Boolean = false,
-        @StringRes val error: Int = R.string.few_symbols_error
+        @StringRes val error: Int = R_core.string.few_symbols_error
     ) : TransportParamState(text, isCarBrandError, error)
 
     data class CarCategoryState(
         val text: String = "",
         val isCarCategoryError: Boolean = false,
-        @StringRes val error: Int = R.string.few_symbols_error
+        @StringRes val error: Int = R_core.string.few_symbols_error
     ) : TransportParamState(text, isCarCategoryError, error)
 
     data class CarLoadCapacityState(
         val text: String = "",
         val isCarLoadCapacityError: Boolean = false,
-        @StringRes val error: Int = R.string.few_symbols_error
+        @StringRes val error: Int = R_core.string.few_symbols_error
     ) : TransportParamState(text, isCarLoadCapacityError, error)
 
     data class CarCapacityState(
         val text: String = "",
         val isCarCapacityError: Boolean = false,
-        @StringRes val error: Int = R.string.few_symbols_error
+        @StringRes val error: Int = R_core.string.few_symbols_error
     ) : TransportParamState(text, isCarCapacityError, error)
 
     data class BsAddressState(

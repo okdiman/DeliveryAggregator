@@ -6,7 +6,7 @@ import organization.bank.presentation.viewmodel.model.BankEvent
 import organization.bank.presentation.viewmodel.model.BankState
 import root.RegistrationConstants.Limits.Bank.BANK_ACC_CHARS
 import root.RegistrationConstants.Limits.Bank.BIK_CHARS
-import root.RegistrationConstants.Limits.Common.MIN_NAME_CHARS
+import utils.CommonConstants.LIMITS.Common.MIN_NAME_CHARS
 import utils.isTextFieldFilled
 
 class BankViewModel : BaseViewModel<BankState, BankAction, BankEvent>(

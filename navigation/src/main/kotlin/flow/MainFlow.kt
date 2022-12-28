@@ -5,10 +5,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import editing.presentation.compose.EditProfileScreen
 import navigation.NavigationTree
 import offer.presentation.compose.OfferScreen
+import presentation.EditProfileParameters
 import root.presentation.compose.ProfileScreen
 import ru.alexgladkov.odyssey.compose.extensions.customNavigation
+import ru.alexgladkov.odyssey.compose.extensions.flow
 import ru.alexgladkov.odyssey.compose.extensions.screen
 import ru.alexgladkov.odyssey.compose.extensions.tab
 import ru.alexgladkov.odyssey.compose.navigation.RootComposeBuilder
@@ -46,5 +49,10 @@ fun RootComposeBuilder.mainFlow() {
     }
     screen(NavigationTree.Profile.Offer.name) {
         OfferScreen()
+    }
+    flow(NavigationTree.Profile.Edit.name) {
+        screen(NavigationTree.Profile.Edit.name) { parameters ->
+            EditProfileScreen(parameters as EditProfileParameters)
+        }
     }
 }

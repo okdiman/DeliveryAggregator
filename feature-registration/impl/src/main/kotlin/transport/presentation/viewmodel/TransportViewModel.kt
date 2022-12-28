@@ -12,13 +12,13 @@ import org.koin.core.component.inject
 import presentation.AddressUiModel
 import presentation.mapper.AddressSuggestUiMapper
 import presentation.parameters.TransportParameters
-import root.RegistrationConstants.Limits.Common.MIN_ADDRESS_CHARS
-import root.RegistrationConstants.Limits.Transport.CAR_BRAND_MIN_CHARS
-import root.RegistrationConstants.Limits.Transport.CAR_INFO_MIN_CHARS
-import root.RegistrationConstants.Limits.Transport.LICENCE_PLATE_MIN_CHARS
 import transport.presentation.viewmodel.model.TransportAction
 import transport.presentation.viewmodel.model.TransportEvent
 import transport.presentation.viewmodel.model.TransportState
+import utils.CommonConstants.LIMITS.Common.MIN_ADDRESS_CHARS
+import utils.CommonConstants.LIMITS.Transport.CAR_BRAND_MIN_CHARS
+import utils.CommonConstants.LIMITS.Transport.CAR_INFO_MIN_CHARS
+import utils.CommonConstants.LIMITS.Transport.LICENCE_PLATE_MIN_CHARS
 import utils.isTextFieldFilled
 
 class TransportViewModel(

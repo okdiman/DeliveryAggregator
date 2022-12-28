@@ -2,11 +2,13 @@ package root.presentation.viewmodel
 
 import BaseViewModel
 import coroutines.AppDispatchers
+import domain.ProfileModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import root.domain.GetProfileUseCase
 import root.presentation.compose.model.ProfileItemType
 import root.presentation.compose.model.ProfileItemUiModel
+import root.presentation.mapper.ProfileUiMapper
 import root.presentation.viewmodel.model.ProfileAction
 import root.presentation.viewmodel.model.ProfileEvent
 import root.presentation.viewmodel.model.ProfileState
@@ -16,6 +18,9 @@ class ProfileViewModel : BaseViewModel<ProfileState, ProfileAction, ProfileEvent
 ), KoinComponent {
     private val getProfile by inject<GetProfileUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
+    private val mapper by inject<ProfileUiMapper>()
+
+    lateinit var model: ProfileModel
 
     init {
         loadContent()
@@ -30,19 +35,24 @@ class ProfileViewModel : BaseViewModel<ProfileState, ProfileAction, ProfileEvent
         }
     }
 
+    fun getProfileModel() = model
+
     private fun loadContent() {
         launchJob(context = appDispatchers.network, onError = {
             viewState = viewState.copy(isLoading = false, isError = true)
         }) {
             viewState = viewState.copy(isLoading = true, isError = false)
-            val profile = getProfile()
-            viewState = ProfileState(
-                name = profile.name,
-                organizationName = profile.organizationName,
-                phone = profile.phone,
-                email = profile.email,
-                isLoading = false
-            )
+            getProfile().also { profile ->
+                model = profile
+                val uiModel = mapper.map(profile)
+                viewState = ProfileState(
+                    name = uiModel.name,
+                    organizationName = uiModel.organizationName,
+                    phone = uiModel.phone,
+                    email = uiModel.email,
+                    isLoading = false
+                )
+            }
         }
     }
 

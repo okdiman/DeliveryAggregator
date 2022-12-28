@@ -1,8 +1,8 @@
 package user.presentation.compose.model
 
 import androidx.annotation.StringRes
+import trinity_monsters.wildberries_delivery_aggregator.core_ui.R
 import view.model.DefaultParamState
-import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
 
 sealed class UserParamState(
     override val stateText: String,

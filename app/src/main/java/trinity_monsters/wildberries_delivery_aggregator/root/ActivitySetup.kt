@@ -5,13 +5,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.CompositionLocalProvider
 import com.adeo.kviewmodel.odyssey.setupWithViewModels
 import generateGraph
+import navigation.NavigationTree
 import ru.alexgladkov.odyssey.compose.base.Navigator
 import ru.alexgladkov.odyssey.compose.extensions.setupWithActivity
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import ru.alexgladkov.odyssey.compose.navigation.RootComposeBuilder
 import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalNavigator
 import theme.DeliveryAggregatorTheme
-import navigation.NavigationTree
 
 fun ComponentActivity.setupThemedNavigation() {
     val rootController =
@@ -25,7 +25,7 @@ fun ComponentActivity.setupThemedNavigation() {
                 LocalRootController provides rootController
             ) {
                 ModalNavigator {
-                    Navigator(startScreen = NavigationTree.Auth.Login.name)
+                    Navigator(startScreen = NavigationTree.Splash.Splash.name)
                 }
             }
         }

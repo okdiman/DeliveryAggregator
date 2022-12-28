@@ -18,6 +18,7 @@ include(
         ":core",
         ":core-ui",
         ":navigation",
+        ":feature-splash-screen",
         ":feature-auth:api",
         ":feature-auth:impl",
         ":feature-registration:api",

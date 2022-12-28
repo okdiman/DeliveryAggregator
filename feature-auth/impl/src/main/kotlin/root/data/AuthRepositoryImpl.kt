@@ -27,4 +27,8 @@ class AuthRepositoryImpl(
         val response = api.signUp(mapper.map(model))
         localDataSource.saveToken(response.token)
     }
+
+    override suspend fun getAuthInfo() {
+        api.getAuthInfo()
+    }
 }

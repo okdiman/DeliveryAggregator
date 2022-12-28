@@ -12,8 +12,29 @@ object CommonConstants {
     }
 
     object LIMITS {
-        const val MAX_PHONE_CHARS = 10
+        object Transport {
+            const val LICENCE_PLATE_MIN_CHARS = 8
+            const val LICENCE_PLATE_MAX_CHARS = 9
+            const val CAR_BRAND_MIN_CHARS = 2
+            const val CAR_BRAND_MAX_CHARS = 20
+            const val CAR_INFO_MIN_CHARS = 1
+            const val CAR_CATEGORY_MAX_CHARS = 10
+            const val CAR_CAPACITY_MAX_CHARS = 5
+        }
+
+        object User {
+            const val MAX_USER_NAME_CHARS = 30
+        }
+
+        object Common {
+            const val MAX_PHONE_CHARS = 10
+            const val MIN_ADDRESS_CHARS = 5
+            const val MIN_NAME_CHARS = 2
+            const val MAX_NAME_CHARS = 50
+        }
     }
+
+    const val HINT_ALPHA = 0.7f
 
     const val APP_PACKAGE = "app_package"
     const val APP_UID = "app_uid"

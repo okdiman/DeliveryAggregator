@@ -6,11 +6,11 @@ import domain.usecase.SignUpUseCase
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import presentation.parameters.UserParameters
-import root.RegistrationConstants.Limits.Common.MIN_NAME_CHARS
 import user.presentation.mapper.SignUpModelMapper
 import user.presentation.viewmodel.model.UserAction
 import user.presentation.viewmodel.model.UserEvent
 import user.presentation.viewmodel.model.UserState
+import utils.CommonConstants.LIMITS.Common.MIN_NAME_CHARS
 import utils.isEmailCorrect
 import utils.isTextFieldFilled
 

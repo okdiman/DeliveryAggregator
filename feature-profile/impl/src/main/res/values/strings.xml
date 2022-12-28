@@ -6,4 +6,7 @@
     <string name="notifications">Настройки уведомлений</string>
     <string name="offer">Оферта</string>
     <string name="exit">Выйти</string>
+    <string name="profile">Профиль</string>
+    <string name="delete_profile">Удалить аккаунт</string>
+    <string name="mobile">Мобильный</string>
 </resources>

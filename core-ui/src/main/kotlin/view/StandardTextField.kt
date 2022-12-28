@@ -1,4 +1,4 @@
-package root.presentation
+package view
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -8,14 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import root.RegistrationConstants.HINT_ALPHA
 import theme.Theme
-import view.TitledTextField
+import utils.CommonConstants.HINT_ALPHA
 import view.model.DefaultParamState
 
 @Suppress("LongParameterList")
 @Composable
-fun RegistrationTextField(
+fun StandardTextField(
     modifier: Modifier = Modifier,
     hasTitle: Boolean = true,
     title: String = "",
@@ -25,7 +24,7 @@ fun RegistrationTextField(
     readOnly: Boolean = false,
     trailingIcon: @Composable (() -> Unit)? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
-    hint: String,
+    hint: String = "",
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     maxChar: Int = Int.MAX_VALUE,
     onValueChanged: (String) -> Unit = {}

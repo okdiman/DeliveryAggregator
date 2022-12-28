@@ -21,13 +21,13 @@ import androidx.compose.ui.unit.dp
 import organization.company.presentation.viewmodel.model.CompanyEvent
 import organization.company.presentation.viewmodel.model.CompanyState
 import root.RegistrationConstants
-import root.RegistrationConstants.Limits.Common.MAX_NAME_CHARS
 import root.RegistrationConstants.Limits.Company.INN_CHARS
 import root.RegistrationConstants.Limits.Company.KPP_CHARS
 import root.RegistrationConstants.Limits.Company.OGRN_CHARS
-import root.presentation.RegistrationTextField
 import root.presentation.TitleRegistrationView
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import utils.CommonConstants.LIMITS.Common.MAX_NAME_CHARS
+import view.StandardTextField
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
 @Composable
@@ -54,13 +54,13 @@ private fun CompanyTextFieldsBlock(
     state: CompanyState,
     eventHandler: (CompanyEvent) -> Unit
 ) {
-    RegistrationTextField(
-        title = stringResource(R.string.company_name),
+    StandardTextField(
+        title = stringResource(R_core.string.company_name),
         state = state.companyName,
         hint = stringResource(R.string.company_name_hint),
         maxChar = MAX_NAME_CHARS
     ) { eventHandler(CompanyEvent.OnCompanyNameChanged(it)) }
-    RegistrationTextField(
+    StandardTextField(
         title = stringResource(R.string.inn),
         state = state.inn,
         isDigits = true,
@@ -68,7 +68,7 @@ private fun CompanyTextFieldsBlock(
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = INN_CHARS
     ) { eventHandler(CompanyEvent.OnInnChanged(it)) }
-    RegistrationTextField(
+    StandardTextField(
         title = stringResource(R.string.kpp),
         state = state.kpp,
         isDigits = true,
@@ -76,7 +76,7 @@ private fun CompanyTextFieldsBlock(
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = KPP_CHARS
     ) { eventHandler(CompanyEvent.OnKppChanged(it)) }
-    RegistrationTextField(
+    StandardTextField(
         title = stringResource(R.string.ogrn),
         state = state.ogrn,
         isDigits = true,
@@ -84,7 +84,7 @@ private fun CompanyTextFieldsBlock(
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = OGRN_CHARS
     ) { eventHandler(CompanyEvent.OnOgrnChanged(it)) }
-    RegistrationTextField(
+    StandardTextField(
         modifier = Modifier.clickable { eventHandler(CompanyEvent.OnLegalAddressClick) },
         title = stringResource(R.string.legal_address),
         enabled = false,
@@ -97,7 +97,7 @@ private fun CompanyTextFieldsBlock(
         state = state.legalAddress,
         hint = stringResource(R.string.address_hint)
     )
-    RegistrationTextField(
+    StandardTextField(
         modifier = Modifier.clickable { eventHandler(CompanyEvent.OnActualAddressClick) },
         title = stringResource(R.string.actual_address),
         enabled = false,

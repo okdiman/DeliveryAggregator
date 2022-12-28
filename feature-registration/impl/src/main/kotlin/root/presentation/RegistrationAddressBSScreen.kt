@@ -26,6 +26,7 @@ import presentation.AddressUiModel
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import theme.Theme
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import view.StandardTextField
 import view.model.DefaultParamState
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
@@ -63,7 +64,7 @@ fun RegistrationAddressBSScreen(
                     contentDescription = null
                 )
             }
-            RegistrationTextField(
+            StandardTextField(
                 state = state,
                 hasTitle = false,
                 leadingIcon = {
