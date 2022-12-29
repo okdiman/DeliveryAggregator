@@ -2,6 +2,7 @@ package root.di
 
 import data.ProfileRepository
 import data.mapper.ProfileModelMapper
+import deleting.domain.DeleteProfileUseCase
 import domain.GetMaskedPhoneUseCase
 import editing.domain.GetMaskedPhoneUseCaseImpl
 import editing.domain.UpdateProfileUseCase
@@ -18,6 +19,7 @@ fun profileModule() = module {
     factory { ProfileModelMapper() }
     factory { GetProfileUseCase(get()) }
     factory { UpdateProfileUseCase(get()) }
+    factory { DeleteProfileUseCase(get()) }
     factory { ProfileUiMapper(get()) }
     factory<ProfileRepository> { ProfileRepositoryImpl(get(), get(), get()) }
     factory<GetMaskedPhoneUseCase> { GetMaskedPhoneUseCaseImpl() }

@@ -20,12 +20,14 @@ import androidx.compose.ui.unit.sp
 import theme.Theme
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R
 
+@Suppress("LongParameterList")
 @Composable
 fun ActionButton(
     modifier: Modifier = Modifier,
     @StringRes textRes: Int = R.string.continue_button,
     gradient: Brush = Theme.gradients.actionButtonGradient,
     alignment: Alignment = Alignment.BottomCenter,
+    textColor: Color = Theme.colors.textSecondaryColor,
     enabled: Boolean = true,
     padding: PaddingValues = PaddingValues(start = 16.dp, end = 16.dp, bottom = 44.dp),
     onClick: () -> Unit
@@ -54,7 +56,50 @@ fun ActionButton(
                 text = stringResource(id = textRes),
                 style = Theme.fonts.bold.copy(
                     fontSize = 20.sp,
-                    color = Theme.colors.textSecondaryColor
+                    color = textColor
+                )
+            )
+        }
+    }
+}
+
+@Suppress("LongParameterList")
+@Composable
+fun ActionButton(
+    modifier: Modifier = Modifier,
+    @StringRes textRes: Int = R.string.continue_button,
+    color: Color,
+    alignment: Alignment = Alignment.BottomCenter,
+    textColor: Color = Theme.colors.textSecondaryColor,
+    enabled: Boolean = true,
+    padding: PaddingValues = PaddingValues(start = 16.dp, end = 16.dp, bottom = 44.dp),
+    onClick: () -> Unit
+) {
+    Box(
+        modifier = modifier.then(
+            Modifier
+                .padding(padding)
+        ),
+        contentAlignment = alignment
+    ) {
+        TextButton(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(52.dp)
+                .clip(Theme.shapes.roundedButton)
+                .background(color),
+            enabled = enabled,
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color.Transparent,
+                disabledBackgroundColor = Color.White.copy(alpha = 0.7f)
+            ),
+            onClick = { onClick() },
+        ) {
+            Text(
+                text = stringResource(id = textRes),
+                style = Theme.fonts.bold.copy(
+                    fontSize = 20.sp,
+                    color = textColor
                 )
             )
         }

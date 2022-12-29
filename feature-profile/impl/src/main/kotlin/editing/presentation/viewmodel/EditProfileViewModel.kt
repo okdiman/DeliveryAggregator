@@ -104,7 +104,7 @@ class EditProfileViewModel(
                     email = viewState.email.text
                 )
             )
-            isSaveButtonVisible(isUpdated = true)
+            viewState = viewState.copy(isSaveButtonVisible = isSaveButtonVisible(isUpdated = true))
             viewAction = EditProfileAction.ShowProfileUpdatedSnackbar
         }
     }

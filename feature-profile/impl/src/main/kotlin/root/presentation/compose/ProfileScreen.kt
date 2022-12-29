@@ -29,10 +29,12 @@ fun ProfileScreen() {
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             is ProfileAction.OpenEditProfile -> {
-                rootController.findRootController().push(
-                    screen = NavigationTree.Profile.Edit.name,
-                    params = EditProfileParameters(viewModel.getProfileModel())
-                )
+                runCatching {
+                    rootController.findRootController().push(
+                        screen = NavigationTree.Profile.Edit.name,
+                        params = EditProfileParameters(viewModel.getProfileModel())
+                    )
+                }
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             is ProfileAction.OpenDepartureAddress -> {

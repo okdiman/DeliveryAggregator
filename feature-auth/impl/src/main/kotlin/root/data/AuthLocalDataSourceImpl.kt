@@ -29,7 +29,7 @@ class AuthLocalDataSourceImpl(
     }
 
     override suspend fun clear() {
-        sharedPreferences.edit().clear()
+        sharedPreferences.edit().clear().commit()
     }
 
     private companion object {

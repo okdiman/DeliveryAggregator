@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
-import data.AddressConstants
 import navigation.NavigationTree
 import organization.company.presentation.viewmodel.CompanyViewModel
 import organization.company.presentation.viewmodel.model.CompanyAction
@@ -19,6 +18,8 @@ import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
+import utils.CommonConstants.LIMITS.BottomSheet.SCREEN_CORNER_RADIUS
+import utils.CommonConstants.LIMITS.BottomSheet.SCREEN_MAX_HEIGHT
 
 @Composable
 fun CompanyScreen(parameters: CompanyParameters) {
@@ -82,8 +83,8 @@ fun ObtainBSScreenAction(
     val rootController = LocalRootController.current
     rootController.findModalController().present(
         modalSheetConfiguration = ModalSheetConfiguration(
-            maxHeight = AddressConstants.SCREEN_MAX_HEIGHT,
-            cornerRadius = AddressConstants.SCREEN_CORNER_RADIUS,
+            maxHeight = SCREEN_MAX_HEIGHT,
+            cornerRadius = SCREEN_CORNER_RADIUS,
             closeOnBackdropClick = false,
             closeOnSwipe = false
         )

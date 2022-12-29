@@ -17,5 +17,5 @@ object Versions {
     const val okhttp = "4.10.0"
     const val kotlin = "1.7.10"
     const val kotlinCoroutines = "1.5.2"
-    const val crypto = "1.0.0"
+    const val crypto = "1.1.0-alpha04"
 }

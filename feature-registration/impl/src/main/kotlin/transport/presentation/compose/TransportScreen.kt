@@ -3,7 +3,6 @@ package transport.presentation.compose
 import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
-import data.AddressConstants
 import navigation.NavigationTree
 import presentation.model.DepartureAddressModel
 import presentation.model.RegistrationTransportModel
@@ -18,6 +17,8 @@ import transport.presentation.viewmodel.TransportViewModel
 import transport.presentation.viewmodel.model.TransportAction
 import transport.presentation.viewmodel.model.TransportEvent
 import transport.presentation.viewmodel.model.TransportState
+import utils.CommonConstants.LIMITS.BottomSheet.SCREEN_CORNER_RADIUS
+import utils.CommonConstants.LIMITS.BottomSheet.SCREEN_MAX_HEIGHT
 
 @Composable
 fun TransportScreen(parameters: TransportParameters) {
@@ -43,8 +44,8 @@ fun TransportScreen(parameters: TransportParameters) {
             is TransportAction.OpenDepartureAddressBs -> {
                 rootController.findModalController().present(
                     modalSheetConfiguration = ModalSheetConfiguration(
-                        maxHeight = AddressConstants.SCREEN_MAX_HEIGHT,
-                        cornerRadius = AddressConstants.SCREEN_CORNER_RADIUS,
+                        maxHeight = SCREEN_MAX_HEIGHT,
+                        cornerRadius = SCREEN_CORNER_RADIUS,
                         closeOnBackdropClick = false,
                         closeOnSwipe = false
                     )

@@ -32,6 +32,11 @@ object CommonConstants {
             const val MIN_NAME_CHARS = 2
             const val MAX_NAME_CHARS = 50
         }
+
+        object BottomSheet {
+            const val SCREEN_CORNER_RADIUS = 40
+            const val SCREEN_MAX_HEIGHT = 0.85f
+        }
     }
 
     const val HINT_ALPHA = 0.7f

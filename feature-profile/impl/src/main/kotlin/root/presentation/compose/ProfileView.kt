@@ -41,6 +41,7 @@ import trinity_monsters.wildberries_delivery_aggregator.feature_profile.impl.R
 import view.ProgressIndicator
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
+@Suppress("LongMethod")
 @Composable
 fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Unit) {
     when {
