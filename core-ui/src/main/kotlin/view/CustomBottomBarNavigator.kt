@@ -27,7 +27,7 @@ import theme.Theme
 @Composable
 fun CustomBottomBarNavigator(startScreen: String?) {
     val rootController = LocalRootController.current as MultiStackRootController
-    val tabItem = rootController.stackChangeObserver.collectAsState().value
+    val tabItem = rootController.stackChangeObserver.collectAsState().value ?: return
 
     Column(modifier = Modifier.fillMaxSize()) {
         TabNavigator(
@@ -48,6 +48,7 @@ fun CustomBottomBarNavigator(startScreen: String?) {
         ) {
             rootController.tabItems.forEachIndexed { index, currentItem ->
                 val configuration = currentItem.tabInfo.tabItem.configuration
+                val position = rootController.tabItems.indexOf(currentItem)
                 val isSelected = tabItem == currentItem
                 val padding = if (index == 0) {
                     PaddingValues(bottom = 10.dp, start = 80.dp)
@@ -86,11 +87,10 @@ fun CustomBottomBarNavigator(startScreen: String?) {
                         )
                     },
                     onClick = {
-                        rootController.switchTab(currentItem)
+                        rootController.switchTab(position)
                     })
             }
         }
     }
-
     rootController.tabsNavModel.launchedEffect.invoke()
 }

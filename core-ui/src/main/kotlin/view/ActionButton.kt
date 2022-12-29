@@ -34,8 +34,7 @@ fun ActionButton(
 ) {
     Box(
         modifier = modifier.then(
-            Modifier
-                .padding(padding)
+            Modifier.padding(padding)
         ),
         contentAlignment = alignment
     ) {
