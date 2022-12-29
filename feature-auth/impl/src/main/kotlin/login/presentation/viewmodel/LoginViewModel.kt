@@ -20,11 +20,11 @@ class LoginViewModel : BaseViewModel<LoginState, LoginAction, LoginEvent>(
 
     override fun obtainEvent(viewEvent: LoginEvent) {
         when (viewEvent) {
-            is LoginEvent.OnAgreementClick -> onAgreementClick()
-            is LoginEvent.OnOfferCLick -> onOfferClick()
-            is LoginEvent.OnEntranceButtonCLick -> onEntranceButtonClick()
             is LoginEvent.PhoneChanged -> onPhoneChanged(viewEvent.phone)
-            is LoginEvent.ResetAction -> onResetAction()
+            LoginEvent.OnAgreementClick -> onAgreementClick()
+            LoginEvent.OnOfferCLick -> onOfferClick()
+            LoginEvent.OnEntranceButtonCLick -> onEntranceButtonClick()
+            LoginEvent.ResetAction -> onResetAction()
         }
     }
 

@@ -22,11 +22,11 @@ fun UserScreen(parameters: UserParameters) {
             viewModel.obtainEvent(event)
         }
         when (action.value) {
-            is UserAction.OpenPreviousStep -> {
+            UserAction.OpenPreviousStep -> {
                 rootController.popBackStack()
                 viewModel.obtainEvent(UserEvent.ResetAction)
             }
-            is UserAction.OpenMainFlow -> {
+            UserAction.OpenMainFlow -> {
                 rootController.findRootController().present(
                     screen = NavigationTree.Main.MainFlow.name,
                     launchFlag = LaunchFlag.SingleNewTask

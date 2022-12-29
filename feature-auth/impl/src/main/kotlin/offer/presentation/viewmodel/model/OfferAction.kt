@@ -1,5 +1,5 @@
 package offer.presentation.viewmodel.model
 
-sealed class OfferAction {
-    object OpenPreviousScreen: OfferAction()
+sealed interface OfferAction {
+    object OpenPreviousScreen: OfferAction
 }

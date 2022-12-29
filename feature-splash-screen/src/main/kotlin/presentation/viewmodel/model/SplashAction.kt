@@ -1,6 +1,6 @@
 package presentation.viewmodel.model
 
-sealed class SplashAction {
-    object OpenAuthorizationFlow : SplashAction()
-    object OpenMainFlow : SplashAction()
+sealed interface SplashAction {
+    object OpenAuthorizationFlow : SplashAction
+    object OpenMainFlow : SplashAction
 }

@@ -24,17 +24,17 @@ fun VerifyScreen(parameters: VerifyParameters) {
             viewModel.obtainEvent(event)
         }
         when (action.value) {
-            is VerifyAction.OpenPreviousScreen -> {
+            VerifyAction.OpenPreviousScreen -> {
                 rootController.popBackStack()
                 viewModel.obtainEvent(VerifyEvent.ResetAction)
             }
-            is VerifyAction.OpenMainFlow -> {
+            VerifyAction.OpenMainFlow -> {
                 rootController.findRootController().present(
                     screen = NavigationTree.Main.MainFlow.name,
                     launchFlag = LaunchFlag.SingleNewTask
                 )
             }
-            is VerifyAction.OpenRegistrationFlow -> {
+            VerifyAction.OpenRegistrationFlow -> {
                 rootController.findRootController().present(
                     screen = NavigationTree.Registration.RegistrationFlow.name,
                     params = CompanyParameters(

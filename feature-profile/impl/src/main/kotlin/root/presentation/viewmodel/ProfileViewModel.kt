@@ -30,12 +30,12 @@ class ProfileViewModel : BaseViewModel<ProfileState, ProfileAction, ProfileEvent
 
     override fun obtainEvent(viewEvent: ProfileEvent) {
         when (viewEvent) {
-            is ProfileEvent.OnEditProfileClick -> onEditProfileClick()
             is ProfileEvent.OnListItemClick -> onListItemClick(viewEvent.uiModel)
-            is ProfileEvent.OnRetryClick -> loadContent()
-            is ProfileEvent.ResetAction -> onResetAction()
-            is ProfileEvent.OnPhoneLongClick -> onLongClick(viewState.phone)
-            is ProfileEvent.OnEmailLongClick -> onLongClick(viewState.email)
+            ProfileEvent.OnEditProfileClick -> onEditProfileClick()
+            ProfileEvent.OnRetryClick -> loadContent()
+            ProfileEvent.ResetAction -> onResetAction()
+            ProfileEvent.OnPhoneLongClick -> onLongClick(viewState.phone)
+            ProfileEvent.OnEmailLongClick -> onLongClick(viewState.email)
         }
     }
 

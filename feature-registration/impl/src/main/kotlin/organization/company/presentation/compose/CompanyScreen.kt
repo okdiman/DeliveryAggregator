@@ -31,7 +31,7 @@ fun CompanyScreen(parameters: CompanyParameters) {
             viewModel.obtainEvent(event)
         }
         when (action.value) {
-            is CompanyAction.OpenNextStep -> {
+            CompanyAction.OpenNextStep -> {
                 rootController.push(
                     screen = NavigationTree.Registration.Bank.name,
                     params = BankParameters(
@@ -48,7 +48,7 @@ fun CompanyScreen(parameters: CompanyParameters) {
                 )
                 viewModel.obtainEvent(CompanyEvent.ResetAction)
             }
-            is CompanyAction.OpenSelectLegalAddress -> {
+            CompanyAction.OpenSelectLegalAddress -> {
                 ObtainBSScreenAction(
                     state = state,
                     onChangeEvent = { viewModel.obtainEvent(CompanyEvent.OnBSAddressChanged(it)) },
@@ -58,7 +58,7 @@ fun CompanyScreen(parameters: CompanyParameters) {
                     }
                 )
             }
-            is CompanyAction.OpenSelectActualAddress -> {
+            CompanyAction.OpenSelectActualAddress -> {
                 ObtainBSScreenAction(
                     state = state,
                     onChangeEvent = { viewModel.obtainEvent(CompanyEvent.OnBSAddressChanged(it)) },

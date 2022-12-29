@@ -23,7 +23,7 @@ fun BankScreen(parameters: BankParameters) {
             viewModel.obtainEvent(event)
         }
         when (action.value) {
-            is BankAction.OpenNextStep -> {
+            BankAction.OpenNextStep -> {
                 rootController.push(
                     screen = NavigationTree.Registration.Transport.name,
                     params = TransportParameters(
@@ -39,7 +39,7 @@ fun BankScreen(parameters: BankParameters) {
                 )
                 viewModel.obtainEvent(BankEvent.ResetAction)
             }
-            is BankAction.OpenPreviousStep -> {
+            BankAction.OpenPreviousStep -> {
                 rootController.popBackStack()
                 viewModel.obtainEvent(BankEvent.ResetAction)
             }

@@ -29,9 +29,9 @@ class UserViewModel(
             is UserEvent.OnSurnameChanged -> onSurnameChanged(viewEvent.surname)
             is UserEvent.OnSecondNameChanged -> onSecondNameChanged(viewEvent.secondName)
             is UserEvent.OnEmailChanged -> onEmailChanged(viewEvent.email)
-            is UserEvent.OnBackClick -> onBackClick()
-            is UserEvent.OnCreateAccClick -> onCreateAccClick()
-            is UserEvent.ResetAction -> onResetAction()
+            UserEvent.OnBackClick -> onBackClick()
+            UserEvent.OnCreateAccClick -> onCreateAccClick()
+            UserEvent.ResetAction -> onResetAction()
         }
     }
 

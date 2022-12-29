@@ -1,5 +1,5 @@
 package offer.presentation.viewmodel.model
 
-sealed class OfferEvent {
-    object OnBackClick : OfferEvent()
+sealed interface OfferEvent {
+    object OnBackClick : OfferEvent
 }

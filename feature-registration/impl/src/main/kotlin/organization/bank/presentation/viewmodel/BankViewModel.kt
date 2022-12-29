@@ -19,9 +19,9 @@ class BankViewModel : BaseViewModel<BankState, BankAction, BankEvent>(
             is BankEvent.OnCorrAccChanged -> onCorrAccChanged(viewEvent.corrAcc)
             is BankEvent.OnBikChanged -> onBikChanged(viewEvent.bik)
             is BankEvent.OnBankNameChanged -> onBankNameChanged(viewEvent.bankName)
-            is BankEvent.OnContinueButtonClick -> onContinueButtonClick()
-            is BankEvent.OnBackButtonClick -> onBackButtonClick()
-            is BankEvent.ResetAction -> onResetAction()
+            BankEvent.OnContinueButtonClick -> onContinueButtonClick()
+            BankEvent.OnBackButtonClick -> onBackButtonClick()
+            BankEvent.ResetAction -> onResetAction()
         }
     }
 

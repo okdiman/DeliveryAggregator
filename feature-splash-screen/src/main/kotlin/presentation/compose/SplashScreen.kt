@@ -17,13 +17,13 @@ fun SplashScreen() {
         val action = viewModel.viewActions().observeAsState()
         SplashView()
         when (action.value) {
-            is SplashAction.OpenMainFlow -> {
+            SplashAction.OpenMainFlow -> {
                 rootController.present(
                     screen = NavigationTree.Main.MainFlow.name,
                     launchFlag = LaunchFlag.SingleNewTask
                 )
             }
-            is SplashAction.OpenAuthorizationFlow -> {
+            SplashAction.OpenAuthorizationFlow -> {
                 rootController.present(
                     screen = NavigationTree.Auth.AuthFlow.name,
                     launchFlag = LaunchFlag.SingleNewTask

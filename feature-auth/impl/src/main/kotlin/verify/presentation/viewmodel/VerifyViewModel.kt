@@ -32,10 +32,10 @@ class VerifyViewModel(
     override fun obtainEvent(viewEvent: VerifyEvent) {
         when (viewEvent) {
             is VerifyEvent.OnCodeChanged -> onCodeChanged(viewEvent.code)
-            is VerifyEvent.OnBackClick -> onBackClick()
-            is VerifyEvent.OnRetryCallClick -> onRetryCallClick()
-            is VerifyEvent.TickerFinished -> onTickerFinished()
-            is VerifyEvent.ResetAction -> onResetAction()
+            VerifyEvent.OnBackClick -> onBackClick()
+            VerifyEvent.OnRetryCallClick -> onRetryCallClick()
+            VerifyEvent.TickerFinished -> onTickerFinished()
+            VerifyEvent.ResetAction -> onResetAction()
         }
     }
 

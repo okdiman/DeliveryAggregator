@@ -30,18 +30,18 @@ fun TransportScreen(parameters: TransportParameters) {
             viewModel.obtainEvent(event)
         }
         when (action.value) {
-            is TransportAction.OpenNextStep -> {
+            TransportAction.OpenNextStep -> {
                 rootController.push(
                     screen = NavigationTree.Registration.User.name,
                     params = getUserParameters(parameters, state.value)
                 )
                 viewModel.obtainEvent(TransportEvent.ResetAction)
             }
-            is TransportAction.OpenPreviousStep -> {
+            TransportAction.OpenPreviousStep -> {
                 rootController.popBackStack()
                 viewModel.obtainEvent(TransportEvent.ResetAction)
             }
-            is TransportAction.OpenDepartureAddressBs -> {
+            TransportAction.OpenDepartureAddressBs -> {
                 rootController.findModalController().present(
                     modalSheetConfiguration = ModalSheetConfiguration(
                         maxHeight = SCREEN_MAX_HEIGHT,

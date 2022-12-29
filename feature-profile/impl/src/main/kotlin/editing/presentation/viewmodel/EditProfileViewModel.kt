@@ -40,10 +40,10 @@ class EditProfileViewModel(
             is EditProfileEvent.OnSurnameChanged -> onSurnameChanged(viewEvent.surname)
             is EditProfileEvent.OnSecondNameChanged -> onSecondNameChanged(viewEvent.secondName)
             is EditProfileEvent.OnEmailChanged -> onEmailChanged(viewEvent.email)
-            is EditProfileEvent.OnBackClick -> onBackClick()
-            is EditProfileEvent.OnSaveEditingClick -> onSaveEditing()
-            is EditProfileEvent.OnDeleteAccClick -> onDeleteAcc()
-            is EditProfileEvent.ResetAction -> onResetAction()
+            EditProfileEvent.OnBackClick -> onBackClick()
+            EditProfileEvent.OnSaveEditingClick -> onSaveEditing()
+            EditProfileEvent.OnDeleteAccClick -> onDeleteAcc()
+            EditProfileEvent.ResetAction -> onResetAction()
         }
     }
 

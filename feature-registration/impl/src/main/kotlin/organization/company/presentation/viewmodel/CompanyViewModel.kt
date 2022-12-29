@@ -41,13 +41,13 @@ class CompanyViewModel(
             is CompanyEvent.OnInnChanged -> onInnChanged(viewEvent.inn)
             is CompanyEvent.OnKppChanged -> onKppChanged(viewEvent.kpp)
             is CompanyEvent.OnOgrnChanged -> onOgrnChanged(viewEvent.ogrn)
-            is CompanyEvent.OnLegalAddressClick -> onLegalAddressClick()
-            is CompanyEvent.OnActualAddressClick -> onActualAddressClick()
-            is CompanyEvent.OnContinueButtonClick -> onContinueButtonClick()
             is CompanyEvent.OnLegalSuggestAddressClick -> onLegalAddressSuggestClick(viewEvent.address)
             is CompanyEvent.OnActualSuggestAddressClick -> onActualAddressSuggestClick(viewEvent.address)
             is CompanyEvent.OnBSAddressChanged -> onBsAddressChanged(viewEvent.bsAddress)
-            is CompanyEvent.ResetAction -> {
+            CompanyEvent.OnLegalAddressClick -> onLegalAddressClick()
+            CompanyEvent.OnActualAddressClick -> onActualAddressClick()
+            CompanyEvent.OnContinueButtonClick -> onContinueButtonClick()
+            CompanyEvent.ResetAction -> {
                 onResetAction()
                 resetSuggests()
             }

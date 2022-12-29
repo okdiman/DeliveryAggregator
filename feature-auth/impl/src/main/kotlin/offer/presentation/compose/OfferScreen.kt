@@ -17,7 +17,7 @@ fun OfferScreen() {
             viewModel.obtainEvent(event)
         }
         when (action.value) {
-            is OfferAction.OpenPreviousScreen -> {
+            OfferAction.OpenPreviousScreen -> {
                 rootController.popBackStack()
             }
             else -> {}

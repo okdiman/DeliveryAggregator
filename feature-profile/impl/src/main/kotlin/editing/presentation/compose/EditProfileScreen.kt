@@ -23,7 +23,7 @@ fun EditProfileScreen(parameters: EditProfileParameters) {
             viewModel.obtainEvent(event)
         }
         when (action.value) {
-            is EditProfileAction.OpenDeleteAccScreen -> {
+            EditProfileAction.OpenDeleteAccScreen -> {
                 rootController.findModalController().present(
                     modalSheetConfiguration = ModalSheetConfiguration(
                         cornerRadius = SCREEN_CORNER_RADIUS
@@ -31,10 +31,10 @@ fun EditProfileScreen(parameters: EditProfileParameters) {
                 ) { DeleteProfileScreen() }
                 viewModel.obtainEvent(EditProfileEvent.ResetAction)
             }
-            is EditProfileAction.OpenPreviousScreen -> {
+            EditProfileAction.OpenPreviousScreen -> {
                 rootController.popBackStack()
             }
-            is EditProfileAction.ShowProfileUpdatedSnackbar -> {
+            EditProfileAction.ShowProfileUpdatedSnackbar -> {
                 viewModel.obtainEvent(EditProfileEvent.ResetAction)
             }
             else -> {}

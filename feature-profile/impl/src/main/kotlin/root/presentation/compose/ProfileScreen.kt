@@ -24,11 +24,11 @@ fun ProfileScreen() {
             viewModel.obtainEvent(event)
         }
         when (action.value) {
-            is ProfileAction.OpenTransport -> {
+            ProfileAction.OpenTransport -> {
 //                rootController.push(NavigationTree.Profile.Transport.name)
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
-            is ProfileAction.OpenEditProfile -> {
+            ProfileAction.OpenEditProfile -> {
                 runCatching {
                     rootController.findRootController().push(
                         screen = NavigationTree.Profile.Edit.name,
@@ -37,23 +37,23 @@ fun ProfileScreen() {
                 }
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
-            is ProfileAction.OpenDepartureAddress -> {
+            ProfileAction.OpenDepartureAddress -> {
 //                rootController.push(NavigationTree.Profile.DepartureAddress.name)
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
-            is ProfileAction.OpenOffer -> {
+            ProfileAction.OpenOffer -> {
                 rootController.findRootController().push(NavigationTree.Profile.Offer.name)
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
-            is ProfileAction.OpenSupport -> {
+            ProfileAction.OpenSupport -> {
 //                rootController.push(NavigationTree.Profile.Support.name)
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
-            is ProfileAction.OpenNotificationsSettings -> {
+            ProfileAction.OpenNotificationsSettings -> {
                 openNotificationSettings(context)
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
-            is ProfileAction.OpenExitFromAccount -> {
+            ProfileAction.OpenExitFromAccount -> {
 //                rootController.push(NavigationTree.Profile.Exit.name)
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }

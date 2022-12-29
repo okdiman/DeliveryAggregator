@@ -40,11 +40,11 @@ class TransportViewModel(
             is TransportEvent.OnCarLoadCapacityChanged -> onCarLoadCapacityChanged(viewEvent.carLoadCapacity)
             is TransportEvent.OnCarCategoryChanged -> onCarCategoryChanged(viewEvent.carCategory)
             is TransportEvent.OnCarCapacityChanged -> onCarCapacityChanged(viewEvent.carCapacity)
-            is TransportEvent.OnBackButtonClick -> onBackButtonClick()
-            is TransportEvent.OnContinueButtonClick -> onContinueButtonClick()
-            is TransportEvent.OnDepartAddressClick -> onDepartAddressClick()
             is TransportEvent.OnSuggestAddressClick -> onSuggestAddressClick(viewEvent.address)
-            is TransportEvent.ResetAction -> onResetAction()
+            TransportEvent.OnBackButtonClick -> onBackButtonClick()
+            TransportEvent.OnContinueButtonClick -> onContinueButtonClick()
+            TransportEvent.OnDepartAddressClick -> onDepartAddressClick()
+            TransportEvent.ResetAction -> onResetAction()
         }
     }
 

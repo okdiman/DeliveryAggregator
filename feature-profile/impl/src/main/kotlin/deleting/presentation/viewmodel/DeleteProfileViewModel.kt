@@ -18,8 +18,8 @@ class DeleteProfileViewModel :
 
     override fun obtainEvent(viewEvent: DeleteProfileEvent) {
         when (viewEvent) {
-            is DeleteProfileEvent.OnDeleteClick -> onDeleteClick()
-            is DeleteProfileEvent.OnBackClick -> onBackClick()
+            DeleteProfileEvent.OnDeleteClick -> onDeleteClick()
+            DeleteProfileEvent.OnBackClick -> onBackClick()
         }
     }
 

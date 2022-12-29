@@ -20,7 +20,7 @@ class OfferViewModel : BaseViewModel<OfferState, OfferAction, OfferEvent>(
 
     override fun obtainEvent(viewEvent: OfferEvent) {
         when (viewEvent) {
-            is OfferEvent.OnBackClick -> onBackCLick()
+            OfferEvent.OnBackClick -> onBackCLick()
         }
     }
 

@@ -1,3 +1,3 @@
 package presentation.viewmodel.model
 
-sealed class SplashEvent
+sealed interface SplashEvent

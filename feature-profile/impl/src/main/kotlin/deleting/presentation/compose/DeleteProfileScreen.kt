@@ -17,14 +17,14 @@ fun DeleteProfileScreen() {
         val action = viewModel.viewActions().observeAsState()
         DeleteProfileView { viewModel.obtainEvent(it) }
         when (action.value) {
-            is DeleteProfileAction.OpenLoginFlow -> {
+            DeleteProfileAction.OpenLoginFlow -> {
                 rootController.findModalController().popBackStack(key = null)
                 rootController.findRootController().present(
                     screen = NavigationTree.Auth.AuthFlow.name,
                     launchFlag = LaunchFlag.SingleNewTask
                 )
             }
-            is DeleteProfileAction.OpenPreviousScreen -> {
+            DeleteProfileAction.OpenPreviousScreen -> {
                 rootController.findModalController().popBackStack(key = null)
             }
             else -> {}

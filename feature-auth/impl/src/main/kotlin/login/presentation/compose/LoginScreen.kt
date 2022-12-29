@@ -21,14 +21,14 @@ fun LoginScreen() {
             viewModel.obtainEvent(event)
         }
         when (action.value) {
-            is LoginAction.OpenVerifyScreen -> {
+            LoginAction.OpenVerifyScreen -> {
                 rootController.push(
                     screen = NavigationTree.Auth.Verify.name,
                     params = VerifyParameters(state.value.phone)
                 )
                 viewModel.obtainEvent(LoginEvent.ResetAction)
             }
-            is LoginAction.OpenOffer -> {
+            LoginAction.OpenOffer -> {
                 rootController.push(NavigationTree.Auth.Offer.name)
                 viewModel.obtainEvent(LoginEvent.ResetAction)
             }
