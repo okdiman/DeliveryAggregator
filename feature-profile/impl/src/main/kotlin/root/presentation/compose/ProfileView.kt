@@ -50,7 +50,7 @@ fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Unit) {
                 ProgressIndicator()
             }
         }
-        !state.isError -> {
+        state.isError -> {
             ErrorScreen { eventHandler(ProfileEvent.OnRetryClick) }
         }
         else -> {
