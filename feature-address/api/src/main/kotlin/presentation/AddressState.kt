@@ -5,7 +5,7 @@ import presentation.model.AddressUiModel
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R
 import view.model.DefaultParamState
 
-data class BsAddressState(
+data class AddressState(
     val text: String = "",
     val address: AddressUiModel? = null,
     val isBsAddressError: Boolean = false,

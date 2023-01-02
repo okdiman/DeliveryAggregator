@@ -25,7 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
-import presentation.BsAddressState
+import presentation.AddressState
 import presentation.model.AddressUiModel
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import theme.Theme
@@ -36,7 +36,7 @@ import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
 @Composable
 fun RegistrationAddressBSScreen(
-    state: BsAddressState,
+    state: AddressState,
     suggests: List<AddressUiModel>,
     onClearClick: () -> Unit,
     onTextFieldChanged: (String) -> Unit,

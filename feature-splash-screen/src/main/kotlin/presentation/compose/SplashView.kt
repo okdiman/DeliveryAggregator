@@ -28,6 +28,6 @@ fun SplashView() {
             contentDescription = null
         )
         Spacer(modifier = Modifier.height(24.dp))
-        ProgressIndicator(modifier = Modifier.size(40.dp))
+        ProgressIndicator()
     }
 }

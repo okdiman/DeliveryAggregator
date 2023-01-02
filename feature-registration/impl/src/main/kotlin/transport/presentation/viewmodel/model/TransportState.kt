@@ -1,7 +1,7 @@
 package transport.presentation.viewmodel.model
 
 import presentation.model.AddressUiModel
-import presentation.BsAddressState
+import presentation.AddressState
 import transport.presentation.compose.model.TransportParamState
 
 data class TransportState(
@@ -11,7 +11,7 @@ data class TransportState(
     val carCategory: TransportParamState.CarCategoryState = TransportParamState.CarCategoryState(),
     val carLoadCapacity: TransportParamState.CarLoadCapacityState = TransportParamState.CarLoadCapacityState(),
     val carCapacity: TransportParamState.CarCapacityState = TransportParamState.CarCapacityState(),
-    val bsAddress: BsAddressState = BsAddressState(),
+    val bsAddress: AddressState = AddressState(),
     val suggests: List<AddressUiModel> = emptyList(),
     val isContinueButtonEnabled: Boolean = false
 )
