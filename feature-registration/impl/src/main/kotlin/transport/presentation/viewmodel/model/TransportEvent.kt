@@ -1,6 +1,6 @@
 package transport.presentation.viewmodel.model
 
-import presentation.AddressUiModel
+import presentation.model.AddressUiModel
 
 sealed interface TransportEvent {
     data class OnLicencePlateChanged(val licencePlate: String) : TransportEvent

@@ -2,14 +2,15 @@ package transport.presentation.viewmodel
 
 import BaseViewModel
 import coroutines.AppDispatchers
-import data.AddressConstants
+import data.AddressConstants.DEBOUNCE
+import data.AddressConstants.MIN_CHARS_FOR_SUGGEST
 import domain.model.AddressSuggestRequestModel
 import domain.usecase.GetSuggestByQueryUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import presentation.AddressUiModel
+import presentation.model.AddressUiModel
 import presentation.mapper.AddressSuggestUiMapper
 import presentation.parameters.TransportParameters
 import transport.presentation.viewmodel.model.TransportAction
@@ -138,9 +139,16 @@ class TransportViewModel(
 
     private fun loadSuggests(query: String) {
         suggestJob?.cancel()
-        if (query.length >= AddressConstants.MIN_CHARS_FOR_SUGGEST) {
-            suggestJob = launchJob(appDispatchers.network) {
-                delay(AddressConstants.DEBOUNCE)
+        if (query.length >= MIN_CHARS_FOR_SUGGEST) {
+            suggestJob = launchJob(context = appDispatchers.network, onError = {
+                viewState = viewState.copy(
+                    bsAddress = viewState.bsAddress.copy(isSuggestLoading = false)
+                )
+            }) {
+                delay(DEBOUNCE)
+                viewState = viewState.copy(
+                    bsAddress = viewState.bsAddress.copy(isSuggestLoading = true)
+                )
                 val suggests = getSuggestByQuery(
                     AddressSuggestRequestModel(
                         query = query,
@@ -148,7 +156,10 @@ class TransportViewModel(
                         phone = parameters.user.phone
                     )
                 )
-                viewState = viewState.copy(suggests = addressUiMapper.map(suggests))
+                viewState = viewState.copy(
+                    suggests = addressUiMapper.map(suggests),
+                    bsAddress = viewState.bsAddress.copy(isSuggestLoading = false)
+                )
             }
         } else {
             viewState = viewState.copy(suggests = emptyList())

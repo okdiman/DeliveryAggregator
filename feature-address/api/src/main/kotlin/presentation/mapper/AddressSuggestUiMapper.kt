@@ -2,7 +2,7 @@ package presentation.mapper
 
 import data.AddressConstants.MAX_SUGGESTS
 import domain.model.AddressSuggestModel
-import presentation.AddressUiModel
+import presentation.model.AddressUiModel
 
 class AddressSuggestUiMapper {
     fun map(items: List<AddressSuggestModel>): List<AddressUiModel> {

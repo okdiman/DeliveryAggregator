@@ -9,7 +9,7 @@ import organization.company.presentation.viewmodel.CompanyViewModel
 import organization.company.presentation.viewmodel.model.CompanyAction
 import organization.company.presentation.viewmodel.model.CompanyEvent
 import organization.company.presentation.viewmodel.model.CompanyState
-import presentation.AddressUiModel
+import presentation.model.AddressUiModel
 import presentation.model.RegistrationCompanyModel
 import presentation.parameters.BankParameters
 import presentation.parameters.CompanyParameters

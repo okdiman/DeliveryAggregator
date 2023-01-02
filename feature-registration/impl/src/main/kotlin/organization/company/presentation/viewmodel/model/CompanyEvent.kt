@@ -1,6 +1,6 @@
 package organization.company.presentation.viewmodel.model
 
-import presentation.AddressUiModel
+import presentation.model.AddressUiModel
 
 sealed interface CompanyEvent {
     data class OnCompanyNameChanged(val name: String) : CompanyEvent

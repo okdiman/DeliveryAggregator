@@ -11,4 +11,6 @@ android {
 
 dependencies {
     network()
+    compose()
+    implementation(project(Modules.core_ui))
 }

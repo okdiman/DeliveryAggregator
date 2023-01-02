@@ -3,5 +3,4 @@
     <string name="registration_step">Шаг %1s из 4</string>
     <string name="create_acc_button">Создать аккаунт</string>
     <string name="organization_info">Данные организации</string>
-    <string name="incorrect_address">Выберете адрес из списка</string>
 </resources>

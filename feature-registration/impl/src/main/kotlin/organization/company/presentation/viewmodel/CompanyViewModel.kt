@@ -13,7 +13,7 @@ import org.koin.core.component.inject
 import organization.company.presentation.viewmodel.model.CompanyAction
 import organization.company.presentation.viewmodel.model.CompanyEvent
 import organization.company.presentation.viewmodel.model.CompanyState
-import presentation.AddressUiModel
+import presentation.model.AddressUiModel
 import presentation.mapper.AddressSuggestUiMapper
 import presentation.parameters.CompanyParameters
 import root.RegistrationConstants.Limits.Company.INN_CHARS
@@ -149,8 +149,15 @@ class CompanyViewModel(
     private fun loadSuggests(query: String) {
         suggestJob?.cancel()
         if (query.length >= MIN_CHARS_FOR_SUGGEST) {
-            suggestJob = launchJob(appDispatchers.network) {
+            suggestJob = launchJob(context = appDispatchers.network, onError = {
+                viewState = viewState.copy(
+                    bsAddress = viewState.bsAddress.copy(isSuggestLoading = false)
+                )
+            }) {
                 delay(DEBOUNCE)
+                viewState = viewState.copy(
+                    bsAddress = viewState.bsAddress.copy(isSuggestLoading = true)
+                )
                 val suggests = getSuggestByQuery(
                     AddressSuggestRequestModel(
                         query = query,
@@ -158,7 +165,10 @@ class CompanyViewModel(
                         phone = parameters.user.phone
                     )
                 )
-                viewState = viewState.copy(suggests = addressUiMapper.map(suggests))
+                viewState = viewState.copy(
+                    suggests = addressUiMapper.map(suggests),
+                    bsAddress = viewState.bsAddress.copy(isSuggestLoading = false)
+                )
             }
         } else {
             viewState = viewState.copy(suggests = emptyList())

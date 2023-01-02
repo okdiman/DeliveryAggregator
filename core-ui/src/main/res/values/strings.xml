@@ -8,4 +8,5 @@
     <string name="few_symbols_error">Введено недостаточное количество символов</string>
     <string name="save">Сохранить</string>
     <string name="company_name">Название организации</string>
+    <string name="incorrect_address">Выберете адрес из списка</string>
 </resources>

@@ -1,10 +1,10 @@
 package transport.presentation.compose.model
 
 import androidx.annotation.StringRes
-import presentation.AddressUiModel
+import presentation.model.AddressUiModel
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 import view.model.DefaultParamState
+import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
 sealed class TransportParamState(
     override val stateText: String,
@@ -47,11 +47,4 @@ sealed class TransportParamState(
         val isCarCapacityError: Boolean = false,
         @StringRes val error: Int = R_core.string.few_symbols_error
     ) : TransportParamState(text, isCarCapacityError, error)
-
-    data class BsAddressState(
-        val text: String = "",
-        val address: AddressUiModel? = null,
-        val isBsAddressError: Boolean = false,
-        @StringRes val error: Int = R.string.incorrect_address
-    ) : TransportParamState(text, isBsAddressError, error)
 }

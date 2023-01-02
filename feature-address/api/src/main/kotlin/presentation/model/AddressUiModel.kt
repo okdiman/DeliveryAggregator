@@ -1,4 +1,4 @@
-package presentation
+package presentation.model
 
 data class AddressUiModel(
     val value: String,
