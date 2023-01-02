@@ -7,7 +7,6 @@ fun formatTicks(tick: Int): String {
         "0$tick"
     }
     return buildString {
-        append(" 00:")
-        append("$formattedTick ")
+        append(" 00:$formattedTick ")
     }
 }

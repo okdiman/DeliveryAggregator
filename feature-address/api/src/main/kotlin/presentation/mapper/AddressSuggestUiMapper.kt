@@ -11,25 +11,19 @@ class AddressSuggestUiMapper {
             val subtitle = buildString {
                 append(street)
                 if (model.data.house.isNotEmpty()) {
-                    append(", ")
-                    append(model.data.house)
+                    append(COMMA + model.data.house)
                 }
                 if (model.data.block.isNotEmpty()) {
-                    append(", ")
-                    append(model.data.blockType)
-                    append(" ")
-                    append(model.data.block)
+                    append(COMMA + model.data.blockType + model.data.block)
                 }
             }
             val city = buildString {
                 append(model.data.city)
                 if (model.data.area.isNotEmpty()) {
-                    append(", ")
-                    append(model.data.area)
+                    append(COMMA + model.data.area)
                 }
                 if (model.data.settlement.isNotEmpty()) {
-                    append(", ")
-                    append(model.data.settlement)
+                    append(COMMA + model.data.settlement)
                 }
             }
             AddressUiModel(
@@ -42,5 +36,9 @@ class AddressSuggestUiMapper {
                 subtitle = subtitle
             )
         }.take(MAX_SUGGESTS)
+    }
+
+    companion object {
+        private const val COMMA = ", "
     }
 }

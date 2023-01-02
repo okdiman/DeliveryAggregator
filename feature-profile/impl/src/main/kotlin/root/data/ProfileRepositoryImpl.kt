@@ -22,6 +22,10 @@ class ProfileRepositoryImpl(
 
     override suspend fun deleteProfile() {
         api.deleteProfile()
+        exitFromProfile()
+    }
+
+    override suspend fun exitFromProfile() {
         localDataSource.clear()
     }
 }

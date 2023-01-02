@@ -3,6 +3,8 @@ package root.presentation.mapper
 import domain.GetMaskedPhoneUseCase
 import domain.ProfileModel
 import root.presentation.compose.model.ProfileUiModel
+import utils.CommonConstants.Helpers.LINE_BREAK
+import utils.CommonConstants.Helpers.SPACER
 
 class ProfileUiMapper(
     private val getMaskedPhone: GetMaskedPhoneUseCase
@@ -17,10 +19,6 @@ class ProfileUiMapper(
     }
 
     private fun getFullName(profile: ProfileModel) = buildString {
-        append(profile.surname)
-        append("\n")
-        append(profile.name)
-        append(" ")
-        append(profile.secondName)
+        append(profile.surname + LINE_BREAK + profile.name + SPACER + profile.secondName)
     }
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="are_u_sure_to_exit">Вы уверены, что хотите выйти из аккаунта?</string>
+    <string name="exit">Выйти</string>
+    <string name="stay">Остаться</string>
+</resources>

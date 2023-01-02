@@ -18,7 +18,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             DeliveryAggregatorTheme {
                 val configuration = OdysseyConfiguration(canvas = this)
-                setNavigationContent(configuration) {
+                setNavigationContent(configuration = configuration, onApplicationFinish = {
+                    finish()
+                }) {
                     generateGraph()
                 }
             }

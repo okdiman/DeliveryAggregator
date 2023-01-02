@@ -18,8 +18,8 @@ import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
-import utils.CommonConstants.LIMITS.BottomSheet.SCREEN_CORNER_RADIUS
-import utils.CommonConstants.LIMITS.BottomSheet.SCREEN_MAX_HEIGHT
+import utils.UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
+import utils.UiConstants.BottomSheet.SCREEN_MAX_HEIGHT
 
 @Composable
 fun CompanyScreen(parameters: CompanyParameters) {

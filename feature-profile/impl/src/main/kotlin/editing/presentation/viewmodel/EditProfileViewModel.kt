@@ -105,7 +105,7 @@ class EditProfileViewModel(
                 )
             )
             viewState = viewState.copy(isSaveButtonVisible = isSaveButtonVisible(isUpdated = true))
-            viewAction = EditProfileAction.ShowProfileUpdatedSnackbar
+            viewAction = EditProfileAction.OpenProfileScreenWithUpdate
         }
     }
 

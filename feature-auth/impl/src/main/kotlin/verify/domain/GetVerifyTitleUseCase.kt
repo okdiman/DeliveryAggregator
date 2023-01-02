@@ -1,6 +1,7 @@
 package verify.domain
 
 import trinity_monsters.wildberries_delivery_aggregator.feature_auth.impl.R
+import utils.CommonConstants.Helpers.LINE_BREAK
 import utils.resource.domain.ResourceInteractor
 
 class GetVerifyTitleUseCase(
@@ -9,9 +10,7 @@ class GetVerifyTitleUseCase(
     operator fun invoke(phone: String): String {
         return buildString {
             append(resourceInteractor.getString(R.string.verify_title_start))
-            append("\n")
-            append(maskedPhone(phone))
-            append("\n")
+            append(LINE_BREAK + maskedPhone(phone) + LINE_BREAK)
             append(resourceInteractor.getString(R.string.verify_title_end))
         }
     }
@@ -19,17 +18,18 @@ class GetVerifyTitleUseCase(
     private fun maskedPhone(phone: String): String {
         return buildString {
             append(resourceInteractor.getString(R.string.phone_prefix))
-            append("(")
-            append(phone.take(FIRST_THREE))
-            append(")")
-            append(MASK)
-            append(phone.takeLast(LAST_TWO))
-            append(".")
+            append(
+                FRONT_BRACKET + phone.take(FIRST_THREE) + BACK_BRACKET + MASK +
+                        phone.takeLast(LAST_TWO) + POINT
+            )
         }
     }
 
     companion object {
         private const val MASK = "***-**-"
+        private const val FRONT_BRACKET = "("
+        private const val BACK_BRACKET = ")"
+        private const val POINT = "."
         private const val FIRST_THREE = 3
         private const val LAST_TWO = 2
     }

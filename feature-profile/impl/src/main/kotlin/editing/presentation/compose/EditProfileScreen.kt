@@ -7,11 +7,14 @@ import deleting.presentation.compose.DeleteProfileScreen
 import editing.presentation.viewmodel.EditProfileViewModel
 import editing.presentation.viewmodel.model.EditProfileAction
 import editing.presentation.viewmodel.model.EditProfileEvent
+import navigation.NavigationTree
 import presentation.EditProfileParameters
 import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
-import utils.CommonConstants.LIMITS.BottomSheet.SCREEN_CORNER_RADIUS
+import ru.alexgladkov.odyssey.core.LaunchFlag
+import utils.CommonConstants.BottomNavigation.PROFILE_TAB
+import utils.UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
 
 @Composable
 fun EditProfileScreen(parameters: EditProfileParameters) {
@@ -34,8 +37,12 @@ fun EditProfileScreen(parameters: EditProfileParameters) {
             EditProfileAction.OpenPreviousScreen -> {
                 rootController.popBackStack()
             }
-            EditProfileAction.ShowProfileUpdatedSnackbar -> {
-                viewModel.obtainEvent(EditProfileEvent.ResetAction)
+            EditProfileAction.OpenProfileScreenWithUpdate -> {
+                rootController.present(
+                    screen = NavigationTree.Main.MainFlow.name,
+                    launchFlag = LaunchFlag.SingleInstance,
+                    startTabPosition = PROFILE_TAB
+                )
             }
             else -> {}
         }

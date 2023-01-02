@@ -32,15 +32,20 @@ object CommonConstants {
             const val MIN_NAME_CHARS = 2
             const val MAX_NAME_CHARS = 50
         }
-
-        object BottomSheet {
-            const val SCREEN_CORNER_RADIUS = 40
-            const val SCREEN_MAX_HEIGHT = 0.85f
-        }
     }
 
-    const val HINT_ALPHA = 0.7f
+    object Helpers {
+        const val LINE_BREAK = "\n"
+        const val SPACER = " "
+    }
 
-    const val APP_PACKAGE = "app_package"
-    const val APP_UID = "app_uid"
+    object System {
+        const val APP_PACKAGE = "app_package"
+        const val APP_UID = "app_uid"
+    }
+
+    object BottomNavigation {
+        const val ROUTE_TAB = 0
+        const val PROFILE_TAB = 1
+    }
 }

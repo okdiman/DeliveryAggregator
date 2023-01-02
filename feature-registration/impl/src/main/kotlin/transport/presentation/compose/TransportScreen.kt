@@ -17,8 +17,8 @@ import transport.presentation.viewmodel.TransportViewModel
 import transport.presentation.viewmodel.model.TransportAction
 import transport.presentation.viewmodel.model.TransportEvent
 import transport.presentation.viewmodel.model.TransportState
-import utils.CommonConstants.LIMITS.BottomSheet.SCREEN_CORNER_RADIUS
-import utils.CommonConstants.LIMITS.BottomSheet.SCREEN_MAX_HEIGHT
+import utils.UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
+import utils.UiConstants.BottomSheet.SCREEN_MAX_HEIGHT
 
 @Composable
 fun TransportScreen(parameters: TransportParameters) {

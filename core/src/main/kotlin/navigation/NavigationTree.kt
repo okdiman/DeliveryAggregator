@@ -19,6 +19,6 @@ object NavigationTree {
     }
 
     enum class Profile {
-        Offer, Edit, DepartureAddress, Support, Exit, Transport
+        Offer, Edit, DepartureAddress, Transport
     }
 }

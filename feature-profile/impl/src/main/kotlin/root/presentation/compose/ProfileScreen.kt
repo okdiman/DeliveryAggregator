@@ -4,13 +4,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
+import exit.presentation.compose.ExitScreen
 import navigation.NavigationTree
 import presentation.EditProfileParameters
 import root.presentation.viewmodel.ProfileViewModel
 import root.presentation.viewmodel.model.ProfileAction
 import root.presentation.viewmodel.model.ProfileEvent
+import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
+import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
+import utils.UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
 import utils.openNotificationSettings
 
 @Composable
@@ -24,10 +28,6 @@ fun ProfileScreen() {
             viewModel.obtainEvent(event)
         }
         when (action.value) {
-            ProfileAction.OpenTransport -> {
-//                rootController.push(NavigationTree.Profile.Transport.name)
-                viewModel.obtainEvent(ProfileEvent.ResetAction)
-            }
             ProfileAction.OpenEditProfile -> {
                 runCatching {
                     rootController.findRootController().push(
@@ -41,8 +41,8 @@ fun ProfileScreen() {
 //                rootController.push(NavigationTree.Profile.DepartureAddress.name)
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
-            ProfileAction.OpenOffer -> {
-                rootController.findRootController().push(NavigationTree.Profile.Offer.name)
+            ProfileAction.OpenTransport -> {
+//                rootController.push(NavigationTree.Profile.Transport.name)
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             ProfileAction.OpenSupport -> {
@@ -53,8 +53,16 @@ fun ProfileScreen() {
                 openNotificationSettings(context)
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
+            ProfileAction.OpenOffer -> {
+                rootController.findRootController().push(NavigationTree.Profile.Offer.name)
+                viewModel.obtainEvent(ProfileEvent.ResetAction)
+            }
             ProfileAction.OpenExitFromAccount -> {
-//                rootController.push(NavigationTree.Profile.Exit.name)
+                rootController.findModalController().present(
+                    modalSheetConfiguration = ModalSheetConfiguration(
+                        cornerRadius = SCREEN_CORNER_RADIUS
+                    )
+                ) { ExitScreen() }
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             else -> {}

@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import theme.Theme
-import utils.CommonConstants.HINT_ALPHA
+import utils.UiConstants.HINT_ALPHA
 import view.model.DefaultParamState
 
 @Suppress("LongParameterList")
