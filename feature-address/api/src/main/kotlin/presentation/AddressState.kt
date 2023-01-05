@@ -6,9 +6,17 @@ import trinity_monsters.wildberries_delivery_aggregator.core_ui.R
 import view.model.DefaultParamState
 
 data class AddressState(
-    val text: String = "",
+    override val stateText: String = "",
+    override val isFillingError: Boolean = false,
+    override val isValidationError: Boolean = false,
+    @StringRes override val fillingErrorDiscription: Int = R.string.incorrect_address,
+    @StringRes override val validationErrorDiscription: Int = R.string.empty_error,
     val address: AddressUiModel? = null,
-    val isBsAddressError: Boolean = false,
-    val isSuggestLoading: Boolean = false,
-    @StringRes val error: Int = R.string.incorrect_address
-) : DefaultParamState(text, isBsAddressError, error)
+    val isSuggestLoading: Boolean = false
+) : DefaultParamState(
+    stateText,
+    isFillingError,
+    isValidationError,
+    fillingErrorDiscription,
+    validationErrorDiscription
+)

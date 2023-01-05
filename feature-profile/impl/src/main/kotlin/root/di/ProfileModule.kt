@@ -5,7 +5,7 @@ import data.mapper.ProfileModelMapper
 import deleting.domain.DeleteProfileUseCase
 import domain.GetMaskedPhoneUseCase
 import editing.domain.GetMaskedPhoneUseCaseImpl
-import editing.domain.UpdateProfileUseCase
+import root.domain.UpdateProfileUseCase
 import exit.domain.ExitFromProfileUseCase
 import org.koin.dsl.module
 import retrofit2.Retrofit

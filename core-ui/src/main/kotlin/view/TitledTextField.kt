@@ -70,7 +70,7 @@ fun TitledTextField(
                 }
         ),
         maxLines = 1,
-        isError = state.isError && !isFocused.value,
+        isError = state.isFillingError && !isFocused.value,
         value = state.stateText,
         enabled = enabled,
         textStyle = textStyle,
@@ -98,10 +98,15 @@ fun TitledTextField(
             }
         }
     )
-    if (state.isError && !isFocused.value) {
+    if ((state.isFillingError || state.isValidationError) && !isFocused.value) {
         Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = stringResource(state.stateError), style = Theme.fonts.regular.copy(
+            text = if (state.isFillingError) {
+                stringResource(state.fillingErrorDiscription)
+            } else {
+                stringResource(state.validationErrorDiscription)
+            },
+            style = Theme.fonts.regular.copy(
                 color = Theme.colors.errorColor,
                 fontSize = 12.sp,
             )

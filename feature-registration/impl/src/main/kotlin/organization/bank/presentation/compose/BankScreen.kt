@@ -30,10 +30,10 @@ fun BankScreen(parameters: BankParameters) {
                         user = parameters.user,
                         company = parameters.company,
                         bank = RegistrationBankModel(
-                            paymentAcc = state.value.paymentAcc.text,
-                            corrAcc = state.value.corrAcc.text,
-                            bik = state.value.bik.text,
-                            bankName = state.value.bankName.text
+                            paymentAcc = state.value.paymentAcc.stateText,
+                            corrAcc = state.value.corrAcc.stateText,
+                            bik = state.value.bik.stateText,
+                            bankName = state.value.bankName.stateText
                         )
                     )
                 )

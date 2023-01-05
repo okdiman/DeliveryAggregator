@@ -1,4 +1,4 @@
-package editing.domain
+package root.domain
 
 import data.ProfileRepository
 import domain.ProfileModel

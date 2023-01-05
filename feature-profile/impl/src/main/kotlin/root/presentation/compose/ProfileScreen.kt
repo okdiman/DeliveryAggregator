@@ -7,6 +7,7 @@ import com.adeo.kviewmodel.odyssey.StoredViewModel
 import exit.presentation.compose.ExitScreen
 import navigation.NavigationTree
 import presentation.EditProfileParameters
+import presentation.TransportProfileParameters
 import root.presentation.viewmodel.ProfileViewModel
 import root.presentation.viewmodel.model.ProfileAction
 import root.presentation.viewmodel.model.ProfileEvent
@@ -42,7 +43,10 @@ fun ProfileScreen() {
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             ProfileAction.OpenTransport -> {
-//                rootController.push(NavigationTree.Profile.Transport.name)
+                rootController.push(
+                    screen = NavigationTree.Profile.Transport.name,
+                    params = TransportProfileParameters(viewModel.getProfileModel())
+                )
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             ProfileAction.OpenSupport -> {

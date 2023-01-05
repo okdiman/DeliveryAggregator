@@ -9,6 +9,7 @@ import editing.presentation.compose.EditProfileScreen
 import navigation.NavigationTree
 import offer.presentation.compose.OfferScreen
 import presentation.EditProfileParameters
+import presentation.TransportProfileParameters
 import root.presentation.compose.ProfileScreen
 import ru.alexgladkov.odyssey.compose.extensions.customNavigation
 import ru.alexgladkov.odyssey.compose.extensions.screen
@@ -16,6 +17,7 @@ import ru.alexgladkov.odyssey.compose.extensions.tab
 import ru.alexgladkov.odyssey.compose.navigation.RootComposeBuilder
 import tabs.BottomConfiguration
 import tabs.BottomNavigationTab
+import transport.presentation.compose.TransportProfileScreen
 import trinity_monsters.wildberries_delivery_aggregator.navigation.R
 
 fun RootComposeBuilder.mainFlow() {
@@ -51,5 +53,8 @@ fun RootComposeBuilder.mainFlow() {
     }
     screen(NavigationTree.Profile.Edit.name) { parameters ->
         EditProfileScreen(parameters as EditProfileParameters)
+    }
+    screen(NavigationTree.Profile.Transport.name) { parameters ->
+        TransportProfileScreen(parameters as TransportProfileParameters)
     }
 }

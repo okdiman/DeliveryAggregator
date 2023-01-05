@@ -4,6 +4,4 @@ import androidx.compose.runtime.Immutable
 import domain.ProfileModel
 
 @Immutable
-class EditProfileParameters(
-    val profileModel: ProfileModel
-)
+class EditProfileParameters(val profileModel: ProfileModel)

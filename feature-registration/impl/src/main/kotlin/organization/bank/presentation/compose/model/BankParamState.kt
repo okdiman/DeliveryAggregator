@@ -1,36 +1,76 @@
 package organization.bank.presentation.compose.model
 
 import androidx.annotation.StringRes
-import view.model.DefaultParamState
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import view.model.DefaultParamState
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
 sealed class BankParamState(
     override val stateText: String,
-    override val isError: Boolean,
-    @StringRes override val stateError: Int
-) : DefaultParamState(stateText, isError, stateError) {
+    override val isFillingError: Boolean,
+    override val isValidationError: Boolean,
+    @StringRes override val fillingErrorDiscription: Int,
+    @StringRes override val validationErrorDiscription: Int
+) : DefaultParamState(
+    stateText,
+    isFillingError,
+    isValidationError,
+    fillingErrorDiscription,
+    validationErrorDiscription
+) {
     data class PaymentAccState(
-        val text: String = "",
-        val isPaymentAccError: Boolean = false,
-        @StringRes val error: Int = R.string.payment_acc_error
-    ) : BankParamState(text, isPaymentAccError, error)
+        override val stateText: String = "",
+        override val isFillingError: Boolean = false,
+        override val isValidationError: Boolean = false,
+        @StringRes override val fillingErrorDiscription: Int = R.string.payment_acc_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.payment_acc_validate_error
+    ) : BankParamState(
+        stateText,
+        isFillingError,
+        isValidationError,
+        fillingErrorDiscription,
+        validationErrorDiscription
+    )
 
     data class CorrAccState(
-        val text: String = "",
-        val isCorrAccError: Boolean = false,
-        @StringRes val error: Int = R.string.corr_acc_error
-    ) : BankParamState(text, isCorrAccError, error)
+        override val stateText: String = "",
+        override val isFillingError: Boolean = false,
+        override val isValidationError: Boolean = false,
+        @StringRes override val fillingErrorDiscription: Int = R.string.corr_acc_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.corr_acc_validate_error
+    ) : BankParamState(
+        stateText,
+        isFillingError,
+        isValidationError,
+        fillingErrorDiscription,
+        validationErrorDiscription
+    )
 
     data class BikState(
-        val text: String = "",
-        val isBikError: Boolean = false,
-        @StringRes val error: Int = R.string.bik_error
-    ) : BankParamState(text, isBikError, error)
+        override val stateText: String = "",
+        override val isFillingError: Boolean = false,
+        override val isValidationError: Boolean = false,
+        @StringRes override val fillingErrorDiscription: Int = R.string.bik_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.bik_validate_error
+    ) : BankParamState(
+        stateText,
+        isFillingError,
+        isValidationError,
+        fillingErrorDiscription,
+        validationErrorDiscription
+    )
 
     data class BankNameState(
-        val text: String = "",
-        val isBankNameError: Boolean = false,
-        @StringRes val error: Int = R_core.string.few_symbols_error
-    ) : BankParamState(text, isBankNameError, error)
+        override val stateText: String = "",
+        override val isFillingError: Boolean = false,
+        override val isValidationError: Boolean = false,
+        @StringRes override val fillingErrorDiscription: Int = R_core.string.few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.bank_name_validate_error
+    ) : BankParamState(
+        stateText,
+        isFillingError,
+        isValidationError,
+        fillingErrorDiscription,
+        validationErrorDiscription
+    )
 }

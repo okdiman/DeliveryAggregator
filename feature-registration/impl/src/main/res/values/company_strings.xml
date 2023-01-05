@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="company_name_hint">ООО “Подари Жизнь”</string>
+    <string name="company_name_error">Некорректное название организации.</string>
     <string name="inn">ИНН</string>
     <string name="inn_hint">6449013711</string>
     <string name="inn_error">Номер ИНН должен содержать от 10 до 12 символов.</string>
+    <string name="inn_validate_error">Некорректный ИНН.</string>
     <string name="kpp">КПП</string>
     <string name="kpp_hint">644901001</string>
     <string name="kpp_error">Номер КПП должен содержать 9 символов.</string>
+    <string name="kpp_validate_error">Некорректный КПП.</string>
     <string name="ogrn">ОГРН</string>
     <string name="ogrn_hint">1053600591197</string>
     <string name="ogrn_error">Номер ОГРН содержит 13 символов.</string>
+    <string name="ogrn_validate_error">Некорректный ОГРН.</string>
     <string name="legal_address">Юридический адрес</string>
     <string name="actual_address">Фактический адрес</string>
     <string name="address_hint">142100, Московская область…</string>

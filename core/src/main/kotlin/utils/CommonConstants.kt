@@ -7,7 +7,7 @@ object CommonConstants {
     }
 
     object REGEX {
-        const val NAMES = "[А-Яа-яA-Za-z-]+"
+        const val LETTERS = "[А-Яа-яA-Za-z-]+"
         const val LICENCE_PLATE = "[А-Яа-я][0-9]{3}[А-Яа-я]{2}[0-9]+"
     }
 

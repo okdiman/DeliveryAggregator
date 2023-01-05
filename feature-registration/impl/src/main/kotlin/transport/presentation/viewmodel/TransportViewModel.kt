@@ -4,14 +4,18 @@ import BaseViewModel
 import coroutines.AppDispatchers
 import data.AddressConstants.DEBOUNCE
 import data.AddressConstants.MIN_CHARS_FOR_SUGGEST
+import di.modules.DIGITS_AND_LETTERS_VALIDATOR_QUALIFIER
+import di.modules.LETTERS_VALIDATOR_QUALIFIER
+import di.modules.LICENCE_PLATE_VALIDATOR_QUALIFIER
 import domain.model.AddressSuggestRequestModel
 import domain.usecase.GetSuggestByQueryUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import presentation.model.AddressUiModel
+import org.koin.core.qualifier.named
 import presentation.mapper.AddressSuggestUiMapper
+import presentation.model.AddressUiModel
 import presentation.parameters.TransportParameters
 import transport.presentation.viewmodel.model.TransportAction
 import transport.presentation.viewmodel.model.TransportEvent
@@ -21,6 +25,7 @@ import utils.CommonConstants.LIMITS.Transport.CAR_BRAND_MIN_CHARS
 import utils.CommonConstants.LIMITS.Transport.CAR_INFO_MIN_CHARS
 import utils.CommonConstants.LIMITS.Transport.LICENCE_PLATE_MIN_CHARS
 import utils.isTextFieldFilled
+import utils.validators.TextFieldValidator
 
 class TransportViewModel(
     private val parameters: TransportParameters
@@ -30,6 +35,13 @@ class TransportViewModel(
     private val getSuggestByQuery by inject<GetSuggestByQueryUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
     private val addressUiMapper by inject<AddressSuggestUiMapper>()
+    private val lettersValidator by inject<TextFieldValidator>(named(LETTERS_VALIDATOR_QUALIFIER))
+    private val licencePlateValidator by inject<TextFieldValidator>(
+        named(LICENCE_PLATE_VALIDATOR_QUALIFIER)
+    )
+    private val digitsAndLettersValidator by inject<TextFieldValidator>(
+        named(DIGITS_AND_LETTERS_VALIDATOR_QUALIFIER)
+    )
 
     private var suggestJob: Job? = null
 
@@ -56,27 +68,37 @@ class TransportViewModel(
     private fun onSuggestAddressClick(address: AddressUiModel) {
         viewState = viewState.copy(
             departureAddress = viewState.departureAddress.copy(
-                text = address.value,
+                stateText = address.value,
                 address = address,
-                isDepartureAddressError = address.house.isEmpty()
+                isFillingError = address.house.isEmpty()
             ),
             bsAddress = viewState.bsAddress.copy(
-                text = address.subtitle
+                stateText = address.subtitle
             ),
-            isContinueButtonEnabled = isContinueButtonEnabled(departureAddress = address.value)
+            isContinueButtonEnabled = isContinueButtonEnabled(
+                viewState.copy(
+                    departureAddress = viewState.departureAddress.copy(stateText = address.value)
+                )
+            )
         )
     }
 
     private fun onLicencePlateChanged(newLicencePlate: String) {
+        val isValid = licencePlateValidator.isValidate(newLicencePlate)
         viewState = viewState.copy(
             licencePlate = viewState.licencePlate.copy(
-                text = newLicencePlate,
-                isLicencePlateError = !isTextFieldFilled(
-                    newLicencePlate,
-                    LICENCE_PLATE_MIN_CHARS
-                )
+                stateText = newLicencePlate,
+                isFillingError = !isTextFieldFilled(newLicencePlate, LICENCE_PLATE_MIN_CHARS),
+                isValidationError = !isValid
             ),
-            isContinueButtonEnabled = isContinueButtonEnabled(licencePlate = newLicencePlate)
+            isContinueButtonEnabled = isContinueButtonEnabled(
+                viewState.copy(
+                    licencePlate = viewState.licencePlate.copy(
+                        stateText = newLicencePlate,
+                        isValidationError = !isValid
+                    )
+                )
+            )
         )
     }
 
@@ -84,48 +106,72 @@ class TransportViewModel(
         loadSuggests(address)
         viewState = viewState.copy(
             bsAddress = viewState.bsAddress.copy(
-                text = address
+                stateText = address
             )
         )
     }
 
     private fun onCarBrandChanged(newCarBrand: String) {
+        val isValid = lettersValidator.isValidate(newCarBrand)
         viewState = viewState.copy(
             carBrand = viewState.carBrand.copy(
-                text = newCarBrand,
-                isCarBrandError = !isTextFieldFilled(newCarBrand, CAR_BRAND_MIN_CHARS)
+                stateText = newCarBrand,
+                isFillingError = !isTextFieldFilled(newCarBrand, CAR_BRAND_MIN_CHARS),
+                isValidationError = !isValid
             ),
-            isContinueButtonEnabled = isContinueButtonEnabled(carBrand = newCarBrand)
+            isContinueButtonEnabled = isContinueButtonEnabled(
+                viewState.copy(
+                    carBrand = viewState.carBrand.copy(
+                        stateText = newCarBrand,
+                        isValidationError = !isValid
+                    )
+                )
+            )
         )
     }
 
     private fun onCarLoadCapacityChanged(newCarLoadCapacity: String) {
         viewState = viewState.copy(
             carLoadCapacity = viewState.carLoadCapacity.copy(
-                text = newCarLoadCapacity,
-                isCarLoadCapacityError = !isTextFieldFilled(newCarLoadCapacity, CAR_INFO_MIN_CHARS)
+                stateText = newCarLoadCapacity,
+                isFillingError = !isTextFieldFilled(newCarLoadCapacity, CAR_INFO_MIN_CHARS)
             ),
-            isContinueButtonEnabled = isContinueButtonEnabled(carLoadCapacity = newCarLoadCapacity)
+            isContinueButtonEnabled = isContinueButtonEnabled(
+                viewState.copy(
+                    carLoadCapacity = viewState.carLoadCapacity.copy(stateText = newCarLoadCapacity)
+                )
+            )
         )
     }
 
     private fun onCarCategoryChanged(newCarCategory: String) {
+        val isValid = digitsAndLettersValidator.isValidate(newCarCategory)
         viewState = viewState.copy(
             carCategory = viewState.carCategory.copy(
-                text = newCarCategory,
-                isCarCategoryError = !isTextFieldFilled(newCarCategory, CAR_INFO_MIN_CHARS)
+                stateText = newCarCategory,
+                isFillingError = !isTextFieldFilled(newCarCategory, CAR_INFO_MIN_CHARS),
+                isValidationError = !isValid
             ),
-            isContinueButtonEnabled = isContinueButtonEnabled(carCategory = newCarCategory)
+            isContinueButtonEnabled = isContinueButtonEnabled(
+                viewState.copy(
+                    carCategory = viewState.carCategory.copy(
+                        stateText = newCarCategory,
+                        isValidationError = !isValid
+                    )
+                )
+            )
         )
     }
 
     private fun onCarCapacityChanged(newCarCapacity: String) {
         viewState = viewState.copy(
             carCapacity = viewState.carCapacity.copy(
-                text = newCarCapacity,
-                isCarCapacityError = !isTextFieldFilled(newCarCapacity, CAR_INFO_MIN_CHARS)
+                stateText = newCarCapacity,
+                isFillingError = !isTextFieldFilled(newCarCapacity, CAR_INFO_MIN_CHARS)
             ),
-            isContinueButtonEnabled = isContinueButtonEnabled(carCapacity = newCarCapacity)
+            isContinueButtonEnabled = isContinueButtonEnabled(
+                viewState.copy(carCapacity = viewState.carCapacity.copy(stateText = newCarCapacity))
+            )
         )
     }
 
@@ -166,19 +212,14 @@ class TransportViewModel(
         }
     }
 
-    private fun isContinueButtonEnabled(
-        licencePlate: String = viewState.licencePlate.text,
-        departureAddress: String = viewState.departureAddress.text,
-        carBrand: String = viewState.carBrand.text,
-        carCategory: String = viewState.carCategory.text,
-        carLoadCapacity: String = viewState.carLoadCapacity.text,
-        carCapacity: String = viewState.carCapacity.text
-    ): Boolean {
-        return isTextFieldFilled(licencePlate, LICENCE_PLATE_MIN_CHARS) &&
-                isTextFieldFilled(departureAddress, MIN_ADDRESS_CHARS) &&
-                isTextFieldFilled(carBrand, CAR_BRAND_MIN_CHARS) &&
-                isTextFieldFilled(carCategory, CAR_INFO_MIN_CHARS) &&
-                isTextFieldFilled(carLoadCapacity, CAR_INFO_MIN_CHARS) &&
-                isTextFieldFilled(carCapacity, CAR_INFO_MIN_CHARS)
+    private fun isContinueButtonEnabled(state: TransportState): Boolean {
+        return isTextFieldFilled(state.licencePlate.stateText, LICENCE_PLATE_MIN_CHARS) &&
+                isTextFieldFilled(state.departureAddress.stateText, MIN_ADDRESS_CHARS) &&
+                isTextFieldFilled(state.carBrand.stateText, CAR_BRAND_MIN_CHARS) &&
+                isTextFieldFilled(state.carCategory.stateText, CAR_INFO_MIN_CHARS) &&
+                isTextFieldFilled(state.carLoadCapacity.stateText, CAR_INFO_MIN_CHARS) &&
+                isTextFieldFilled(state.carCapacity.stateText, CAR_INFO_MIN_CHARS) &&
+                !state.licencePlate.isValidationError && !state.carCategory.isValidationError &&
+                !state.carBrand.isValidationError
     }
 }

@@ -2,17 +2,20 @@ package editing.presentation.viewmodel
 
 import BaseViewModel
 import coroutines.AppDispatchers
+import di.modules.EMAIL_VALIDATOR_QUALIFIER
+import di.modules.LETTERS_VALIDATOR_QUALIFIER
 import domain.GetMaskedPhoneUseCase
-import editing.domain.UpdateProfileUseCase
 import editing.presentation.viewmodel.model.EditProfileAction
 import editing.presentation.viewmodel.model.EditProfileEvent
 import editing.presentation.viewmodel.model.EditProfileState
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import org.koin.core.qualifier.named
 import presentation.EditProfileParameters
+import root.domain.UpdateProfileUseCase
 import utils.CommonConstants.LIMITS.Common.MIN_NAME_CHARS
-import utils.isEmailCorrect
 import utils.isTextFieldFilled
+import utils.validators.TextFieldValidator
 
 class EditProfileViewModel(
     private val parameters: EditProfileParameters
@@ -22,15 +25,17 @@ class EditProfileViewModel(
     private val appDispatchers by inject<AppDispatchers>()
     private val updateProfile by inject<UpdateProfileUseCase>()
     private val getMaskedPhone by inject<GetMaskedPhoneUseCase>()
+    private val emailValidator by inject<TextFieldValidator>(named(EMAIL_VALIDATOR_QUALIFIER))
+    private val lettersValidator by inject<TextFieldValidator>(named(LETTERS_VALIDATOR_QUALIFIER))
 
     init {
         viewState = viewState.copy(
-            name = viewState.name.copy(text = parameters.profileModel.name),
-            secondName = viewState.secondName.copy(text = parameters.profileModel.secondName),
-            surname = viewState.surname.copy(text = parameters.profileModel.surname),
-            email = viewState.email.copy(text = parameters.profileModel.email),
-            phone = viewState.phone.copy(text = getMaskedPhone(parameters.profileModel.phone)),
-            organizationName = viewState.organizationName.copy(text = parameters.profileModel.organizationName)
+            name = viewState.name.copy(stateText = parameters.profileModel.name),
+            secondName = viewState.secondName.copy(stateText = parameters.profileModel.secondName),
+            surname = viewState.surname.copy(stateText = parameters.profileModel.surname),
+            email = viewState.email.copy(stateText = parameters.profileModel.email),
+            phone = viewState.phone.copy(stateText = getMaskedPhone(parameters.profileModel.phone)),
+            organizationName = viewState.organizationName.copy(stateText = parameters.profileModel.organizationName)
         )
     }
 
@@ -48,34 +53,58 @@ class EditProfileViewModel(
     }
 
     private fun onNameChanged(newName: String) {
+        val isValid = lettersValidator.isValidate(newName)
         viewState = viewState.copy(
             name = viewState.name.copy(
-                text = newName,
-                isNameError = !isTextFieldFilled(newName, MIN_NAME_CHARS)
+                stateText = newName,
+                isFillingError = !isTextFieldFilled(newName, MIN_NAME_CHARS),
+                isValidationError = !isValid
             ),
-            isSaveButtonVisible = isSaveButtonVisible(newName = newName, isUpdated = false)
+            isSaveButtonVisible = isSaveButtonVisible(
+                viewState.copy(
+                    name = viewState.name.copy(
+                        stateText = newName,
+                        isValidationError = !isValid
+                    )
+                )
+            )
         )
     }
 
     private fun onSurnameChanged(newSurname: String) {
+        val isValid = lettersValidator.isValidate(newSurname)
         viewState = viewState.copy(
             surname = viewState.surname.copy(
-                text = newSurname,
-                isSurnameError = !isTextFieldFilled(newSurname, MIN_NAME_CHARS)
+                stateText = newSurname,
+                isFillingError = !isTextFieldFilled(newSurname, MIN_NAME_CHARS),
+                isValidationError = !isValid
             ),
-            isSaveButtonVisible = isSaveButtonVisible(newSurname = newSurname, isUpdated = false)
+            isSaveButtonVisible = isSaveButtonVisible(
+                viewState.copy(
+                    surname = viewState.surname.copy(
+                        stateText = newSurname,
+                        isValidationError = !isValid
+                    )
+                )
+            )
         )
     }
 
     private fun onSecondNameChanged(newSecondName: String) {
+        val isValid = lettersValidator.isValidate(newSecondName)
         viewState = viewState.copy(
             secondName = viewState.secondName.copy(
-                text = newSecondName,
-                isSecondNameError = !isTextFieldFilled(newSecondName, MIN_NAME_CHARS)
+                stateText = newSecondName,
+                isFillingError = !isTextFieldFilled(newSecondName, MIN_NAME_CHARS),
+                isValidationError = !isValid
             ),
             isSaveButtonVisible = isSaveButtonVisible(
-                newSecondName = newSecondName,
-                isUpdated = false
+                viewState.copy(
+                    secondName = viewState.secondName.copy(
+                        stateText = newSecondName,
+                        isValidationError = !isValid
+                    )
+                )
             )
         )
     }
@@ -83,10 +112,12 @@ class EditProfileViewModel(
     private fun onEmailChanged(newEmail: String) {
         viewState = viewState.copy(
             email = viewState.email.copy(
-                text = newEmail,
-                isEmailError = !isEmailCorrect(newEmail)
+                stateText = newEmail,
+                isFillingError = !emailValidator.isValidate(newEmail)
             ),
-            isSaveButtonVisible = isSaveButtonVisible(newEmail = newEmail, isUpdated = false)
+            isSaveButtonVisible = isSaveButtonVisible(
+                viewState.copy(email = viewState.email.copy(stateText = newEmail))
+            )
         )
     }
 
@@ -98,13 +129,15 @@ class EditProfileViewModel(
         launchJob(appDispatchers.network) {
             updateProfile(
                 parameters.profileModel.copy(
-                    name = viewState.name.text,
-                    secondName = viewState.secondName.text,
-                    surname = viewState.surname.text,
-                    email = viewState.email.text
+                    name = viewState.name.stateText,
+                    secondName = viewState.secondName.stateText,
+                    surname = viewState.surname.stateText,
+                    email = viewState.email.stateText
                 )
             )
-            viewState = viewState.copy(isSaveButtonVisible = isSaveButtonVisible(isUpdated = true))
+            viewState = viewState.copy(
+                isSaveButtonVisible = isSaveButtonVisible(state = viewState, isUpdated = true)
+            )
             viewAction = EditProfileAction.OpenProfileScreenWithUpdate
         }
     }
@@ -113,18 +146,17 @@ class EditProfileViewModel(
         viewAction = EditProfileAction.OpenDeleteAccScreen
     }
 
-    private fun isSaveButtonVisible(
-        newName: String = viewState.name.text,
-        newSurname: String = viewState.surname.text,
-        newSecondName: String = viewState.secondName.text,
-        newEmail: String = viewState.email.text,
-        isUpdated: Boolean = false
-    ): Boolean {
-        return !isUpdated && isTextFieldFilled(newName, MIN_NAME_CHARS) &&
-                isTextFieldFilled(newName, MIN_NAME_CHARS) &&
-                isTextFieldFilled(newName, MIN_NAME_CHARS) && isEmailCorrect(newEmail) &&
+    private fun isSaveButtonVisible(state: EditProfileState, isUpdated: Boolean = false) =
+        !isUpdated && isTextFieldFilled(state.name.stateText, MIN_NAME_CHARS) &&
+                isTextFieldFilled(state.surname.stateText, MIN_NAME_CHARS) &&
+                isTextFieldFilled(state.secondName.stateText, MIN_NAME_CHARS) &&
+                emailValidator.isValidate(state.email.stateText) &&
+                !state.name.isValidationError && !state.surname.isValidationError &&
+                !state.secondName.isValidationError &&
                 parameters.profileModel != parameters.profileModel.copy(
-            email = newEmail, name = newName, surname = newSurname, secondName = newSecondName
+            email = state.email.stateText,
+            name = state.name.stateText,
+            surname = state.surname.stateText,
+            secondName = state.secondName.stateText
         )
-    }
 }

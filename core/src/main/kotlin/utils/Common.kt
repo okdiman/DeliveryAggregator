@@ -4,13 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
-import android.util.Patterns
 import utils.CommonConstants.System.APP_PACKAGE
 import utils.CommonConstants.System.APP_UID
 
 fun isTextFieldFilled(newText: String, minChar: Int) = newText.length >= minChar
-
-fun isEmailCorrect(email: String) = Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
 fun openNotificationSettings(context: Context) {
     val intent = Intent().apply {

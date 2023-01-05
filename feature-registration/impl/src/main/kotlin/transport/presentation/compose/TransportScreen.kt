@@ -76,7 +76,7 @@ private fun getUserParameters(parameters: TransportParameters, state: TransportS
         company = parameters.company,
         bank = parameters.bank,
         transport = RegistrationTransportModel(
-            licencePlate = state.licencePlate.text,
+            licencePlate = state.licencePlate.stateText,
             departureAddress = DepartureAddressModel(
                 geoLon = state.departureAddress.address?.geoLon.orEmpty(),
                 geoLat = state.departureAddress.address?.geoLat.orEmpty(),
@@ -84,9 +84,9 @@ private fun getUserParameters(parameters: TransportParameters, state: TransportS
                 street = state.departureAddress.address?.street.orEmpty(),
                 house = state.departureAddress.address?.house.orEmpty()
             ),
-            carBrand = state.carBrand.text,
-            carCategory = state.carCategory.text,
-            carLoadCapacity = state.carLoadCapacity.text,
-            carCapacity = state.carCapacity.text
+            carBrand = state.carBrand.stateText,
+            carCategory = state.carCategory.stateText,
+            carLoadCapacity = state.carLoadCapacity.stateText,
+            carCapacity = state.carCapacity.stateText
         )
     )

@@ -2,49 +2,104 @@ package transport.presentation.compose.model
 
 import androidx.annotation.StringRes
 import presentation.model.AddressUiModel
-import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
 import view.model.DefaultParamState
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
 sealed class TransportParamState(
     override val stateText: String,
-    override val isError: Boolean,
-    @StringRes override val stateError: Int
-) : DefaultParamState(stateText, isError, stateError) {
+    override val isFillingError: Boolean,
+    override val isValidationError: Boolean,
+    @StringRes override val fillingErrorDiscription: Int,
+    @StringRes override val validationErrorDiscription: Int
+) : DefaultParamState(
+    stateText,
+    isFillingError,
+    isValidationError,
+    fillingErrorDiscription,
+    validationErrorDiscription
+) {
     data class LicencePlateState(
-        val text: String = "",
-        val isLicencePlateError: Boolean = false,
-        @StringRes val error: Int = R.string.license_plate_error
-    ) : TransportParamState(text, isLicencePlateError, error)
+        override val stateText: String = "",
+        override val isFillingError: Boolean = false,
+        override val isValidationError: Boolean = false,
+        @StringRes override val fillingErrorDiscription: Int = R_core.string.license_plate_error,
+        @StringRes override val validationErrorDiscription: Int = R_core.string.license_plate_symbols_error
+    ) : TransportParamState(
+        stateText,
+        isFillingError,
+        isValidationError,
+        fillingErrorDiscription,
+        validationErrorDiscription
+    )
 
     data class DepartureAddressState(
-        val text: String = "",
-        val address: AddressUiModel? = null,
-        val isDepartureAddressError: Boolean = false,
-        @StringRes val error: Int = R_core.string.few_symbols_error
-    ) : TransportParamState(text, isDepartureAddressError, error)
+        override val stateText: String = "",
+        override val isFillingError: Boolean = false,
+        override val isValidationError: Boolean = false,
+        @StringRes override val fillingErrorDiscription: Int = R_core.string.few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R_core.string.choose_address_from_suggest,
+        val address: AddressUiModel? = null
+    ) : TransportParamState(
+        stateText,
+        isFillingError,
+        isValidationError,
+        fillingErrorDiscription,
+        validationErrorDiscription
+    )
 
     data class CarBrandState(
-        val text: String = "",
-        val isCarBrandError: Boolean = false,
-        @StringRes val error: Int = R_core.string.few_symbols_error
-    ) : TransportParamState(text, isCarBrandError, error)
+        override val stateText: String = "",
+        override val isFillingError: Boolean = false,
+        override val isValidationError: Boolean = false,
+        @StringRes override val fillingErrorDiscription: Int = R_core.string.few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R_core.string.car_brand_error
+    ) : TransportParamState(
+        stateText,
+        isFillingError,
+        isValidationError,
+        fillingErrorDiscription,
+        validationErrorDiscription
+    )
 
     data class CarCategoryState(
-        val text: String = "",
-        val isCarCategoryError: Boolean = false,
-        @StringRes val error: Int = R_core.string.few_symbols_error
-    ) : TransportParamState(text, isCarCategoryError, error)
+        override val stateText: String = "",
+        override val isFillingError: Boolean = false,
+        override val isValidationError: Boolean = false,
+        @StringRes override val fillingErrorDiscription: Int = R_core.string.few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R_core.string.car_category_error
+    ) : TransportParamState(
+        stateText,
+        isFillingError,
+        isValidationError,
+        fillingErrorDiscription,
+        validationErrorDiscription
+    )
 
     data class CarLoadCapacityState(
-        val text: String = "",
-        val isCarLoadCapacityError: Boolean = false,
-        @StringRes val error: Int = R_core.string.few_symbols_error
-    ) : TransportParamState(text, isCarLoadCapacityError, error)
+        override val stateText: String = "",
+        override val isFillingError: Boolean = false,
+        override val isValidationError: Boolean = false,
+        @StringRes override val fillingErrorDiscription: Int = R_core.string.few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R_core.string.empty_error
+    ) : TransportParamState(
+        stateText,
+        isFillingError,
+        isValidationError,
+        fillingErrorDiscription,
+        validationErrorDiscription
+    )
 
     data class CarCapacityState(
-        val text: String = "",
-        val isCarCapacityError: Boolean = false,
-        @StringRes val error: Int = R_core.string.few_symbols_error
-    ) : TransportParamState(text, isCarCapacityError, error)
+        override val stateText: String = "",
+        override val isFillingError: Boolean = false,
+        override val isValidationError: Boolean = false,
+        @StringRes override val fillingErrorDiscription: Int = R_core.string.few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R_core.string.empty_error
+    ) : TransportParamState(
+        stateText,
+        isFillingError,
+        isValidationError,
+        fillingErrorDiscription,
+        validationErrorDiscription
+    )
 }

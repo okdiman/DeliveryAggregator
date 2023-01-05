@@ -37,10 +37,10 @@ fun CompanyScreen(parameters: CompanyParameters) {
                     params = BankParameters(
                         user = parameters.user,
                         company = RegistrationCompanyModel(
-                            companyName = state.value.companyName.text,
-                            inn = state.value.inn.text,
-                            kpp = state.value.kpp.text,
-                            ogrn = state.value.ogrn.text,
+                            companyName = state.value.companyName.stateText,
+                            inn = state.value.inn.stateText,
+                            kpp = state.value.kpp.stateText,
+                            ogrn = state.value.ogrn.stateText,
                             legalAddress = state.value.legalAddress.address?.value,
                             actualAddress = state.value.actualAddress.address?.value
                         )

@@ -2,26 +2,29 @@ package user.presentation.viewmodel
 
 import BaseViewModel
 import coroutines.AppDispatchers
+import di.modules.EMAIL_VALIDATOR_QUALIFIER
+import di.modules.LETTERS_VALIDATOR_QUALIFIER
 import domain.usecase.SignUpUseCase
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import org.koin.core.qualifier.named
 import presentation.parameters.UserParameters
 import user.presentation.mapper.SignUpModelMapper
 import user.presentation.viewmodel.model.UserAction
 import user.presentation.viewmodel.model.UserEvent
 import user.presentation.viewmodel.model.UserState
 import utils.CommonConstants.LIMITS.Common.MIN_NAME_CHARS
-import utils.isEmailCorrect
 import utils.isTextFieldFilled
+import utils.validators.TextFieldValidator
 
 class UserViewModel(
     private val parameters: UserParameters
-) : BaseViewModel<UserState, UserAction, UserEvent>(
-    initialState = UserState()
-), KoinComponent {
+) : BaseViewModel<UserState, UserAction, UserEvent>(initialState = UserState()), KoinComponent {
     private val appDispatchers by inject<AppDispatchers>()
     private val signUp by inject<SignUpUseCase>()
     private val mapper by inject<SignUpModelMapper>()
+    private val lettersValidator by inject<TextFieldValidator>(named(LETTERS_VALIDATOR_QUALIFIER))
+    private val emailValidator by inject<TextFieldValidator>(named(EMAIL_VALIDATOR_QUALIFIER))
 
     override fun obtainEvent(viewEvent: UserEvent) {
         when (viewEvent) {
@@ -36,42 +39,71 @@ class UserViewModel(
     }
 
     private fun onNameChanged(newName: String) {
+        val isValid = lettersValidator.isValidate(newName)
         viewState = viewState.copy(
             name = viewState.name.copy(
-                text = newName,
-                isNameError = !isTextFieldFilled(newName, MIN_NAME_CHARS)
+                stateText = newName,
+                isFillingError = !isTextFieldFilled(newName, MIN_NAME_CHARS),
+                isValidationError = !isValid
             ),
-            isCreateAccButtonEnabled = isCreateButtonEnabled(name = newName)
+            isCreateAccButtonEnabled = isCreateButtonEnabled(
+                viewState.copy(
+                    name = viewState.name.copy(
+                        stateText = newName,
+                        isValidationError = !isValid
+                    )
+                )
+            )
         )
     }
 
     private fun onSurnameChanged(newSurname: String) {
+        val isValid = lettersValidator.isValidate(newSurname)
         viewState = viewState.copy(
             surname = viewState.surname.copy(
-                text = newSurname,
-                isSurnameError = !isTextFieldFilled(newSurname, MIN_NAME_CHARS)
+                stateText = newSurname,
+                isFillingError = !isTextFieldFilled(newSurname, MIN_NAME_CHARS),
+                isValidationError = !isValid
             ),
-            isCreateAccButtonEnabled = isCreateButtonEnabled(surname = newSurname)
+            isCreateAccButtonEnabled = isCreateButtonEnabled(
+                viewState.copy(
+                    surname = viewState.surname.copy(
+                        stateText = newSurname,
+                        isValidationError = !isValid
+                    )
+                )
+            )
         )
     }
 
     private fun onSecondNameChanged(newSecondName: String) {
+        val isValid = lettersValidator.isValidate(newSecondName)
         viewState = viewState.copy(
             secondName = viewState.secondName.copy(
-                text = newSecondName,
-                isSecondNameError = !isTextFieldFilled(newSecondName, MIN_NAME_CHARS)
+                stateText = newSecondName,
+                isFillingError = !isTextFieldFilled(newSecondName, MIN_NAME_CHARS),
+                isValidationError = !isValid
             ),
-            isCreateAccButtonEnabled = isCreateButtonEnabled(name = newSecondName)
+            isCreateAccButtonEnabled = isCreateButtonEnabled(
+                viewState.copy(
+                    secondName = viewState.secondName.copy(
+                        stateText = newSecondName,
+                        isValidationError = !isValid
+                    )
+                )
+            )
         )
     }
 
     private fun onEmailChanged(newEmail: String) {
         viewState = viewState.copy(
             email = viewState.email.copy(
-                text = newEmail,
-                isEmailError = !isEmailCorrect(newEmail)
+                stateText = newEmail,
+                isFillingError = !emailValidator.isValidate(newEmail)
             ),
-            isCreateAccButtonEnabled = isCreateButtonEnabled(name = newEmail)
+            isCreateAccButtonEnabled = isCreateButtonEnabled(
+                viewState.copy(email = viewState.email.copy(stateText = newEmail))
+            )
         )
     }
 
@@ -86,11 +118,10 @@ class UserViewModel(
         }
     }
 
-    private fun isCreateButtonEnabled(
-        name: String = viewState.name.text,
-        surname: String = viewState.surname.text,
-        secondName: String = viewState.secondName.text,
-        email: String = viewState.email.text
-    ) = isTextFieldFilled(name, MIN_NAME_CHARS) && isTextFieldFilled(surname, MIN_NAME_CHARS) &&
-            isTextFieldFilled(secondName, MIN_NAME_CHARS) && isEmailCorrect(email)
+    private fun isCreateButtonEnabled(state: UserState) =
+        isTextFieldFilled(state.name.stateText, MIN_NAME_CHARS) &&
+                isTextFieldFilled(state.surname.stateText, MIN_NAME_CHARS) &&
+                isTextFieldFilled(state.secondName.stateText, MIN_NAME_CHARS) &&
+                !state.name.isValidationError && !state.surname.isValidationError &&
+                !state.secondName.isValidationError && emailValidator.isValidate(state.email.stateText)
 }

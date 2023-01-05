@@ -29,7 +29,6 @@ import presentation.AddressState
 import presentation.model.AddressUiModel
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import theme.Theme
-import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
 import view.ProgressIndicator
 import view.StandardTextField
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
@@ -84,7 +83,7 @@ fun RegistrationAddressBSScreen(
                         contentDescription = null
                     )
                 },
-                hint = stringResource(id = R.string.departure_address_hint),
+                hint = stringResource(id = R_core.string.departure_address_hint),
                 onValueChanged = { onTextFieldChanged(it) }
             )
             Spacer(modifier = Modifier.height(24.dp))

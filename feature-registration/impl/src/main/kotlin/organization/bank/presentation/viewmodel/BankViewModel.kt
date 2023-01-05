@@ -1,6 +1,10 @@
 package organization.bank.presentation.viewmodel
 
 import BaseViewModel
+import di.modules.NAMING_VALIDATOR_QUALIFIER
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import org.koin.core.qualifier.named
 import organization.bank.presentation.viewmodel.model.BankAction
 import organization.bank.presentation.viewmodel.model.BankEvent
 import organization.bank.presentation.viewmodel.model.BankState
@@ -8,10 +12,12 @@ import root.RegistrationConstants.Limits.Bank.BANK_ACC_CHARS
 import root.RegistrationConstants.Limits.Bank.BIK_CHARS
 import utils.CommonConstants.LIMITS.Common.MIN_NAME_CHARS
 import utils.isTextFieldFilled
+import utils.validators.TextFieldValidator
 
 class BankViewModel : BaseViewModel<BankState, BankAction, BankEvent>(
     initialState = BankState()
-) {
+), KoinComponent {
+    private val namingValidator by inject<TextFieldValidator>(named(NAMING_VALIDATOR_QUALIFIER))
 
     override fun obtainEvent(viewEvent: BankEvent) {
         when (viewEvent) {
@@ -36,49 +42,62 @@ class BankViewModel : BaseViewModel<BankState, BankAction, BankEvent>(
     private fun onPaymentAccChanged(newPayment: String) {
         viewState = viewState.copy(
             paymentAcc = viewState.paymentAcc.copy(
-                text = newPayment,
-                isPaymentAccError = !isTextFieldFilled(newPayment, BANK_ACC_CHARS)
+                stateText = newPayment,
+                isFillingError = !isTextFieldFilled(newPayment, BANK_ACC_CHARS)
             ),
-            isContinueButtonEnabled = isContinueButtonEnabled(paymentAcc = newPayment)
+            isContinueButtonEnabled = isContinueButtonEnabled(
+                viewState.copy(paymentAcc = viewState.paymentAcc.copy(stateText = newPayment))
+            )
         )
     }
 
     private fun onCorrAccChanged(newCorr: String) {
         viewState = viewState.copy(
             corrAcc = viewState.corrAcc.copy(
-                text = newCorr,
-                isCorrAccError = !isTextFieldFilled(newCorr, BANK_ACC_CHARS)
+                stateText = newCorr,
+                isFillingError = !isTextFieldFilled(newCorr, BANK_ACC_CHARS)
             ),
-            isContinueButtonEnabled = isContinueButtonEnabled(corrAcc = newCorr)
+            isContinueButtonEnabled = isContinueButtonEnabled(
+                viewState.copy(corrAcc = viewState.corrAcc.copy(stateText = newCorr))
+            )
         )
     }
 
     private fun onBikChanged(newBik: String) {
         viewState = viewState.copy(
             bik = viewState.bik.copy(
-                text = newBik,
-                isBikError = !isTextFieldFilled(newBik, BIK_CHARS)
+                stateText = newBik,
+                isFillingError = !isTextFieldFilled(newBik, BIK_CHARS)
             ),
-            isContinueButtonEnabled = isContinueButtonEnabled(bik = newBik)
+            isContinueButtonEnabled = isContinueButtonEnabled(
+                viewState.copy(bik = viewState.bik.copy(stateText = newBik))
+            )
         )
     }
 
     private fun onBankNameChanged(newName: String) {
+        val isValid = namingValidator.isValidate(newName)
         viewState = viewState.copy(
             bankName = viewState.bankName.copy(
-                text = newName,
-                isBankNameError = !isTextFieldFilled(newName, MIN_NAME_CHARS)
+                stateText = newName,
+                isFillingError = !isTextFieldFilled(newName, MIN_NAME_CHARS),
+                isValidationError = !isValid
             ),
-            isContinueButtonEnabled = isContinueButtonEnabled(name = newName)
+            isContinueButtonEnabled = isContinueButtonEnabled(
+                viewState.copy(
+                    bankName = viewState.bankName.copy(
+                        stateText = newName,
+                        isValidationError = !isValid
+                    )
+                )
+            )
         )
     }
 
-    private fun isContinueButtonEnabled(
-        paymentAcc: String = viewState.paymentAcc.text,
-        corrAcc: String = viewState.corrAcc.text,
-        bik: String = viewState.bik.text,
-        name: String = viewState.bankName.text,
-    ) = isTextFieldFilled(paymentAcc, BANK_ACC_CHARS) &&
-            isTextFieldFilled(corrAcc, BANK_ACC_CHARS) && isTextFieldFilled(bik, BIK_CHARS) &&
-            isTextFieldFilled(name, MIN_NAME_CHARS)
+    private fun isContinueButtonEnabled(state: BankState) =
+        isTextFieldFilled(state.paymentAcc.stateText, BANK_ACC_CHARS) &&
+                isTextFieldFilled(state.corrAcc.stateText, BANK_ACC_CHARS) &&
+                isTextFieldFilled(state.bik.stateText, BIK_CHARS) &&
+                isTextFieldFilled(state.bankName.stateText, MIN_NAME_CHARS) &&
+                !state.bankName.isValidationError
 }

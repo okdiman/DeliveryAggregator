@@ -6,30 +6,70 @@ import view.model.DefaultParamState
 
 sealed class UserParamState(
     override val stateText: String,
-    override val isError: Boolean,
-    @StringRes override val stateError: Int
-) : DefaultParamState(stateText, isError, stateError) {
+    override val isFillingError: Boolean,
+    override val isValidationError: Boolean,
+    @StringRes override val fillingErrorDiscription: Int,
+    @StringRes override val validationErrorDiscription: Int
+) : DefaultParamState(
+    stateText,
+    isFillingError,
+    isValidationError,
+    fillingErrorDiscription,
+    validationErrorDiscription
+) {
     data class NameState(
-        val text: String = "",
-        val isNameError: Boolean = false,
-        @StringRes val error: Int = R.string.few_symbols_error
-    ) : UserParamState(text, isNameError, error)
+        override val stateText: String = "",
+        override val isFillingError: Boolean = false,
+        override val isValidationError: Boolean = false,
+        @StringRes override val fillingErrorDiscription: Int = R.string.few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.user_name_error
+    ) : UserParamState(
+        stateText,
+        isFillingError,
+        isValidationError,
+        fillingErrorDiscription,
+        validationErrorDiscription
+    )
 
     data class SurnameState(
-        val text: String = "",
-        val isSurnameError: Boolean = false,
-        @StringRes val error: Int = R.string.few_symbols_error
-    ) : UserParamState(text, isSurnameError, error)
+        override val stateText: String = "",
+        override val isFillingError: Boolean = false,
+        override val isValidationError: Boolean = false,
+        @StringRes override val fillingErrorDiscription: Int = R.string.few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.user_surname_error
+    ) : UserParamState(
+        stateText,
+        isFillingError,
+        isValidationError,
+        fillingErrorDiscription,
+        validationErrorDiscription
+    )
 
     data class SecondNameState(
-        val text: String = "",
-        val isSecondNameError: Boolean = false,
-        @StringRes val error: Int = R.string.few_symbols_error
-    ) : UserParamState(text, isSecondNameError, error)
+        override val stateText: String = "",
+        override val isFillingError: Boolean = false,
+        override val isValidationError: Boolean = false,
+        @StringRes override val fillingErrorDiscription: Int = R.string.few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.user_second_name_error
+    ) : UserParamState(
+        stateText,
+        isFillingError,
+        isValidationError,
+        fillingErrorDiscription,
+        validationErrorDiscription
+    )
 
     data class EmailState(
-        val text: String = "",
-        val isEmailError: Boolean = false,
-        @StringRes val error: Int = R.string.user_email_error
-    ) : UserParamState(text, isEmailError, error)
+        override val stateText: String = "",
+        override val isFillingError: Boolean = false,
+        override val isValidationError: Boolean = false,
+        @StringRes override val fillingErrorDiscription: Int = R.string.few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.user_email_error
+    ) : UserParamState(
+        stateText,
+        isFillingError,
+        isValidationError,
+        fillingErrorDiscription,
+        validationErrorDiscription
+    )
 }

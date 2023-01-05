@@ -19,7 +19,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import root.RegistrationConstants
-import view.StandardTextField
 import root.presentation.TitleRegistrationView
 import transport.presentation.viewmodel.model.TransportEvent
 import transport.presentation.viewmodel.model.TransportState
@@ -28,6 +27,7 @@ import utils.CommonConstants.LIMITS.Transport.CAR_BRAND_MAX_CHARS
 import utils.CommonConstants.LIMITS.Transport.CAR_CAPACITY_MAX_CHARS
 import utils.CommonConstants.LIMITS.Transport.CAR_CATEGORY_MAX_CHARS
 import utils.CommonConstants.LIMITS.Transport.LICENCE_PLATE_MAX_CHARS
+import view.StandardTextField
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
 @Composable
@@ -42,7 +42,7 @@ fun TransportView(state: TransportState, eventHandler: (TransportEvent) -> Unit)
             onButtonClick = { eventHandler(TransportEvent.OnBackButtonClick) },
             step = RegistrationConstants.Step.THREE,
             imageRes = R.drawable.transport_info_ic,
-            titleRes = R.string.transport_title
+            titleRes = R_core.string.transport_title
         )
         TransportTextFieldsBlock(state = state, eventHandler = eventHandler)
     }
@@ -54,16 +54,16 @@ fun TransportView(state: TransportState, eventHandler: (TransportEvent) -> Unit)
 @Composable
 fun TransportTextFieldsBlock(state: TransportState, eventHandler: (TransportEvent) -> Unit) {
     StandardTextField(
-        title = stringResource(R.string.license_plate),
+        title = stringResource(R_core.string.license_plate),
         state = state.licencePlate,
-        hint = stringResource(R.string.license_plate_hint),
+        hint = stringResource(R_core.string.license_plate_hint),
         maxChar = LICENCE_PLATE_MAX_CHARS
     ) { eventHandler(TransportEvent.OnLicencePlateChanged(it)) }
     StandardTextField(
         modifier = Modifier.clickable { eventHandler(TransportEvent.OnDepartAddressClick) },
-        title = stringResource(R.string.departure_address),
+        title = stringResource(R_core.string.departure_address),
         state = state.departureAddress,
-        hint = stringResource(R.string.departure_address_hint),
+        hint = stringResource(R_core.string.departure_address_hint),
         enabled = false,
         trailingIcon = {
             Icon(
@@ -73,29 +73,29 @@ fun TransportTextFieldsBlock(state: TransportState, eventHandler: (TransportEven
         }
     )
     StandardTextField(
-        title = stringResource(R.string.car_brand),
+        title = stringResource(R_core.string.car_brand),
         state = state.carBrand,
-        hint = stringResource(R.string.car_brand_hint),
+        hint = stringResource(R_core.string.car_brand_hint),
         maxChar = CAR_BRAND_MAX_CHARS
     ) { eventHandler(TransportEvent.OnCarBrandChanged(it)) }
     StandardTextField(
-        title = stringResource(R.string.car_category),
+        title = stringResource(R_core.string.car_category),
         state = state.carCategory,
-        hint = stringResource(R.string.car_category_hint),
+        hint = stringResource(R_core.string.car_category_hint),
         maxChar = CAR_CATEGORY_MAX_CHARS
     ) { eventHandler(TransportEvent.OnCarCategoryChanged(it)) }
     StandardTextField(
-        title = stringResource(R.string.car_load_capacity),
+        title = stringResource(R_core.string.car_load_capacity),
         state = state.carLoadCapacity,
-        hint = stringResource(R.string.car_load_capacity_hint),
+        hint = stringResource(R_core.string.car_load_capacity_hint),
         isDigits = true,
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = CAR_CAPACITY_MAX_CHARS
     ) { eventHandler(TransportEvent.OnCarLoadCapacityChanged(it)) }
     StandardTextField(
-        title = stringResource(R.string.car_capacity),
+        title = stringResource(R_core.string.car_capacity),
         state = state.carCapacity,
-        hint = stringResource(R.string.car_capacity_hint),
+        hint = stringResource(R_core.string.car_capacity_hint),
         isDigits = true,
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = CAR_CAPACITY_MAX_CHARS
