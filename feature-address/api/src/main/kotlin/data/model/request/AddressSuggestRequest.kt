@@ -4,7 +4,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AddressSuggestRequest(
-    val query: String,
-    val code: Int,
-    val phone: String
+    val query: String
 )

@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import theme.Theme
 import view.model.DefaultParamState
 
-@Suppress("LongParameterList")
+@Suppress("LongParameterList", "LongMethod")
 @Composable
 fun TitledTextField(
     modifier: Modifier = Modifier,

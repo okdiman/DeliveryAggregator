@@ -21,11 +21,11 @@ class ProfileModelMapper {
         legalAddress = dto.contractor.legalAddress,
         checkingAccount = dto.contractor.checkingAccount,
         correspondentAccount = dto.contractor.correspondentAccount,
-        carPlate = dto.contractor.carPlate,
+        licencePlate = dto.contractor.carPlate,
         carModel = dto.contractor.carModel,
         carCategory = dto.contractor.carCategory,
-        carPalletCapacity = dto.contractor.carPalletCapacity,
-        carLoadCapacity = dto.contractor.carLoadCapacity
+        carLoadCapacity = dto.contractor.carLoadCapacity,
+        carCapacity = dto.contractor.carCapacity
     )
 
     fun mapFromDomainToData(model: ProfileModel) = ProfileRequest(
@@ -43,10 +43,10 @@ class ProfileModelMapper {
         legalAddress = model.legalAddress,
         checkingAccount = model.checkingAccount,
         correspondentAccount = model.correspondentAccount,
-        carPlate = model.carPlate,
+        carPlate = model.licencePlate,
         carModel = model.carModel,
         carCategory = model.carCategory,
-        carPalletCapacity = model.carPalletCapacity,
-        carLoadCapacity = model.carLoadCapacity
+        carLoadCapacity = model.carLoadCapacity,
+        carCapacity = model.carCapacity
     )
 }

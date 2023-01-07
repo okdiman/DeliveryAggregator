@@ -4,8 +4,8 @@ import data.ProfileRepository
 import data.mapper.ProfileModelMapper
 import deleting.domain.DeleteProfileUseCase
 import domain.GetMaskedPhoneUseCase
+import domain.usecase.GetSuggestByQueryUseCase
 import editing.domain.GetMaskedPhoneUseCaseImpl
-import root.domain.UpdateProfileUseCase
 import exit.domain.ExitFromProfileUseCase
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -13,7 +13,9 @@ import retrofit2.create
 import root.data.ProfileApi
 import root.data.ProfileRepositoryImpl
 import root.domain.GetProfileUseCase
+import root.domain.UpdateProfileUseCase
 import root.presentation.mapper.ProfileUiMapper
+import transport.domain.GetSuggestByQueryUseCaseImpl
 
 fun profileModule() = module {
     single<ProfileApi> { get<Retrofit>().create() }
@@ -25,4 +27,5 @@ fun profileModule() = module {
     factory { ProfileUiMapper(get()) }
     factory<ProfileRepository> { ProfileRepositoryImpl(get(), get(), get()) }
     factory<GetMaskedPhoneUseCase> { GetMaskedPhoneUseCaseImpl() }
+    factory<GetSuggestByQueryUseCase> { GetSuggestByQueryUseCaseImpl(get()) }
 }

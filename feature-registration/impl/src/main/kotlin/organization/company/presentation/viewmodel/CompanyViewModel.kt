@@ -5,8 +5,8 @@ import coroutines.AppDispatchers
 import data.AddressConstants.DEBOUNCE
 import data.AddressConstants.MIN_CHARS_FOR_SUGGEST
 import di.modules.NAMING_VALIDATOR_QUALIFIER
-import domain.model.AddressSuggestRequestModel
-import domain.usecase.GetSuggestByQueryUseCase
+import domain.GetAuthSuggestByQueryUseCase
+import domain.model.AuthAddressSuggestRequestModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import org.koin.core.component.KoinComponent
@@ -32,7 +32,7 @@ class CompanyViewModel(
 ) : BaseViewModel<CompanyState, CompanyAction, CompanyEvent>(initialState = CompanyState()),
     KoinComponent {
 
-    private val getSuggestByQuery by inject<GetSuggestByQueryUseCase>()
+    private val getSuggestByQuery by inject<GetAuthSuggestByQueryUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
     private val addressUiMapper by inject<AddressSuggestUiMapper>()
     private val namingValidator by inject<TextFieldValidator>(named(NAMING_VALIDATOR_QUALIFIER))
@@ -103,10 +103,16 @@ class CompanyViewModel(
     }
 
     private fun onLegalAddressClick() {
+        viewState = viewState.copy(
+            bsAddress = viewState.bsAddress.copy(stateText = viewState.legalAddress.stateText)
+        )
         viewAction = CompanyAction.OpenSelectLegalAddress
     }
 
     private fun onActualAddressClick() {
+        viewState = viewState.copy(
+            bsAddress = viewState.bsAddress.copy(stateText = viewState.actualAddress.stateText)
+        )
         viewAction = CompanyAction.OpenSelectActualAddress
     }
 
@@ -182,7 +188,7 @@ class CompanyViewModel(
                     bsAddress = viewState.bsAddress.copy(isSuggestLoading = true)
                 )
                 val suggests = getSuggestByQuery(
-                    AddressSuggestRequestModel(
+                    AuthAddressSuggestRequestModel(
                         query = query,
                         code = parameters.user.code.toInt(),
                         phone = parameters.user.phone

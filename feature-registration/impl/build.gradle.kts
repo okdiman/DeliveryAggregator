@@ -22,6 +22,7 @@ dependencies {
     network()
     implementation(project(Modules.auth_api))
     implementation(project(Modules.address_api))
+    implementation(project(Modules.address_impl))
     implementation(project(Modules.registration_api))
     implementation(project(Modules.core))
     implementation(project(Modules.core_ui))

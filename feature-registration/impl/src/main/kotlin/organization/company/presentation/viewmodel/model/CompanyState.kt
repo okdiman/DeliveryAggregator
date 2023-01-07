@@ -2,7 +2,7 @@ package organization.company.presentation.viewmodel.model
 
 import organization.company.presentation.compose.model.CompanyParamState
 import presentation.model.AddressUiModel
-import presentation.AddressState
+import presentation.model.AddressState
 
 data class CompanyState(
     val companyName: CompanyParamState.NameState = CompanyParamState.NameState(),

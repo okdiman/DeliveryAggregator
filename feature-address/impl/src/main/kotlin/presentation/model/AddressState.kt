@@ -1,7 +1,6 @@
-package presentation
+package presentation.model
 
 import androidx.annotation.StringRes
-import presentation.model.AddressUiModel
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R
 import view.model.DefaultParamState
 

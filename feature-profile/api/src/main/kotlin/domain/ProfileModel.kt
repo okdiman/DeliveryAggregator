@@ -16,10 +16,10 @@ data class ProfileModel(
     val correspondentAccount: String,
     val bank: String,
     val organizationName: String,
-    val carPlate: String,
+    val licencePlate: String,
     val carModel: String,
     val carCategory: String,
+    val carCapacity: Int,
     val carLoadCapacity: Int,
-    val carPalletCapacity: Int,
     val phone: String
 )

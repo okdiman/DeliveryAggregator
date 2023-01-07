@@ -4,8 +4,7 @@ import data.AddressApi
 import data.AddressRepositoryImpl
 import data.mapper.AddressSuggestMapper
 import domain.AddressRepository
-import domain.GetSuggestByQueryUseCaseImpl
-import domain.usecase.GetSuggestByQueryUseCase
+import domain.GetAuthSuggestByQueryUseCase
 import org.koin.dsl.module
 import presentation.mapper.AddressSuggestUiMapper
 import retrofit2.Retrofit
@@ -16,5 +15,5 @@ fun addressModule() = module {
     factory<AddressRepository> { AddressRepositoryImpl(get(), get()) }
     factory { AddressSuggestMapper() }
     factory { AddressSuggestUiMapper() }
-    factory<GetSuggestByQueryUseCase> { GetSuggestByQueryUseCaseImpl(get()) }
+    factory { GetAuthSuggestByQueryUseCase(get()) }
 }

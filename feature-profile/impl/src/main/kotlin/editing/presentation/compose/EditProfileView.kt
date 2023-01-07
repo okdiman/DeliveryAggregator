@@ -117,5 +117,5 @@ fun EditProfileFieldsBlock(state: EditProfileState, eventHandler: (EditProfileEv
         text = stringResource(id = R.string.delete_profile),
         style = Theme.fonts.bold
     )
-    Spacer(modifier = Modifier.height(120.dp))
+    Spacer(modifier = Modifier.height(if (state.isSaveButtonVisible) 120.dp else 24.dp))
 }

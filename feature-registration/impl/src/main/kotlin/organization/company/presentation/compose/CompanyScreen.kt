@@ -13,7 +13,7 @@ import presentation.model.AddressUiModel
 import presentation.model.RegistrationCompanyModel
 import presentation.parameters.BankParameters
 import presentation.parameters.CompanyParameters
-import root.presentation.RegistrationAddressBSScreen
+import presentation.AddressBSScreen
 import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
@@ -89,7 +89,7 @@ fun ObtainBSScreenAction(
             closeOnSwipe = false
         )
     ) {
-        RegistrationAddressBSScreen(
+        AddressBSScreen(
             state = state.value.bsAddress,
             suggests = state.value.suggests,
             onClearClick = { onChangeEvent("") },

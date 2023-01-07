@@ -1,7 +1,7 @@
 package transport.presentation.viewmodel.model
 
 import presentation.model.AddressUiModel
-import presentation.AddressState
+import presentation.model.AddressState
 import transport.presentation.compose.model.TransportParamState
 
 data class TransportState(

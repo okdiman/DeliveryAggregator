@@ -43,7 +43,7 @@ fun ProfileScreen() {
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             ProfileAction.OpenTransport -> {
-                rootController.push(
+                rootController.findRootController().push(
                     screen = NavigationTree.Profile.Transport.name,
                     params = TransportProfileParameters(viewModel.getProfileModel())
                 )
