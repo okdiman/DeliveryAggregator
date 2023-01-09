@@ -1,4 +1,4 @@
-package transport.domain
+package departure.domain
 
 import domain.AddressRepository
 import domain.model.AddressSuggestRequestModel

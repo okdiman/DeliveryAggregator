@@ -6,6 +6,7 @@ import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
 import exit.presentation.compose.ExitScreen
 import navigation.NavigationTree
+import openNotificationSettings
 import presentation.EditProfileParameters
 import presentation.TransportProfileParameters
 import root.presentation.viewmodel.ProfileViewModel
@@ -15,8 +16,8 @@ import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
+import support.presentation.compose.SupportScreen
 import utils.UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
-import utils.openNotificationSettings
 
 @Composable
 fun ProfileScreen() {
@@ -50,7 +51,11 @@ fun ProfileScreen() {
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             ProfileAction.OpenSupport -> {
-//                rootController.push(NavigationTree.Profile.Support.name)
+                rootController.findModalController().present(
+                    modalSheetConfiguration = ModalSheetConfiguration(
+                        cornerRadius = SCREEN_CORNER_RADIUS
+                    )
+                ) { SupportScreen() }
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             ProfileAction.OpenNotificationsSettings -> {

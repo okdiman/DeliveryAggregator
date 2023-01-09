@@ -135,9 +135,6 @@ class EditProfileViewModel(
                     email = viewState.email.stateText
                 )
             )
-            viewState = viewState.copy(
-                isSaveButtonVisible = isSaveButtonVisible(state = viewState, isUpdated = true)
-            )
             viewAction = EditProfileAction.OpenProfileScreenWithUpdate
         }
     }
@@ -146,8 +143,8 @@ class EditProfileViewModel(
         viewAction = EditProfileAction.OpenDeleteAccScreen
     }
 
-    private fun isSaveButtonVisible(state: EditProfileState, isUpdated: Boolean = false) =
-        !isUpdated && isTextFieldFilled(state.name.stateText, MIN_NAME_CHARS) &&
+    private fun isSaveButtonVisible(state: EditProfileState) =
+        isTextFieldFilled(state.name.stateText, MIN_NAME_CHARS) &&
                 isTextFieldFilled(state.surname.stateText, MIN_NAME_CHARS) &&
                 isTextFieldFilled(state.secondName.stateText, MIN_NAME_CHARS) &&
                 emailValidator.isValidate(state.email.stateText) &&

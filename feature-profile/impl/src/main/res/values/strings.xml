@@ -8,6 +8,4 @@
     <string name="profile">Профиль</string>
     <string name="delete_profile">Удалить аккаунт</string>
     <string name="mobile">Мобильный</string>
-    <string name="phone_copied">Номер телефона скопирован</string>
-    <string name="email_copied">Электронный адрес скопирован</string>
 </resources>

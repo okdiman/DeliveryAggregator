@@ -2,24 +2,17 @@ package transport.presentation.viewmodel
 
 import BaseViewModel
 import coroutines.AppDispatchers
-import data.AddressConstants
 import di.modules.DIGITS_AND_LETTERS_VALIDATOR_QUALIFIER
 import di.modules.LETTERS_VALIDATOR_QUALIFIER
 import di.modules.LICENCE_PLATE_VALIDATOR_QUALIFIER
-import domain.model.AddressSuggestRequestModel
-import domain.usecase.GetSuggestByQueryUseCase
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.qualifier.named
 import presentation.TransportProfileParameters
-import presentation.mapper.AddressSuggestUiMapper
-import presentation.model.AddressUiModel
+import root.domain.UpdateProfileUseCase
 import transport.presentation.viewmodel.model.TransportProfileAction
 import transport.presentation.viewmodel.model.TransportProfileEvent
 import transport.presentation.viewmodel.model.TransportProfileState
-import utils.CommonConstants.LIMITS.Common.MIN_ADDRESS_CHARS
 import utils.CommonConstants.LIMITS.Transport.CAR_BRAND_MIN_CHARS
 import utils.CommonConstants.LIMITS.Transport.CAR_INFO_MIN_CHARS
 import utils.CommonConstants.LIMITS.Transport.LICENCE_PLATE_MIN_CHARS
@@ -32,9 +25,8 @@ class TransportProfileViewModel(
     initialState = TransportProfileState()
 ), KoinComponent {
 
-    private val getSuggestByQuery by inject<GetSuggestByQueryUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
-    private val addressUiMapper by inject<AddressSuggestUiMapper>()
+    private val updateProfile by inject<UpdateProfileUseCase>()
     private val lettersValidator by inject<TextFieldValidator>(named(LETTERS_VALIDATOR_QUALIFIER))
     private val licencePlateValidator by inject<TextFieldValidator>(
         named(LICENCE_PLATE_VALIDATOR_QUALIFIER)
@@ -42,8 +34,6 @@ class TransportProfileViewModel(
     private val digitsAndLettersValidator by inject<TextFieldValidator>(
         named(DIGITS_AND_LETTERS_VALIDATOR_QUALIFIER)
     )
-
-    private var suggestJob: Job? = null
 
     init {
         viewState = viewState.copy(
@@ -53,48 +43,20 @@ class TransportProfileViewModel(
             carBrand = viewState.carBrand.copy(stateText = parameters.profileModel.carModel),
             carLoadCapacity = viewState.carLoadCapacity.copy(
                 stateText = parameters.profileModel.carLoadCapacity.toString()
-            ),
-            //TODO какая то фигня с адресом, где полный
-            departureAddress = viewState.departureAddress.copy(stateText = parameters.profileModel.legalAddress)
+            )
         )
     }
 
     override fun obtainEvent(viewEvent: TransportProfileEvent) {
         when (viewEvent) {
             is TransportProfileEvent.OnLicencePlateChanged -> onLicencePlateChanged(viewEvent.licencePlate)
-            is TransportProfileEvent.OnBSAddressChanged -> onBsAddressChanged(viewEvent.bsAddress)
             is TransportProfileEvent.OnCarBrandChanged -> onCarBrandChanged(viewEvent.carBrand)
             is TransportProfileEvent.OnCarLoadCapacityChanged -> onCarLoadCapacityChanged(viewEvent.carLoadCapacity)
             is TransportProfileEvent.OnCarCategoryChanged -> onCarCategoryChanged(viewEvent.carCategory)
             is TransportProfileEvent.OnCarCapacityChanged -> onCarCapacityChanged(viewEvent.carCapacity)
-            is TransportProfileEvent.OnSuggestAddressClick -> onSuggestAddressClick(viewEvent.address)
             TransportProfileEvent.OnBackButtonClick -> onBackButtonClick()
             TransportProfileEvent.OnSaveButtonClick -> onSaveButtonClick()
-            TransportProfileEvent.OnDepartAddressClick -> onDepartAddressClick()
-            TransportProfileEvent.ResetAction -> onResetAction()
         }
-    }
-
-    private fun onDepartAddressClick() {
-        viewAction = TransportProfileAction.OpenDepartureAddressBs
-    }
-
-    private fun onSuggestAddressClick(address: AddressUiModel) {
-        viewState = viewState.copy(
-            departureAddress = viewState.departureAddress.copy(
-                stateText = address.value,
-                address = address,
-                isFillingError = address.house.isEmpty()
-            ),
-            bsAddress = viewState.bsAddress.copy(
-                stateText = address.subtitle
-            ),
-            isSaveButtonVisible = isSaveButtonVisible(
-                viewState.copy(
-                    departureAddress = viewState.departureAddress.copy(stateText = address.value)
-                )
-            )
-        )
     }
 
     private fun onLicencePlateChanged(newLicencePlate: String) {
@@ -112,15 +74,6 @@ class TransportProfileViewModel(
                         isValidationError = !isValid
                     )
                 )
-            )
-        )
-    }
-
-    private fun onBsAddressChanged(address: String) {
-        loadSuggests(address)
-        viewState = viewState.copy(
-            bsAddress = viewState.bsAddress.copy(
-                stateText = address
             )
         )
     }
@@ -194,35 +147,22 @@ class TransportProfileViewModel(
     }
 
     private fun onSaveButtonClick() {
-        viewAction = TransportProfileAction.OpenPreviousScreen
-    }
-
-    private fun loadSuggests(query: String) {
-        suggestJob?.cancel()
-        if (query.length >= AddressConstants.MIN_CHARS_FOR_SUGGEST) {
-            suggestJob = launchJob(context = appDispatchers.network, onError = {
-                viewState = viewState.copy(
-                    bsAddress = viewState.bsAddress.copy(isSuggestLoading = false)
+        launchJob(appDispatchers.network) {
+            updateProfile(
+                parameters.profileModel.copy(
+                    licencePlate = viewState.licencePlate.stateText,
+                    carCategory = viewState.carCategory.stateText,
+                    carModel = viewState.carBrand.stateText,
+                    carCapacity = viewState.carCapacity.stateText.toInt(),
+                    carLoadCapacity = viewState.carLoadCapacity.stateText.toInt()
                 )
-            }) {
-                delay(AddressConstants.DEBOUNCE)
-                viewState = viewState.copy(
-                    bsAddress = viewState.bsAddress.copy(isSuggestLoading = true)
-                )
-                val suggests = getSuggestByQuery(AddressSuggestRequestModel(query = query))
-                viewState = viewState.copy(
-                    suggests = addressUiMapper.map(suggests),
-                    bsAddress = viewState.bsAddress.copy(isSuggestLoading = false)
-                )
-            }
-        } else {
-            viewState = viewState.copy(suggests = emptyList())
+            )
+            viewAction = TransportProfileAction.OpenProfileWithUpdate
         }
     }
 
     private fun isSaveButtonVisible(state: TransportProfileState) =
         isTextFieldFilled(state.licencePlate.stateText, LICENCE_PLATE_MIN_CHARS) &&
-                isTextFieldFilled(state.departureAddress.stateText, MIN_ADDRESS_CHARS) &&
                 isTextFieldFilled(state.carBrand.stateText, CAR_BRAND_MIN_CHARS) &&
                 isTextFieldFilled(state.carCategory.stateText, CAR_INFO_MIN_CHARS) &&
                 isTextFieldFilled(state.carLoadCapacity.stateText, CAR_INFO_MIN_CHARS) &&
@@ -231,7 +171,6 @@ class TransportProfileViewModel(
                 !state.carBrand.isValidationError && isTransportChanged(state)
 
     private fun isTransportChanged(state: TransportProfileState) =
-        //TODO departureAddress опять проблема
         parameters.profileModel != parameters.profileModel.copy(
             licencePlate = state.licencePlate.stateText,
             carModel = state.carBrand.stateText,

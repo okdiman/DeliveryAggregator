@@ -47,6 +47,6 @@ class ProfileModelMapper {
         carModel = model.carModel,
         carCategory = model.carCategory,
         carLoadCapacity = model.carLoadCapacity,
-        carCapacity = model.carCapacity
+        carPalletCapacity = model.carCapacity
     )
 }

@@ -1,7 +1,6 @@
 package root.presentation.viewmodel
 
 import BaseViewModel
-import clipboard.domain.ClipboardUseCase
 import coroutines.AppDispatchers
 import domain.ProfileModel
 import org.koin.core.component.KoinComponent
@@ -20,7 +19,6 @@ class ProfileViewModel : BaseViewModel<ProfileState, ProfileAction, ProfileEvent
     private val getProfile by inject<GetProfileUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
     private val mapper by inject<ProfileUiMapper>()
-    private val clipboard by inject<ClipboardUseCase>()
 
     lateinit var model: ProfileModel
 
@@ -34,16 +32,10 @@ class ProfileViewModel : BaseViewModel<ProfileState, ProfileAction, ProfileEvent
             ProfileEvent.OnEditProfileClick -> onEditProfileClick()
             ProfileEvent.OnRetryClick -> loadContent()
             ProfileEvent.ResetAction -> onResetAction()
-            ProfileEvent.OnPhoneLongClick -> onLongClick(viewState.phone)
-            ProfileEvent.OnEmailLongClick -> onLongClick(viewState.email)
         }
     }
 
     fun getProfileModel() = model
-
-    private fun onLongClick(text: String) {
-        clipboard.setText(PROFILE_LABEL, text)
-    }
 
     private fun loadContent() {
         launchJob(context = appDispatchers.network, onError = {
@@ -77,9 +69,5 @@ class ProfileViewModel : BaseViewModel<ProfileState, ProfileAction, ProfileEvent
             ProfileItemType.Offer -> ProfileAction.OpenOffer
             ProfileItemType.Exit -> ProfileAction.OpenExitFromAccount
         }
-    }
-
-    companion object {
-        private const val PROFILE_LABEL = "profile_label"
     }
 }

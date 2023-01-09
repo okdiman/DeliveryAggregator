@@ -21,6 +21,6 @@ data class ProfileRequest(
     val carPlate: String,
     val carModel: String,
     val carCategory: String,
-    val carCapacity: Int,
+    val carPalletCapacity: Int,
     val carLoadCapacity: Int
 )

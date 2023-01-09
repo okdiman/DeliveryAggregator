@@ -15,7 +15,7 @@ import root.data.ProfileRepositoryImpl
 import root.domain.GetProfileUseCase
 import root.domain.UpdateProfileUseCase
 import root.presentation.mapper.ProfileUiMapper
-import transport.domain.GetSuggestByQueryUseCaseImpl
+import departure.domain.GetSuggestByQueryUseCaseImpl
 
 fun profileModule() = module {
     single<ProfileApi> { get<Retrofit>().create() }
