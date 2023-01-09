@@ -38,8 +38,8 @@ class ProfileContractorDto(
     val carModel: String,
     @SerializedName("carCategory")
     val carCategory: String,
-    @SerializedName("carLoadCapacity")
-    val carCapacity: Int,
     @SerializedName("carPalletCapacity")
+    val carCapacity: Int,
+    @SerializedName("carLoadCapacity")
     val carLoadCapacity: Int
 )
