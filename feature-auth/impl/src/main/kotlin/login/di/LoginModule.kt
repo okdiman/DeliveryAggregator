@@ -4,6 +4,6 @@ import domain.usecase.GetCodeUseCase
 import login.domain.GetCodeUseCaseImpl
 import org.koin.dsl.module
 
-fun loginModule() = module {
+internal fun loginModule() = module {
     factory<GetCodeUseCase> { GetCodeUseCaseImpl(get()) }
 }

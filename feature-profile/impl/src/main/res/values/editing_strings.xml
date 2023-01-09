@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile">Профиль</string>
+    <string name="delete_profile">Удалить аккаунт</string>
+    <string name="mobile">Мобильный</string>
+</resources>

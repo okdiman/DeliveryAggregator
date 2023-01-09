@@ -10,7 +10,7 @@ import coroutines.JvmAppDispatchers
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
-fun commonModule() = module {
+internal fun commonModule() = module {
     factory<AppDispatchers> { JvmAppDispatchers() }
     single {
         provideEncryptedSharedPrefs(androidContext())

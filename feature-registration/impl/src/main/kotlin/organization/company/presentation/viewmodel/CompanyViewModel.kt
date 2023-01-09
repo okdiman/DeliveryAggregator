@@ -6,7 +6,7 @@ import data.AddressConstants.DEBOUNCE
 import data.AddressConstants.MIN_CHARS_FOR_SUGGEST
 import di.modules.NAMING_VALIDATOR_QUALIFIER
 import domain.GetAuthSuggestByQueryUseCase
-import domain.model.AuthAddressSuggestRequestModel
+import domain.model.request.AuthAddressSuggestRequestModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import org.koin.core.component.KoinComponent

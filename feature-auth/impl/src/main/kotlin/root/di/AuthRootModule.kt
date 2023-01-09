@@ -14,7 +14,7 @@ import root.data.mapper.SignUpMapper
 import root.domain.GetAuthTokenSyncUseCaseImpl
 import root.domain.SignUpUseCaseImpl
 
-fun rootModule() = module {
+internal fun authRootModule() = module {
     single<AuthApi> { get<Retrofit>().create() }
     factory<AuthRepository> { AuthRepositoryImpl(get(), get(), get()) }
     factory<AuthLocalDataSource> { AuthLocalDataSourceImpl(get(), get()) }

@@ -38,7 +38,7 @@ import view.CommonTextField
 import view.ProgressIndicator
 
 @Composable
-fun VerifyView(viewState: VerifyState, eventHandler: (VerifyEvent) -> Unit) {
+internal fun VerifyView(viewState: VerifyState, eventHandler: (VerifyEvent) -> Unit) {
     Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp, top = 8.dp)) {
         BackButton { eventHandler(VerifyEvent.OnBackClick) }
         Spacer(modifier = Modifier.height(30.dp))

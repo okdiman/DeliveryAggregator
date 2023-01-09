@@ -2,13 +2,13 @@ package di.modules
 
 import android.content.ClipboardManager
 import android.content.Context
-import org.koin.dsl.module
 import clipboard.data.ClipboardRepositoryImpl
-import clipboard.domain.ClipboardUseCase
 import clipboard.domain.ClipboardRepository
+import clipboard.domain.ClipboardUseCase
 import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.module
 
-fun clipboardModule() = module {
+internal fun clipboardModule() = module {
     single<ClipboardRepository> { ClipboardRepositoryImpl(get()) }
     factory { ClipboardUseCase(get()) }
     single { androidContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }

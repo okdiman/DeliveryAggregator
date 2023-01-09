@@ -1,7 +1,7 @@
 package departure.domain
 
 import domain.AddressRepository
-import domain.model.AddressSuggestRequestModel
+import domain.model.request.AddressSuggestRequestModel
 import domain.usecase.GetSuggestByQueryUseCase
 
 class GetSuggestByQueryUseCaseImpl(

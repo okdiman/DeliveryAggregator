@@ -32,7 +32,7 @@ import view.StandardTextField
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
 @Composable
-fun EditProfileView(state: EditProfileState, eventHandler: (EditProfileEvent) -> Unit) {
+internal fun EditProfileView(state: EditProfileState, eventHandler: (EditProfileEvent) -> Unit) {
     Column(
         modifier = Modifier
             .padding(PaddingValues(start = 16.dp, end = 16.dp, top = 4.dp))

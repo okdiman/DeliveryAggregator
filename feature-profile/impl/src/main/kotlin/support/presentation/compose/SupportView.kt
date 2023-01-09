@@ -14,7 +14,7 @@ import theme.Theme
 import trinity_monsters.wildberries_delivery_aggregator.feature_profile.impl.R
 
 @Composable
-fun SupportView(eventHandler: (SupportEvent) -> Unit) {
+internal fun SupportView(eventHandler: (SupportEvent) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()

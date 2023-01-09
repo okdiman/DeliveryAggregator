@@ -1,4 +1,4 @@
-package domain.model
+package domain.model.request
 
 data class AuthAddressSuggestRequestModel(
     val query: String,

@@ -1,4 +1,4 @@
-package domain.model
+package domain.model.request
 
 @JvmInline
 value class AddressSuggestRequestModel(

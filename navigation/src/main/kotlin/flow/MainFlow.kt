@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import departure.presentation.compose.DepartureScreen
 import editing.presentation.compose.EditProfileScreen
 import navigation.NavigationTree
 import offer.presentation.compose.OfferScreen
@@ -56,5 +57,8 @@ fun RootComposeBuilder.mainFlow() {
     }
     screen(NavigationTree.Profile.Transport.name) { parameters ->
         TransportProfileScreen(parameters as TransportProfileParameters)
+    }
+    screen(NavigationTree.Profile.DepartureAddress.name) { parameters ->
+        DepartureScreen()
     }
 }

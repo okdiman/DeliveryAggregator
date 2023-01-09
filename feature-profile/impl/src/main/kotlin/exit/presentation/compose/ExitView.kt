@@ -17,7 +17,7 @@ import theme.Theme
 import trinity_monsters.wildberries_delivery_aggregator.feature_profile.impl.R
 
 @Composable
-fun ExitView(eventHandler: (ExitEvent) -> Unit) {
+internal fun ExitView(eventHandler: (ExitEvent) -> Unit) {
     Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 40.dp)) {
         Text(
             text = stringResource(id = R.string.are_u_sure_to_exit),

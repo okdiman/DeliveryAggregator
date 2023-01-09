@@ -1,8 +1,7 @@
 package domain.usecase
 
 import domain.model.AddressSuggestModel
-import domain.model.AddressSuggestRequestModel
+import domain.model.request.AddressSuggestRequestModel
 
-interface GetSuggestByQueryUseCase {
-    suspend operator fun invoke(model: AddressSuggestRequestModel): List<AddressSuggestModel>
-}
+interface GetSuggestByQueryUseCase :
+    suspend (AddressSuggestRequestModel) -> List<AddressSuggestModel>

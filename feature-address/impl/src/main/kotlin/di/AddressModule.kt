@@ -2,6 +2,7 @@ package di
 
 import data.AddressApi
 import data.AddressRepositoryImpl
+import data.mapper.AddressMapper
 import data.mapper.AddressSuggestMapper
 import domain.AddressRepository
 import domain.GetAuthSuggestByQueryUseCase
@@ -12,8 +13,9 @@ import retrofit2.create
 
 fun addressModule() = module {
     single<AddressApi> { get<Retrofit>().create() }
-    factory<AddressRepository> { AddressRepositoryImpl(get(), get()) }
+    factory<AddressRepository> { AddressRepositoryImpl(get(), get(), get()) }
     factory { AddressSuggestMapper() }
+    factory { AddressMapper() }
     factory { AddressSuggestUiMapper() }
     factory { GetAuthSuggestByQueryUseCase(get()) }
 }

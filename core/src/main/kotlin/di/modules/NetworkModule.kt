@@ -10,7 +10,7 @@ import org.koin.dsl.module
 import retrofit2.Converter
 import retrofit2.converter.gson.GsonConverterFactory
 
-fun networkModule() = module {
+internal fun networkModule() = module {
     single<Converter.Factory> {
         GsonConverterFactory.create()
     }

@@ -40,7 +40,8 @@ fun ProfileScreen() {
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             ProfileAction.OpenDepartureAddress -> {
-//                rootController.push(NavigationTree.Profile.DepartureAddress.name)
+                rootController.findRootController()
+                    .push(NavigationTree.Profile.DepartureAddress.name)
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             ProfileAction.OpenTransport -> {

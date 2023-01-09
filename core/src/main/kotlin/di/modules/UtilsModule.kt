@@ -17,7 +17,7 @@ const val LICENCE_PLATE_VALIDATOR_QUALIFIER = "licence_plate"
 const val NAMING_VALIDATOR_QUALIFIER = "naming"
 const val EMAIL_VALIDATOR_QUALIFIER = "email"
 
-fun utilsModule() = module {
+internal fun utilsModule() = module {
     factory { Gson() }
     factory(named(DIGITS_AND_LETTERS_VALIDATOR_QUALIFIER)) {
         DigitsAndLettersValidator()

@@ -8,7 +8,7 @@ import di.modules.DIGITS_AND_LETTERS_VALIDATOR_QUALIFIER
 import di.modules.LETTERS_VALIDATOR_QUALIFIER
 import di.modules.LICENCE_PLATE_VALIDATOR_QUALIFIER
 import domain.GetAuthSuggestByQueryUseCase
-import domain.model.AuthAddressSuggestRequestModel
+import domain.model.request.AuthAddressSuggestRequestModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import org.koin.core.component.KoinComponent

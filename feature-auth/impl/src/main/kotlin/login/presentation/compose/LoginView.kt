@@ -36,7 +36,7 @@ import utils.CommonConstants.LIMITS.Common.MAX_PHONE_CHARS
 import view.CommonTextField
 
 @Composable
-fun LoginView(viewState: LoginState, eventHandler: (LoginEvent) -> Unit) {
+internal fun LoginView(viewState: LoginState, eventHandler: (LoginEvent) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()

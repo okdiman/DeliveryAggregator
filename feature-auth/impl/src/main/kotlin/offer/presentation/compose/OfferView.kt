@@ -18,7 +18,7 @@ import trinity_monsters.wildberries_delivery_aggregator.feature_auth.impl.R
 import view.BackButton
 
 @Composable
-fun OfferView(viewState: OfferState, eventHandler: (OfferEvent) -> Unit) {
+internal fun OfferView(viewState: OfferState, eventHandler: (OfferEvent) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()

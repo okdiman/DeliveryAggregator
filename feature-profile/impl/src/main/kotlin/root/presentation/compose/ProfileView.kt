@@ -33,7 +33,7 @@ import view.ProgressIndicator
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
 @Composable
-fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Unit) {
+internal fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Unit) {
     when {
         state.isLoading -> {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
