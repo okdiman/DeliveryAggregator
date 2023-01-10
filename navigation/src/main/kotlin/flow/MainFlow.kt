@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import departure.presentation.compose.DepartureScreen
+import departure.root.presentation.compose.DepartureScreen
 import editing.presentation.compose.EditProfileScreen
 import navigation.NavigationTree
 import offer.presentation.compose.OfferScreen

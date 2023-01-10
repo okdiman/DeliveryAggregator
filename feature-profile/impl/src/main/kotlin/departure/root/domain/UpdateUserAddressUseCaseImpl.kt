@@ -1,4 +1,4 @@
-package departure.domain
+package departure.root.domain
 
 import domain.AddressRepository
 import domain.model.AddressModel

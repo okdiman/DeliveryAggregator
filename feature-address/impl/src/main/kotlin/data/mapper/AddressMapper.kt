@@ -12,7 +12,6 @@ class AddressMapper {
             geoLon = it.geoLon,
             house = it.house,
             street = it.street,
-            comment = it.comment,
             id = it.id,
             isSelected = it.isSelected
         )
@@ -24,7 +23,6 @@ class AddressMapper {
         geoLon = model.geoLon,
         house = model.house,
         street = model.street,
-        comment = model.comment,
         isSelected = model.isSelected
     )
 }

@@ -1,13 +1,12 @@
-package departure.presentation
+package departure.root.presentation.mapper
 
-import departure.presentation.compose.model.DepartureAddressUiModel
+import departure.root.presentation.compose.model.DepartureAddressUiModel
 import domain.model.AddressModel
 
 class DepartureAddressUiMapper {
     fun map(models: List<AddressModel>) = models.map {
         DepartureAddressUiModel(
             address = it.street,
-            comment = it.comment,
             isSelected = it.isSelected,
             id = it.id
         )

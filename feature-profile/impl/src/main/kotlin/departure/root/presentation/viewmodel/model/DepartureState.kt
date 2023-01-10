@@ -1,6 +1,6 @@
-package departure.presentation.viewmodel.model
+package departure.root.presentation.viewmodel.model
 
-import departure.presentation.compose.model.DepartureAddressUiModel
+import departure.root.presentation.compose.model.DepartureAddressUiModel
 
 data class DepartureState(
     val addresses: List<DepartureAddressUiModel> = emptyList(),

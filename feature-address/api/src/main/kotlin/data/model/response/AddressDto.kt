@@ -8,8 +8,6 @@ class AddressDto(
     val id: String,
     @SerializedName("city")
     val city: String,
-    @SerializedName("comment")
-    val comment: String,
     @SerializedName("geo_lat")
     val geoLat: String,
     @SerializedName("geo_lon")

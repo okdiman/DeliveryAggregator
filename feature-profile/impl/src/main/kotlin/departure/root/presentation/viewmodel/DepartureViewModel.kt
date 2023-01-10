@@ -1,11 +1,11 @@
-package departure.presentation.viewmodel
+package departure.root.presentation.viewmodel
 
 import BaseViewModel
 import coroutines.AppDispatchers
-import departure.presentation.DepartureAddressUiMapper
-import departure.presentation.viewmodel.model.DepartureAction
-import departure.presentation.viewmodel.model.DepartureEvent
-import departure.presentation.viewmodel.model.DepartureState
+import departure.root.presentation.mapper.DepartureAddressUiMapper
+import departure.root.presentation.viewmodel.model.DepartureAction
+import departure.root.presentation.viewmodel.model.DepartureEvent
+import departure.root.presentation.viewmodel.model.DepartureState
 import domain.model.AddressModel
 import domain.usecase.GetUserAddressesUseCase
 import domain.usecase.UpdateUserAddressUseCase
@@ -51,21 +51,17 @@ class DepartureViewModel : BaseViewModel<DepartureState, DepartureAction, Depart
     }
 
     private fun onAddressClick(id: String) {
-        launchJob(context = appDispatchers.network, onError = {
-            viewState = viewState.copy(isLoading = false, isError = true)
-        }) {
+        launchJob(context = appDispatchers.network) {
             viewState = viewState.copy(isLoading = true, isError = false)
             addresses.find { it.id == id }?.let {
                 updateUserAddress(it.copy(isSelected = true))
             }
-            viewState = viewState.copy(isLoading = false, addresses = viewState.addresses.map {
-                it.copy(isSelected = it.id == id)
-            })
+            loadContent()
         }
     }
 
     private fun onEditAddressClick(id: String) {
-        viewAction = DepartureAction.OpenAddressEdit
+        viewAction = DepartureAction.OpenAddressEdit(id)
     }
 
     private fun onBackClick() {

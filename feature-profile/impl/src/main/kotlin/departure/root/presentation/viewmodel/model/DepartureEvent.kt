@@ -1,4 +1,4 @@
-package departure.presentation.viewmodel.model
+package departure.root.presentation.viewmodel.model
 
 sealed interface DepartureEvent {
     data class OnAddressClick(val id: String) : DepartureEvent

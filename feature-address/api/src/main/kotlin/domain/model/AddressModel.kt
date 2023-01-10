@@ -3,7 +3,6 @@ package domain.model
 data class AddressModel(
     val id: String,
     val city: String,
-    val comment: String,
     val geoLat: String,
     val geoLon: String,
     val house: String,

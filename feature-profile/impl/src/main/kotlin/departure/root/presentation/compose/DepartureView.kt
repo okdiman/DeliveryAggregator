@@ -1,9 +1,8 @@
-package departure.presentation.compose
+package departure.root.presentation.compose
 
 import ErrorScreen
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -26,8 +25,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import departure.presentation.viewmodel.model.DepartureEvent
-import departure.presentation.viewmodel.model.DepartureState
+import departure.root.presentation.viewmodel.model.DepartureEvent
+import departure.root.presentation.viewmodel.model.DepartureState
 import theme.Theme
 import trinity_monsters.wildberries_delivery_aggregator.feature_profile.impl.R
 import view.BackButton
@@ -77,18 +76,12 @@ internal fun DepartureView(state: DepartureState, eventHandler: (DepartureEvent)
                                 unselectedColor = Theme.colors.radioButtonColor
                             )
                         )
-                        Column(
+                        Text(
                             modifier = Modifier
                                 .padding(start = 10.dp)
-                                .weight(1f)
-                        ) {
-                            Text(
-                                text = it.address
-                            )
-                            if (it.comment.isNotEmpty()) Text(
-                                text = it.comment
-                            )
-                        }
+                                .weight(1f),
+                            text = it.address
+                        )
                         Icon(
                             modifier = Modifier
                                 .clip(Theme.shapes.roundedButton)

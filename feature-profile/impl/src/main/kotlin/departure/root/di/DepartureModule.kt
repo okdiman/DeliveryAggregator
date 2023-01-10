@@ -1,9 +1,9 @@
-package departure.di
+package departure.root.di
 
-import departure.domain.GetSuggestByQueryUseCaseImpl
-import departure.domain.GetUserAddressesUseCaseImpl
-import departure.domain.UpdateUserAddressUseCaseImpl
-import departure.presentation.DepartureAddressUiMapper
+import departure.root.domain.GetSuggestByQueryUseCaseImpl
+import departure.root.domain.GetUserAddressesUseCaseImpl
+import departure.root.domain.UpdateUserAddressUseCaseImpl
+import departure.root.presentation.mapper.DepartureAddressUiMapper
 import domain.usecase.GetSuggestByQueryUseCase
 import domain.usecase.GetUserAddressesUseCase
 import domain.usecase.UpdateUserAddressUseCase

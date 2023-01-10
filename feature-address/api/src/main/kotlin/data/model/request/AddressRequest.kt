@@ -6,7 +6,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class AddressRequest(
     val city: String,
-    val comment: String,
     @SerializedName("geo_lat")
     val geoLat: String,
     @SerializedName("geo_lon")
