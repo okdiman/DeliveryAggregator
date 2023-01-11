@@ -31,6 +31,12 @@ internal fun OfferView(viewState: OfferState, eventHandler: (OfferEvent) -> Unit
             style = Theme.fonts.bold.copy(fontSize = 24.sp)
         )
         Spacer(modifier = Modifier.height(12.dp))
+        //FIXME Когда будет нормальная оферта, надо будет убрать подзаголовок
+        Text(
+            text = stringResource(id = R.string.offer_subtitle),
+            style = Theme.fonts.bold
+        )
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = viewState.offer,
             style = Theme.fonts.regular
