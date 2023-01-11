@@ -47,7 +47,7 @@ internal fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Un
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(top = 54.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
+                    .padding(top = 48.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
             ) {
                 item {
                     Row(modifier = Modifier.fillMaxWidth()) {

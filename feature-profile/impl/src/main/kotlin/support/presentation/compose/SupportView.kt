@@ -18,7 +18,7 @@ internal fun SupportView(eventHandler: (SupportEvent) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 40.dp)
+            .padding(horizontal = 16.dp, vertical = 36.dp)
     ) {
         ActionButton(
             textRes = R.string.call,

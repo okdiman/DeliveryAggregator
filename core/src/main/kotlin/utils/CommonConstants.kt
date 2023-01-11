@@ -37,6 +37,7 @@ object CommonConstants {
     object Helpers {
         const val LINE_BREAK = "\n"
         const val SPACER = " "
+        const val COMMA = ", "
     }
 
     object System {

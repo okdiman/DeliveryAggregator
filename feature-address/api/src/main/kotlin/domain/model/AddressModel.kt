@@ -7,5 +7,5 @@ data class AddressModel(
     val geoLon: String,
     val house: String,
     val street: String,
-    val isSelected: Boolean
+    val isActive: Boolean
 )

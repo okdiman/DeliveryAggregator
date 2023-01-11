@@ -13,7 +13,7 @@ class AddressMapper {
             house = it.house,
             street = it.street,
             id = it.id,
-            isSelected = it.isSelected
+            isActive = it.isActive
         )
     }
 
@@ -23,6 +23,6 @@ class AddressMapper {
         geoLon = model.geoLon,
         house = model.house,
         street = model.street,
-        isSelected = model.isSelected
+        isActive = model.isActive
     )
 }

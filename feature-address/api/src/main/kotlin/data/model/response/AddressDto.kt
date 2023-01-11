@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 @Suppress("LongParameterList")
 class AddressDto(
-    @SerializedName("userId")
+    @SerializedName("id")
     val id: String,
     @SerializedName("city")
     val city: String,
@@ -16,6 +16,6 @@ class AddressDto(
     val house: String,
     @SerializedName("street")
     val street: String,
-    @SerializedName("isSelected")
-    val isSelected: Boolean
+    @SerializedName("isActive")
+    val isActive: Boolean
 )

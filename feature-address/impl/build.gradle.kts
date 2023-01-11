@@ -20,5 +20,6 @@ dependencies {
     compose()
     navigation()
     implementation(project(Modules.core_ui))
+    implementation(project(Modules.core))
     implementation(project(Modules.address_api))
 }

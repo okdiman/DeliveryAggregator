@@ -1,5 +1,6 @@
 package presentation
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,8 +36,10 @@ import view.ProgressIndicator
 import view.StandardTextField
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
+@Suppress("LongMethod")
 @Composable
 fun AddressBSScreen(
+    @StringRes titleRes: Int = R_core.string.add_address,
     state: AddressState,
     suggests: List<AddressUiModel>,
     onClearClick: () -> Unit,
@@ -54,7 +57,7 @@ fun AddressBSScreen(
             Row(modifier = Modifier.padding(top = 30.dp)) {
                 Text(
                     modifier = Modifier.weight(1f),
-                    text = stringResource(id = R_core.string.add_address),
+                    text = stringResource(id = titleRes),
                     style = Theme.fonts.bold.copy(fontSize = 24.sp)
                 )
                 Icon(
@@ -80,7 +83,9 @@ fun AddressBSScreen(
                 },
                 trailingIcon = {
                     Icon(
-                        modifier = Modifier.clickable { onClearClick() },
+                        modifier = Modifier
+                            .clip(Theme.shapes.roundedButton)
+                            .clickable { onClearClick() },
                         painter = painterResource(id = R_core.drawable.delete_ic),
                         contentDescription = null
                     )

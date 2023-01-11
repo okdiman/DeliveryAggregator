@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import departure.maxaddresses.presentation.viewmodel.model.DepartureMaxAddressCountEvent
@@ -21,10 +22,11 @@ fun DepartureMaxAddressCountView(eventHandler: (DepartureMaxAddressCountEvent) -
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 40.dp),
+            .padding(horizontal = 16.dp, vertical = 36.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
+            textAlign = TextAlign.Center,
             text = stringResource(id = R.string.max_address), style = Theme.fonts.bold.copy(
                 fontSize = 20.sp
             )

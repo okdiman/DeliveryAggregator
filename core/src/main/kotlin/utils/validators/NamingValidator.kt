@@ -11,6 +11,6 @@ class NamingValidator : TextFieldValidator {
     }
 
     private fun isNotPermittedSymbol(char: Char): Boolean {
-        return char != '_' && char != '.' && char != '-'
+        return char != '_' && char != '.' && char != '-' && char != ' ' && char != '"'
     }
 }

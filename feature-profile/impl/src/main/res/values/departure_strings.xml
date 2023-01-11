@@ -3,6 +3,5 @@
     <string name="add_new_address">Добавить новый адрес</string>
     <string name="max_address">У Вас сохранено максимальное количество адресов</string>
     <string name="good">Хорошо</string>
-    <string name="address_comment">Комментарий к адресу</string>
-    <string name="apply">Готово</string>
+    <string name="edit_address">Редактировать адрес</string>
 </resources>

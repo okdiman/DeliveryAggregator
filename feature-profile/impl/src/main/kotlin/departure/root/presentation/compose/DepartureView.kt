@@ -69,7 +69,7 @@ internal fun DepartureView(state: DepartureState, eventHandler: (DepartureEvent)
                     ) {
                         RadioButton(
                             modifier = Modifier.size(20.dp),
-                            selected = it.isSelected,
+                            selected = it.isActive,
                             onClick = { eventHandler(DepartureEvent.OnAddressClick(it.id)) },
                             colors = RadioButtonDefaults.colors(
                                 selectedColor = Theme.colors.radioButtonColor,
@@ -86,7 +86,7 @@ internal fun DepartureView(state: DepartureState, eventHandler: (DepartureEvent)
                             modifier = Modifier
                                 .clip(Theme.shapes.roundedButton)
                                 .clickable {
-                                    eventHandler(DepartureEvent.OnEditClick(it.id))
+                                    eventHandler(DepartureEvent.OnEditClick(it))
                                 },
                             painter = painterResource(id = R.drawable.profile_edit_ic),
                             contentDescription = null
