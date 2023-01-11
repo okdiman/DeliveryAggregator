@@ -19,10 +19,14 @@ import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -48,6 +52,7 @@ fun AddressBSScreen(
 ) {
     val rootController = LocalRootController.current
     val scrollState = rememberLazyListState()
+    val focusRequester = remember { FocusRequester() }
     LazyColumn(
         state = scrollState,
         modifier = Modifier
@@ -73,6 +78,7 @@ fun AddressBSScreen(
                 )
             }
             StandardTextField(
+                modifier = Modifier.focusRequester(focusRequester),
                 state = state,
                 hasTitle = false,
                 leadingIcon = {
@@ -104,6 +110,9 @@ fun AddressBSScreen(
         } else {
             items(suggests) { SuggestsItem(scrollState, it, onSuggestClick) }
         }
+    }
+    LaunchedEffect(Unit) {
+        focusRequester.requestFocus()
     }
 }
 

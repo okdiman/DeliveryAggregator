@@ -8,6 +8,7 @@ import utils.validators.DigitsAndLettersValidator
 import utils.validators.EmailValidator
 import utils.validators.LettersValidator
 import utils.validators.LicencePlateValidator
+import utils.validators.LoadCapacityValidator
 import utils.validators.NamingValidator
 import utils.validators.TextFieldValidator
 
@@ -16,6 +17,7 @@ const val LETTERS_VALIDATOR_QUALIFIER = "letters"
 const val LICENCE_PLATE_VALIDATOR_QUALIFIER = "licence_plate"
 const val NAMING_VALIDATOR_QUALIFIER = "naming"
 const val EMAIL_VALIDATOR_QUALIFIER = "email"
+const val LOAD_CAPACITY_VALIDATOR_QUALIFIER = "load_capacity"
 
 internal fun utilsModule() = module {
     factory { Gson() }
@@ -33,5 +35,8 @@ internal fun utilsModule() = module {
     } bind TextFieldValidator::class
     factory(named(EMAIL_VALIDATOR_QUALIFIER)) {
         EmailValidator()
+    } bind TextFieldValidator::class
+    factory(named(LOAD_CAPACITY_VALIDATOR_QUALIFIER)) {
+        LoadCapacityValidator()
     } bind TextFieldValidator::class
 }

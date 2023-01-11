@@ -80,7 +80,7 @@ sealed class TransportParamState(
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
         @StringRes override val fillingErrorDiscription: Int = R_core.string.few_symbols_error,
-        @StringRes override val validationErrorDiscription: Int = R_core.string.empty_error
+        @StringRes override val validationErrorDiscription: Int = R_core.string.car_load_capacity_error
     ) : TransportParamState(
         stateText,
         isFillingError,

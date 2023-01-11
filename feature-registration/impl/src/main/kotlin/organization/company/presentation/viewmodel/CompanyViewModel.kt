@@ -18,7 +18,6 @@ import organization.company.presentation.viewmodel.model.CompanyState
 import presentation.mapper.AddressSuggestUiMapper
 import presentation.model.AddressUiModel
 import presentation.parameters.CompanyParameters
-import root.RegistrationConstants.Limits.Company.INN_CHARS
 import root.RegistrationConstants.Limits.Company.INN_MIN_CHARS
 import root.RegistrationConstants.Limits.Company.KPP_CHARS
 import root.RegistrationConstants.Limits.Company.OGRN_CHARS
@@ -209,7 +208,7 @@ class CompanyViewModel(
                 isTextFieldFilled(state.legalAddress.stateText, MIN_ADDRESS_CHARS) &&
                 isTextFieldFilled(state.ogrn.stateText, OGRN_CHARS) &&
                 isTextFieldFilled(state.kpp.stateText, KPP_CHARS) &&
-                isTextFieldFilled(state.inn.stateText, INN_CHARS) &&
+                isTextFieldFilled(state.inn.stateText, INN_MIN_CHARS) &&
                 isTextFieldFilled(state.companyName.stateText, MIN_NAME_CHARS) &&
                 !state.companyName.isValidationError
 }

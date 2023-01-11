@@ -14,7 +14,8 @@
     <string name="car_category_hint">C</string>
     <string name="car_category_error">Некорректная категория автомобиля</string>
     <string name="car_load_capacity">Грузоподъемность фактическая (тонн)</string>
-    <string name="car_load_capacity_hint">2,5</string>
+    <string name="car_load_capacity_error">Грузоподъемность указана некорректно (возможно, вы использовали \",\" вместо \".\")</string>
+    <string name="car_load_capacity_hint">2.5</string>
     <string name="car_capacity">Количество вместимости паллет/шт</string>
     <string name="car_capacity_hint">6</string>
     <string name="car_capacity_subtitle">Размер 120х80 см</string>

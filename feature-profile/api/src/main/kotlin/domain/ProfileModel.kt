@@ -20,6 +20,6 @@ data class ProfileModel(
     val carModel: String,
     val carCategory: String,
     val carCapacity: Int,
-    val carLoadCapacity: Int,
+    val carLoadCapacity: Double?,
     val phone: String
 )

@@ -31,7 +31,7 @@ class SignUpModelMapper {
             ),
             organisationName = parameters.company.companyName,
             bank = parameters.bank.bankName,
-            carLoadCapacity = parameters.transport.carLoadCapacity.toInt(),
+            carLoadCapacity = parameters.transport.carLoadCapacity.toDouble(),
             carCategory = parameters.transport.carCategory,
             carModel = parameters.transport.carBrand,
             carPalletCapacity = parameters.transport.carCapacity.toInt(),

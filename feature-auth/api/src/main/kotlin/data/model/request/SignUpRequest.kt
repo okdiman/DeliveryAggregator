@@ -25,6 +25,6 @@ data class SignUpRequest(
     val address: AddressSignUpModel,
     val carModel: String,
     val carCategory: String,
-    val carLoadCapacity: Int,
+    val carLoadCapacity: Double,
     val carPalletCapacity: Int
 )

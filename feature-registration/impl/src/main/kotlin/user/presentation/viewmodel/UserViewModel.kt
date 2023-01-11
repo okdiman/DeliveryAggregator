@@ -99,7 +99,7 @@ class UserViewModel(
         viewState = viewState.copy(
             email = viewState.email.copy(
                 stateText = newEmail,
-                isFillingError = !emailValidator.isValidate(newEmail)
+                isValidationError = !emailValidator.isValidate(newEmail)
             ),
             isCreateAccButtonEnabled = isCreateButtonEnabled(
                 viewState.copy(email = viewState.email.copy(stateText = newEmail))

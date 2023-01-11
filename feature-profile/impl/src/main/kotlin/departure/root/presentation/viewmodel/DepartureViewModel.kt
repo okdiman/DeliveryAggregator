@@ -139,6 +139,7 @@ class DepartureViewModel : BaseViewModel<DepartureState, DepartureAction, Depart
 
     private fun onAddAddressClick() {
         viewAction = if (viewState.addresses.size < MAX_ADDRESS) {
+            viewState = viewState.copy(bsAddress = viewState.bsAddress.copy(stateText = ""))
             DepartureAction.OpenAddAddress
         } else {
             DepartureAction.OpenAddingError

@@ -41,5 +41,5 @@ class ProfileContractorDto(
     @SerializedName("carPalletCapacity")
     val carCapacity: Int,
     @SerializedName("carLoadCapacity")
-    val carLoadCapacity: Int
+    val carLoadCapacity: Double?
 )

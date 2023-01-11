@@ -7,6 +7,7 @@ import data.AddressConstants.MIN_CHARS_FOR_SUGGEST
 import di.modules.DIGITS_AND_LETTERS_VALIDATOR_QUALIFIER
 import di.modules.LETTERS_VALIDATOR_QUALIFIER
 import di.modules.LICENCE_PLATE_VALIDATOR_QUALIFIER
+import di.modules.LOAD_CAPACITY_VALIDATOR_QUALIFIER
 import domain.GetAuthSuggestByQueryUseCase
 import domain.model.request.AuthAddressSuggestRequestModel
 import kotlinx.coroutines.Job
@@ -41,6 +42,9 @@ class TransportViewModel(
     )
     private val digitsAndLettersValidator by inject<TextFieldValidator>(
         named(DIGITS_AND_LETTERS_VALIDATOR_QUALIFIER)
+    )
+    private val loadCapacityValidator by inject<TextFieldValidator>(
+        named(LOAD_CAPACITY_VALIDATOR_QUALIFIER)
     )
 
     private var suggestJob: Job? = null
@@ -131,14 +135,19 @@ class TransportViewModel(
     }
 
     private fun onCarLoadCapacityChanged(newCarLoadCapacity: String) {
+        val isValid = loadCapacityValidator.isValidate(newCarLoadCapacity)
         viewState = viewState.copy(
             carLoadCapacity = viewState.carLoadCapacity.copy(
                 stateText = newCarLoadCapacity,
-                isFillingError = !isTextFieldFilled(newCarLoadCapacity, CAR_INFO_MIN_CHARS)
+                isFillingError = !isTextFieldFilled(newCarLoadCapacity, CAR_INFO_MIN_CHARS),
+                isValidationError = !isValid
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(
                 viewState.copy(
-                    carLoadCapacity = viewState.carLoadCapacity.copy(stateText = newCarLoadCapacity)
+                    carLoadCapacity = viewState.carLoadCapacity.copy(
+                        stateText = newCarLoadCapacity,
+                        isValidationError = !isValid
+                    )
                 )
             )
         )
@@ -220,6 +229,6 @@ class TransportViewModel(
                 isTextFieldFilled(state.carLoadCapacity.stateText, CAR_INFO_MIN_CHARS) &&
                 isTextFieldFilled(state.carCapacity.stateText, CAR_INFO_MIN_CHARS) &&
                 !state.licencePlate.isValidationError && !state.carCategory.isValidationError &&
-                !state.carBrand.isValidationError
+                !state.carBrand.isValidationError && !state.carLoadCapacity.isValidationError
     }
 }

@@ -88,7 +88,6 @@ fun TransportTextFieldsBlock(state: TransportState, eventHandler: (TransportEven
         title = stringResource(R_core.string.car_load_capacity),
         state = state.carLoadCapacity,
         hint = stringResource(R_core.string.car_load_capacity_hint),
-        isDigits = true,
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = CAR_CAPACITY_MAX_CHARS
     ) { eventHandler(TransportEvent.OnCarLoadCapacityChanged(it)) }

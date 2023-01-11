@@ -113,7 +113,7 @@ class EditProfileViewModel(
         viewState = viewState.copy(
             email = viewState.email.copy(
                 stateText = newEmail,
-                isFillingError = !emailValidator.isValidate(newEmail)
+                isValidationError = !emailValidator.isValidate(newEmail)
             ),
             isSaveButtonVisible = isSaveButtonVisible(
                 viewState.copy(email = viewState.email.copy(stateText = newEmail))
