@@ -12,6 +12,6 @@ object Modules {
     const val registration_impl = ":feature-registration:impl"
     const val profile_api = ":feature-profile:api"
     const val profile_impl = ":feature-profile:impl"
-    const val order_api = ":feature-order:api"
-    const val order_impl = ":feature-order:impl"
+    const val route_api = ":feature-route:api"
+    const val route_impl = ":feature-route:impl"
 }

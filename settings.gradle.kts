@@ -17,15 +17,15 @@ include(
     ":core",
     ":core-ui",
     ":navigation",
-    ":feature-splash-screen",
+    ":feature-address:api",
+    ":feature-address:impl",
+    ":feature-profile:api",
+    ":feature-profile:impl",
     ":feature-auth:api",
     ":feature-auth:impl",
     ":feature-registration:api",
     ":feature-registration:impl",
-    ":feature-profile:api",
-    ":feature-profile:impl",
-    ":feature-order:api",
-    ":feature-order:impl",
-    ":feature-address:api",
-    ":feature-address:impl"
+    ":feature-route:api",
+    ":feature-route:impl",
+    ":feature-splash-screen"
 )

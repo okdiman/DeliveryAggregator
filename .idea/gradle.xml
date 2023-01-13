@@ -20,15 +20,15 @@
             <option value="$PROJECT_DIR$/feature-auth" />
             <option value="$PROJECT_DIR$/feature-auth/api" />
             <option value="$PROJECT_DIR$/feature-auth/impl" />
-            <option value="$PROJECT_DIR$/feature-order" />
-            <option value="$PROJECT_DIR$/feature-order/api" />
-            <option value="$PROJECT_DIR$/feature-order/impl" />
             <option value="$PROJECT_DIR$/feature-profile" />
             <option value="$PROJECT_DIR$/feature-profile/api" />
             <option value="$PROJECT_DIR$/feature-profile/impl" />
             <option value="$PROJECT_DIR$/feature-registration" />
             <option value="$PROJECT_DIR$/feature-registration/api" />
             <option value="$PROJECT_DIR$/feature-registration/impl" />
+            <option value="$PROJECT_DIR$/feature-route" />
+            <option value="$PROJECT_DIR$/feature-route/api" />
+            <option value="$PROJECT_DIR$/feature-route/impl" />
             <option value="$PROJECT_DIR$/feature-splash-screen" />
             <option value="$PROJECT_DIR$/navigation" />
           </set>
