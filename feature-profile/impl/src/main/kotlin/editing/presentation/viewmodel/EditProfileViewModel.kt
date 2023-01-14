@@ -15,7 +15,7 @@ import presentation.EditProfileParameters
 import root.domain.UpdateProfileUseCase
 import utils.CommonConstants.LIMITS.Common.MIN_NAME_CHARS
 import utils.isTextFieldFilled
-import utils.validators.TextFieldValidator
+import utils.validators.domain.TextFieldValidator
 
 class EditProfileViewModel(
     private val parameters: EditProfileParameters

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="routes_will_be_here">Здесь будет отображаться рейс</string>
+    <string name="route_can_includes_some_orders">В рейсе может быть несколько заказов</string>
+</resources>

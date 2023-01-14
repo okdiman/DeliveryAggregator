@@ -6,6 +6,9 @@ plugins {
 android {
     compileSdk = Settings.targetSdk
     namespace = "trinity_monsters.wildberries_delivery_aggregator.feature_profile.impl"
+    defaultConfig {
+        minSdk = Settings.minSdk
+    }
     buildFeatures {
         compose = true
     }
@@ -15,10 +18,10 @@ android {
 }
 
 dependencies {
-    network()
-    navigation()
     compose()
     koin()
+    navigation()
+    network()
     viewModel()
     implementation(project(Modules.profile_api))
     implementation(project(Modules.address_api))

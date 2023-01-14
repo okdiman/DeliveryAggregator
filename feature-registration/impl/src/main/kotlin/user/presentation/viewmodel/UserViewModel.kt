@@ -15,7 +15,7 @@ import user.presentation.viewmodel.model.UserEvent
 import user.presentation.viewmodel.model.UserState
 import utils.CommonConstants.LIMITS.Common.MIN_NAME_CHARS
 import utils.isTextFieldFilled
-import utils.validators.TextFieldValidator
+import utils.validators.domain.TextFieldValidator
 
 class UserViewModel(
     private val parameters: UserParameters

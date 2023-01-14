@@ -1,6 +1,6 @@
 package root.domain
 
-import data.ProfileRepository
+import domain.ProfileRepository
 import domain.ProfileModel
 
 class UpdateProfileUseCase(

@@ -4,13 +4,13 @@ import com.google.gson.Gson
 import org.koin.core.qualifier.named
 import org.koin.dsl.bind
 import org.koin.dsl.module
-import utils.validators.DigitsAndLettersValidator
-import utils.validators.EmailValidator
-import utils.validators.LettersValidator
-import utils.validators.LicencePlateValidator
-import utils.validators.LoadCapacityValidator
-import utils.validators.NamingValidator
-import utils.validators.TextFieldValidator
+import utils.validators.data.DigitsAndLettersValidator
+import utils.validators.data.EmailValidator
+import utils.validators.data.LettersValidator
+import utils.validators.data.LicencePlateValidator
+import utils.validators.data.LoadCapacityValidator
+import utils.validators.data.NamingValidator
+import utils.validators.domain.TextFieldValidator
 
 const val DIGITS_AND_LETTERS_VALIDATOR_QUALIFIER = "digits_and_letters"
 const val LETTERS_VALIDATOR_QUALIFIER = "letters"

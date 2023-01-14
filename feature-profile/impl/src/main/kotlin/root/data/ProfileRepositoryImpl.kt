@@ -1,6 +1,6 @@
 package root.data
 
-import data.ProfileRepository
+import domain.ProfileRepository
 import data.datasource.AuthLocalDataSource
 import data.mapper.ProfileModelMapper
 import domain.ProfileModel

@@ -21,4 +21,8 @@ object NavigationTree {
     enum class Profile {
         Offer, Edit, DepartureAddress, Transport
     }
+
+    enum class Routes {
+        Notifications, RouteDetails
+    }
 }

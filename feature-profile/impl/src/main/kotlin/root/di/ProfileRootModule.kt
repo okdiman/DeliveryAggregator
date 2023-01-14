@@ -1,6 +1,6 @@
 package root.di
 
-import data.ProfileRepository
+import domain.ProfileRepository
 import data.mapper.ProfileModelMapper
 import org.koin.dsl.module
 import retrofit2.Retrofit

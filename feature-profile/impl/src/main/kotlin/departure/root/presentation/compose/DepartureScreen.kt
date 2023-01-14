@@ -85,7 +85,7 @@ fun DepartureScreen() {
                 }
                 viewModel.obtainEvent(DepartureEvent.ResetAction)
             }
-            DepartureAction.OpenPreviousScreen -> rootController.findRootController().popBackStack()
+            DepartureAction.OpenPreviousScreen -> rootController.popBackStack()
             else -> {}
         }
     }

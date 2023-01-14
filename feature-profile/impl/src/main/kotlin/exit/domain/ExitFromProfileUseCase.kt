@@ -1,6 +1,6 @@
 package exit.domain
 
-import data.ProfileRepository
+import domain.ProfileRepository
 
 class ExitFromProfileUseCase(
     private val repository: ProfileRepository

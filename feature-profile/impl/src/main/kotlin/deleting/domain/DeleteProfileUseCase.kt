@@ -1,6 +1,6 @@
 package deleting.domain
 
-import data.ProfileRepository
+import domain.ProfileRepository
 
 class DeleteProfileUseCase(
     private val repository: ProfileRepository

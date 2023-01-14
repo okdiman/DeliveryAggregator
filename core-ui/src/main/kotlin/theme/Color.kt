@@ -14,7 +14,8 @@ data class DeliveryAggregatorColors(
     val dividerColor: Color,
     val hintColor: Color,
     val radioButtonColor: Color,
-    val errorColor: Color
+    val errorColor: Color,
+    val badgeBackgroundColor: Color
 )
 
 val palette = DeliveryAggregatorColors(
@@ -28,7 +29,8 @@ val palette = DeliveryAggregatorColors(
     disabledButtonColor = Color(0xFFECF2ED),
     hintColor = Color(0xFFB3B3B3),
     errorColor = Color(0xFFFF3B30),
-    radioButtonColor = Color(0xFF589A6E)
+    radioButtonColor = Color(0xFF589A6E),
+    badgeBackgroundColor = Color(0xFFE36B2B)
 )
 
 val LocalColorProvider =

@@ -18,7 +18,7 @@ import utils.CommonConstants.LIMITS.Transport.CAR_BRAND_MIN_CHARS
 import utils.CommonConstants.LIMITS.Transport.CAR_INFO_MIN_CHARS
 import utils.CommonConstants.LIMITS.Transport.LICENCE_PLATE_MIN_CHARS
 import utils.isTextFieldFilled
-import utils.validators.TextFieldValidator
+import utils.validators.domain.TextFieldValidator
 
 class TransportProfileViewModel(
     private val parameters: TransportProfileParameters

@@ -12,7 +12,7 @@ import root.RegistrationConstants.Limits.Bank.BANK_ACC_CHARS
 import root.RegistrationConstants.Limits.Bank.BIK_CHARS
 import utils.CommonConstants.LIMITS.Common.MIN_NAME_CHARS
 import utils.isTextFieldFilled
-import utils.validators.TextFieldValidator
+import utils.validators.domain.TextFieldValidator
 
 class BankViewModel : BaseViewModel<BankState, BankAction, BankEvent>(
     initialState = BankState()

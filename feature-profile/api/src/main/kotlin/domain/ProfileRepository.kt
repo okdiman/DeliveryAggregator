@@ -1,6 +1,4 @@
-package data
-
-import domain.ProfileModel
+package domain
 
 interface ProfileRepository {
     suspend fun getProfile(): ProfileModel

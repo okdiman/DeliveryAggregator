@@ -1,4 +1,6 @@
-package utils.validators
+package utils.validators.data
+
+import utils.validators.domain.TextFieldValidator
 
 class NamingValidator : TextFieldValidator {
     override fun isValidate(value: String): Boolean {

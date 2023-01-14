@@ -1,17 +1,14 @@
 package flow
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Text
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import departure.root.presentation.compose.DepartureScreen
 import editing.presentation.compose.EditProfileScreen
 import navigation.NavigationTree
+import notifications.presentation.compose.NotificationsScreen
 import offer.presentation.compose.OfferScreen
 import presentation.EditProfileParameters
 import presentation.TransportProfileParameters
 import root.presentation.compose.ProfileScreen
+import root.presentation.compose.RouteScreen
 import ru.alexgladkov.odyssey.compose.extensions.customNavigation
 import ru.alexgladkov.odyssey.compose.extensions.screen
 import ru.alexgladkov.odyssey.compose.extensions.tab
@@ -20,6 +17,7 @@ import tabs.BottomConfiguration
 import tabs.BottomNavigationTab
 import transport.presentation.compose.TransportProfileScreen
 import trinity_monsters.wildberries_delivery_aggregator.navigation.R
+import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
 fun RootComposeBuilder.mainFlow() {
     customNavigation(
@@ -28,19 +26,17 @@ fun RootComposeBuilder.mainFlow() {
     ) {
         tab(
             BottomNavigationTab(
-                title = R.string.route,
+                title = R_core.string.route,
                 icon = R.drawable.route_ic
             )
         ) {
             screen(NavigationTree.Main.Routes.name) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text(text = "Рейсы")
-                }
+                RouteScreen()
             }
         }
         tab(
             BottomNavigationTab(
-                title = R.string.profile,
+                title = R_core.string.profile,
                 icon = R.drawable.profile_ic
             )
         ) {
@@ -58,7 +54,10 @@ fun RootComposeBuilder.mainFlow() {
     screen(NavigationTree.Profile.Transport.name) { parameters ->
         TransportProfileScreen(parameters as TransportProfileParameters)
     }
-    screen(NavigationTree.Profile.DepartureAddress.name) { parameters ->
+    screen(NavigationTree.Profile.DepartureAddress.name) {
         DepartureScreen()
+    }
+    screen(NavigationTree.Routes.Notifications.name) {
+        NotificationsScreen()
     }
 }

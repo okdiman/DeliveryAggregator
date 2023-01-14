@@ -24,7 +24,7 @@ import root.RegistrationConstants.Limits.Company.OGRN_CHARS
 import utils.CommonConstants.LIMITS.Common.MIN_ADDRESS_CHARS
 import utils.CommonConstants.LIMITS.Common.MIN_NAME_CHARS
 import utils.isTextFieldFilled
-import utils.validators.TextFieldValidator
+import utils.validators.domain.TextFieldValidator
 
 class CompanyViewModel(
     private val parameters: CompanyParameters
