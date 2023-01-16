@@ -1,6 +1,6 @@
 package root.domain
 
-import data.AuthRepository
+import domain.AuthRepository
 import domain.model.SignUpModel
 import domain.usecase.SignUpUseCase
 

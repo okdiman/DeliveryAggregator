@@ -1,6 +1,6 @@
 package verify.domain
 
-import data.AuthRepository
+import domain.AuthRepository
 import domain.model.SignInModel
 import domain.usecase.SignInUseCase
 

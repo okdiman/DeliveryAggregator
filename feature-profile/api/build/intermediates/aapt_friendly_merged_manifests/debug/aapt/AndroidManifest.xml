@@ -3,7 +3,7 @@
     package="trinity_monsters.wildberries_delivery_aggregator.feature_profile.api" >
 
     <uses-sdk
-        android:minSdkVersion="1"
-        android:targetSdkVersion="1" />
+        android:minSdkVersion="23"
+        android:targetSdkVersion="23" />
 
 </manifest>

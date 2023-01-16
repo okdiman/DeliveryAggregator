@@ -1,6 +1,5 @@
 package domain
 
-import data.AuthRepository
 import domain.usecase.GetAuthInfoUseCase
 
 class GetAuthInfoUseCaseImpl(

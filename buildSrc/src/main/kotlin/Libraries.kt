@@ -25,8 +25,7 @@ object Libraries {
     object Core {
         const val coreKtx = "androidx.core:core-ktx:${Versions.androidxCore}"
         const val material = "com.google.android.material:material:${Versions.material}"
-        const val splashScreen =
-            "androidx.core:core-splashscreen:${Versions.splashScreen}"
+        const val splashScreen = "androidx.core:core-splashscreen:${Versions.splashScreen}"
         const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
     }
 

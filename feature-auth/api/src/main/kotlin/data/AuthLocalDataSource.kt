@@ -1,4 +1,4 @@
-package data.datasource
+package data
 
 interface AuthLocalDataSource {
     suspend fun saveToken(token: String)

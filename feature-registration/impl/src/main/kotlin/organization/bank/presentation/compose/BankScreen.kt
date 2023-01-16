@@ -7,7 +7,7 @@ import navigation.NavigationTree
 import organization.bank.presentation.viewmodel.BankViewModel
 import organization.bank.presentation.viewmodel.model.BankAction
 import organization.bank.presentation.viewmodel.model.BankEvent
-import presentation.model.RegistrationBankModel
+import presentation.parameters.model.RegistrationBankModel
 import presentation.parameters.BankParameters
 import presentation.parameters.TransportParameters
 import ru.alexgladkov.odyssey.compose.extensions.push

@@ -1,4 +1,4 @@
-package data
+package domain
 
 import domain.model.SignInModel
 import domain.model.SignUpModel

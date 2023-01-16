@@ -1,12 +1,9 @@
-package data.model.request
+package root.data.model.request
 
-import domain.model.AddressSignUpModel
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SignUpRequest(
-    val code: Int,
-    val phone: String,
+data class ProfileRequest(
     val email: String,
     val name: String,
     val surname: String,
@@ -22,9 +19,8 @@ data class SignUpRequest(
     val bank: String,
     val organisationName: String,
     val carPlate: String,
-    val address: AddressSignUpModel,
     val carModel: String,
     val carCategory: String,
-    val carLoadCapacity: Double,
-    val carPalletCapacity: Int
+    val carPalletCapacity: Int,
+    val carLoadCapacity: Double?
 )

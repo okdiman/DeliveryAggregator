@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
 import navigation.NavigationTree
-import presentation.model.DepartureAddressModel
-import presentation.model.RegistrationTransportModel
+import presentation.parameters.model.DepartureAddressModel
+import presentation.parameters.model.RegistrationTransportModel
 import presentation.parameters.TransportParameters
 import presentation.parameters.UserParameters
 import presentation.AddressBSScreen

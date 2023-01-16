@@ -4,7 +4,7 @@ import BaseViewModel
 import coroutines.AppDispatchers
 import di.modules.EMAIL_VALIDATOR_QUALIFIER
 import di.modules.LETTERS_VALIDATOR_QUALIFIER
-import domain.GetMaskedPhoneUseCase
+import domain.usecase.GetMaskedPhoneUseCase
 import editing.presentation.viewmodel.model.EditProfileAction
 import editing.presentation.viewmodel.model.EditProfileEvent
 import editing.presentation.viewmodel.model.EditProfileState

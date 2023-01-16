@@ -1,6 +1,6 @@
 package login.domain
 
-import data.AuthRepository
+import domain.AuthRepository
 import domain.model.VerifyCodeModel
 import domain.usecase.GetCodeUseCase
 

@@ -1,9 +1,9 @@
 package presentation.parameters
 
 import androidx.compose.runtime.Immutable
-import presentation.model.RegistrationBankModel
-import presentation.model.RegistrationCompanyModel
-import presentation.model.RegistrationStartUserModel
+import presentation.parameters.model.RegistrationBankModel
+import presentation.parameters.model.RegistrationCompanyModel
+import presentation.parameters.model.RegistrationStartUserModel
 
 @Immutable
 class TransportParameters(

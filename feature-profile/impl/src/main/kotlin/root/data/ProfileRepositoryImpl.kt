@@ -1,9 +1,9 @@
 package root.data
 
 import domain.ProfileRepository
-import data.datasource.AuthLocalDataSource
-import data.mapper.ProfileModelMapper
-import domain.ProfileModel
+import data.AuthLocalDataSource
+import root.data.mapper.ProfileModelMapper
+import domain.model.ProfileModel
 
 class ProfileRepositoryImpl(
     private val api: ProfileApi,

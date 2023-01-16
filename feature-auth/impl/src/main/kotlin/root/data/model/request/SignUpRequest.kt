@@ -1,7 +1,12 @@
-package domain
+package root.data.model.request
 
-@Suppress("LongParameterList")
-data class ProfileModel(
+import domain.model.AddressSignUpModel
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class SignUpRequest(
+    val code: Int,
+    val phone: String,
     val email: String,
     val name: String,
     val surname: String,
@@ -15,11 +20,11 @@ data class ProfileModel(
     val checkingAccount: String,
     val correspondentAccount: String,
     val bank: String,
-    val organizationName: String,
-    val licencePlate: String,
+    val organisationName: String,
+    val carPlate: String,
+    val address: AddressSignUpModel,
     val carModel: String,
     val carCategory: String,
-    val carCapacity: Int,
-    val carLoadCapacity: Double?,
-    val phone: String
+    val carLoadCapacity: Double,
+    val carPalletCapacity: Int
 )

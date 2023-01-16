@@ -1,3 +1,3 @@
-package domain
+package domain.usecase
 
 interface GetMaskedPhoneUseCase : (String) -> String

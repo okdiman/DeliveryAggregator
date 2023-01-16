@@ -1,9 +1,9 @@
 package root.data
 
-import data.model.request.SendVerifyCodeRequest
-import data.model.request.SignInRequest
-import data.model.request.SignUpRequest
-import data.model.response.AuthSuccessResponse
+import root.data.model.request.SendVerifyCodeRequest
+import root.data.model.request.SignInRequest
+import root.data.model.request.SignUpRequest
+import root.data.model.response.AuthSuccessResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

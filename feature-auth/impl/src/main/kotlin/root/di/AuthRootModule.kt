@@ -1,7 +1,7 @@
 package root.di
 
-import data.AuthRepository
-import data.datasource.AuthLocalDataSource
+import domain.AuthRepository
+import data.AuthLocalDataSource
 import domain.usecase.SignUpUseCase
 import network.domain.GetAuthTokenSyncUseCase
 import org.koin.dsl.module

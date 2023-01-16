@@ -1,7 +1,7 @@
 package root.presentation.mapper
 
-import domain.GetMaskedPhoneUseCase
-import domain.ProfileModel
+import domain.usecase.GetMaskedPhoneUseCase
+import domain.model.ProfileModel
 import root.presentation.compose.model.ProfileUiModel
 import utils.CommonConstants.Helpers.LINE_BREAK
 import utils.CommonConstants.Helpers.SPACER

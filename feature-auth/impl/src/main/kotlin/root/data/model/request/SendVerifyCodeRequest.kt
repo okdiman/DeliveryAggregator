@@ -1,4 +1,4 @@
-package data.model.request
+package root.data.model.request
 
 import kotlinx.serialization.Serializable
 

@@ -1,4 +1,4 @@
-package data.model.response
+package root.data.model.response
 
 import com.google.gson.annotations.SerializedName
 

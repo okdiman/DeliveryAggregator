@@ -1,7 +1,7 @@
 package presentation.parameters
 
 import androidx.compose.runtime.Immutable
-import presentation.model.RegistrationStartUserModel
+import presentation.parameters.model.RegistrationStartUserModel
 
 @Immutable
 class CompanyParameters(

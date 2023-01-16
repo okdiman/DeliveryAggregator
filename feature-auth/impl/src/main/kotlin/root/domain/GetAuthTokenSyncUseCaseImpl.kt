@@ -1,6 +1,6 @@
 package root.domain
 
-import data.datasource.AuthLocalDataSource
+import data.AuthLocalDataSource
 import network.domain.GetAuthTokenSyncUseCase
 
 class GetAuthTokenSyncUseCaseImpl(

@@ -1,6 +1,6 @@
 package root.data.mapper
 
-import data.model.request.SignUpRequest
+import root.data.model.request.SignUpRequest
 import domain.model.SignUpModel
 
 class SignUpMapper {

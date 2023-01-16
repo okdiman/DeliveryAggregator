@@ -2,7 +2,7 @@ package root.presentation.viewmodel
 
 import BaseViewModel
 import coroutines.AppDispatchers
-import domain.ProfileModel
+import domain.model.ProfileModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import root.domain.GetProfileUseCase

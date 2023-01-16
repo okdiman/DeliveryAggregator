@@ -1,7 +1,7 @@
 package editing.domain
 
 import androidx.compose.ui.text.AnnotatedString
-import domain.GetMaskedPhoneUseCase
+import domain.usecase.GetMaskedPhoneUseCase
 import utils.CommonConstants.LIMITS.Common.MAX_PHONE_CHARS
 import utils.CommonConstants.MASK.PHONE
 import utils.DigitVisualTransformation

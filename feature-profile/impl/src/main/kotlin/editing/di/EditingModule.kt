@@ -1,6 +1,6 @@
 package editing.di
 
-import domain.GetMaskedPhoneUseCase
+import domain.usecase.GetMaskedPhoneUseCase
 import editing.domain.GetMaskedPhoneUseCaseImpl
 import org.koin.dsl.module
 import root.domain.UpdateProfileUseCase

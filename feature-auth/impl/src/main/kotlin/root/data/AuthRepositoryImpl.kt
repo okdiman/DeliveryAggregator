@@ -1,9 +1,9 @@
 package root.data
 
-import data.AuthRepository
-import data.datasource.AuthLocalDataSource
-import data.model.request.SendVerifyCodeRequest
-import data.model.request.SignInRequest
+import domain.AuthRepository
+import data.AuthLocalDataSource
+import root.data.model.request.SendVerifyCodeRequest
+import root.data.model.request.SignInRequest
 import domain.model.SignInModel
 import domain.model.SignUpModel
 import domain.model.VerifyCodeModel

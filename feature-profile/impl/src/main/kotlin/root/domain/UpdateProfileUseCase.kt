@@ -1,7 +1,7 @@
 package root.domain
 
 import domain.ProfileRepository
-import domain.ProfileModel
+import domain.model.ProfileModel
 
 class UpdateProfileUseCase(
     private val repository: ProfileRepository

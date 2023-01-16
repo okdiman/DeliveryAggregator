@@ -1,7 +1,7 @@
 package root.data
 
-import data.model.request.ProfileRequest
-import data.model.response.ProfileResponse
+import root.data.model.request.ProfileRequest
+import root.data.model.response.ProfileResponse
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET

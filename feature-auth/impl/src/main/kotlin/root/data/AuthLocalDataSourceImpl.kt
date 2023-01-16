@@ -2,7 +2,7 @@ package root.data
 
 import android.content.SharedPreferences
 import coroutines.AppDispatchers
-import data.datasource.AuthLocalDataSource
+import data.AuthLocalDataSource
 import kotlinx.coroutines.withContext
 
 class AuthLocalDataSourceImpl(
@@ -29,7 +29,7 @@ class AuthLocalDataSourceImpl(
     }
 
     override suspend fun clear() {
-        sharedPreferences.edit().clear().commit()
+        sharedPreferences.edit().clear().apply()
     }
 
     private companion object {

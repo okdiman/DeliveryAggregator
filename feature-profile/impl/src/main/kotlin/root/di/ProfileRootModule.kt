@@ -1,7 +1,7 @@
 package root.di
 
 import domain.ProfileRepository
-import data.mapper.ProfileModelMapper
+import root.data.mapper.ProfileModelMapper
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.create

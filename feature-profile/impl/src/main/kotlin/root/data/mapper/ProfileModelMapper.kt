@@ -1,8 +1,8 @@
-package data.mapper
+package root.data.mapper
 
-import data.model.request.ProfileRequest
-import data.model.response.ProfileDto
-import domain.ProfileModel
+import domain.model.ProfileModel
+import root.data.model.request.ProfileRequest
+import root.data.model.response.ProfileDto
 
 class ProfileModelMapper {
     fun mapFromDataToDomain(dto: ProfileDto) = ProfileModel(
