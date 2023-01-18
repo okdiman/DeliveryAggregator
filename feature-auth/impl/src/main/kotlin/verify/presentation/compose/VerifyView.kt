@@ -82,7 +82,7 @@ private fun CodeBlock(viewState: VerifyState, eventHandler: (VerifyEvent) -> Uni
         }
     }
     val focusRequester = remember { FocusRequester() }
-    Spacer(modifier = Modifier.height(8.dp))
+    Spacer(modifier = Modifier.height(12.dp))
     CommonTextField(
         modifier = Modifier.focusRequester(focusRequester),
         text = viewState.code,

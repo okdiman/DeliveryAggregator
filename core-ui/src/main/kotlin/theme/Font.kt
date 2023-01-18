@@ -1,10 +1,12 @@
 package theme
 
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.sp
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R
 
@@ -20,7 +22,17 @@ private fun baseFontStyle(
     fontWeight = weight,
     fontFamily = sfUiDisplay,
     color = palette.textPrimaryColor,
-    fontSize = 16.sp
+    fontSize = 16.sp,
+    platformStyle = platformTextStyle,
+    lineHeightStyle = lineHeightStyle
+)
+
+@Suppress("DEPRECATION")
+private val platformTextStyle = PlatformTextStyle(includeFontPadding = false)
+
+private val lineHeightStyle = LineHeightStyle(
+    alignment = LineHeightStyle.Alignment.Proportional,
+    trim = LineHeightStyle.Trim.None,
 )
 
 val sfUiDisplay = FontFamily(

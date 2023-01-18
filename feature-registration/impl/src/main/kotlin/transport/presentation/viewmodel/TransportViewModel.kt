@@ -217,18 +217,21 @@ class TransportViewModel(
                 )
             }
         } else {
-            viewState = viewState.copy(suggests = emptyList())
+            viewState = viewState.copy(
+                suggests = emptyList(),
+                bsAddress = viewState.bsAddress.copy(isSuggestLoading = false)
+            )
         }
     }
 
     private fun isContinueButtonEnabled(state: TransportState): Boolean {
         return isTextFieldFilled(state.licencePlate.stateText, LICENCE_PLATE_MIN_CHARS) &&
-                isTextFieldFilled(state.departureAddress.stateText, MIN_ADDRESS_CHARS) &&
-                isTextFieldFilled(state.carBrand.stateText, CAR_BRAND_MIN_CHARS) &&
-                isTextFieldFilled(state.carCategory.stateText, CAR_INFO_MIN_CHARS) &&
-                isTextFieldFilled(state.carLoadCapacity.stateText, CAR_INFO_MIN_CHARS) &&
-                isTextFieldFilled(state.carCapacity.stateText, CAR_INFO_MIN_CHARS) &&
-                !state.licencePlate.isValidationError && !state.carCategory.isValidationError &&
-                !state.carBrand.isValidationError && !state.carLoadCapacity.isValidationError
+            isTextFieldFilled(state.departureAddress.stateText, MIN_ADDRESS_CHARS) &&
+            isTextFieldFilled(state.carBrand.stateText, CAR_BRAND_MIN_CHARS) &&
+            isTextFieldFilled(state.carCategory.stateText, CAR_INFO_MIN_CHARS) &&
+            isTextFieldFilled(state.carLoadCapacity.stateText, CAR_INFO_MIN_CHARS) &&
+            isTextFieldFilled(state.carCapacity.stateText, CAR_INFO_MIN_CHARS) &&
+            !state.licencePlate.isValidationError && !state.carCategory.isValidationError &&
+            !state.carBrand.isValidationError && !state.carLoadCapacity.isValidationError
     }
 }

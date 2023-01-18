@@ -28,7 +28,7 @@ fun TitleRegistrationView(
     @DrawableRes imageRes: Int,
     @StringRes titleRes: Int
 ) {
-    Box(modifier = Modifier.fillMaxWidth()) {
+    Box(modifier = Modifier.fillMaxWidth().padding(top = 4.dp)) {
         if (isBackButtonVisible) {
             BackButton(modifier = Modifier.padding(top = 3.dp)) { onButtonClick() }
         }

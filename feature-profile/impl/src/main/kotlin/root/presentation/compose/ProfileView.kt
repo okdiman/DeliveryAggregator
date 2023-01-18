@@ -1,6 +1,9 @@
 package root.presentation.compose
 
 import ErrorScreen
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.MutableTransitionState
+import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +20,7 @@ import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -44,46 +48,51 @@ internal fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Un
             ErrorScreen { eventHandler(ProfileEvent.OnRetryClick) }
         }
         else -> {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = 48.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
-            ) {
-                item {
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = state.name,
-                                style = Theme.fonts.bold.copy(fontSize = 24.sp)
+            val startState = remember { MutableTransitionState(false) }.also {
+                it.targetState = true
+            }
+            AnimatedVisibility(visibleState = startState, enter = slideInHorizontally()) {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(top = 54.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
+                ) {
+                    item {
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = state.name,
+                                    style = Theme.fonts.bold.copy(fontSize = 24.sp)
+                                )
+                            }
+                            Icon(
+                                modifier = Modifier
+                                    .clip(Theme.shapes.roundedButton)
+                                    .clickable {
+                                        eventHandler(ProfileEvent.OnEditProfileClick)
+                                    },
+                                painter = painterResource(id = R.drawable.profile_edit_ic),
+                                contentDescription = null
                             )
                         }
-                        Icon(
-                            modifier = Modifier
-                                .clip(Theme.shapes.roundedButton)
-                                .clickable {
-                                    eventHandler(ProfileEvent.OnEditProfileClick)
-                                },
-                            painter = painterResource(id = R.drawable.profile_edit_ic),
-                            contentDescription = null
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Text(
+                            text = state.organizationName,
+                            style = Theme.fonts.regular
                         )
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Text(
+                            text = state.phone, style = Theme.fonts.regular
+                        )
+                        Spacer(modifier = Modifier.height(12.dp))
+                        Text(
+                            text = state.email, style = Theme.fonts.regular
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Divider(thickness = 1.dp, color = Theme.colors.hintColor)
                     }
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Text(
-                        text = state.organizationName,
-                        style = Theme.fonts.regular
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        text = state.phone, style = Theme.fonts.regular
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        text = state.email, style = Theme.fonts.regular
-                    )
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Divider(thickness = 1.dp, color = Theme.colors.hintColor)
+                    items(state.uiModels) { ProfileItem(it, eventHandler) }
                 }
-                items(state.uiModels) { ProfileItem(it, eventHandler) }
             }
         }
     }
@@ -95,12 +104,14 @@ private fun ProfileItem(
     eventHandler: (ProfileEvent) -> Unit
 ) {
     Spacer(modifier = Modifier.height(20.dp))
-    Row(modifier = Modifier
-        .fillMaxWidth()
-        .clip(Theme.shapes.textFields)
-        .clickable {
-            eventHandler(ProfileEvent.OnListItemClick(item))
-        }) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(Theme.shapes.textFields)
+            .clickable {
+                eventHandler(ProfileEvent.OnListItemClick(item))
+            }, verticalAlignment = Alignment.CenterVertically
+    ) {
         Icon(painter = painterResource(id = item.icon), contentDescription = null)
         Spacer(modifier = Modifier.width(8.dp))
         Text(

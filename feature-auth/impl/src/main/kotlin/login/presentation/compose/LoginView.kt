@@ -62,7 +62,7 @@ private fun TitleBlock() {
         painter = painterResource(R.drawable.login_phone_ic),
         contentDescription = "poster"
     )
-    Spacer(modifier = Modifier.height(12.dp))
+    Spacer(modifier = Modifier.height(18.dp))
     Text(
         text = stringResource(R.string.enter_phone),
         style = Theme.fonts.regular
@@ -71,13 +71,13 @@ private fun TitleBlock() {
 
 @Composable
 private fun PhoneBlock(viewState: LoginState, eventHandler: (LoginEvent) -> Unit) {
-    Spacer(modifier = Modifier.height(4.dp))
+    Spacer(modifier = Modifier.height(12.dp))
     Row {
         Text(
             text = stringResource(id = R.string.phone_prefix),
             style = Theme.fonts.bold.copy(fontSize = 24.sp)
         )
-        Spacer(modifier = Modifier.width(4.dp))
+        Spacer(modifier = Modifier.width(6.dp))
         CommonTextField(
             text = viewState.phone,
             textStyle = Theme.fonts.bold.copy(fontSize = 24.sp),
@@ -95,7 +95,7 @@ private fun PhoneBlock(viewState: LoginState, eventHandler: (LoginEvent) -> Unit
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun AgreementBlock(viewState: LoginState, eventHandler: (LoginEvent) -> Unit) {
-    Spacer(modifier = Modifier.height(4.dp))
+    Spacer(modifier = Modifier.height(8.dp))
     Row(
         modifier = Modifier.fillMaxWidth()
     ) {

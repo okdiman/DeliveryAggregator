@@ -38,7 +38,10 @@ fun StandardTextField(
     hint: String = "",
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     maxChar: Int = Int.MAX_VALUE,
-    textStyle: TextStyle = Theme.fonts.regular,
+    textStyle: TextStyle = Theme.fonts.regular.copy(
+        platformStyle = null,
+        lineHeightStyle = null
+    ),
     onValueChanged: (String) -> Unit = {}
 ) {
     Spacer(modifier = Modifier.height(24.dp))

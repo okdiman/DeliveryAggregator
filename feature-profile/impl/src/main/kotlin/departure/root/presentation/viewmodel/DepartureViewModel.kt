@@ -165,7 +165,10 @@ class DepartureViewModel : BaseViewModel<DepartureState, DepartureAction, Depart
                 )
             }
         } else {
-            viewState = viewState.copy(suggests = emptyList())
+            viewState = viewState.copy(
+                suggests = emptyList(),
+                bsAddress = viewState.bsAddress.copy(isSuggestLoading = false)
+            )
         }
     }
 

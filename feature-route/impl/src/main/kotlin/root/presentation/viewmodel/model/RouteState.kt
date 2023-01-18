@@ -1,9 +1,12 @@
 package root.presentation.viewmodel.model
 
-import root.presentation.compose.model.RootUiModel
+import root.presentation.compose.model.RouteOrderUiModel
 
 data class RouteState(
-    val routes: List<RootUiModel> = emptyList(),
+    val orders: List<RouteOrderUiModel> = emptyList(),
     val notificationsCount: Int = 0,
-    val isAcceptButtonEnabled: Boolean = false
+    val isAcceptButtonEnabled: Boolean = false,
+    val isLoading: Boolean = true,
+    val isError: Boolean = false,
+    val isRefreshing: Boolean = false
 )

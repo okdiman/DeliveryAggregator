@@ -1,8 +1,10 @@
 package root.presentation.viewmodel.model
 
 sealed interface RouteEvent {
-    data class OnRouteClick(val id: String) : RouteEvent
-    data class AcceptOrderClick(val id: String) : RouteEvent
+    data class OnRouteClick(val id: Long) : RouteEvent
+    data class AcceptOrderClick(val id: Long) : RouteEvent
     object OnNotificationsClick : RouteEvent
     object ResetAction : RouteEvent
+    object OnRetryClick : RouteEvent
+    object OnRefreshSwipe : RouteEvent
 }

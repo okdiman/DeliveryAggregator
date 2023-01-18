@@ -59,7 +59,7 @@ fun AddressBSScreen(
             .padding(start = 16.dp, end = 16.dp),
     ) {
         item {
-            Row(modifier = Modifier.padding(top = 30.dp)) {
+            Row(modifier = Modifier.padding(top = 40.dp)) {
                 Text(
                     modifier = Modifier.weight(1f),
                     text = stringResource(id = titleRes),
@@ -68,6 +68,7 @@ fun AddressBSScreen(
                 Icon(
                     modifier = Modifier
                         .padding(top = 8.dp)
+                        .clip(Theme.shapes.roundedButton)
                         .clickable {
                             rootController
                                 .findModalController()
@@ -152,6 +153,7 @@ private fun SuggestsItem(
                     text = item.subtitle,
                     style = Theme.fonts.regular
                 )
+                Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = item.city, style = Theme.fonts.regular.copy(
                         fontSize = 14.sp,
@@ -160,11 +162,11 @@ private fun SuggestsItem(
                 )
             }
         }
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(14.dp))
         Divider(
             modifier = Modifier.padding(start = 36.dp),
             color = Theme.colors.dividerColor
         )
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(modifier = Modifier.height(14.dp))
     }
 }

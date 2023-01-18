@@ -199,16 +199,19 @@ class CompanyViewModel(
                 )
             }
         } else {
-            viewState = viewState.copy(suggests = emptyList())
+            viewState = viewState.copy(
+                suggests = emptyList(),
+                bsAddress = viewState.bsAddress.copy(isSuggestLoading = false)
+            )
         }
     }
 
     private fun isContinueButtonEnabled(state: CompanyState) =
         isTextFieldFilled(state.actualAddress.stateText, MIN_ADDRESS_CHARS) &&
-                isTextFieldFilled(state.legalAddress.stateText, MIN_ADDRESS_CHARS) &&
-                isTextFieldFilled(state.ogrn.stateText, OGRN_CHARS) &&
-                isTextFieldFilled(state.kpp.stateText, KPP_CHARS) &&
-                isTextFieldFilled(state.inn.stateText, INN_MIN_CHARS) &&
-                isTextFieldFilled(state.companyName.stateText, MIN_NAME_CHARS) &&
-                !state.companyName.isValidationError
+            isTextFieldFilled(state.legalAddress.stateText, MIN_ADDRESS_CHARS) &&
+            isTextFieldFilled(state.ogrn.stateText, OGRN_CHARS) &&
+            isTextFieldFilled(state.kpp.stateText, KPP_CHARS) &&
+            isTextFieldFilled(state.inn.stateText, INN_MIN_CHARS) &&
+            isTextFieldFilled(state.companyName.stateText, MIN_NAME_CHARS) &&
+            !state.companyName.isValidationError
 }

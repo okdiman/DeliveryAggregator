@@ -7,6 +7,7 @@ import di.coreUiiModule
 import di.splashModule
 import root.di.profileModules
 import root.di.registrationModule
+import root.di.routeModules
 
 fun applicationModules() = listOf(
     coreUiiModule(),
@@ -16,4 +17,5 @@ fun applicationModules() = listOf(
 ) +
         coreModules() +
         authModule() +
-        profileModules()
+        profileModules() +
+        routeModules()

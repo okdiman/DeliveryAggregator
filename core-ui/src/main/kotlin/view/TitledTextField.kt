@@ -60,6 +60,7 @@ fun TitledTextField(
                 color = Theme.colors.textThirdColor
             )
         )
+        Spacer(modifier = Modifier.height(4.dp))
     }
     OutlinedTextField(
         modifier = modifier.then(

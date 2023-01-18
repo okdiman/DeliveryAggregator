@@ -1,6 +1,5 @@
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
-
 fun DependencyHandler.core() {
     add("implementation", Libraries.Core.coreKtx)
     add("implementation", Libraries.Core.material)

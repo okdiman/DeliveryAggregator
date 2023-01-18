@@ -38,7 +38,11 @@ internal fun EditProfileView(state: EditProfileState, eventHandler: (EditProfile
             .padding(PaddingValues(start = 16.dp, end = 16.dp, top = 4.dp))
             .verticalScroll(rememberScrollState())
     ) {
-        Box(modifier = Modifier.fillMaxWidth()) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 4.dp)
+        ) {
             BackButton(modifier = Modifier.padding(top = 3.dp)) {
                 eventHandler(EditProfileEvent.OnBackClick)
             }

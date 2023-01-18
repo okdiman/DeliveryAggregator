@@ -1,6 +1,9 @@
 package departure.root.presentation.compose
 
 import ErrorScreen
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.MutableTransitionState
+import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -18,6 +21,7 @@ import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,69 +49,78 @@ internal fun DepartureView(state: DepartureState, eventHandler: (DepartureEvent)
             ErrorScreen { eventHandler(DepartureEvent.OnRetryClick) }
         }
         else -> {
-            LazyColumn(
-                modifier = Modifier
-                    .padding(PaddingValues(start = 16.dp, end = 16.dp))
-            ) {
-                item {
-                    Box(modifier = Modifier.fillMaxWidth()) {
-                        BackButton(modifier = Modifier.padding(top = 3.dp)) {
-                            eventHandler(DepartureEvent.OnBackClick)
-                        }
-                        Text(
-                            modifier = Modifier.align(Alignment.Center),
-                            text = stringResource(R.string.depart_address),
-                            style = Theme.fonts.bold.copy(fontSize = 20.sp)
-                        )
-                    }
-                    Spacer(Modifier.height(24.dp))
-                }
-                items(state.addresses) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        RadioButton(
-                            modifier = Modifier.size(20.dp),
-                            selected = it.isActive,
-                            onClick = { eventHandler(DepartureEvent.OnAddressClick(it.id)) },
-                            colors = RadioButtonDefaults.colors(
-                                selectedColor = Theme.colors.radioButtonColor,
-                                unselectedColor = Theme.colors.radioButtonColor
+            val startState = remember { MutableTransitionState(false) }.also {
+                it.targetState = true
+            }
+            AnimatedVisibility(visibleState = startState, enter = slideInVertically()) {
+                LazyColumn(
+                    modifier = Modifier
+                        .padding(PaddingValues(start = 16.dp, end = 16.dp))
+                ) {
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 4.dp)
+                        ) {
+                            BackButton(modifier = Modifier.padding(top = 3.dp)) {
+                                eventHandler(DepartureEvent.OnBackClick)
+                            }
+                            Text(
+                                modifier = Modifier.align(Alignment.Center),
+                                text = stringResource(R.string.depart_address),
+                                style = Theme.fonts.bold.copy(fontSize = 20.sp)
                             )
-                        )
-                        Text(
-                            modifier = Modifier
-                                .padding(start = 10.dp)
-                                .weight(1f),
-                            text = it.address
-                        )
-                        Icon(
-                            modifier = Modifier
-                                .clip(Theme.shapes.roundedButton)
-                                .clickable {
-                                    eventHandler(DepartureEvent.OnEditClick(it))
-                                },
-                            painter = painterResource(id = R.drawable.profile_edit_ic),
-                            contentDescription = null
-                        )
+                        }
+                        Spacer(Modifier.height(26.dp))
                     }
-                    Spacer(modifier = Modifier.height(16.dp))
-                }
-                item {
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        Text(
-                            modifier = Modifier.weight(1f),
-                            text = stringResource(id = R.string.add_new_address)
-                        )
-                        Icon(
-                            modifier = Modifier
-                                .padding(start = 16.dp)
-                                .clip(Theme.shapes.roundedButton)
-                                .clickable { eventHandler(DepartureEvent.OnAddAddressClick) },
-                            painter = painterResource(id = R.drawable.profile_add_ic),
-                            contentDescription = null
-                        )
+                    items(state.addresses) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            RadioButton(
+                                modifier = Modifier.size(20.dp),
+                                selected = it.isActive,
+                                onClick = { eventHandler(DepartureEvent.OnAddressClick(it.id)) },
+                                colors = RadioButtonDefaults.colors(
+                                    selectedColor = Theme.colors.radioButtonColor,
+                                    unselectedColor = Theme.colors.radioButtonColor
+                                )
+                            )
+                            Text(
+                                modifier = Modifier
+                                    .padding(start = 10.dp)
+                                    .weight(1f),
+                                text = it.address
+                            )
+                            Icon(
+                                modifier = Modifier
+                                    .clip(Theme.shapes.roundedButton)
+                                    .clickable {
+                                        eventHandler(DepartureEvent.OnEditClick(it))
+                                    },
+                                painter = painterResource(id = R.drawable.profile_edit_ic),
+                                contentDescription = null
+                            )
+                        }
+                        Spacer(modifier = Modifier.height(24.dp))
+                    }
+                    item {
+                        Row(modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(Theme.shapes.roundedButton)
+                            .clickable { eventHandler(DepartureEvent.OnAddAddressClick) }) {
+                            Text(
+                                modifier = Modifier.weight(1f),
+                                text = stringResource(id = R.string.add_new_address)
+                            )
+                            Icon(
+                                modifier = Modifier.padding(start = 16.dp),
+                                painter = painterResource(id = R.drawable.profile_add_ic),
+                                contentDescription = null
+                            )
+                        }
                     }
                 }
             }
