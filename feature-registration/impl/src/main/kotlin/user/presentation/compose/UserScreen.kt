@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
 import navigation.NavigationTree
-import presentation.parameters.UserParameters
+import user.presentation.UserParameters
 import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import ru.alexgladkov.odyssey.core.LaunchFlag

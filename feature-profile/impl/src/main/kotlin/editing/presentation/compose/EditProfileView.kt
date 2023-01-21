@@ -1,6 +1,6 @@
 package editing.presentation.compose
 
-import ActionButton
+import ScrollScreenActionButton
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -48,7 +48,7 @@ internal fun EditProfileView(state: EditProfileState, eventHandler: (EditProfile
             }
             Text(
                 modifier = Modifier.align(Alignment.Center),
-                text = stringResource(R.string.profile),
+                text = stringResource(R.string.editing_profile),
                 style = Theme.fonts.bold.copy(fontSize = 20.sp)
             )
         }
@@ -56,10 +56,14 @@ internal fun EditProfileView(state: EditProfileState, eventHandler: (EditProfile
         EditProfileFieldsBlock(state, eventHandler)
     }
     if (state.isSaveButtonVisible) {
-        ActionButton(
+        Box(
             modifier = Modifier.fillMaxSize(),
-            textRes = R_core.string.save
-        ) { eventHandler(EditProfileEvent.OnSaveEditingClick) }
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            ScrollScreenActionButton(
+                textRes = R_core.string.common_save
+            ) { eventHandler(EditProfileEvent.OnSaveEditingClick) }
+        }
     }
 }
 
@@ -90,7 +94,7 @@ fun EditProfileFieldsBlock(state: EditProfileState, eventHandler: (EditProfileEv
         maxChar = CommonConstants.LIMITS.Common.MAX_NAME_CHARS
     ) { eventHandler(EditProfileEvent.OnEmailChanged(it)) }
     StandardTextField(
-        title = stringResource(R.string.mobile),
+        title = stringResource(R.string.editing_mobile),
         state = state.phone,
         enabled = false,
         textStyle = Theme.fonts.regular.copy(
@@ -102,7 +106,7 @@ fun EditProfileFieldsBlock(state: EditProfileState, eventHandler: (EditProfileEv
         )
     )
     StandardTextField(
-        title = stringResource(R_core.string.company_name),
+        title = stringResource(R_core.string.common_company_name),
         state = state.organizationName,
         enabled = false,
         textStyle = Theme.fonts.regular.copy(
@@ -118,7 +122,7 @@ fun EditProfileFieldsBlock(state: EditProfileState, eventHandler: (EditProfileEv
         modifier = Modifier
             .clip(Theme.shapes.textFields)
             .clickable { eventHandler(EditProfileEvent.OnDeleteAccClick) },
-        text = stringResource(id = R.string.delete_profile),
+        text = stringResource(id = R.string.editing_delete_profile),
         style = Theme.fonts.bold
     )
     Spacer(modifier = Modifier.height(if (state.isSaveButtonVisible) 120.dp else 24.dp))

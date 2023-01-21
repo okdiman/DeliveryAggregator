@@ -23,6 +23,7 @@ fun StandardTextField(
     isDigits: Boolean = false,
     state: DefaultParamState,
     enabled: Boolean = true,
+    discription: String? = null,
     readOnly: Boolean = false,
     colors: TextFieldColors = TextFieldDefaults.textFieldColors(
         focusedIndicatorColor = Color.Transparent,
@@ -63,6 +64,7 @@ fun StandardTextField(
         ),
         colors = colors,
         textStyle = textStyle,
-        onValueChanged = { onValueChanged(it) }
+        onValueChanged = { onValueChanged(it) },
+        discription = discription
     )
 }

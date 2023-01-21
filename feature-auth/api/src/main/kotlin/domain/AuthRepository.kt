@@ -1,12 +1,12 @@
 package domain
 
-import domain.model.SignInModel
-import domain.model.SignUpModel
-import domain.model.VerifyCodeModel
+import domain.model.AuthSignInModel
+import domain.model.AuthSignUpModel
+import domain.model.AuthVerifyCodeModel
 
 interface AuthRepository {
     suspend fun getAuthInfo()
-    suspend fun getVerifyCode(model: VerifyCodeModel)
-    suspend fun signIn(model: SignInModel)
-    suspend fun signUp(model: SignUpModel)
+    suspend fun getVerifyCode(model: AuthVerifyCodeModel)
+    suspend fun signIn(model: AuthSignInModel)
+    suspend fun signUp(model: AuthSignUpModel)
 }

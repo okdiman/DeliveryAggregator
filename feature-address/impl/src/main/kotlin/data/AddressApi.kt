@@ -2,7 +2,7 @@ package data
 
 import data.model.request.AddressRequest
 import data.model.request.AddressSuggestRequest
-import data.model.request.AuthAddressSuggestRequest
+import data.model.request.AddressAuthSuggestRequest
 import data.model.response.AddressSuggestDto
 import data.model.response.AddressesDto
 import retrofit2.http.Body
@@ -14,7 +14,7 @@ import retrofit2.http.Path
 interface AddressApi {
     @POST("/auth/addresses/suggest")
     suspend fun getAuthAddressesByQuery(
-        @Body request: AuthAddressSuggestRequest
+        @Body request: AddressAuthSuggestRequest
     ): ArrayList<AddressSuggestDto>
 
     @POST("/api/users/addresses/suggest")

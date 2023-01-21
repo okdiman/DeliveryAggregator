@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="payment_acc">Рассчетный счет</string>
-    <string name="payment_acc_hint">40817810099910004312</string>
-    <string name="payment_acc_error">Расчетный счет должен содержать 20 символов.</string>
-    <string name="payment_acc_validate_error">Некорректный расчётный счёт.</string>
-    <string name="corr_acc">Корреспондентский счет</string>
-    <string name="corr_acc_hint">30101810145250000974</string>
-    <string name="corr_acc_error">Корреспондентский счет должен содержать 20 символов.</string>
-    <string name="corr_acc_validate_error">Некорректный корреспондентский счет.</string>
-    <string name="bik">БИК</string>
-    <string name="bik_hint">044525974</string>
-    <string name="bik_error">Номер БИК должен содержать 9 символов.</string>
-    <string name="bik_validate_error">Некорректный БИК.</string>
+    <string name="bank_payment_acc">Рассчетный счет</string>
+    <string name="bank_payment_acc_hint">40817810099910004312</string>
+    <string name="bank_payment_acc_error">Расчетный счет должен содержать 20 символов.</string>
+    <string name="bank_payment_acc_validate_error">Некорректный расчётный счёт.</string>
+    <string name="bank_corr_acc">Корреспондентский счет</string>
+    <string name="bank_corr_acc_hint">30101810145250000974</string>
+    <string name="bank_corr_acc_error">Корреспондентский счет должен содержать 20 символов.</string>
+    <string name="bank_corr_acc_validate_error">Некорректный корреспондентский счет.</string>
+    <string name="bank_bik">БИК</string>
+    <string name="bank_bik_hint">044525974</string>
+    <string name="bank_bik_error">Номер БИК должен содержать 9 символов.</string>
+    <string name="bank_bik_validate_error">Некорректный БИК.</string>
     <string name="bank_name">Название банка</string>
     <string name="bank_name_hint">ПАО Сбербанк</string>
     <string name="bank_name_validate_error">Некорректное название банка.</string>

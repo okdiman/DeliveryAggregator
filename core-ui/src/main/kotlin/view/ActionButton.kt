@@ -1,7 +1,10 @@
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -15,6 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import theme.Theme
@@ -24,7 +28,9 @@ import trinity_monsters.wildberries_delivery_aggregator.core_ui.R
 @Composable
 fun ActionButton(
     modifier: Modifier = Modifier,
-    @StringRes textRes: Int = R.string.continue_button,
+    @StringRes textRes: Int = R.string.common_continue_button,
+    additionalText: String? = null,
+    height: Dp = 52.dp,
     gradient: Brush = Theme.gradients.actionButtonGradient,
     alignment: Alignment = Alignment.BottomCenter,
     textColor: Color = Theme.colors.textSecondaryColor,
@@ -33,32 +39,19 @@ fun ActionButton(
     onClick: () -> Unit
 ) {
     Box(
-        modifier = modifier.then(
-            Modifier.padding(padding)
-        ),
+        modifier = modifier,
         contentAlignment = alignment
     ) {
-        TextButton(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(52.dp)
-                .clip(Theme.shapes.roundedButton)
-                .background(gradient),
-            enabled = enabled,
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = Color.Transparent,
-                disabledBackgroundColor = Color.White.copy(alpha = 0.7f)
-            ),
-            onClick = { onClick() },
-        ) {
-            Text(
-                text = stringResource(id = textRes),
-                style = Theme.fonts.bold.copy(
-                    fontSize = 20.sp,
-                    color = textColor
-                )
-            )
-        }
+        ActionButtonView(
+            textRes,
+            additionalText,
+            height,
+            gradient,
+            textColor,
+            enabled,
+            padding,
+            onClick
+        )
     }
 }
 
@@ -66,7 +59,7 @@ fun ActionButton(
 @Composable
 fun ActionButton(
     modifier: Modifier = Modifier,
-    @StringRes textRes: Int = R.string.continue_button,
+    @StringRes textRes: Int = R.string.common_continue_button,
     color: Color,
     alignment: Alignment = Alignment.BottomCenter,
     textColor: Color = Theme.colors.textSecondaryColor,
@@ -76,8 +69,7 @@ fun ActionButton(
 ) {
     Box(
         modifier = modifier.then(
-            Modifier
-                .padding(padding)
+            Modifier.padding(padding)
         ),
         contentAlignment = alignment
     ) {
@@ -101,6 +93,94 @@ fun ActionButton(
                     color = textColor
                 )
             )
+        }
+    }
+}
+
+/**
+ * добавляет бэкграунд для плавного скрытия скроллящегося контента под кнопкой
+ */
+@Suppress("LongParameterList")
+@Composable
+fun ScrollScreenActionButton(
+    @StringRes textRes: Int = R.string.common_continue_button,
+    additionalText: String? = null,
+    height: Dp = 52.dp,
+    gradient: Brush = Theme.gradients.actionButtonGradient,
+    alignment: Alignment = Alignment.BottomCenter,
+    textColor: Color = Theme.colors.textSecondaryColor,
+    enabled: Boolean = true,
+    padding: PaddingValues = PaddingValues(start = 16.dp, end = 16.dp, bottom = 44.dp),
+    onClick: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(140.dp)
+            .background(Theme.gradients.buttonBackgroundGradient),
+        contentAlignment = alignment
+    ) {
+        ActionButtonView(
+            textRes,
+            additionalText,
+            height,
+            gradient,
+            textColor,
+            enabled,
+            padding,
+            onClick
+        )
+    }
+}
+
+@Suppress("LongParameterList")
+@Composable
+private fun ActionButtonView(
+    @StringRes textRes: Int = R.string.common_continue_button,
+    additionalText: String? = null,
+    height: Dp = 52.dp,
+    gradient: Brush = Theme.gradients.actionButtonGradient,
+    textColor: Color = Theme.colors.textSecondaryColor,
+    enabled: Boolean = true,
+    padding: PaddingValues = PaddingValues(start = 16.dp, end = 16.dp, bottom = 44.dp),
+    onClick: () -> Unit
+) {
+    TextButton(
+        modifier = Modifier
+            .padding(padding)
+            .fillMaxWidth()
+            .height(height)
+            .clip(Theme.shapes.roundedButton)
+            .background(gradient),
+        enabled = enabled,
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = Color.Transparent,
+            disabledBackgroundColor = Color.White.copy(alpha = 0.7f)
+        ),
+        onClick = { onClick() },
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = stringResource(id = textRes),
+                style = Theme.fonts.bold.copy(
+                    fontSize = 20.sp,
+                    color = textColor
+                )
+            )
+            if (additionalText != null) {
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = additionalText,
+                    style = Theme.fonts.regular.copy(
+                        fontSize = 14.sp,
+                        color = textColor
+                    )
+                )
+            }
         }
     }
 }

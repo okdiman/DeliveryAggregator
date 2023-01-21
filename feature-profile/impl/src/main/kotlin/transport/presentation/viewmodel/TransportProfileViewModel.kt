@@ -9,7 +9,7 @@ import di.modules.LOAD_CAPACITY_VALIDATOR_QUALIFIER
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.qualifier.named
-import presentation.TransportProfileParameters
+import transport.presentation.TransportProfileParameters
 import root.domain.UpdateProfileUseCase
 import transport.presentation.viewmodel.model.TransportProfileAction
 import transport.presentation.viewmodel.model.TransportProfileEvent

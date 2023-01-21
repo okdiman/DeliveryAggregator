@@ -4,10 +4,10 @@ import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
 import navigation.NavigationTree
-import presentation.parameters.model.DepartureAddressModel
-import presentation.parameters.model.RegistrationTransportModel
-import presentation.parameters.TransportParameters
-import presentation.parameters.UserParameters
+import root.presentation.model.RegistrationDepartureAddressModel
+import root.presentation.model.RegistrationTransportModel
+import transport.presentation.TransportParameters
+import user.presentation.UserParameters
 import presentation.AddressBSScreen
 import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.extensions.push
@@ -77,7 +77,7 @@ private fun getUserParameters(parameters: TransportParameters, state: TransportS
         bank = parameters.bank,
         transport = RegistrationTransportModel(
             licencePlate = state.licencePlate.stateText,
-            departureAddress = DepartureAddressModel(
+            departureAddress = RegistrationDepartureAddressModel(
                 geoLon = state.departureAddress.address?.geoLon.orEmpty(),
                 geoLat = state.departureAddress.address?.geoLat.orEmpty(),
                 city = state.departureAddress.address?.city.orEmpty(),

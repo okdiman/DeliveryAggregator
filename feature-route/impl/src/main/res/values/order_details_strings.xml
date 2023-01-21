@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="order_details">Детали заказа</string>
+    <string name="order_details_client_name">Заказчик</string>
+    <string name="order_details_client_phone">Мобильный</string>
+    <string name="order_details_delivery_date">Дата поставки</string>
+    <string name="order_details_delivery_time">Время прибытия</string>
+    <string name="order_details_cargo_type">Тип груза</string>
+    <string name="order_details_pallet_count">Колличество паллет</string>
+    <string name="order_details_delivery_address">Адрес доставки</string>
+    <string name="order_details_additional_info">Дополнительная информация</string>
+    <string name="order_details_status">Статусы доставки</string>
+    <string name="order_details_status_info">На каждом статусе нужно сделать фото: номера автомобиля, места отгрузки/погрузки</string>
+    <string name="order_details_loading_status">1. Погрузка</string>
+    <string name="order_details_delivery_status">2. Доставка</string>
+    <string name="order_details_delivery_status_completed">Выполнен</string>
+</resources>

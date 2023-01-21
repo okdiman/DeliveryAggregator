@@ -27,6 +27,7 @@ fun TitledTextField(
     modifier: Modifier = Modifier,
     hasTitle: Boolean = true,
     title: String,
+    discription: String?,
     state: DefaultParamState,
     hint: String,
     readOnly: Boolean = false,
@@ -99,18 +100,29 @@ fun TitledTextField(
             }
         }
     )
-    if ((state.isFillingError || state.isValidationError) && !isFocused.value) {
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = if (state.isFillingError) {
-                stringResource(state.fillingErrorDiscription)
-            } else {
-                stringResource(state.validationErrorDiscription)
-            },
-            style = Theme.fonts.regular.copy(
-                color = Theme.colors.errorColor,
-                fontSize = 12.sp,
+    when {
+        (state.isFillingError || state.isValidationError) && !isFocused.value -> {
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = if (state.isFillingError) {
+                    stringResource(state.fillingErrorDiscription)
+                } else {
+                    stringResource(state.validationErrorDiscription)
+                },
+                style = Theme.fonts.regular.copy(
+                    color = Theme.colors.errorColor,
+                    fontSize = 12.sp,
+                )
             )
-        )
+        }
+        discription != null -> {
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = discription,
+                style = Theme.fonts.regular.copy(
+                    fontSize = 14.sp,
+                )
+            )
+        }
     }
 }

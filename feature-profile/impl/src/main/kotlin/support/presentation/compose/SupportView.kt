@@ -21,17 +21,17 @@ internal fun SupportView(eventHandler: (SupportEvent) -> Unit) {
             .padding(horizontal = 16.dp, vertical = 36.dp)
     ) {
         ActionButton(
-            textRes = R.string.call,
+            textRes = R.string.support_call,
             alignment = Alignment.Center,
             padding = PaddingValues(0.dp)
         ) { eventHandler(SupportEvent.OnCallClick) }
         ActionButton(
-            textRes = R.string.send_email,
+            textRes = R.string.support_send_email,
             alignment = Alignment.Center,
             padding = PaddingValues(top = 16.dp)
         ) { eventHandler(SupportEvent.OnEmailClick) }
         ActionButton(
-            textRes = R.string.reject,
+            textRes = R.string.support_reject,
             textColor = Theme.colors.textPrimaryColor,
             color = Theme.colors.disabledButtonColor,
             alignment = Alignment.Center,

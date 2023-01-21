@@ -8,7 +8,7 @@ import domain.usecase.SignUpUseCase
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.qualifier.named
-import presentation.parameters.UserParameters
+import user.presentation.UserParameters
 import user.presentation.mapper.SignUpModelMapper
 import user.presentation.viewmodel.model.UserAction
 import user.presentation.viewmodel.model.UserEvent

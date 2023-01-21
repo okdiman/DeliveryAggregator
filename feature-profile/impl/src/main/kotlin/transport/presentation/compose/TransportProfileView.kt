@@ -1,6 +1,6 @@
 package transport.presentation.compose
 
-import ActionButton
+import ScrollScreenActionButton
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -39,15 +39,17 @@ internal fun TransportProfileView(
             .padding(PaddingValues(start = 16.dp, end = 16.dp, top = 4.dp))
             .verticalScroll(rememberScrollState())
     ) {
-        Box(modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 4.dp)) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 4.dp)
+        ) {
             BackButton(modifier = Modifier.padding(top = 3.dp)) {
                 eventHandler(TransportProfileEvent.OnBackButtonClick)
             }
             Text(
                 modifier = Modifier.align(Alignment.Center),
-                text = stringResource(R.string.profile),
+                text = stringResource(R.string.editing_profile),
                 style = Theme.fonts.bold.copy(fontSize = 20.sp)
             )
         }
@@ -58,10 +60,14 @@ internal fun TransportProfileView(
         )
     }
     if (state.isSaveButtonVisible) {
-        ActionButton(
+        Box(
             modifier = Modifier.fillMaxSize(),
-            textRes = R_core.string.save
-        ) { eventHandler(TransportProfileEvent.OnSaveButtonClick) }
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            ScrollScreenActionButton(
+                textRes = R_core.string.common_save
+            ) { eventHandler(TransportProfileEvent.OnSaveButtonClick) }
+        }
     }
 }
 
@@ -71,34 +77,34 @@ fun TransportTextFieldsBlock(
     eventHandler: (TransportProfileEvent) -> Unit
 ) {
     StandardTextField(
-        title = stringResource(R_core.string.license_plate),
+        title = stringResource(R_core.string.transport_license_plate),
         state = state.licencePlate,
-        hint = stringResource(R_core.string.license_plate_hint),
+        hint = stringResource(R_core.string.transport_license_plate_hint),
         maxChar = CommonConstants.LIMITS.Transport.LICENCE_PLATE_MAX_CHARS
     ) { eventHandler(TransportProfileEvent.OnLicencePlateChanged(it)) }
     StandardTextField(
-        title = stringResource(R_core.string.car_brand),
+        title = stringResource(R_core.string.transport_car_brand),
         state = state.carBrand,
-        hint = stringResource(R_core.string.car_brand_hint),
+        hint = stringResource(R_core.string.transport_car_brand_hint),
         maxChar = CommonConstants.LIMITS.Transport.CAR_BRAND_MAX_CHARS
     ) { eventHandler(TransportProfileEvent.OnCarBrandChanged(it)) }
     StandardTextField(
-        title = stringResource(R_core.string.car_category),
+        title = stringResource(R_core.string.transport_car_category),
         state = state.carCategory,
-        hint = stringResource(R_core.string.car_category_hint),
+        hint = stringResource(R_core.string.transport_car_category_hint),
         maxChar = CommonConstants.LIMITS.Transport.CAR_CATEGORY_MAX_CHARS
     ) { eventHandler(TransportProfileEvent.OnCarCategoryChanged(it)) }
     StandardTextField(
-        title = stringResource(R_core.string.car_load_capacity),
+        title = stringResource(R_core.string.transport_car_load_capacity),
         state = state.carLoadCapacity,
-        hint = stringResource(R_core.string.car_load_capacity_hint),
+        hint = stringResource(R_core.string.transport_car_load_capacity_hint),
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = CommonConstants.LIMITS.Transport.CAR_CAPACITY_MAX_CHARS
     ) { eventHandler(TransportProfileEvent.OnCarLoadCapacityChanged(it)) }
     StandardTextField(
-        title = stringResource(R_core.string.car_capacity),
+        title = stringResource(R_core.string.transport_car_capacity),
         state = state.carCapacity,
-        hint = stringResource(R_core.string.car_capacity_hint),
+        hint = stringResource(R_core.string.transport_car_capacity_hint),
         isDigits = true,
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = CommonConstants.LIMITS.Transport.CAR_CAPACITY_MAX_CHARS

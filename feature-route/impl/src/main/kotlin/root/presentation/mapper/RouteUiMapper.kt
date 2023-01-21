@@ -1,29 +1,30 @@
 package root.presentation.mapper
 
-import root.domain.OrderStatusProgress
-import root.domain.model.OrderModel
+import orderdetails.domain.model.OrderDetailsStatusProgress
+import root.domain.model.RouteOrderModel
 import root.presentation.compose.model.RouteOrderStatusUiModel
 import root.presentation.compose.model.RouteOrderUiModel
 import utils.CommonConstants.Helpers.COMMA
 
 class RouteUiMapper {
-    fun map(data: List<OrderModel>) = data.map {
+    fun map(data: List<RouteOrderModel>) = data.map {
         RouteOrderUiModel(
-            id = it.id,
-            arrivalDate = buildString { append(it.arrivalTime) },
-            status = mapStatusToUi(it.status),
+            id = it.order.id,
+            //FIXME корректно отображать дату!!
+            arrivalDate = buildString { append(it.order.arrivalTime) },
+            status = mapStatusToUi(it.order.status),
             departureAddress = buildString {
-                append(it.address.city + COMMA + it.address.street + COMMA + it.address.house)
+                append(it.order.address.city + COMMA + it.order.address.street + COMMA + it.order.address.house)
             },
-            deliveryAddress = it.storage.address
+            deliveryAddress = it.order.storage.address
         )
     }
 
-    private fun mapStatusToUi(model: OrderStatusProgress?) =
+    private fun mapStatusToUi(model: OrderDetailsStatusProgress?) =
         when (model) {
-            OrderStatusProgress.ACTIVE -> RouteOrderStatusUiModel.ACTIVE
-            OrderStatusProgress.INPROGRESS -> RouteOrderStatusUiModel.INPROGRESS
-            OrderStatusProgress.DONE -> RouteOrderStatusUiModel.DONE
+            OrderDetailsStatusProgress.ACTIVE -> RouteOrderStatusUiModel.ACTIVE
+            OrderDetailsStatusProgress.IN_PROGRESS -> RouteOrderStatusUiModel.IN_PROGRESS
+            OrderDetailsStatusProgress.DONE -> RouteOrderStatusUiModel.DONE
             else -> null
         }
 }

@@ -68,7 +68,7 @@ internal fun DepartureView(state: DepartureState, eventHandler: (DepartureEvent)
                             }
                             Text(
                                 modifier = Modifier.align(Alignment.Center),
-                                text = stringResource(R.string.depart_address),
+                                text = stringResource(R.string.profile_depart_address),
                                 style = Theme.fonts.bold.copy(fontSize = 20.sp)
                             )
                         }
@@ -113,7 +113,7 @@ internal fun DepartureView(state: DepartureState, eventHandler: (DepartureEvent)
                             .clickable { eventHandler(DepartureEvent.OnAddAddressClick) }) {
                             Text(
                                 modifier = Modifier.weight(1f),
-                                text = stringResource(id = R.string.add_new_address)
+                                text = stringResource(id = R.string.departure_add_new_address)
                             )
                             Icon(
                                 modifier = Modifier.padding(start = 16.dp),

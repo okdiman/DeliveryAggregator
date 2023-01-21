@@ -80,7 +80,7 @@ fun DepartureScreen() {
                         onClearClick = {
                             viewModel.obtainEvent(DepartureEvent.OnBSAddressChanged(""))
                         },
-                        titleRes = R.string.edit_address
+                        titleRes = R.string.departure_edit_address
                     )
                 }
                 viewModel.obtainEvent(DepartureEvent.ResetAction)

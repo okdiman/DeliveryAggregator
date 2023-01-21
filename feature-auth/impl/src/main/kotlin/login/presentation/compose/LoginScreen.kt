@@ -7,9 +7,9 @@ import login.presentation.viewmodel.LoginViewModel
 import login.presentation.viewmodel.model.LoginAction
 import login.presentation.viewmodel.model.LoginEvent
 import navigation.NavigationTree
-import presentation.VerifyParameters
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
+import verify.presentation.VerifyParameters
 
 @Composable
 fun LoginScreen() {

@@ -10,7 +10,7 @@ import retrofit2.create
 import root.data.AuthApi
 import root.data.AuthLocalDataSourceImpl
 import root.data.AuthRepositoryImpl
-import root.data.mapper.SignUpMapper
+import root.data.mapper.AuthSignUpMapper
 import root.domain.GetAuthTokenSyncUseCaseImpl
 import root.domain.SignUpUseCaseImpl
 
@@ -19,6 +19,6 @@ internal fun authRootModule() = module {
     factory<AuthRepository> { AuthRepositoryImpl(get(), get(), get()) }
     factory<AuthLocalDataSource> { AuthLocalDataSourceImpl(get(), get()) }
     factory<SignUpUseCase> { SignUpUseCaseImpl(get()) }
-    factory { SignUpMapper() }
+    factory { AuthSignUpMapper() }
     factory<GetAuthTokenSyncUseCase> { GetAuthTokenSyncUseCaseImpl(get()) }
 }

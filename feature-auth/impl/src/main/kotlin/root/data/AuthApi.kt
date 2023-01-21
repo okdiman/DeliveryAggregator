@@ -1,8 +1,8 @@
 package root.data
 
-import root.data.model.request.SendVerifyCodeRequest
-import root.data.model.request.SignInRequest
-import root.data.model.request.SignUpRequest
+import root.data.model.request.AuthSendVerifyCodeRequest
+import root.data.model.request.AuthSignInRequest
+import root.data.model.request.AuthSignUpRequest
 import root.data.model.response.AuthSuccessResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -11,17 +11,17 @@ import retrofit2.http.POST
 interface AuthApi {
     @POST("/auth/send-code")
     suspend fun getVerifyCode(
-        @Body request: SendVerifyCodeRequest
+        @Body request: AuthSendVerifyCodeRequest
     )
 
     @POST("/auth/sign-in")
     suspend fun signIn(
-        @Body request: SignInRequest
+        @Body request: AuthSignInRequest
     ): AuthSuccessResponse
 
     @POST("/auth/contractor/sign-up")
     suspend fun signUp(
-        @Body request: SignUpRequest
+        @Body request: AuthSignUpRequest
     ): AuthSuccessResponse
 
     /**

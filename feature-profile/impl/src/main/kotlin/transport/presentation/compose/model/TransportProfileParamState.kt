@@ -21,8 +21,8 @@ sealed class TransportProfileParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.license_plate_error,
-        @StringRes override val validationErrorDiscription: Int = R.string.license_plate_symbols_error
+        @StringRes override val fillingErrorDiscription: Int = R.string.transport_license_plate_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.transport_license_plate_symbols_error
     ) : TransportProfileParamState(
         stateText,
         isFillingError,
@@ -35,8 +35,8 @@ sealed class TransportProfileParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.few_symbols_error,
-        @StringRes override val validationErrorDiscription: Int = R.string.car_brand_error
+        @StringRes override val fillingErrorDiscription: Int = R.string.common_few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.transport_car_brand_error
     ) : TransportProfileParamState(
         stateText,
         isFillingError,
@@ -49,8 +49,8 @@ sealed class TransportProfileParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.few_symbols_error,
-        @StringRes override val validationErrorDiscription: Int = R.string.car_category_error
+        @StringRes override val fillingErrorDiscription: Int = R.string.common_few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.transport_car_category_error
     ) : TransportProfileParamState(
         stateText,
         isFillingError,
@@ -63,8 +63,8 @@ sealed class TransportProfileParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.few_symbols_error,
-        @StringRes override val validationErrorDiscription: Int = R.string.car_load_capacity_error
+        @StringRes override val fillingErrorDiscription: Int = R.string.common_few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.transport_car_load_capacity_error
     ) : TransportProfileParamState(
         stateText,
         isFillingError,
@@ -77,8 +77,8 @@ sealed class TransportProfileParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.few_symbols_error,
-        @StringRes override val validationErrorDiscription: Int = R.string.empty_error
+        @StringRes override val fillingErrorDiscription: Int = R.string.common_few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.common_empty_error
     ) : TransportProfileParamState(
         stateText,
         isFillingError,

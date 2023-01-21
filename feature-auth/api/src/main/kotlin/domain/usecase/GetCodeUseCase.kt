@@ -1,5 +1,5 @@
 package domain.usecase
 
-import domain.model.VerifyCodeModel
+import domain.model.AuthVerifyCodeModel
 
-interface GetCodeUseCase : suspend (VerifyCodeModel) -> Unit
+interface GetCodeUseCase : suspend (AuthVerifyCodeModel) -> Unit

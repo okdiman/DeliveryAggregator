@@ -4,9 +4,9 @@
     <string name="verify_title_end">
         Поднимать звонок не нужно.\nВведите 4 последние цифры телефона
     </string>
-    <string name="code_hint">00-00</string>
-    <string name="code_error">Неверный код</string>
-    <string name="call_again">Позвонить еще раз</string>
-    <string name="send_code_again_timer">Запросить новый код можно через </string>
-    <string name="seconds"> сек.</string>
+    <string name="verify_code_hint">00-00</string>
+    <string name="verify_code_error">Неверный код</string>
+    <string name="verify_call_again">Позвонить еще раз</string>
+    <string name="verify_send_code_again_timer">Запросить новый код можно через </string>
+    <string name="verify_seconds"> сек.</string>
 </resources>

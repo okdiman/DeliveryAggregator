@@ -1,6 +1,7 @@
 package user.presentation.compose
 
-import ActionButton
+import ScrollScreenActionButton
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -10,17 +11,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import root.RegistrationConstants.Step.FOUR
-import view.StandardTextField
-import root.presentation.TitleRegistrationView
+import root.presentation.RegistrationTitleView
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
 import user.presentation.viewmodel.model.UserEvent
 import user.presentation.viewmodel.model.UserState
 import utils.CommonConstants.LIMITS.Common.MAX_NAME_CHARS
 import utils.CommonConstants.LIMITS.User.MAX_USER_NAME_CHARS
+import view.StandardTextField
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
 @Composable
@@ -30,7 +32,7 @@ fun UserView(state: UserState, eventHandler: (UserEvent) -> Unit) {
             .padding(PaddingValues(start = 16.dp, end = 16.dp))
             .verticalScroll(rememberScrollState())
     ) {
-        TitleRegistrationView(
+        RegistrationTitleView(
             step = FOUR,
             imageRes = R.drawable.user_info_ic,
             titleRes = R_core.string.user_title,
@@ -39,11 +41,15 @@ fun UserView(state: UserState, eventHandler: (UserEvent) -> Unit) {
         )
         UserTextFieldsBlock(state, eventHandler)
     }
-    ActionButton(
+    Box(
         modifier = Modifier.fillMaxSize(),
-        textRes = R.string.create_acc_button,
-        enabled = state.isCreateAccButtonEnabled
-    ) { eventHandler(UserEvent.OnCreateAccClick) }
+        contentAlignment = Alignment.BottomCenter
+    ) {
+        ScrollScreenActionButton(
+            textRes = R.string.registration_create_acc_button,
+            enabled = state.isCreateAccButtonEnabled
+        ) { eventHandler(UserEvent.OnCreateAccClick) }
+    }
 }
 
 @Composable

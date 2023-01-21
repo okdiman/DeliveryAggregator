@@ -2,7 +2,7 @@ package login.presentation.viewmodel
 
 import BaseViewModel
 import coroutines.AppDispatchers
-import domain.model.VerifyCodeModel
+import domain.model.AuthVerifyCodeModel
 import domain.usecase.GetCodeUseCase
 import login.presentation.viewmodel.model.LoginAction
 import login.presentation.viewmodel.model.LoginEvent
@@ -48,7 +48,7 @@ class LoginViewModel : BaseViewModel<LoginState, LoginAction, LoginEvent>(
 
     private fun onEntranceButtonClick() {
         launchJob(appDispatchers.network) {
-            getVerifyCode(VerifyCodeModel(viewState.phone))
+            getVerifyCode(AuthVerifyCodeModel(viewState.phone))
             viewAction = LoginAction.OpenVerifyScreen
         }
     }

@@ -27,12 +27,12 @@ fun DepartureMaxAddressCountView(eventHandler: (DepartureMaxAddressCountEvent) -
     ) {
         Text(
             textAlign = TextAlign.Center,
-            text = stringResource(id = R.string.max_address), style = Theme.fonts.bold.copy(
+            text = stringResource(id = R.string.departure_max_address), style = Theme.fonts.bold.copy(
                 fontSize = 20.sp
             )
         )
         ActionButton(
-            textRes = R.string.good,
+            textRes = R.string.departure_good,
             alignment = Alignment.Center,
             padding = PaddingValues(top = 24.dp)
         ) { eventHandler(DepartureMaxAddressCountEvent.OnBackClick) }

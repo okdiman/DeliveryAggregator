@@ -3,10 +3,10 @@ package flow
 import navigation.NavigationTree
 import organization.bank.presentation.compose.BankScreen
 import organization.company.presentation.compose.CompanyScreen
-import presentation.parameters.BankParameters
+import organization.bank.presentation.BankParameters
 import presentation.parameters.CompanyParameters
-import presentation.parameters.TransportParameters
-import presentation.parameters.UserParameters
+import transport.presentation.TransportParameters
+import user.presentation.UserParameters
 import ru.alexgladkov.odyssey.compose.extensions.flow
 import ru.alexgladkov.odyssey.compose.extensions.screen
 import ru.alexgladkov.odyssey.compose.navigation.RootComposeBuilder

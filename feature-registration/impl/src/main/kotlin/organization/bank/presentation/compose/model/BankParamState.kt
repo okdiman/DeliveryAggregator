@@ -22,8 +22,8 @@ sealed class BankParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.payment_acc_error,
-        @StringRes override val validationErrorDiscription: Int = R.string.payment_acc_validate_error
+        @StringRes override val fillingErrorDiscription: Int = R.string.bank_payment_acc_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.bank_payment_acc_validate_error
     ) : BankParamState(
         stateText,
         isFillingError,
@@ -36,8 +36,8 @@ sealed class BankParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.corr_acc_error,
-        @StringRes override val validationErrorDiscription: Int = R.string.corr_acc_validate_error
+        @StringRes override val fillingErrorDiscription: Int = R.string.bank_corr_acc_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.bank_corr_acc_validate_error
     ) : BankParamState(
         stateText,
         isFillingError,
@@ -50,8 +50,8 @@ sealed class BankParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.bik_error,
-        @StringRes override val validationErrorDiscription: Int = R.string.bik_validate_error
+        @StringRes override val fillingErrorDiscription: Int = R.string.bank_bik_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.bank_bik_validate_error
     ) : BankParamState(
         stateText,
         isFillingError,
@@ -64,7 +64,7 @@ sealed class BankParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R_core.string.few_symbols_error,
+        @StringRes override val fillingErrorDiscription: Int = R_core.string.common_few_symbols_error,
         @StringRes override val validationErrorDiscription: Int = R.string.bank_name_validate_error
     ) : BankParamState(
         stateText,

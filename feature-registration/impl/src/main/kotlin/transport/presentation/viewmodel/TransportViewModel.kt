@@ -9,7 +9,7 @@ import di.modules.LETTERS_VALIDATOR_QUALIFIER
 import di.modules.LICENCE_PLATE_VALIDATOR_QUALIFIER
 import di.modules.LOAD_CAPACITY_VALIDATOR_QUALIFIER
 import domain.GetAuthSuggestByQueryUseCase
-import domain.model.request.AuthAddressSuggestRequestModel
+import domain.model.request.AddressAuthSuggestRequestModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import org.koin.core.component.KoinComponent
@@ -17,7 +17,7 @@ import org.koin.core.component.inject
 import org.koin.core.qualifier.named
 import presentation.mapper.AddressSuggestUiMapper
 import presentation.model.AddressUiModel
-import presentation.parameters.TransportParameters
+import transport.presentation.TransportParameters
 import transport.presentation.viewmodel.model.TransportAction
 import transport.presentation.viewmodel.model.TransportEvent
 import transport.presentation.viewmodel.model.TransportState
@@ -205,7 +205,7 @@ class TransportViewModel(
                     bsAddress = viewState.bsAddress.copy(isSuggestLoading = true)
                 )
                 val suggests = getSuggestByQuery(
-                    AuthAddressSuggestRequestModel(
+                    AddressAuthSuggestRequestModel(
                         query = query,
                         code = parameters.user.code.toInt(),
                         phone = parameters.user.phone

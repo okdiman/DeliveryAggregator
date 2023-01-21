@@ -1,6 +1,7 @@
 package organization.bank.presentation.compose
 
-import ActionButton
+import ScrollScreenActionButton
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +12,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -20,7 +22,7 @@ import organization.bank.presentation.viewmodel.model.BankState
 import root.RegistrationConstants
 import root.RegistrationConstants.Limits.Bank.BANK_ACC_CHARS
 import root.RegistrationConstants.Limits.Bank.BIK_CHARS
-import root.presentation.TitleRegistrationView
+import root.presentation.RegistrationTitleView
 import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
 import utils.CommonConstants.LIMITS.Common.MAX_NAME_CHARS
 import view.StandardTextField
@@ -32,26 +34,33 @@ fun BankView(state: BankState, eventHandler: (BankEvent) -> Unit) {
             .padding(PaddingValues(start = 16.dp, end = 16.dp))
             .verticalScroll(rememberScrollState())
     ) {
-        TitleRegistrationView(
+        RegistrationTitleView(
             isBackButtonVisible = true,
             onButtonClick = { eventHandler(BankEvent.OnBackButtonClick) },
             step = RegistrationConstants.Step.TWO,
             imageRes = R.drawable.organization_info_ic,
-            titleRes = R.string.organization_info
+            titleRes = R.string.registration_organization_info
         )
         BankTextFieldsBlock(state, eventHandler)
     }
-    ActionButton(modifier = Modifier.fillMaxSize(), enabled = state.isContinueButtonEnabled) {
-        eventHandler(BankEvent.OnContinueButtonClick)
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.BottomCenter
+    ) {
+        ScrollScreenActionButton(
+            enabled = state.isContinueButtonEnabled
+        ) {
+            eventHandler(BankEvent.OnContinueButtonClick)
+        }
     }
 }
 
 @Composable
 fun BankTextFieldsBlock(state: BankState, eventHandler: (BankEvent) -> Unit) {
     StandardTextField(
-        title = stringResource(R.string.payment_acc),
+        title = stringResource(R.string.bank_payment_acc),
         state = state.paymentAcc,
-        hint = stringResource(R.string.payment_acc_hint),
+        hint = stringResource(R.string.bank_payment_acc_hint),
         isDigits = true,
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = BANK_ACC_CHARS
@@ -59,19 +68,19 @@ fun BankTextFieldsBlock(state: BankState, eventHandler: (BankEvent) -> Unit) {
         eventHandler(BankEvent.OnPaymentAccChanged(it))
     }
     StandardTextField(
-        title = stringResource(R.string.corr_acc),
+        title = stringResource(R.string.bank_corr_acc),
         state = state.corrAcc,
         isDigits = true,
-        hint = stringResource(R.string.corr_acc_hint),
+        hint = stringResource(R.string.bank_corr_acc_hint),
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = BANK_ACC_CHARS
     ) {
         eventHandler(BankEvent.OnCorrAccChanged(it))
     }
     StandardTextField(
-        title = stringResource(R.string.bik),
+        title = stringResource(R.string.bank_bik),
         state = state.bik,
-        hint = stringResource(R.string.bik_hint),
+        hint = stringResource(R.string.bank_bik_hint),
         isDigits = true,
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = BIK_CHARS

@@ -1,3 +1,6 @@
 package root.di
 
-fun routeModules() = listOf(routeRootModule())
+import additionalInfo.di.additionalInfoModule
+import orderdetails.di.orderDetailsModule
+
+fun routeModules() = listOf(routeRootModule(), orderDetailsModule(), additionalInfoModule())

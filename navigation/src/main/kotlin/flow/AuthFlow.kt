@@ -3,7 +3,7 @@ package flow
 import login.presentation.compose.LoginScreen
 import navigation.NavigationTree
 import offer.presentation.compose.OfferScreen
-import presentation.VerifyParameters
+import verify.presentation.VerifyParameters
 import ru.alexgladkov.odyssey.compose.extensions.flow
 import ru.alexgladkov.odyssey.compose.extensions.screen
 import ru.alexgladkov.odyssey.compose.navigation.RootComposeBuilder

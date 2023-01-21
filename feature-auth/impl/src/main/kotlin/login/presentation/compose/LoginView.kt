@@ -47,7 +47,7 @@ internal fun LoginView(viewState: LoginState, eventHandler: (LoginEvent) -> Unit
         AgreementBlock(viewState = viewState, eventHandler = eventHandler)
         ActionButton(
             modifier = Modifier.fillMaxSize(),
-            textRes = R.string.entrance,
+            textRes = R.string.login_entrance,
             enabled = viewState.isButtonEnabled,
             padding = PaddingValues(0.dp)
         ) { eventHandler(LoginEvent.OnEntranceButtonCLick) }
@@ -64,7 +64,7 @@ private fun TitleBlock() {
     )
     Spacer(modifier = Modifier.height(18.dp))
     Text(
-        text = stringResource(R.string.enter_phone),
+        text = stringResource(R.string.login_enter_phone),
         style = Theme.fonts.regular
     )
 }
@@ -74,14 +74,14 @@ private fun PhoneBlock(viewState: LoginState, eventHandler: (LoginEvent) -> Unit
     Spacer(modifier = Modifier.height(12.dp))
     Row {
         Text(
-            text = stringResource(id = R.string.phone_prefix),
+            text = stringResource(id = R.string.login_phone_prefix),
             style = Theme.fonts.bold.copy(fontSize = 24.sp)
         )
         Spacer(modifier = Modifier.width(6.dp))
         CommonTextField(
             text = viewState.phone,
             textStyle = Theme.fonts.bold.copy(fontSize = 24.sp),
-            hint = stringResource(id = R.string.phone_hint),
+            hint = stringResource(id = R.string.login_phone_hint),
             onValueChanged = {
                 eventHandler(LoginEvent.PhoneChanged(it))
             },
@@ -116,14 +116,14 @@ private fun AgreementBlock(viewState: LoginState, eventHandler: (LoginEvent) -> 
         Spacer(modifier = Modifier.width(4.dp))
         Column {
             Text(
-                text = stringResource(id = R.string.agreement),
+                text = stringResource(id = R.string.login_agreement),
                 style = Theme.fonts.regular
             )
             Text(
                 modifier = Modifier.clickable {
                     eventHandler(LoginEvent.OnOfferCLick)
                 },
-                text = stringResource(id = R.string.read_offer),
+                text = stringResource(id = R.string.login_read_offer),
                 style = Theme.fonts.regular.copy(
                     textDecoration = TextDecoration.Underline
                 )

@@ -10,8 +10,8 @@ import organization.company.presentation.viewmodel.model.CompanyAction
 import organization.company.presentation.viewmodel.model.CompanyEvent
 import organization.company.presentation.viewmodel.model.CompanyState
 import presentation.model.AddressUiModel
-import presentation.parameters.model.RegistrationCompanyModel
-import presentation.parameters.BankParameters
+import root.presentation.model.RegistrationCompanyModel
+import organization.bank.presentation.BankParameters
 import presentation.parameters.CompanyParameters
 import presentation.AddressBSScreen
 import ru.alexgladkov.odyssey.compose.extensions.present

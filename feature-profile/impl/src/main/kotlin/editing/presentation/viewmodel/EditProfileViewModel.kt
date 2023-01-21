@@ -11,7 +11,7 @@ import editing.presentation.viewmodel.model.EditProfileState
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.qualifier.named
-import presentation.EditProfileParameters
+import editing.presentation.EditProfileParameters
 import root.domain.UpdateProfileUseCase
 import utils.CommonConstants.LIMITS.Common.MIN_NAME_CHARS
 import utils.isTextFieldFilled

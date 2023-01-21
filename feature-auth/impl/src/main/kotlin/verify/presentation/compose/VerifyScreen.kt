@@ -4,12 +4,12 @@ import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
 import navigation.NavigationTree
-import presentation.VerifyParameters
-import presentation.parameters.model.RegistrationStartUserModel
 import presentation.parameters.CompanyParameters
+import presentation.parameters.model.RegistrationStartUserModel
 import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import ru.alexgladkov.odyssey.core.LaunchFlag
+import verify.presentation.VerifyParameters
 import verify.presentation.viewmodel.VerifyViewModel
 import verify.presentation.viewmodel.model.VerifyAction
 import verify.presentation.viewmodel.model.VerifyEvent

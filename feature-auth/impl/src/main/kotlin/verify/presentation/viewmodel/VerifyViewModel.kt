@@ -2,13 +2,13 @@ package verify.presentation.viewmodel
 
 import BaseViewModel
 import coroutines.AppDispatchers
-import domain.model.SignInModel
+import domain.model.AuthSignInModel
 import domain.usecase.SignInUseCase
 import network.exceptions.ForbiddenException
 import network.exceptions.UnauthorizedException
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import presentation.VerifyParameters
+import verify.presentation.VerifyParameters
 import root.AuthConstants.Limits.MAX_CODE_CHARS
 import utils.isTextFieldFilled
 import verify.domain.GetVerifyTitleUseCase
@@ -67,7 +67,7 @@ class VerifyViewModel(
             }, onFinally = {
                 viewState = viewState.copy(isLoading = false)
             }) {
-                signIn(SignInModel(code.toInt(), parameters.phone))
+                signIn(AuthSignInModel(code.toInt(), parameters.phone))
                 viewAction = VerifyAction.OpenMainFlow
             }
         }

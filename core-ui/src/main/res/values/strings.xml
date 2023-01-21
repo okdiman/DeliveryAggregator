@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="continue_button">Далее</string>
-    <string name="add_address">"Добавить адрес"</string>
-    <string name="smth_wrong">Что-то пошло не так</string>
-    <string name="try_again_description">Попробуйте перезагрузить приложение и проверьте подключение к интернету</string>
-    <string name="try_again">Попробовать еще раз</string>
-    <string name="few_symbols_error">Введено недостаточное количество символов</string>
-    <string name="choose_address_from_suggest">Выберите адрес из предложенных</string>
-    <string name="save">Сохранить</string>
-    <string name="company_name">Название организации</string>
-    <string name="incorrect_address">Выберете адрес из списка</string>
-    <string name="empty_error" />
+    <string name="common_continue_button">Далее</string>
+    <string name="common_add_address">"Добавить адрес"</string>
+    <string name="common_smth_wrong">Что-то пошло не так</string>
+    <string name="common_try_again_description">Попробуйте перезагрузить приложение и проверьте подключение к интернету</string>
+    <string name="common_try_again">Попробовать еще раз</string>
+    <string name="common_few_symbols_error">Введено недостаточное количество символов</string>
+    <string name="common_choose_address_from_suggest">Выберите адрес из предложенных</string>
+    <string name="common_save">Сохранить</string>
+    <string name="common_company_name">Название организации</string>
+    <string name="common_incorrect_address">Выберете адрес из списка</string>
+    <string name="common_empty_error" />
 </resources>

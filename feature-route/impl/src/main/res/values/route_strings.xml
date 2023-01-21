@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="routes_will_be_here">Здесь будет отображаться рейс</string>
+    <string name="route_will_be_here">Здесь будет отображаться рейс</string>
     <string name="route_can_includes_some_orders">В рейсе может быть несколько заказов</string>
-    <string name="active_status">Активный</string>
-    <string name="inprogress_status">В пути</string>
-    <string name="done_status">Выполнен</string>
+    <string name="route_active_status">Активный</string>
+    <string name="route_inprogress_status">В пути</string>
+    <string name="route_done_status">Выполнен</string>
     <string name="route_departure_address">Адрес склада</string>
-    <string name="delivery_adddress">Склад назначения</string>
+    <string name="route_delivery_adddress">Склад назначения</string>
+    <string name="route_accept_route">Взять в работу</string>
 </resources>

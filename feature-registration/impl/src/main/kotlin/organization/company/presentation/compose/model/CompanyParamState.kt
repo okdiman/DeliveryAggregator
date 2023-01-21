@@ -23,7 +23,7 @@ sealed class CompanyParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R_core.string.few_symbols_error,
+        @StringRes override val fillingErrorDiscription: Int = R_core.string.common_few_symbols_error,
         @StringRes override val validationErrorDiscription: Int = R.string.company_name_error
     ) : CompanyParamState(
         stateText,
@@ -37,8 +37,8 @@ sealed class CompanyParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.inn_error,
-        @StringRes override val validationErrorDiscription: Int = R.string.inn_validate_error
+        @StringRes override val fillingErrorDiscription: Int = R.string.company_inn_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.company_inn_validate_error
     ) : CompanyParamState(
         stateText,
         isFillingError,
@@ -51,8 +51,8 @@ sealed class CompanyParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.kpp_error,
-        @StringRes override val validationErrorDiscription: Int = R.string.kpp_validate_error
+        @StringRes override val fillingErrorDiscription: Int = R.string.company_kpp_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.company_kpp_validate_error
     ) : CompanyParamState(
         stateText,
         isFillingError,
@@ -65,8 +65,8 @@ sealed class CompanyParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.ogrn_error,
-        @StringRes override val validationErrorDiscription: Int = R.string.ogrn_validate_error
+        @StringRes override val fillingErrorDiscription: Int = R.string.company_ogrn_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.company_ogrn_validate_error
     ) : CompanyParamState(
         stateText,
         isFillingError,
@@ -79,8 +79,8 @@ sealed class CompanyParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R_core.string.incorrect_address,
-        @StringRes override val validationErrorDiscription: Int = R_core.string.empty_error,
+        @StringRes override val fillingErrorDiscription: Int = R_core.string.common_incorrect_address,
+        @StringRes override val validationErrorDiscription: Int = R_core.string.common_empty_error,
         val address: AddressUiModel? = null,
     ) : CompanyParamState(
         stateText,
@@ -94,8 +94,8 @@ sealed class CompanyParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R_core.string.incorrect_address,
-        @StringRes override val validationErrorDiscription: Int = R_core.string.empty_error,
+        @StringRes override val fillingErrorDiscription: Int = R_core.string.common_incorrect_address,
+        @StringRes override val validationErrorDiscription: Int = R_core.string.common_empty_error,
         val address: AddressUiModel? = null
     ) : CompanyParamState(
         stateText,

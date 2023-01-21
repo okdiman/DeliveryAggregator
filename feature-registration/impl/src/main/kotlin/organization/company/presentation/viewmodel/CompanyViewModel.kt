@@ -6,7 +6,7 @@ import data.AddressConstants.DEBOUNCE
 import data.AddressConstants.MIN_CHARS_FOR_SUGGEST
 import di.modules.NAMING_VALIDATOR_QUALIFIER
 import domain.GetAuthSuggestByQueryUseCase
-import domain.model.request.AuthAddressSuggestRequestModel
+import domain.model.request.AddressAuthSuggestRequestModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import org.koin.core.component.KoinComponent
@@ -187,7 +187,7 @@ class CompanyViewModel(
                     bsAddress = viewState.bsAddress.copy(isSuggestLoading = true)
                 )
                 val suggests = getSuggestByQuery(
-                    AuthAddressSuggestRequestModel(
+                    AddressAuthSuggestRequestModel(
                         query = query,
                         code = parameters.user.code.toInt(),
                         phone = parameters.user.phone

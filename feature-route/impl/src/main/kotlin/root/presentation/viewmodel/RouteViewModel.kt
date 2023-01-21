@@ -5,6 +5,7 @@ import coroutines.AppDispatchers
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import root.domain.usecase.GetActiveRouteUseCase
+import root.presentation.mapper.RouteButtonUiModelMapper
 import root.presentation.mapper.RouteUiMapper
 import root.presentation.viewmodel.model.RouteAction
 import root.presentation.viewmodel.model.RouteEvent
@@ -16,6 +17,7 @@ class RouteViewModel : BaseViewModel<RouteState, RouteAction, RouteEvent>(
     private val getActiveRoute by inject<GetActiveRouteUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
     private val mapper by inject<RouteUiMapper>()
+    private val buttonUiMapper by inject<RouteButtonUiModelMapper>()
 
     init {
         getContent()
@@ -23,8 +25,8 @@ class RouteViewModel : BaseViewModel<RouteState, RouteAction, RouteEvent>(
 
     override fun obtainEvent(viewEvent: RouteEvent) {
         when (viewEvent) {
-            is RouteEvent.AcceptOrderClick -> onAcceptOrderClick(viewEvent.id)
             is RouteEvent.OnRouteClick -> onRouteClick(viewEvent.id)
+            RouteEvent.AcceptOrderClick -> onAcceptOrderClick()
             RouteEvent.OnNotificationsClick -> onNotificationsClick()
             RouteEvent.ResetAction -> onResetAction()
             RouteEvent.OnRetryClick -> getContent()
@@ -35,10 +37,10 @@ class RouteViewModel : BaseViewModel<RouteState, RouteAction, RouteEvent>(
         }
     }
 
-    private fun onAcceptOrderClick(id: Long) {
+    private fun onAcceptOrderClick() {
         launchJob {
-            // TODO
-            viewAction = RouteAction.OpenRouteDetail(id)
+            //TODO обработка нажатия, когда появится метод
+            viewAction = RouteAction.OpenRouteDetail(viewState.orders.first().id)
         }
     }
 
@@ -53,6 +55,8 @@ class RouteViewModel : BaseViewModel<RouteState, RouteAction, RouteEvent>(
             val route = getActiveRoute()
             viewState = viewState.copy(
                 orders = mapper.map(route.orders),
+                buttonUiModel = buttonUiMapper.map(route.price, route.distance),
+                status = route.status,
                 isLoading = false,
                 isRefreshing = false
             )

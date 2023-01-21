@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
 import navigation.NavigationTree
+import orderdetails.presentation.OrderDetailsParameters
+import root.presentation.compose.view.RouteView
 import root.presentation.viewmodel.RouteViewModel
 import root.presentation.viewmodel.model.RouteAction
 import root.presentation.viewmodel.model.RouteEvent
@@ -21,7 +23,10 @@ fun RouteScreen() {
         }
         when (action.value) {
             is RouteAction.OpenRouteDetail -> {
-
+                rootController.findRootController().push(
+                    screen = NavigationTree.Routes.RouteDetails.name,
+                    params = OrderDetailsParameters((action.value as RouteAction.OpenRouteDetail).id)
+                )
                 viewModel.obtainEvent(RouteEvent.ResetAction)
             }
             RouteAction.OpenNotifications -> {

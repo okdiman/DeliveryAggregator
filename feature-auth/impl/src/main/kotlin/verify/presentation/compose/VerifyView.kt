@@ -87,7 +87,7 @@ private fun CodeBlock(viewState: VerifyState, eventHandler: (VerifyEvent) -> Uni
         modifier = Modifier.focusRequester(focusRequester),
         text = viewState.code,
         textStyle = Theme.fonts.bold.copy(fontSize = 24.sp),
-        hint = stringResource(id = R.string.code_hint),
+        hint = stringResource(id = R.string.verify_code_hint),
         onValueChanged = {
             eventHandler(VerifyEvent.OnCodeChanged(it))
         },
@@ -98,7 +98,7 @@ private fun CodeBlock(viewState: VerifyState, eventHandler: (VerifyEvent) -> Uni
     )
     if (viewState.isCodeError) {
         Text(
-            text = stringResource(id = R.string.code_error),
+            text = stringResource(id = R.string.verify_code_error),
             style = Theme.fonts.regular.copy(fontSize = 14.sp, color = Theme.colors.errorColor)
         )
         Spacer(modifier = Modifier.height(8.dp))
@@ -106,9 +106,9 @@ private fun CodeBlock(viewState: VerifyState, eventHandler: (VerifyEvent) -> Uni
     if (viewState.isTimerVisible) {
         Text(
             text = buildString {
-                append(stringResource(id = R.string.send_code_again_timer))
+                append(stringResource(id = R.string.verify_send_code_again_timer))
                 append(formatTicks(ticks))
-                append(stringResource(id = R.string.seconds))
+                append(stringResource(id = R.string.verify_seconds))
             },
             style = Theme.fonts.regular.copy(fontSize = 14.sp)
         )
@@ -119,7 +119,7 @@ private fun CodeBlock(viewState: VerifyState, eventHandler: (VerifyEvent) -> Uni
             modifier = Modifier.clickable {
                 eventHandler(VerifyEvent.OnRetryCallClick)
             },
-            text = stringResource(id = R.string.call_again),
+            text = stringResource(id = R.string.verify_call_again),
             style = Theme.fonts.bold
         )
     }

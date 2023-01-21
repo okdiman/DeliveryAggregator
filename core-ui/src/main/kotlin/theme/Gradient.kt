@@ -7,7 +7,8 @@ import utils.LinearGradient
 
 data class DeliveryAggregatorGradients(
     val actionButtonGradient: Brush,
-    val progressBarGradient: Brush
+    val progressBarGradient: Brush,
+    val buttonBackgroundGradient: Brush
 )
 
 val gradients = DeliveryAggregatorGradients(
@@ -26,6 +27,16 @@ val gradients = DeliveryAggregatorGradients(
             Color(0xFF6BA0E4)
         ),
         angleInDegrees = 90f
+    ),
+    buttonBackgroundGradient = LinearGradient(
+        colors = listOf(
+            Color(0x00FFFFFF),
+            Color(0x99FFFFFF),
+            Color(0xCCFFFFFF),
+            Color(0xE6FFFFFF),
+            Color(0xFFFFFFFF)
+        ),
+        angleInDegrees = 270f
     )
 )
 

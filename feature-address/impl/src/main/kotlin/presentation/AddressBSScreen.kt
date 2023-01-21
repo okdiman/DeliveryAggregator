@@ -43,7 +43,7 @@ import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 @Suppress("LongMethod")
 @Composable
 fun AddressBSScreen(
-    @StringRes titleRes: Int = R_core.string.add_address,
+    @StringRes titleRes: Int = R_core.string.common_add_address,
     state: AddressState,
     suggests: List<AddressUiModel>,
     onClearClick: () -> Unit,
@@ -97,7 +97,7 @@ fun AddressBSScreen(
                         contentDescription = null
                     )
                 },
-                hint = stringResource(id = R_core.string.departure_address_hint),
+                hint = stringResource(id = R_core.string.transport_departure_address_hint),
                 onValueChanged = { onTextFieldChanged(it) }
             )
             Spacer(modifier = Modifier.height(24.dp))

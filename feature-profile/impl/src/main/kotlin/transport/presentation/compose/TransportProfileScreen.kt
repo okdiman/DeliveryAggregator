@@ -4,10 +4,10 @@ import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
 import navigation.NavigationTree
-import presentation.TransportProfileParameters
 import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import ru.alexgladkov.odyssey.core.LaunchFlag
+import transport.presentation.TransportProfileParameters
 import transport.presentation.viewmodel.TransportProfileViewModel
 import transport.presentation.viewmodel.model.TransportProfileAction
 import utils.CommonConstants

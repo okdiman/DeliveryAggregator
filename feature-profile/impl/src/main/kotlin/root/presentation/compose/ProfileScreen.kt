@@ -7,8 +7,8 @@ import com.adeo.kviewmodel.odyssey.StoredViewModel
 import exit.presentation.compose.ExitScreen
 import navigation.NavigationTree
 import openNotificationSettings
-import presentation.EditProfileParameters
-import presentation.TransportProfileParameters
+import editing.presentation.EditProfileParameters
+import transport.presentation.TransportProfileParameters
 import root.presentation.viewmodel.ProfileViewModel
 import root.presentation.viewmodel.model.ProfileAction
 import root.presentation.viewmodel.model.ProfileEvent

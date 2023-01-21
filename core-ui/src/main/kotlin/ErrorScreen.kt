@@ -20,8 +20,7 @@ import trinity_monsters.wildberries_delivery_aggregator.core_ui.R
 @Composable
 fun ErrorScreen(onRetry: () -> Unit) {
     Column(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -32,15 +31,14 @@ fun ErrorScreen(onRetry: () -> Unit) {
         )
         Spacer(modifier = Modifier.height(24.dp))
         Text(
-            text = stringResource(id = R.string.smth_wrong),
+            text = stringResource(id = R.string.common_smth_wrong),
             style = Theme.fonts.bold.copy(fontSize = 20.sp),
             textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            modifier = Modifier
-                .padding(horizontal = 52.dp),
-            text = stringResource(id = R.string.try_again_description),
+            modifier = Modifier.padding(horizontal = 52.dp),
+            text = stringResource(id = R.string.common_try_again_description),
             style = Theme.fonts.bold.copy(
                 color = Theme.colors.textPrimaryColor.copy(alpha = 0.6f)
             ),
@@ -48,7 +46,7 @@ fun ErrorScreen(onRetry: () -> Unit) {
         )
         Spacer(modifier = Modifier.height(24.dp))
         ActionButton(
-            textRes = R.string.try_again,
+            textRes = R.string.common_try_again,
             alignment = Alignment.TopCenter
         ) { onRetry() }
     }

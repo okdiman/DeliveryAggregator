@@ -17,7 +17,7 @@ class GetVerifyTitleUseCase(
 
     private fun maskedPhone(phone: String): String {
         return buildString {
-            append(resourceInteractor.getString(R.string.phone_prefix))
+            append(resourceInteractor.getString(R.string.login_phone_prefix))
             append(
                 FRONT_BRACKET + phone.take(FIRST_THREE) + BACK_BRACKET + MASK +
                         phone.takeLast(LAST_TWO) + POINT

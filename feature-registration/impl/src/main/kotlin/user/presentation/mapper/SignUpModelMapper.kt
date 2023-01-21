@@ -1,13 +1,13 @@
 package user.presentation.mapper
 
-import domain.model.AddressSignUpModel
-import domain.model.SignUpModel
-import presentation.parameters.UserParameters
+import domain.model.AuthAddressSignUpModel
+import domain.model.AuthSignUpModel
+import user.presentation.UserParameters
 import user.presentation.viewmodel.model.UserState
 
 class SignUpModelMapper {
-    fun map(parameters: UserParameters, state: UserState): SignUpModel {
-        return SignUpModel(
+    fun map(parameters: UserParameters, state: UserState): AuthSignUpModel {
+        return AuthSignUpModel(
             code = parameters.user.code.toInt(),
             phone = parameters.user.phone,
             email = state.email.stateText,
@@ -22,7 +22,7 @@ class SignUpModelMapper {
             actualAddress = parameters.company.actualAddress.orEmpty(),
             checkingAccount = parameters.bank.paymentAcc,
             correspondentAccount = parameters.bank.corrAcc,
-            address = AddressSignUpModel(
+            address = AuthAddressSignUpModel(
                 geoLon = parameters.transport.departureAddress.geoLon,
                 geoLat = parameters.transport.departureAddress.geoLat,
                 city = parameters.transport.departureAddress.city,

@@ -22,8 +22,8 @@ sealed class TransportParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R_core.string.license_plate_error,
-        @StringRes override val validationErrorDiscription: Int = R_core.string.license_plate_symbols_error
+        @StringRes override val fillingErrorDiscription: Int = R_core.string.transport_license_plate_error,
+        @StringRes override val validationErrorDiscription: Int = R_core.string.transport_license_plate_symbols_error
     ) : TransportParamState(
         stateText,
         isFillingError,
@@ -36,8 +36,8 @@ sealed class TransportParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R_core.string.few_symbols_error,
-        @StringRes override val validationErrorDiscription: Int = R_core.string.choose_address_from_suggest,
+        @StringRes override val fillingErrorDiscription: Int = R_core.string.common_few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R_core.string.common_choose_address_from_suggest,
         val address: AddressUiModel? = null
     ) : TransportParamState(
         stateText,
@@ -51,8 +51,8 @@ sealed class TransportParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R_core.string.few_symbols_error,
-        @StringRes override val validationErrorDiscription: Int = R_core.string.car_brand_error
+        @StringRes override val fillingErrorDiscription: Int = R_core.string.common_few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R_core.string.transport_car_brand_error
     ) : TransportParamState(
         stateText,
         isFillingError,
@@ -65,8 +65,8 @@ sealed class TransportParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R_core.string.few_symbols_error,
-        @StringRes override val validationErrorDiscription: Int = R_core.string.car_category_error
+        @StringRes override val fillingErrorDiscription: Int = R_core.string.common_few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R_core.string.transport_car_category_error
     ) : TransportParamState(
         stateText,
         isFillingError,
@@ -79,8 +79,8 @@ sealed class TransportParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R_core.string.few_symbols_error,
-        @StringRes override val validationErrorDiscription: Int = R_core.string.car_load_capacity_error
+        @StringRes override val fillingErrorDiscription: Int = R_core.string.common_few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R_core.string.transport_car_load_capacity_error
     ) : TransportParamState(
         stateText,
         isFillingError,
@@ -93,8 +93,8 @@ sealed class TransportParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R_core.string.few_symbols_error,
-        @StringRes override val validationErrorDiscription: Int = R_core.string.empty_error
+        @StringRes override val fillingErrorDiscription: Int = R_core.string.common_few_symbols_error,
+        @StringRes override val validationErrorDiscription: Int = R_core.string.common_empty_error
     ) : TransportParamState(
         stateText,
         isFillingError,

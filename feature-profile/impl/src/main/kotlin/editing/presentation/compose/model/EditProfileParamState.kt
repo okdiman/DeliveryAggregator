@@ -21,7 +21,7 @@ sealed class EditProfileParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.few_symbols_error,
+        @StringRes override val fillingErrorDiscription: Int = R.string.common_few_symbols_error,
         @StringRes override val validationErrorDiscription: Int = R.string.user_name_error
     ) : EditProfileParamState(
         stateText,
@@ -35,7 +35,7 @@ sealed class EditProfileParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.few_symbols_error,
+        @StringRes override val fillingErrorDiscription: Int = R.string.common_few_symbols_error,
         @StringRes override val validationErrorDiscription: Int = R.string.user_surname_error
     ) : EditProfileParamState(
         stateText,
@@ -49,7 +49,7 @@ sealed class EditProfileParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.few_symbols_error,
+        @StringRes override val fillingErrorDiscription: Int = R.string.common_few_symbols_error,
         @StringRes override val validationErrorDiscription: Int = R.string.user_second_name_error
     ) : EditProfileParamState(
         stateText,
@@ -63,7 +63,7 @@ sealed class EditProfileParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.few_symbols_error,
+        @StringRes override val fillingErrorDiscription: Int = R.string.common_few_symbols_error,
         @StringRes override val validationErrorDiscription: Int = R.string.user_email_error
     ) : EditProfileParamState(
         stateText,
@@ -77,8 +77,8 @@ sealed class EditProfileParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.empty_error,
-        @StringRes override val validationErrorDiscription: Int = R.string.empty_error
+        @StringRes override val fillingErrorDiscription: Int = R.string.common_empty_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.common_empty_error
     ) : EditProfileParamState(
         stateText,
         isFillingError,
@@ -91,8 +91,8 @@ sealed class EditProfileParamState(
         override val stateText: String = "",
         override val isFillingError: Boolean = false,
         override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.empty_error,
-        @StringRes override val validationErrorDiscription: Int = R.string.empty_error
+        @StringRes override val fillingErrorDiscription: Int = R.string.common_empty_error,
+        @StringRes override val validationErrorDiscription: Int = R.string.common_empty_error
     ) : EditProfileParamState(
         stateText,
         isFillingError,

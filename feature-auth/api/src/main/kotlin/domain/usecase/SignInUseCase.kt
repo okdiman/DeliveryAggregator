@@ -1,5 +1,5 @@
 package domain.usecase
 
-import domain.model.SignInModel
+import domain.model.AuthSignInModel
 
-interface SignInUseCase : suspend (SignInModel) -> Unit
+interface SignInUseCase : suspend (AuthSignInModel) -> Unit

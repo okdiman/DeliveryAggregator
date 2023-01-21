@@ -3,12 +3,12 @@ package data
 import data.mapper.AddressMapper
 import data.mapper.AddressSuggestMapper
 import data.model.request.AddressSuggestRequest
-import data.model.request.AuthAddressSuggestRequest
+import data.model.request.AddressAuthSuggestRequest
 import domain.AddressRepository
 import domain.model.AddressModel
 import domain.model.AddressSuggestModel
 import domain.model.request.AddressSuggestRequestModel
-import domain.model.request.AuthAddressSuggestRequestModel
+import domain.model.request.AddressAuthSuggestRequestModel
 
 class AddressRepositoryImpl(
     private val api: AddressApi,
@@ -28,9 +28,9 @@ class AddressRepositoryImpl(
         api.updateUserAddress(addressModel.id, mapper.mapToData(addressModel))
     }
 
-    override suspend fun getAuthSuggests(model: AuthAddressSuggestRequestModel): List<AddressSuggestModel> {
+    override suspend fun getAuthSuggests(model: AddressAuthSuggestRequestModel): List<AddressSuggestModel> {
         val response = api.getAuthAddressesByQuery(
-            AuthAddressSuggestRequest(
+            AddressAuthSuggestRequest(
                 code = model.code,
                 phone = model.phone,
                 query = model.query

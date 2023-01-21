@@ -15,27 +15,27 @@ data class ProfileState(
     val uiModels: List<ProfileItemUiModel> = listOf(
         ProfileItemUiModel(
             icon = R_core.drawable.geolocation_ic,
-            title = R.string.depart_address,
+            title = R.string.profile_depart_address,
             type = ProfileItemType.DepartureAddress
         ),
         ProfileItemUiModel(
             icon = R.drawable.profile_transport_ic,
-            title = R.string.transport,
+            title = R.string.profile_transport,
             type = ProfileItemType.Transport
         ),
         ProfileItemUiModel(
             icon = R.drawable.profile_support_ic,
-            title = R.string.support,
+            title = R.string.profile_support,
             type = ProfileItemType.Support
         ),
         ProfileItemUiModel(
             icon = R.drawable.profile_notifications_ic,
-            title = R.string.notifications,
+            title = R.string.profile_notifications,
             type = ProfileItemType.Notifications
         ),
         ProfileItemUiModel(
             icon = R.drawable.profile_offer_ic,
-            title = R.string.offer,
+            title = R.string.profile_offer,
             type = ProfileItemType.Offer
         ),
         ProfileItemUiModel(

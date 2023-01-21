@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="call">Позвонить</string>
-    <string name="send_email">Написать e-mail</string>
-    <string name="reject">Отменить</string>
+    <string name="support_call">Позвонить</string>
+    <string name="support_send_email">Написать e-mail</string>
+    <string name="support_reject">Отменить</string>
 </resources>

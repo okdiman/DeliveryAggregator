@@ -20,7 +20,7 @@ import trinity_monsters.wildberries_delivery_aggregator.feature_profile.impl.R
 internal fun ExitView(eventHandler: (ExitEvent) -> Unit) {
     Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 36.dp)) {
         Text(
-            text = stringResource(id = R.string.are_u_sure_to_exit),
+            text = stringResource(id = R.string.exit_are_u_sure),
             style = Theme.fonts.bold.copy(fontSize = 20.sp),
             textAlign = TextAlign.Center
         )
@@ -30,7 +30,7 @@ internal fun ExitView(eventHandler: (ExitEvent) -> Unit) {
             padding = PaddingValues(top = 24.dp)
         ) { eventHandler(ExitEvent.OnConfirmClick) }
         ActionButton(
-            textRes = R.string.stay,
+            textRes = R.string.exit_stay,
             textColor = Theme.colors.textPrimaryColor,
             color = Theme.colors.disabledButtonColor,
             alignment = Alignment.Center,

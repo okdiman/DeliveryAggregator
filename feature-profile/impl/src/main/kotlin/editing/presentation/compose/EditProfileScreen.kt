@@ -8,7 +8,7 @@ import editing.presentation.viewmodel.EditProfileViewModel
 import editing.presentation.viewmodel.model.EditProfileAction
 import editing.presentation.viewmodel.model.EditProfileEvent
 import navigation.NavigationTree
-import presentation.EditProfileParameters
+import editing.presentation.EditProfileParameters
 import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
