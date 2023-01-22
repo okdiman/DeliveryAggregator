@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.sp
 import offer.presentation.viewmodel.model.OfferEvent
 import offer.presentation.viewmodel.model.OfferState
 import theme.Theme
-import trinity_monsters.wildberries_delivery_aggregator.feature_auth.impl.R
+import trinity_monsters.delivery_aggregator.feature_auth.impl.R
 import view.BackButton
 
 @Composable

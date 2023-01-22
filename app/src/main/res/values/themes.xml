@@ -1,12 +1,12 @@
 <resources>
-    <style name="Theme.WildberriesDeliveryAggregator" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.DeliveryAggregator" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="Theme.WildberriesDeliveryAggregator.Launcher" parent="Theme.SplashScreen">
+    <style name="Theme.DeliveryAggregator.Launcher" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@android:color/white</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_logo</item>
-        <item name="postSplashScreenTheme">@style/Theme.WildberriesDeliveryAggregator</item>
+        <item name="postSplashScreenTheme">@style/Theme.DeliveryAggregator</item>
     </style>
 </resources>

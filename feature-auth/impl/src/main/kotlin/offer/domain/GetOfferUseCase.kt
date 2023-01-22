@@ -2,7 +2,7 @@ package offer.domain
 
 import com.google.gson.Gson
 import offer.domain.model.OfferModel
-import trinity_monsters.wildberries_delivery_aggregator.feature_auth.impl.R
+import trinity_monsters.delivery_aggregator.feature_auth.impl.R
 import utils.resource.domain.ResourceInteractor
 
 class GetOfferUseCase(

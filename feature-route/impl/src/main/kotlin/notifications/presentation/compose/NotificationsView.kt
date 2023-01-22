@@ -30,9 +30,9 @@ import notifications.presentation.compose.model.NotificationUiModel
 import notifications.presentation.viewmodel.model.NotificationsEvent
 import notifications.presentation.viewmodel.model.NotificationsState
 import theme.Theme
-import trinity_monsters.wildberries_delivery_aggregator.feature_route.impl.R
+import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import view.BackButton
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
 fun NotificationsView(state: NotificationsState, eventHandler: (NotificationsEvent) -> Unit) {

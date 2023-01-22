@@ -1,4 +1,4 @@
-package trinity_monsters.wildberries_delivery_aggregator.root
+package trinity_monsters.delivery_aggregator.root
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle

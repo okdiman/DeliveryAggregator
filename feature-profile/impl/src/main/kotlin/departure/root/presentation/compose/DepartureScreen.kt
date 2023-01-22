@@ -13,7 +13,7 @@ import presentation.AddressBSScreen
 import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
-import trinity_monsters.wildberries_delivery_aggregator.feature_profile.impl.R
+import trinity_monsters.delivery_aggregator.feature_profile.impl.R
 import utils.UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
 import utils.UiConstants.BottomSheet.SCREEN_MAX_HEIGHT
 

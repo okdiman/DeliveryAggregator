@@ -24,13 +24,13 @@ import root.RegistrationConstants
 import root.presentation.RegistrationTitleView
 import transport.presentation.viewmodel.model.TransportEvent
 import transport.presentation.viewmodel.model.TransportState
-import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import trinity_monsters.delivery_aggregator.feature_registration.impl.R
 import utils.CommonConstants.LIMITS.Transport.CAR_BRAND_MAX_CHARS
 import utils.CommonConstants.LIMITS.Transport.CAR_CAPACITY_MAX_CHARS
 import utils.CommonConstants.LIMITS.Transport.CAR_CATEGORY_MAX_CHARS
 import utils.CommonConstants.LIMITS.Transport.LICENCE_PLATE_MAX_CHARS
 import view.StandardTextField
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
 fun TransportView(state: TransportState, eventHandler: (TransportEvent) -> Unit) {

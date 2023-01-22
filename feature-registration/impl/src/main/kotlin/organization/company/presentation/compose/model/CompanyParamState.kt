@@ -2,9 +2,9 @@ package organization.company.presentation.compose.model
 
 import androidx.annotation.StringRes
 import presentation.model.AddressUiModel
-import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import trinity_monsters.delivery_aggregator.feature_registration.impl.R
 import view.model.DefaultParamState
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 sealed class CompanyParamState(
     override val stateText: String,

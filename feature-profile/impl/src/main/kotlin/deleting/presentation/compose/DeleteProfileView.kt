@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import deleting.presentation.viewmodel.model.DeleteProfileEvent
 import theme.Theme
-import trinity_monsters.wildberries_delivery_aggregator.feature_profile.impl.R
+import trinity_monsters.delivery_aggregator.feature_profile.impl.R
 
 @Composable
 internal fun DeleteProfileView(eventHandler: (DeleteProfileEvent) -> Unit) {

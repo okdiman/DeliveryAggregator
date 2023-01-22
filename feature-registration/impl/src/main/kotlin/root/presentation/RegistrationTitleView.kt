@@ -17,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import theme.Theme
-import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import trinity_monsters.delivery_aggregator.feature_registration.impl.R
 import view.BackButton
 
 @Composable

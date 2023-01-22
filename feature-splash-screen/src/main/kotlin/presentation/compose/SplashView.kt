@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import trinity_monsters.wildberries_delivery_aggregator.feature_splash_screen.R
+import trinity_monsters.delivery_aggregator.feature_splash_screen.R
 import view.ProgressIndicator
 
 @Composable

@@ -17,13 +17,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import root.RegistrationConstants.Step.FOUR
 import root.presentation.RegistrationTitleView
-import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import trinity_monsters.delivery_aggregator.feature_registration.impl.R
 import user.presentation.viewmodel.model.UserEvent
 import user.presentation.viewmodel.model.UserState
 import utils.CommonConstants.LIMITS.Common.MAX_NAME_CHARS
 import utils.CommonConstants.LIMITS.User.MAX_USER_NAME_CHARS
 import view.StandardTextField
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
 fun UserView(state: UserState, eventHandler: (UserEvent) -> Unit) {

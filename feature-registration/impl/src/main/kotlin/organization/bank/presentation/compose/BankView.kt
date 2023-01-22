@@ -23,7 +23,7 @@ import root.RegistrationConstants
 import root.RegistrationConstants.Limits.Bank.BANK_ACC_CHARS
 import root.RegistrationConstants.Limits.Bank.BIK_CHARS
 import root.presentation.RegistrationTitleView
-import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import trinity_monsters.delivery_aggregator.feature_registration.impl.R
 import utils.CommonConstants.LIMITS.Common.MAX_NAME_CHARS
 import view.StandardTextField
 

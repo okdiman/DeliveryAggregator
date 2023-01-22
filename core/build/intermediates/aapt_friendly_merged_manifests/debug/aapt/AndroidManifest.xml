@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="trinity_monsters.wildberries_delivery_aggregator.core" >
+    package="trinity_monsters.delivery_aggregator.core" >
 
     <uses-sdk
         android:minSdkVersion="23"

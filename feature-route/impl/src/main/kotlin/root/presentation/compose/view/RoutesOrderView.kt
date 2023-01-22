@@ -26,7 +26,7 @@ import modifiers.advancedShadow
 import root.presentation.compose.model.RouteOrderUiModel
 import root.presentation.viewmodel.model.RouteEvent
 import theme.Theme
-import trinity_monsters.wildberries_delivery_aggregator.feature_route.impl.R
+import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import utils.CommonConstants
 
 @Composable

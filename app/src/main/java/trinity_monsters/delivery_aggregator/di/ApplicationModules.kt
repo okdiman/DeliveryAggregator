@@ -1,4 +1,4 @@
-package trinity_monsters.wildberries_delivery_aggregator.di
+package trinity_monsters.delivery_aggregator.di
 
 import di.addressModule
 import di.authModule

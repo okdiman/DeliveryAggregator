@@ -29,7 +29,7 @@ import modifiers.advancedShadow
 import orderdetails.presentation.viewmodel.model.OrderDetailsEvent
 import orderdetails.presentation.viewmodel.model.OrderDetailsState
 import theme.Theme
-import trinity_monsters.wildberries_delivery_aggregator.feature_route.impl.R
+import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import utils.CommonConstants.Helpers.NUMBER
 import view.BackButton
 

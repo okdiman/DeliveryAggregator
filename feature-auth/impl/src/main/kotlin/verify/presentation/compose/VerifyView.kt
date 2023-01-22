@@ -29,7 +29,7 @@ import kotlinx.coroutines.launch
 import root.AuthConstants.Limits.MAX_CODE_CHARS
 import root.AuthConstants.Limits.SECOND
 import theme.Theme
-import trinity_monsters.wildberries_delivery_aggregator.feature_auth.impl.R
+import trinity_monsters.delivery_aggregator.feature_auth.impl.R
 import utils.formatTicks
 import verify.presentation.viewmodel.model.VerifyEvent
 import verify.presentation.viewmodel.model.VerifyState

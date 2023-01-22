@@ -3,7 +3,7 @@ package transport.presentation.compose.model
 import androidx.annotation.StringRes
 import presentation.model.AddressUiModel
 import view.model.DefaultParamState
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 sealed class TransportParamState(
     override val stateText: String,

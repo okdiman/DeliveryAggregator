@@ -32,7 +32,7 @@ import departure.root.presentation.compose.model.DepartureAddressUiModel
 import departure.root.presentation.viewmodel.model.DepartureEvent
 import departure.root.presentation.viewmodel.model.DepartureState
 import theme.Theme
-import trinity_monsters.wildberries_delivery_aggregator.feature_profile.impl.R
+import trinity_monsters.delivery_aggregator.feature_profile.impl.R
 import view.BackButton
 
 @Composable

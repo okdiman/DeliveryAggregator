@@ -5,7 +5,7 @@ plugins {
 
 android {
     compileSdk = Settings.targetSdk
-    namespace = "trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl"
+    namespace = "trinity_monsters.delivery_aggregator.feature_registration.impl"
     defaultConfig {
         minSdk = Settings.minSdk
     }

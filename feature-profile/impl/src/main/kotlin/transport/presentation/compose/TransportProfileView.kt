@@ -23,11 +23,11 @@ import androidx.compose.ui.unit.sp
 import theme.Theme
 import transport.presentation.viewmodel.model.TransportProfileEvent
 import transport.presentation.viewmodel.model.TransportProfileState
-import trinity_monsters.wildberries_delivery_aggregator.feature_profile.impl.R
+import trinity_monsters.delivery_aggregator.feature_profile.impl.R
 import utils.CommonConstants
 import view.BackButton
 import view.StandardTextField
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
 internal fun TransportProfileView(

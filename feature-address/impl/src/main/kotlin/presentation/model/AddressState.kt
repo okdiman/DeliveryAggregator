@@ -1,7 +1,7 @@
 package presentation.model
 
 import androidx.annotation.StringRes
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R
+import trinity_monsters.delivery_aggregator.core_ui.R
 import view.model.DefaultParamState
 
 data class AddressState(

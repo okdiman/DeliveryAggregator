@@ -2,7 +2,7 @@ package additionalInfo.presentation.mapper
 
 import additionalInfo.presentation.AdditionalInfoParameters
 import additionalInfo.presentation.compose.model.AdditionalInfoUiModel
-import trinity_monsters.wildberries_delivery_aggregator.feature_route.impl.R
+import trinity_monsters.delivery_aggregator.feature_route.impl.R
 
 class AdditionalInfoUiMapper {
     fun map(parameters: AdditionalInfoParameters) = listOf(

@@ -40,8 +40,8 @@ import root.domain.model.RouteStatusProgress
 import root.presentation.viewmodel.model.RouteEvent
 import root.presentation.viewmodel.model.RouteState
 import theme.Theme
-import trinity_monsters.wildberries_delivery_aggregator.feature_route.impl.R
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
+import trinity_monsters.delivery_aggregator.feature_route.impl.R
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Suppress("LongMethod")
 @OptIn(ExperimentalMaterialApi::class)

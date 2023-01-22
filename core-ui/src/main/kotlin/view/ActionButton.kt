@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import theme.Theme
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R
+import trinity_monsters.delivery_aggregator.core_ui.R
 
 @Suppress("LongParameterList")
 @Composable

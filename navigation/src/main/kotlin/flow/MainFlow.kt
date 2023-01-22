@@ -19,8 +19,8 @@ import tabs.BottomConfiguration
 import tabs.BottomNavigationTab
 import transport.presentation.TransportProfileParameters
 import transport.presentation.compose.TransportProfileScreen
-import trinity_monsters.wildberries_delivery_aggregator.navigation.R
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
+import trinity_monsters.delivery_aggregator.navigation.R
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 fun RootComposeBuilder.mainFlow() {
     customNavigation(

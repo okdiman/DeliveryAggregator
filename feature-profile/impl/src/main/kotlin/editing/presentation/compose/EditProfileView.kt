@@ -25,11 +25,11 @@ import androidx.compose.ui.unit.sp
 import editing.presentation.viewmodel.model.EditProfileEvent
 import editing.presentation.viewmodel.model.EditProfileState
 import theme.Theme
-import trinity_monsters.wildberries_delivery_aggregator.feature_profile.impl.R
+import trinity_monsters.delivery_aggregator.feature_profile.impl.R
 import utils.CommonConstants
 import view.BackButton
 import view.StandardTextField
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
 internal fun EditProfileView(state: EditProfileState, eventHandler: (EditProfileEvent) -> Unit) {

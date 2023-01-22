@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import support.presentation.viewmodel.model.SupportEvent
 import theme.Theme
-import trinity_monsters.wildberries_delivery_aggregator.feature_profile.impl.R
+import trinity_monsters.delivery_aggregator.feature_profile.impl.R
 
 @Composable
 internal fun SupportView(eventHandler: (SupportEvent) -> Unit) {

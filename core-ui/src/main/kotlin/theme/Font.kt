@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.sp
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R
+import trinity_monsters.delivery_aggregator.core_ui.R
 
 data class DeliveryAggregatorFonts(
     val regular: TextStyle = baseFontStyle(FontWeight.Normal),

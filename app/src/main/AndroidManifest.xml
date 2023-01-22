@@ -15,7 +15,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@drawable/splash_logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WildberriesDeliveryAggregator.Launcher"
+        android:theme="@style/Theme.DeliveryAggregator.Launcher"
         tools:targetApi="33">
         <activity
             android:name=".root.MainActivity"

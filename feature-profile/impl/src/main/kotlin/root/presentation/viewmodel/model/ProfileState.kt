@@ -2,8 +2,8 @@ package root.presentation.viewmodel.model
 
 import root.presentation.compose.model.ProfileItemType
 import root.presentation.compose.model.ProfileItemUiModel
-import trinity_monsters.wildberries_delivery_aggregator.feature_profile.impl.R
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
+import trinity_monsters.delivery_aggregator.feature_profile.impl.R
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 data class ProfileState(
     val name: String = "",

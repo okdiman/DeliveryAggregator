@@ -1,7 +1,7 @@
 package root.presentation.compose.model
 
 import androidx.annotation.StringRes
-import trinity_monsters.wildberries_delivery_aggregator.feature_route.impl.R
+import trinity_monsters.delivery_aggregator.feature_route.impl.R
 
 enum class RouteOrderStatusUiModel(@StringRes val text: Int) {
     ACTIVE(R.string.route_active_status),

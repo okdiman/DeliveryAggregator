@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import departure.maxaddresses.presentation.viewmodel.model.DepartureMaxAddressCountEvent
 import theme.Theme
-import trinity_monsters.wildberries_delivery_aggregator.feature_profile.impl.R
+import trinity_monsters.delivery_aggregator.feature_profile.impl.R
 
 @Composable
 fun DepartureMaxAddressCountView(eventHandler: (DepartureMaxAddressCountEvent) -> Unit) {

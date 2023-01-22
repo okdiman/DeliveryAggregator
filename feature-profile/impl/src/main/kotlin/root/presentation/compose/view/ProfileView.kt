@@ -31,8 +31,8 @@ import root.presentation.compose.model.ProfileItemUiModel
 import root.presentation.viewmodel.model.ProfileEvent
 import root.presentation.viewmodel.model.ProfileState
 import theme.Theme
-import trinity_monsters.wildberries_delivery_aggregator.feature_profile.impl.R
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
+import trinity_monsters.delivery_aggregator.feature_profile.impl.R
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
 internal fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Unit) {

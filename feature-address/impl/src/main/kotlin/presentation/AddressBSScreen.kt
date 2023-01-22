@@ -38,7 +38,7 @@ import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import theme.Theme
 import view.ProgressIndicator
 import view.StandardTextField
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Suppress("LongMethod")
 @Composable

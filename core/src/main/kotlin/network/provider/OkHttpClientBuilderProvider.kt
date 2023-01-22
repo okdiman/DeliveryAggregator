@@ -5,7 +5,7 @@ import network.interceptor.CurlLoggingInterceptor
 import network.interceptor.ErrorInterceptor
 import network.interceptor.HeadersInterceptor
 import okhttp3.OkHttpClient
-import trinity_monsters.wildberries_delivery_aggregator.core.BuildConfig
+import trinity_monsters.delivery_aggregator.core.BuildConfig
 
 class OkHttpClientBuilderProvider(
     private val errorInterceptor: ErrorInterceptor,

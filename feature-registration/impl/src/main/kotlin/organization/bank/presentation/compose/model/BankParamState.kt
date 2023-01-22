@@ -1,9 +1,9 @@
 package organization.bank.presentation.compose.model
 
 import androidx.annotation.StringRes
-import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import trinity_monsters.delivery_aggregator.feature_registration.impl.R
 import view.model.DefaultParamState
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 sealed class BankParamState(
     override val stateText: String,

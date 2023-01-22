@@ -11,7 +11,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Wildberries Delivery Aggregator"
+rootProject.name = "Delivery Aggregator"
 include(
     ":app",
     ":core",

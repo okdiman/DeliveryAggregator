@@ -1,6 +1,6 @@
 package verify.domain
 
-import trinity_monsters.wildberries_delivery_aggregator.feature_auth.impl.R
+import trinity_monsters.delivery_aggregator.feature_auth.impl.R
 import utils.CommonConstants.Helpers.LINE_BREAK
 import utils.resource.domain.ResourceInteractor
 

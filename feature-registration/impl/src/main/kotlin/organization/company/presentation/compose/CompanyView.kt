@@ -27,10 +27,10 @@ import root.RegistrationConstants.Limits.Company.INN_CHARS
 import root.RegistrationConstants.Limits.Company.KPP_CHARS
 import root.RegistrationConstants.Limits.Company.OGRN_CHARS
 import root.presentation.RegistrationTitleView
-import trinity_monsters.wildberries_delivery_aggregator.feature_registration.impl.R
+import trinity_monsters.delivery_aggregator.feature_registration.impl.R
 import utils.CommonConstants.LIMITS.Common.MAX_NAME_CHARS
 import view.StandardTextField
-import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
 fun CompanyView(state: CompanyState, eventHandler: (CompanyEvent) -> Unit) {
