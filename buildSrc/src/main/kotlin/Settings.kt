@@ -2,6 +2,7 @@ object Settings {
     const val applicationId = "com.trinity_monsters.delivery_aggregator"
     const val debugVersionCode = 1
     const val debugVersionName = "1.0.0"
+    const val debugApplicationIdSuffix = ".debug"
     const val targetSdk = 33
     const val minSdk = 23
     const val gradle = "7.3.1"
