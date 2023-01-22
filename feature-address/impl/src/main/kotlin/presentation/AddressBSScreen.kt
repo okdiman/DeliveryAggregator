@@ -50,7 +50,6 @@ fun AddressBSScreen(
     onTextFieldChanged: (String) -> Unit,
     onSuggestClick: (AddressUiModel) -> Unit
 ) {
-    val rootController = LocalRootController.current
     val scrollState = rememberLazyListState()
     val focusRequester = remember { FocusRequester() }
     LazyColumn(
@@ -59,48 +58,10 @@ fun AddressBSScreen(
             .padding(start = 16.dp, end = 16.dp),
     ) {
         item {
-            Row(modifier = Modifier.padding(top = 40.dp)) {
-                Text(
-                    modifier = Modifier.weight(1f),
-                    text = stringResource(id = titleRes),
-                    style = Theme.fonts.bold.copy(fontSize = 24.sp)
-                )
-                Icon(
-                    modifier = Modifier
-                        .padding(top = 8.dp)
-                        .clip(Theme.shapes.roundedButton)
-                        .clickable {
-                            rootController
-                                .findModalController()
-                                .popBackStack(null)
-                        },
-                    painter = painterResource(id = R_core.drawable.close_ic),
-                    contentDescription = null
-                )
-            }
-            StandardTextField(
-                modifier = Modifier.focusRequester(focusRequester),
-                state = state,
-                hasTitle = false,
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(id = R_core.drawable.search_ic),
-                        contentDescription = null
-                    )
-                },
-                trailingIcon = {
-                    Icon(
-                        modifier = Modifier
-                            .clip(Theme.shapes.roundedButton)
-                            .clickable { onClearClick() },
-                        painter = painterResource(id = R_core.drawable.delete_ic),
-                        contentDescription = null
-                    )
-                },
-                hint = stringResource(id = R_core.string.transport_departure_address_hint),
-                onValueChanged = { onTextFieldChanged(it) }
-            )
-            Spacer(modifier = Modifier.height(24.dp))
+            AddressTitleView(titleRes)
+        }
+        item {
+            AddressTextFieldView(state, onClearClick, onTextFieldChanged, focusRequester)
         }
         if (state.isSuggestLoading) {
             item {
@@ -115,6 +76,62 @@ fun AddressBSScreen(
     LaunchedEffect(Unit) {
         focusRequester.requestFocus()
     }
+}
+
+@Composable
+private fun AddressTitleView(@StringRes titleRes: Int) {
+    val rootController = LocalRootController.current
+    Row(modifier = Modifier.padding(top = 40.dp)) {
+        Text(
+            modifier = Modifier.weight(1f),
+            text = stringResource(id = titleRes),
+            style = Theme.fonts.bold.copy(fontSize = 24.sp)
+        )
+        Icon(
+            modifier = Modifier
+                .padding(top = 8.dp)
+                .clip(Theme.shapes.roundedButton)
+                .clickable {
+                    rootController
+                        .findModalController()
+                        .popBackStack(null)
+                },
+            painter = painterResource(id = R_core.drawable.close_ic),
+            contentDescription = null
+        )
+    }
+}
+
+@Composable
+private fun AddressTextFieldView(
+    state: AddressState,
+    onClearClick: () -> Unit,
+    onTextFieldChanged: (String) -> Unit,
+    focusRequester: FocusRequester
+) {
+    StandardTextField(
+        modifier = Modifier.focusRequester(focusRequester),
+        state = state,
+        hasTitle = false,
+        leadingIcon = {
+            Icon(
+                painter = painterResource(id = R_core.drawable.search_ic),
+                contentDescription = null
+            )
+        },
+        trailingIcon = {
+            Icon(
+                modifier = Modifier
+                    .clip(Theme.shapes.roundedButton)
+                    .clickable { onClearClick() },
+                painter = painterResource(id = R_core.drawable.delete_ic),
+                contentDescription = null
+            )
+        },
+        hint = stringResource(id = R_core.string.transport_departure_address_hint),
+        onValueChanged = { onTextFieldChanged(it) }
+    )
+    Spacer(modifier = Modifier.height(24.dp))
 }
 
 @Composable

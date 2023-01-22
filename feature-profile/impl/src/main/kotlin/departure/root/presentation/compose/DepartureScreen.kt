@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
 import departure.maxaddresses.presentation.compose.DepartureMaxAddressCountScreen
+import departure.root.presentation.compose.view.DepartureView
 import departure.root.presentation.viewmodel.DepartureViewModel
 import departure.root.presentation.viewmodel.DepartureViewModel.Companion.NEW_ID
 import departure.root.presentation.viewmodel.model.DepartureAction

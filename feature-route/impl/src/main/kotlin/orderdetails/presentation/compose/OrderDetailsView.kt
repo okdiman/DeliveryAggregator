@@ -1,6 +1,6 @@
 package orderdetails.presentation.compose
 
-import ErrorScreen
+import CommonErrorScreen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -32,19 +32,17 @@ import theme.Theme
 import trinity_monsters.wildberries_delivery_aggregator.feature_route.impl.R
 import utils.CommonConstants.Helpers.NUMBER
 import view.BackButton
-import view.ProgressIndicator
 
-@Composable internal fun OrderDetailsView(
+@Composable
+internal fun OrderDetailsView(
     state: OrderDetailsState, eventHandler: (OrderDetailsEvent) -> Unit
 ) {
     when {
         state.isLoading -> {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                ProgressIndicator()
-            }
+
         }
         state.isError -> {
-            ErrorScreen { eventHandler(OrderDetailsEvent.OnRetryClick) }
+            CommonErrorScreen { eventHandler(OrderDetailsEvent.OnRetryClick) }
         }
         else -> {
             val verticalScroll = rememberScrollState()

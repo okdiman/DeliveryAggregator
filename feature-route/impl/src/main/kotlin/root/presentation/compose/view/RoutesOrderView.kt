@@ -41,10 +41,10 @@ internal fun RoutesOrderView(
             .fillMaxWidth()
             .advancedShadow(
                 alpha = 0.1f,
-                cornersRadius = 40.dp,
-                shadowBlurRadius = 40.dp
+                cornersRadius = 20.dp,
+                shadowBlurRadius = 20.dp
             )
-            .clip(Theme.shapes.roundedButton)
+            .clip(Theme.shapes.bigCard)
             .background(Color.White)
             .clickable { eventHandler(RouteEvent.OnRouteClick(model.id)) }
     ) {

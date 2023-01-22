@@ -1,11 +1,10 @@
-package root.presentation.compose
+package root.presentation.compose.view
 
-import ErrorScreen
+import CommonErrorScreen
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -33,19 +32,16 @@ import root.presentation.viewmodel.model.ProfileEvent
 import root.presentation.viewmodel.model.ProfileState
 import theme.Theme
 import trinity_monsters.wildberries_delivery_aggregator.feature_profile.impl.R
-import view.ProgressIndicator
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
 @Composable
 internal fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Unit) {
     when {
         state.isLoading -> {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                ProgressIndicator()
-            }
+            ProfileLoadingView()
         }
         state.isError -> {
-            ErrorScreen { eventHandler(ProfileEvent.OnRetryClick) }
+            CommonErrorScreen { eventHandler(ProfileEvent.OnRetryClick) }
         }
         else -> {
             val startState = remember { MutableTransitionState(false) }.also {
@@ -58,40 +54,16 @@ internal fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Un
                         .padding(top = 54.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
                 ) {
                     item {
-                        Row(modifier = Modifier.fillMaxWidth()) {
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    text = state.name,
-                                    style = Theme.fonts.bold.copy(fontSize = 24.sp)
-                                )
-                            }
-                            Icon(
-                                modifier = Modifier
-                                    .clip(Theme.shapes.roundedButton)
-                                    .clickable {
-                                        eventHandler(ProfileEvent.OnEditProfileClick)
-                                    },
-                                painter = painterResource(id = R.drawable.profile_edit_ic),
-                                contentDescription = null
-                            )
-                        }
-                        Spacer(modifier = Modifier.height(20.dp))
-                        Text(
-                            text = state.organizationName,
-                            style = Theme.fonts.regular
-                        )
-                        Spacer(modifier = Modifier.height(12.dp))
-                        Text(
-                            text = state.phone, style = Theme.fonts.regular
-                        )
-                        Spacer(modifier = Modifier.height(12.dp))
-                        Text(
-                            text = state.email, style = Theme.fonts.regular
-                        )
+                        ProfileUserNameView(state, eventHandler)
+                    }
+                    item {
+                        ProfileUserInfoView(state)
+                    }
+                    item {
                         Spacer(modifier = Modifier.height(20.dp))
                         Divider(thickness = 1.dp, color = Theme.colors.hintColor)
                     }
-                    items(state.uiModels) { ProfileItem(it, eventHandler) }
+                    items(state.uiModels) { ProfileItemView(it, eventHandler) }
                 }
             }
         }
@@ -99,7 +71,45 @@ internal fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Un
 }
 
 @Composable
-private fun ProfileItem(
+private fun ProfileUserNameView(state: ProfileState, eventHandler: (ProfileEvent) -> Unit) {
+    Row(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = state.name,
+                style = Theme.fonts.bold.copy(fontSize = 24.sp)
+            )
+        }
+        Icon(
+            modifier = Modifier
+                .clip(Theme.shapes.roundedButton)
+                .clickable {
+                    eventHandler(ProfileEvent.OnEditProfileClick)
+                },
+            painter = painterResource(id = R.drawable.profile_edit_ic),
+            contentDescription = null
+        )
+    }
+}
+
+@Composable
+private fun ProfileUserInfoView(state: ProfileState) {
+    Spacer(modifier = Modifier.height(20.dp))
+    Text(
+        text = state.organizationName,
+        style = Theme.fonts.regular
+    )
+    Spacer(modifier = Modifier.height(12.dp))
+    Text(
+        text = state.phone, style = Theme.fonts.regular
+    )
+    Spacer(modifier = Modifier.height(12.dp))
+    Text(
+        text = state.email, style = Theme.fonts.regular
+    )
+}
+
+@Composable
+private fun ProfileItemView(
     item: ProfileItemUiModel,
     eventHandler: (ProfileEvent) -> Unit
 ) {

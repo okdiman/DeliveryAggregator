@@ -4,11 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
+import editing.presentation.EditProfileParameters
 import exit.presentation.compose.ExitScreen
 import navigation.NavigationTree
 import openNotificationSettings
-import editing.presentation.EditProfileParameters
-import transport.presentation.TransportProfileParameters
+import root.presentation.compose.view.ProfileView
 import root.presentation.viewmodel.ProfileViewModel
 import root.presentation.viewmodel.model.ProfileAction
 import root.presentation.viewmodel.model.ProfileEvent
@@ -17,6 +17,7 @@ import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
 import support.presentation.compose.SupportScreen
+import transport.presentation.TransportProfileParameters
 import utils.UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
 
 @Composable

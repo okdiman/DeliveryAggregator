@@ -1,6 +1,6 @@
 package root.presentation.compose.view
 
-import ErrorScreen
+import CommonErrorScreen
 import ScrollScreenActionButton
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
@@ -41,57 +41,55 @@ import root.presentation.viewmodel.model.RouteEvent
 import root.presentation.viewmodel.model.RouteState
 import theme.Theme
 import trinity_monsters.wildberries_delivery_aggregator.feature_route.impl.R
-import view.ProgressIndicator
 import trinity_monsters.wildberries_delivery_aggregator.core_ui.R as R_core
 
 @Suppress("LongMethod")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 internal fun RouteView(state: RouteState, eventHandler: (RouteEvent) -> Unit) {
-    val pullRefreshState = rememberPullRefreshState(
-        refreshing = state.isRefreshing,
-        onRefresh = { eventHandler(RouteEvent.OnRefreshSwipe) }
-    )
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .pullRefresh(pullRefreshState)
-    ) {
-        PullRefreshIndicator(
+    if (state.isError) {
+        CommonErrorScreen { eventHandler(RouteEvent.OnRetryClick) }
+    } else {
+        val startState = remember { MutableTransitionState(false) }.also {
+            it.targetState = true
+        }
+        val pullRefreshState = rememberPullRefreshState(
             refreshing = state.isRefreshing,
-            state = pullRefreshState,
-            modifier = Modifier.align(Alignment.TopCenter),
-            scale = true
+            onRefresh = { eventHandler(RouteEvent.OnRefreshSwipe) }
         )
-        when {
-            state.isLoading -> {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    ProgressIndicator()
-                }
-            }
-            state.isError -> {
-                ErrorScreen { eventHandler(RouteEvent.OnRetryClick) }
-            }
-            else -> {
-                val startState = remember { MutableTransitionState(false) }.also {
-                    it.targetState = true
-                }
-                AnimatedVisibility(
-                    visibleState = startState,
-                    enter = slideInHorizontally()
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .pullRefresh(pullRefreshState)
+        ) {
+            PullRefreshIndicator(
+                refreshing = state.isRefreshing,
+                state = pullRefreshState,
+                modifier = Modifier.align(Alignment.TopCenter),
+                scale = true
+            )
+            AnimatedVisibility(
+                visibleState = startState,
+                enter = slideInHorizontally()
+            ) {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(top = 12.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
                 ) {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(top = 12.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
-                    ) {
-                        item {
-                            RouteNotificationsView(state, eventHandler)
+                    item {
+                        RouteNotificationsView(state, eventHandler)
+                    }
+                    item {
+                        RouteTitleView()
+                    }
+                    when {
+                        state.isLoading -> {
+                            item {
+                                RouteLoadingView()
+                            }
                         }
-                        item {
-                            RouteTitleView()
-                        }
-                        if (state.orders.isNotEmpty()) {
+                        state.orders.isNotEmpty() -> {
                             item { Spacer(modifier = Modifier.height(16.dp)) }
                             itemsIndexed(state.orders) { index, item ->
                                 RoutesOrderView(index, item, eventHandler)
@@ -99,15 +97,16 @@ internal fun RouteView(state: RouteState, eventHandler: (RouteEvent) -> Unit) {
                             item {
                                 Spacer(modifier = Modifier.height(100.dp))
                             }
-                        } else {
+                        }
+                        else -> {
                             item {
                                 PlaceholderView()
                             }
                         }
                     }
-                    if (state.status == RouteStatusProgress.NEW) {
-                        RouteAcceptButtonView(state, eventHandler)
-                    }
+                }
+                if (state.status == RouteStatusProgress.NEW && !state.isLoading) {
+                    RouteAcceptButtonView(state, eventHandler)
                 }
             }
         }
