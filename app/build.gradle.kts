@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = Settings.applicationId
+    namespace = "trinity_monsters.delivery_aggregator"
     compileSdk = Settings.targetSdk
 
     defaultConfig {
