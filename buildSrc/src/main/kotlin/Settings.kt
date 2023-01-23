@@ -10,4 +10,6 @@ object Settings {
     const val kotlinJwm = "1.8"
     const val composeCompiler = "1.3.1"
     const val serializationPlugin = "1.7.10"
+    const val googleServicesPlugin = "4.3.15"
+    const val crashlitycsPlugin = "2.9.2"
 }

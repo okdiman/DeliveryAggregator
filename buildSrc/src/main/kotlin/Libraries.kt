@@ -77,4 +77,9 @@ object Libraries {
     object Security {
         const val crypto = "androidx.security:security-crypto:${Versions.crypto}"
     }
+
+    object Firebase {
+        const val messaging = "com.google.firebase:firebase-messaging-ktx:${Versions.firebaseMessaging}"
+        const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx:${Versions.firebaseCrashlytics}"
+    }
 }

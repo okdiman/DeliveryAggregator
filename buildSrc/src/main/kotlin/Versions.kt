@@ -18,4 +18,6 @@ object Versions {
     const val kotlin = "1.7.10"
     const val kotlinCoroutines = "1.5.2"
     const val crypto = "1.1.0-alpha04"
+    const val firebaseMessaging = "23.1.1"
+    const val firebaseCrashlytics = "18.3.3"
 }

@@ -2,6 +2,8 @@ plugins {
     id(Plugins.application)
     id(Plugins.kotlin)
     id(Plugins.serialization)
+    id(Plugins.googleServices)
+    id(Plugins.crashlytics)
 }
 
 android {
@@ -19,7 +21,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-//            proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //            proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             applicationIdSuffix = Settings.debugApplicationIdSuffix
@@ -47,6 +49,7 @@ dependencies {
     compose()
     navigation()
     viewModel()
+    firebase()
     implementation(project(Modules.core))
     implementation(project(Modules.core_ui))
     implementation(project(Modules.splash))

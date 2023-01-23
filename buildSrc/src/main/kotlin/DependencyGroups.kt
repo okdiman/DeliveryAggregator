@@ -56,6 +56,11 @@ fun DependencyHandler.security() {
     add("implementation", Libraries.Security.crypto)
 }
 
+fun DependencyHandler.firebase() {
+    add("implementation", Libraries.Firebase.messaging)
+    add("implementation", Libraries.Firebase.crashlytics)
+}
+
 fun DependencyHandler.viewModel() {
     add("implementation", Libraries.ViewModel.compose)
     add("implementation", Libraries.ViewModel.core)
