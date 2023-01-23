@@ -1,3 +1,3 @@
 package network.domain
 
-interface GetAuthTokenSyncUseCase : () -> String
+interface GetAuthTokenSyncUseCase : () -> String?

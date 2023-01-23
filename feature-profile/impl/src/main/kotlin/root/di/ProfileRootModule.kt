@@ -15,5 +15,5 @@ internal fun profileRootModule() = module {
     factory { ProfileModelMapper() }
     factory { GetProfileUseCase(get()) }
     factory { ProfileUiMapper(get()) }
-    factory<ProfileRepository> { ProfileRepositoryImpl(get(), get(), get()) }
+    factory<ProfileRepository> { ProfileRepositoryImpl(get(), get(), get(), get()) }
 }

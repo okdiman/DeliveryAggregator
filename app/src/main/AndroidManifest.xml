@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".root.DeliveryAggregatorApp"
+        android:name=".root.presentation.DeliveryAggregatorApp"
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -18,7 +18,7 @@
         android:theme="@style/Theme.DeliveryAggregator.Launcher"
         tools:targetApi="33">
         <activity
-            android:name=".root.MainActivity"
+            android:name=".root.presentation.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>

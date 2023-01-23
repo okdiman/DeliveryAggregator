@@ -20,12 +20,12 @@ class AuthRepositoryImpl(
 
     override suspend fun signIn(model: AuthSignInModel) {
         val response = api.signIn(AuthSignInRequest(model.code, model.phone))
-        localDataSource.saveToken(response.token)
+        localDataSource.saveAccessToken(response.token)
     }
 
     override suspend fun signUp(model: AuthSignUpModel) {
         val response = api.signUp(mapper.map(model))
-        localDataSource.saveToken(response.token)
+        localDataSource.saveAccessToken(response.token)
     }
 
     override suspend fun getAuthInfo() {

@@ -4,6 +4,7 @@ import domain.AuthRepository
 import data.AuthLocalDataSource
 import domain.usecase.SignUpUseCase
 import network.domain.GetAuthTokenSyncUseCase
+import network.domain.GetPushTokenSyncUseCase
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.create
@@ -12,6 +13,7 @@ import root.data.AuthLocalDataSourceImpl
 import root.data.AuthRepositoryImpl
 import root.data.mapper.AuthSignUpMapper
 import root.domain.GetAuthTokenSyncUseCaseImpl
+import root.domain.GetPushTokenSyncUseCaseImpl
 import root.domain.SignUpUseCaseImpl
 
 internal fun authRootModule() = module {
@@ -21,4 +23,5 @@ internal fun authRootModule() = module {
     factory<SignUpUseCase> { SignUpUseCaseImpl(get()) }
     factory { AuthSignUpMapper() }
     factory<GetAuthTokenSyncUseCase> { GetAuthTokenSyncUseCaseImpl(get()) }
+    factory<GetPushTokenSyncUseCase> { GetPushTokenSyncUseCaseImpl(get()) }
 }

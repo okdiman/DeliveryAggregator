@@ -11,6 +11,7 @@ object Versions {
     const val compose = "1.3.1"
     const val activityCompose = "1.6.1"
     const val lifecycle = "2.5.1"
+    const val lifecycleExt = "2.2.0"
     const val kViewModel = "0.11"
     const val odyssey = "1.3.0"
     const val serialization = "1.3.3"

@@ -29,5 +29,5 @@ internal fun networkModule() = module {
     }
     factory { ErrorInterceptor() }
     factory { CurlLoggingInterceptor() }
-    factory { HeadersInterceptor(get()) }
+    factory { HeadersInterceptor(get(), get()) }
 }

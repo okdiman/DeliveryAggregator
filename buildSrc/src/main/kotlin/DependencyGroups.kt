@@ -4,6 +4,7 @@ fun DependencyHandler.core() {
     add("implementation", Libraries.Core.coreKtx)
     add("implementation", Libraries.Core.material)
     add("implementation", Libraries.Core.lifecycle)
+    add("implementation", Libraries.Core.lifecycleExt)
 }
 
 fun DependencyHandler.koin() {

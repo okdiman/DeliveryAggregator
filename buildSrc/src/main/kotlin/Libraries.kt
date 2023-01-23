@@ -27,6 +27,7 @@ object Libraries {
         const val material = "com.google.android.material:material:${Versions.material}"
         const val splashScreen = "androidx.core:core-splashscreen:${Versions.splashScreen}"
         const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
+        const val lifecycleExt = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycleExt}"
     }
 
     object Detekt {
@@ -83,7 +84,9 @@ object Libraries {
     }
 
     object Firebase {
-        const val messaging = "com.google.firebase:firebase-messaging-ktx:${Versions.firebaseMessaging}"
-        const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx:${Versions.firebaseCrashlytics}"
+        const val messaging =
+            "com.google.firebase:firebase-messaging-ktx:${Versions.firebaseMessaging}"
+        const val crashlytics =
+            "com.google.firebase:firebase-crashlytics-ktx:${Versions.firebaseCrashlytics}"
     }
 }

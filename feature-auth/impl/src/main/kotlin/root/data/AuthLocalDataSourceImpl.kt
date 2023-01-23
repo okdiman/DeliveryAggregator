@@ -10,7 +10,7 @@ class AuthLocalDataSourceImpl(
     private val dispatchers: AppDispatchers
 ) : AuthLocalDataSource {
 
-    override suspend fun saveToken(token: String) {
+    override suspend fun saveAccessToken(token: String) {
         withContext(dispatchers.storage) {
             sharedPreferences.edit()
                 .putString(USER_TOKEN, token)
@@ -18,13 +18,25 @@ class AuthLocalDataSourceImpl(
         }
     }
 
-    override suspend fun getToken(): String? {
+    override suspend fun getAccessToken(): String? {
         return withContext(dispatchers.storage) {
             sharedPreferences.getString(USER_TOKEN, null)
         }
     }
 
-    override fun getTokenSync(): String? {
+    override suspend fun savePushToken(token: String) {
+        withContext(dispatchers.storage) {
+            sharedPreferences.edit()
+                .putString(PUSH_TOKEN, token)
+                .apply()
+        }
+    }
+
+    override fun getPushTokenSync(): String? {
+        return sharedPreferences.getString(PUSH_TOKEN, null)
+    }
+
+    override fun getAccessTokenSync(): String? {
         return sharedPreferences.getString(USER_TOKEN, null)
     }
 
@@ -34,5 +46,6 @@ class AuthLocalDataSourceImpl(
 
     private companion object {
         const val USER_TOKEN = "user_token"
+        const val PUSH_TOKEN = "push_token"
     }
 }

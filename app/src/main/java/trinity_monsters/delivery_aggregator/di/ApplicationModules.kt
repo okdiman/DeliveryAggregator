@@ -10,6 +10,7 @@ import root.di.registrationModule
 import root.di.routeModules
 
 fun applicationModules() = listOf(
+    applicationRootModule(),
     coreUiiModule(),
     registrationModule(),
     addressModule(),

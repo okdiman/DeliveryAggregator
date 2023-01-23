@@ -4,11 +4,13 @@ import domain.ProfileRepository
 import data.AuthLocalDataSource
 import root.data.mapper.ProfileModelMapper
 import domain.model.ProfileModel
+import domain.usecase.notifications.GetNewFCMTokenUseCase
 
 class ProfileRepositoryImpl(
     private val api: ProfileApi,
     private val mapper: ProfileModelMapper,
-    private val localDataSource: AuthLocalDataSource
+    private val localDataSource: AuthLocalDataSource,
+    private val getNewFCMToken: GetNewFCMTokenUseCase
 ) : ProfileRepository {
     override suspend fun getProfile(): ProfileModel {
         val response = api.getProfile()
@@ -27,5 +29,6 @@ class ProfileRepositoryImpl(
 
     override suspend fun exitFromProfile() {
         localDataSource.clear()
+        getNewFCMToken()
     }
 }
