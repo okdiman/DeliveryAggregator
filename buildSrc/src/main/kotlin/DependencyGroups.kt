@@ -56,6 +56,10 @@ fun DependencyHandler.security() {
     add("implementation", Libraries.Security.crypto)
 }
 
+fun DependencyHandler.time() {
+    add("implementation", Libraries.DateTime.time)
+}
+
 fun DependencyHandler.firebase() {
     add("implementation", Libraries.Firebase.messaging)
     add("implementation", Libraries.Firebase.crashlytics)

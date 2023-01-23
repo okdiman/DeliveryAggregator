@@ -4,5 +4,7 @@ import androidx.compose.runtime.Immutable
 
 @Immutable
 class OrderDetailsParameters(
-    val id: Long
+    val id: Long,
+    val index: Int,
+    val isNeedToUpdateAfterBack: Boolean
 )

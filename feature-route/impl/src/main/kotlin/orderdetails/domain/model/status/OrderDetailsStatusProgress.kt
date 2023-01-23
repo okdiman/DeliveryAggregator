@@ -1,8 +1,9 @@
-package orderdetails.domain.model
+package orderdetails.domain.model.status
 
 enum class OrderDetailsStatusProgress(val status: String) {
     CREATED("created"),
     ACTIVE("assigned"),
-    IN_PROGRESS("in-progress"),
+    LOADING("loading"),
+    DELIVERY("delivery"),
     DONE("done")
 }

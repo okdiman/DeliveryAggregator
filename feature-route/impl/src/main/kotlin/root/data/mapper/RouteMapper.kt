@@ -9,6 +9,7 @@ class RouteMapper(
 ) {
     fun map(dto: RouteDto): RouteModel {
         return RouteModel(
+            id = dto.id,
             orders = dto.orders.map { orderMapper.map(it) },
             distance = dto.distance,
             price = dto.totalPrice,

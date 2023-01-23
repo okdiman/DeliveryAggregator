@@ -1,6 +1,10 @@
 package orderdetails.data.model
 
 import com.google.gson.annotations.SerializedName
+import orderdetails.data.model.details.OrderDetailsAddressDto
+import orderdetails.data.model.details.OrderDetailsMarketplaceDto
+import orderdetails.data.model.details.OrderDetailsStorageDto
+import orderdetails.data.model.extras.OrderDetailsExtrasDto
 
 data class OrderDetailsDto(
     val address: OrderDetailsAddressDto,

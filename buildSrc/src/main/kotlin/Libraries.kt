@@ -78,6 +78,10 @@ object Libraries {
         const val crypto = "androidx.security:security-crypto:${Versions.crypto}"
     }
 
+    object DateTime {
+        const val time = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenAbp}"
+    }
+
     object Firebase {
         const val messaging = "com.google.firebase:firebase-messaging-ktx:${Versions.firebaseMessaging}"
         const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx:${Versions.firebaseCrashlytics}"

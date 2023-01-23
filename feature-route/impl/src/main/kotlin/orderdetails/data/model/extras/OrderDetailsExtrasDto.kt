@@ -1,4 +1,4 @@
-package orderdetails.data.model
+package orderdetails.data.model.extras
 
 class OrderDetailsExtrasDto(
     val id: Int,

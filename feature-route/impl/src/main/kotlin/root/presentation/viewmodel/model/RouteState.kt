@@ -5,6 +5,7 @@ import root.presentation.compose.model.RouteButtonUiModel
 import root.presentation.compose.model.RouteOrderUiModel
 
 data class RouteState(
+    val id: Long = 0,
     val orders: List<RouteOrderUiModel> = emptyList(),
     val buttonUiModel: RouteButtonUiModel = RouteButtonUiModel(),
     val notificationsCount: Int = 0,

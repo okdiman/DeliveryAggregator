@@ -25,7 +25,11 @@ fun RouteScreen() {
             is RouteAction.OpenRouteDetail -> {
                 rootController.findRootController().push(
                     screen = NavigationTree.Routes.RouteDetails.name,
-                    params = OrderDetailsParameters((action.value as RouteAction.OpenRouteDetail).id)
+                    params = OrderDetailsParameters(
+                        (action.value as RouteAction.OpenRouteDetail).id,
+                        (action.value as RouteAction.OpenRouteDetail).index,
+                        (action.value as RouteAction.OpenRouteDetail).isNeedToUpdateAfterBack
+                    )
                 )
                 viewModel.obtainEvent(RouteEvent.ResetAction)
             }

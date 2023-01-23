@@ -6,4 +6,5 @@ import root.domain.model.RouteModel
 interface RouteRepository {
     suspend fun getActiveRoute(): RouteModel
     suspend fun getOrderDetails(id: Long) : RouteOrderModel
+    suspend fun acceptRoute(id: Long)
 }

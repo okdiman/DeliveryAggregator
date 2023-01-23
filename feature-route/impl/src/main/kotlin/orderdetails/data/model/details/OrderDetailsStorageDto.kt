@@ -1,4 +1,4 @@
-package orderdetails.data.model
+package orderdetails.data.model.details
 
 class OrderDetailsStorageDto(
     val address: String,

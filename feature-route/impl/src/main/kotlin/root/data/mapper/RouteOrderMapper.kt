@@ -1,26 +1,28 @@
 package root.data.mapper
 
-import orderdetails.data.model.OrderDetailsAddressDto
+import orderdetails.data.model.details.OrderDetailsAddressDto
 import orderdetails.data.model.OrderDetailsDto
-import orderdetails.data.model.OrderDetailsExtrasDto
-import orderdetails.data.model.OrderDetailsMarketplaceDto
-import orderdetails.data.model.OrderDetailsPriceDescriptionDto
-import orderdetails.data.model.OrderDetailsStorageDto
-import orderdetails.domain.model.OrderDetailsAddressModel
-import orderdetails.domain.model.OrderDetailsClientModel
-import orderdetails.domain.model.OrderDetailsExtrasModel
-import orderdetails.domain.model.OrderDetailsMarketplaceModel
+import orderdetails.data.model.extras.OrderDetailsExtrasDto
+import orderdetails.data.model.details.OrderDetailsMarketplaceDto
+import orderdetails.data.model.extras.OrderDetailsPriceDescriptionDto
+import orderdetails.data.model.details.OrderDetailsStorageDto
+import orderdetails.domain.model.details.OrderDetailsAddressModel
+import orderdetails.domain.model.details.OrderDetailsClientModel
+import orderdetails.domain.model.extras.OrderDetailsExtrasModel
+import orderdetails.domain.model.details.OrderDetailsMarketplaceModel
 import orderdetails.domain.model.OrderDetailsModel
-import orderdetails.domain.model.OrderDetailsPriceDescriptionModel
-import orderdetails.domain.model.OrderDetailsStatusProgress
-import orderdetails.domain.model.OrderDetailsStorageModel
+import orderdetails.domain.model.extras.OrderDetailsPriceDescriptionModel
+import orderdetails.domain.model.status.OrderDetailsStatusProgress
+import orderdetails.domain.model.details.OrderDetailsStorageModel
+import org.threeten.bp.format.DateTimeFormatter
 import root.data.model.RouteOrderDto
 import root.domain.model.RouteOrderModel
+import utils.toLocalZonedDateTime
 
 class RouteOrderMapper {
     fun map(dto: RouteOrderDto) = RouteOrderModel(
-        order = mapOrderToDomain(dto.order),
-        client = OrderDetailsClientModel(dto.client.name, dto.client.surname),
+        details = mapOrderToDomain(dto.order),
+        client = OrderDetailsClientModel(dto.client.name, dto.client.surname, dto.client.phone),
         index = dto.index
     )
 
@@ -28,7 +30,8 @@ class RouteOrderMapper {
         id = dto.id,
         boxes = dto.boxes,
         address = mapAddressToDomain(dto.address),
-        arrivalDay = dto.arrivalDay,
+        organizationName = dto.organizationName,
+        arrivalDay = dto.arrivalDay.toLocalZonedDateTime(DateTimeFormatter.ISO_DATE_TIME),
         arrivalTime = dto.arrivalTime,
         comment = dto.comment,
         price = dto.price,
@@ -57,10 +60,11 @@ class RouteOrderMapper {
         priceDescription = mapPriceDescriptionToDomain(dto.priceDescription)
     )
 
-    private fun mapMarketplaceToDomain(dto: OrderDetailsMarketplaceDto) = OrderDetailsMarketplaceModel(
-        id = dto.id,
-        name = WILDBERRIES
-    )
+    private fun mapMarketplaceToDomain(dto: OrderDetailsMarketplaceDto) =
+        OrderDetailsMarketplaceModel(
+            id = dto.id,
+            name = WILDBERRIES
+        )
 
     private fun mapStorageToDomain(dto: OrderDetailsStorageDto) = OrderDetailsStorageModel(
         id = dto.id,
@@ -68,10 +72,11 @@ class RouteOrderMapper {
         name = dto.name
     )
 
-    private fun mapPriceDescriptionToDomain(dto: OrderDetailsPriceDescriptionDto) = OrderDetailsPriceDescriptionModel(
-        text = dto.text,
-        isValid = dto.isValid
-    )
+    private fun mapPriceDescriptionToDomain(dto: OrderDetailsPriceDescriptionDto) =
+        OrderDetailsPriceDescriptionModel(
+            text = dto.text,
+            isValid = dto.isValid
+        )
 
     private companion object {
         const val WILDBERRIES = "Wildberries"

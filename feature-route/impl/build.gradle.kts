@@ -21,6 +21,7 @@ android {
 dependencies {
     compose()
     koin()
+    time()
     navigation()
     network()
     viewModel()

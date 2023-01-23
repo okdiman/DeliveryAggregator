@@ -1,13 +1,15 @@
 package orderdetails.presentation.compose.model
 
+import orderdetails.domain.model.status.OrderDetailsStatusProgress
+
 data class OrderDetailsUiModel(
     val id: Long,
-    //    val index: Int,
-    //    val clientName: String,
-    //    val clientPhone: String,
+    val index: String,
+    val clientName: String,
+    val clientPhone: String,
+    val status: OrderDetailsStatusProgress,
     val deliveryDate: String,
     val deliveryTime: String,
-    //    val cargoType: String,
     val palletCount: String,
     val deliveryAddress: String
 ) {
@@ -18,7 +20,11 @@ data class OrderDetailsUiModel(
                 deliveryDate = "",
                 deliveryAddress = "",
                 deliveryTime = "",
-                palletCount = ""
+                status = OrderDetailsStatusProgress.CREATED,
+                palletCount = "",
+                index = "",
+                clientName = "",
+                clientPhone = ""
             )
     }
 }

@@ -20,4 +20,8 @@ class RouteRepositoryImpl(
         val request = api.getOrderDetails(id)
         return orderMapper.map(request)
     }
+
+    override suspend fun acceptRoute(id: Long) {
+        api.acceptRoute(id)
+    }
 }

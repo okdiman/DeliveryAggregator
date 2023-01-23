@@ -46,7 +46,7 @@ internal fun RoutesOrderView(
             )
             .clip(Theme.shapes.bigCard)
             .background(Color.White)
-            .clickable { eventHandler(RouteEvent.OnRouteClick(model.id)) }
+            .clickable { eventHandler(RouteEvent.OnRouteClick(model.id, index)) }
     ) {
         Column(
             modifier = Modifier

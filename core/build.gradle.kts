@@ -15,6 +15,7 @@ android {
 
 dependencies {
     core()
+    time()
     kotlin()
     network()
     koin()

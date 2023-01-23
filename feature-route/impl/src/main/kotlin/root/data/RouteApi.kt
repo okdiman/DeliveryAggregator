@@ -14,4 +14,9 @@ interface RouteApi {
     suspend fun getOrderDetails(
         @Path("id") id: Long
     ): RouteOrderDto
+
+    @GET("api/contractors/routes/{id}/accept")
+    suspend fun acceptRoute(
+        @Path("id") id: Long
+    )
 }

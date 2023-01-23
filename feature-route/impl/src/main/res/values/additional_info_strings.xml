@@ -5,6 +5,8 @@
     <string name="additional_info_boxes_count">Количество коробов</string>
     <string name="additional_info_weight">Масса поставки</string>
     <string name="additional_info_additional_services">Дополнительные услуги</string>
+    <string name="additional_info_dont_need">Не требуются</string>
     <string name="additional_info_comment">Комментарий к заказу</string>
+    <string name="additional_info_comment_empty">Отсутствует</string>
     <string name="additional_info_back">Вернуться</string>
 </resources>

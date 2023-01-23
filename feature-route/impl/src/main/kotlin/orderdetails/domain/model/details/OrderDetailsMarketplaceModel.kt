@@ -1,4 +1,4 @@
-package orderdetails.domain.model
+package orderdetails.domain.model.details
 
 data class OrderDetailsMarketplaceModel(
     val id: Int,

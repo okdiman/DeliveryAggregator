@@ -1,4 +1,4 @@
-package orderdetails.data.model
+package orderdetails.data.model.extras
 
 import com.google.gson.annotations.SerializedName
 

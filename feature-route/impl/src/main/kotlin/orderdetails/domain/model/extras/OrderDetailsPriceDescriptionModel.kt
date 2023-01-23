@@ -1,4 +1,4 @@
-package orderdetails.domain.model
+package orderdetails.domain.model.extras
 
 data class OrderDetailsPriceDescriptionModel(
     val text: String,

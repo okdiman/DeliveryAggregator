@@ -47,15 +47,15 @@ class OrderDetailsViewModel(
             viewState = viewState.copy(isLoading = true, isError = false)
             val order = getOrderDetails(parameters.id)
             additionalInfoParameters = AdditionalInfoParameters(
-                marketplace = order.order.marketplace.name,
-                boxesCount = order.order.boxes.toString(),
-                comment = order.order.comment,
-                weight = order.order.weight.toString(),
-                //FIXME
-                organization = order.order.storage.name,
-                additionalOptions = ""
+                marketplace = order.details.marketplace.name,
+                boxesCount = order.details.boxes.toString(),
+                comment = order.details.comment,
+                weight = order.details.weight.toString(),
+                organization = order.details.organizationName,
+                additionalOptions = order.details.extras
             )
-            viewState = viewState.copy(isLoading = false, uiModel = mapper.map(order))
+            viewState =
+                viewState.copy(isLoading = false, uiModel = mapper.map(order, parameters.index))
         }
     }
 

@@ -2,9 +2,15 @@ package additionalInfo.presentation.mapper
 
 import additionalInfo.presentation.AdditionalInfoParameters
 import additionalInfo.presentation.compose.model.AdditionalInfoUiModel
+import orderdetails.domain.model.extras.OrderDetailsExtrasModel
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
+import utils.CommonConstants.Helpers.COMMA
+import utils.CommonConstants.Helpers.LINE_BREAK
+import utils.resource.domain.ResourceInteractor
 
-class AdditionalInfoUiMapper {
+class AdditionalInfoUiMapper(
+    private val resourceInteractor: ResourceInteractor
+) {
     fun map(parameters: AdditionalInfoParameters) = listOf(
         AdditionalInfoUiModel(
             title = R.string.additional_info_marketplace_name,
@@ -24,11 +30,19 @@ class AdditionalInfoUiMapper {
         ),
         AdditionalInfoUiModel(
             title = R.string.additional_info_additional_services,
-            text = parameters.additionalOptions
+            text = mapAdditionalOptions(parameters.additionalOptions).joinToString(LINE_BREAK)
         ),
         AdditionalInfoUiModel(
             title = R.string.additional_info_comment,
-            text = parameters.comment
+            text = parameters.comment.ifEmpty { resourceInteractor.getString(R.string.additional_info_comment_empty) }
         )
     )
+
+    private fun mapAdditionalOptions(extrasModel: List<OrderDetailsExtrasModel>?): List<String> {
+        return extrasModel?.map {
+            if (it.priceDescription.isValid) {
+                buildString { append(it.name + COMMA + it.priceDescription.text) }
+            } else buildString { append(it.name + COMMA + it.price) }
+        } ?: listOf(resourceInteractor.getString(R.string.additional_info_dont_need))
+    }
 }
