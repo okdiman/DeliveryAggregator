@@ -2,6 +2,7 @@ package root.presentation.viewmodel
 
 import BaseViewModel
 import coroutines.AppDispatchers
+import network.exceptions.NotFoundException
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import root.domain.usecase.AcceptRouteUseCase
@@ -50,7 +51,16 @@ class RouteViewModel : BaseViewModel<RouteState, RouteAction, RouteEvent>(
         launchJob(
             context = appDispatchers.network,
             onError = {
-                viewState = viewState.copy(isLoading = false, isError = true, isRefreshing = false)
+                viewState = if (it is NotFoundException) {
+                    viewState.copy(
+                        isLoading = false,
+                        isError = false,
+                        isRefreshing = false,
+                        orders = emptyList()
+                    )
+                } else {
+                    viewState.copy(isLoading = false, isError = true, isRefreshing = false)
+                }
             }
         ) {
             viewState = viewState.copy(isError = false, isLoading = true)

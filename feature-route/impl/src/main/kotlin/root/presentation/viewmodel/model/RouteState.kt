@@ -9,7 +9,7 @@ data class RouteState(
     val orders: List<RouteOrderUiModel> = emptyList(),
     val buttonUiModel: RouteButtonUiModel = RouteButtonUiModel(),
     val notificationsCount: Int = 0,
-    val status: RouteStatusProgress = RouteStatusProgress.NEW,
+    val status: RouteStatusProgress? = null,
     val isAcceptButtonEnabled: Boolean = false,
     val isLoading: Boolean = true,
     val isError: Boolean = false,
