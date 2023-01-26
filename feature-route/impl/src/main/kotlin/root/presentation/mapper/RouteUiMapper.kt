@@ -5,8 +5,8 @@ import root.domain.model.RouteOrderModel
 import root.presentation.compose.model.RouteOrderStatusUiModel
 import root.presentation.compose.model.RouteOrderUiModel
 import utils.CommonConstants.Helpers.COMMA
-import utils.DateFormats.FULL_DISPLAYED_DAY_MONTH_FORMATTER
-import utils.toString
+import utils.ext.DateFormats.FULL_DISPLAYED_DAY_MONTH_FORMATTER
+import utils.ext.toString
 
 class RouteUiMapper {
     fun map(data: List<RouteOrderModel>) = data.map {

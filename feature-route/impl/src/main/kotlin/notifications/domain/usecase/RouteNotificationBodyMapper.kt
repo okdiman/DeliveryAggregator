@@ -7,11 +7,11 @@ import notifications.domain.model.RouteNotificationsStatus
 import org.threeten.bp.format.DateTimeFormatter
 import trinity_monsters.delivery_aggregator.core_ui.R
 import utils.CommonConstants
-import utils.DateFormats
+import utils.ext.DateFormats
+import utils.ext.toLocalZonedDateTime
 import utils.resource.domain.ResourceInteractor
 import utils.setBoldSpan
-import utils.toLocalZonedDateTime
-import utils.toString
+import utils.ext.toString
 
 class RouteNotificationBodyMapper(
     private val resourceInteractor: ResourceInteractor

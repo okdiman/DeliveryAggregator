@@ -73,15 +73,10 @@ class NotificationsFactory(
         }
         return RemoteViews(context.packageName, layout).apply {
             setTextViewText(R.id.vInfoTextView, routeNotificationBodyMapper(remoteMessage.data))
-            when (type) {
-                NotificationViewType.Small -> setTextViewCompoundDrawables(
-                    R.id.vInfoTextView, routeNotificationIconMapper(remoteMessage.data), 0, 0, 0
-                )
-                NotificationViewType.Big -> setImageViewResource(
-                    R.id.vIconView,
-                    routeNotificationIconMapper(remoteMessage.data)
-                )
-            }
+            setImageViewResource(
+                R.id.vIconView,
+                routeNotificationIconMapper(remoteMessage.data)
+            )
         }
     }
 }

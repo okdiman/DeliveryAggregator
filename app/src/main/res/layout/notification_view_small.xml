@@ -1,12 +1,24 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/vInfoTextView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:drawablePadding="8dp"
-    android:ellipsize="end"
-    android:fontFamily="@font/sf_ui_display_regular"
-    android:gravity="center_vertical"
-    android:maxLines="1"
-    android:paddingVertical="8dp"
-    tools:text="Изменения подтверждены №234561 " />
+    android:paddingVertical="8dp">
+
+    <ImageView
+        android:id="@+id/vIconView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:src="@drawable/notifications_changes_ic" />
+
+    <TextView
+        android:id="@+id/vInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:ellipsize="end"
+        android:fontFamily="@font/sf_ui_display_regular"
+        android:maxLines="2"
+        android:paddingHorizontal="8dp"
+        tools:text="Изменения подтверждены №234561 " />
+</LinearLayout>

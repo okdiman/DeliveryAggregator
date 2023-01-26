@@ -17,7 +17,7 @@ import orderdetails.domain.model.details.OrderDetailsStorageModel
 import org.threeten.bp.format.DateTimeFormatter
 import root.data.model.RouteOrderDto
 import root.domain.model.RouteOrderModel
-import utils.toLocalZonedDateTime
+import utils.ext.toLocalZonedDateTime
 
 class RouteOrderMapper {
     fun map(dto: RouteOrderDto) = RouteOrderModel(

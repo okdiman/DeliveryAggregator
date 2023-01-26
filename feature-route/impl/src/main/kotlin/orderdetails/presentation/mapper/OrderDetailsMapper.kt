@@ -3,8 +3,8 @@ package orderdetails.presentation.mapper
 import orderdetails.presentation.compose.model.OrderDetailsUiModel
 import root.domain.model.RouteOrderModel
 import utils.CommonConstants.Helpers.SPACER
-import utils.DateFormats
-import utils.toString
+import utils.ext.DateFormats
+import utils.ext.toString
 
 class OrderDetailsMapper {
     fun map(model: RouteOrderModel, index: Int): OrderDetailsUiModel {

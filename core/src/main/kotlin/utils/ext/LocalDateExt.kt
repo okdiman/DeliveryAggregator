@@ -5,7 +5,7 @@ import org.threeten.bp.ZoneId
 import org.threeten.bp.ZoneOffset
 import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
-import utils.DateFormats.ZONE_ID_UTC
+import utils.ext.DateFormats.ZONE_ID_UTC
 import java.util.Locale
 
 fun String.toLocalZonedDateTime(formatter: DateTimeFormatter): LocalDateTime {
