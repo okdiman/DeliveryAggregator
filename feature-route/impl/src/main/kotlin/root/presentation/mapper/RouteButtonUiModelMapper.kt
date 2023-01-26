@@ -1,7 +1,7 @@
 package root.presentation.mapper
 
 import root.presentation.compose.model.RouteButtonUiModel
-import utils.toStringWithEnding
+import utils.ext.toStringWithEnding
 
 class RouteButtonUiModelMapper {
     fun map(price: Int, distance: Double) = RouteButtonUiModel(

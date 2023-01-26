@@ -30,7 +30,7 @@ import root.AuthConstants.Limits.MAX_CODE_CHARS
 import root.AuthConstants.Limits.SECOND
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_auth.impl.R
-import utils.formatTicks
+import utils.formatters.formatTicks
 import verify.presentation.viewmodel.model.VerifyEvent
 import verify.presentation.viewmodel.model.VerifyState
 import view.BackButton

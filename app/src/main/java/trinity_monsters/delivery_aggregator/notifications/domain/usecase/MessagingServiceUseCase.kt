@@ -4,7 +4,7 @@ import trinity_monsters.delivery_aggregator.notifications.data.model.Notificatio
 import trinity_monsters.delivery_aggregator.notifications.data.strategy.NotificationsStrategy
 import trinity_monsters.delivery_aggregator.notifications.data.strategy.impl.NotificationsCommonStrategy
 import trinity_monsters.delivery_aggregator.notifications.data.strategy.impl.NotificationsRouteStrategy
-import trinity_monsters.delivery_aggregator.notifications.domain.NotificationsConstant
+import notifications.NotificationsConstant
 
 class MessagingServiceUseCase(
     private val commonStrategy: NotificationsCommonStrategy,

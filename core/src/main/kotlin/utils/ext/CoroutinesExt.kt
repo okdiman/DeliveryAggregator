@@ -1,4 +1,4 @@
-package utils
+package utils.ext
 
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.ProcessLifecycleOwner

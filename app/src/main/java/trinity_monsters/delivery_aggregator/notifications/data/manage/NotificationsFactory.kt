@@ -8,14 +8,17 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
-import notifications.domain.model.RouteNotificationsStatus
 import trinity_monsters.delivery_aggregator.R
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 import trinity_monsters.delivery_aggregator.notifications.data.model.NotificationsModel
-import trinity_monsters.delivery_aggregator.notifications.domain.NotificationsConstant
+import notifications.NotificationsConstant
+import notifications.domain.usecase.RouteNotificationBodyMapper
+import notifications.domain.usecase.RouteNotificationIconMapper
 
 class NotificationsFactory(
-    private val context: Context
+    private val context: Context,
+    private val routeNotificationIconMapper: RouteNotificationIconMapper,
+    private val routeNotificationBodyMapper: RouteNotificationBodyMapper
 ) {
     fun create(intent: Intent, remoteMessage: NotificationsModel, channelId: String): Notification {
         return when (channelId) {
@@ -69,27 +72,16 @@ class NotificationsFactory(
             NotificationViewType.Big -> R.layout.notification_view_big
         }
         return RemoteViews(context.packageName, layout).apply {
-            setTextViewText(R.id.vInfoTextView, remoteMessage.body)
+            setTextViewText(R.id.vInfoTextView, routeNotificationBodyMapper(remoteMessage.data))
             when (type) {
                 NotificationViewType.Small -> setTextViewCompoundDrawables(
-                    R.id.vInfoTextView, getNotificationIcon(remoteMessage), 0, 0, 0
+                    R.id.vInfoTextView, routeNotificationIconMapper(remoteMessage.data), 0, 0, 0
                 )
                 NotificationViewType.Big -> setImageViewResource(
                     R.id.vIconView,
-                    getNotificationIcon(remoteMessage)
+                    routeNotificationIconMapper(remoteMessage.data)
                 )
             }
-        }
-    }
-
-    private fun getNotificationIcon(remoteMessage: NotificationsModel): Int {
-        val remoteStatus = remoteMessage.data[NotificationsConstant.Route.STATUS].orEmpty()
-        return when (RouteNotificationsStatus.values().firstOrNull { it.status == remoteStatus }) {
-            RouteNotificationsStatus.ASSIGNED -> R_core.drawable.notifications_info_ic
-            RouteNotificationsStatus.CANCELLED -> R_core.drawable.notifications_cancelled
-            RouteNotificationsStatus.CHANGED -> R_core.drawable.notifications_changes_ic
-            RouteNotificationsStatus.DONE -> R_core.drawable.notifications_done_ic
-            else -> R_core.drawable.notifications_info_ic
         }
     }
 }

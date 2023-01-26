@@ -10,7 +10,7 @@ import trinity_monsters.delivery_aggregator.notifications.data.strategy.impl.Not
 import trinity_monsters.delivery_aggregator.notifications.domain.usecase.MessagingServiceUseCase
 import trinity_monsters.delivery_aggregator.root.domain.GetNewFCMTokenUseCaseImpl
 import trinity_monsters.delivery_aggregator.root.domain.SavePushTokenUseCase
-import utils.processLifecycleScope
+import utils.ext.processLifecycleScope
 
 internal fun applicationRootModule() = module {
     factory { SavePushTokenUseCase(processLifecycleScope, get(), get()) }

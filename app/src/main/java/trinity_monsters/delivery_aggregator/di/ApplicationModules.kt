@@ -8,7 +8,7 @@ import di.splashModule
 import root.di.profileModules
 import root.di.registrationModule
 import root.di.routeModules
-import trinity_monsters.delivery_aggregator.notifications.di.notificationsModule
+import trinity_monsters.delivery_aggregator.notifications.di.remoteNotificationsModule
 
 fun applicationModules() = listOf(
     applicationRootModule(),
@@ -16,7 +16,7 @@ fun applicationModules() = listOf(
     registrationModule(),
     addressModule(),
     splashModule(),
-    notificationsModule()
+    remoteNotificationsModule()
 ) +
     coreModules() +
     authModule() +

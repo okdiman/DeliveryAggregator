@@ -30,7 +30,6 @@ import notifications.presentation.compose.model.NotificationUiModel
 import notifications.presentation.viewmodel.model.NotificationsEvent
 import notifications.presentation.viewmodel.model.NotificationsState
 import theme.Theme
-import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import view.BackButton
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
@@ -61,7 +60,7 @@ private fun NotificationsTitle(eventHandler: (NotificationsEvent) -> Unit) {
         BackButton { eventHandler(NotificationsEvent.OnBackCLick) }
         Text(
             modifier = Modifier.align(Alignment.Center),
-            text = stringResource(id = R.string.notifications_title),
+            text = stringResource(id = R_core.string.notifications_title),
             style = Theme.fonts.bold.copy(
                 fontSize = 20.sp
             )

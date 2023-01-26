@@ -1,4 +1,4 @@
-package utils
+package utils.formatters
 
 fun formatTicks(tick: Int): String {
     val formattedTick = if (tick.toString().length > 1) {

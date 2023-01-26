@@ -7,10 +7,10 @@ import trinity_monsters.delivery_aggregator.notifications.data.manage.Notificati
 import trinity_monsters.delivery_aggregator.notifications.data.manage.NotificationsManager
 import trinity_monsters.delivery_aggregator.notifications.data.model.NotificationsModel
 import trinity_monsters.delivery_aggregator.notifications.data.strategy.NotificationsStrategy
-import trinity_monsters.delivery_aggregator.notifications.domain.NotificationsConstant
-import trinity_monsters.delivery_aggregator.notifications.domain.NotificationsConstant.PUSH_BUNDLE
-import trinity_monsters.delivery_aggregator.notifications.domain.NotificationsConstant.Route.ROUTE_ID
-import trinity_monsters.delivery_aggregator.notifications.domain.NotificationsConstant.Route.STATUS
+import notifications.NotificationsConstant
+import notifications.NotificationsConstant.PUSH_BUNDLE
+import notifications.NotificationsConstant.Route.ROUTE_ID
+import notifications.NotificationsConstant.Route.STATUS
 import trinity_monsters.delivery_aggregator.root.presentation.MainActivity
 
 class NotificationsRouteStrategy(

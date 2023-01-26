@@ -1,6 +1,6 @@
-package trinity_monsters.delivery_aggregator.notifications.domain
+package notifications
 
-internal object NotificationsConstant {
+object NotificationsConstant {
     const val PUSH_TYPE = "type"
     const val PUSH_BUNDLE = "push_bundle"
 
@@ -19,5 +19,6 @@ internal object NotificationsConstant {
     object Route{
         const val ROUTE_ID = "route_id"
         const val STATUS = "status"
+        const val DATE = "date"
     }
 }

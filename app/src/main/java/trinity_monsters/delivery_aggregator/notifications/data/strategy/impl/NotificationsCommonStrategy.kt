@@ -6,7 +6,7 @@ import trinity_monsters.delivery_aggregator.notifications.data.manage.Notificati
 import trinity_monsters.delivery_aggregator.notifications.data.manage.NotificationsManager
 import trinity_monsters.delivery_aggregator.notifications.data.model.NotificationsModel
 import trinity_monsters.delivery_aggregator.notifications.data.strategy.NotificationsStrategy
-import trinity_monsters.delivery_aggregator.notifications.domain.NotificationsConstant
+import notifications.NotificationsConstant
 import trinity_monsters.delivery_aggregator.root.presentation.MainActivity
 
 class NotificationsCommonStrategy(

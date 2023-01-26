@@ -24,21 +24,11 @@ class NotificationsViewModel :
 
     override fun obtainEvent(viewEvent: NotificationsEvent) {
         when (viewEvent) {
-            is NotificationsEvent.OnDeleteNotificationClick -> onDeleteNotificationClick(viewEvent.id)
             NotificationsEvent.OnBackCLick -> onBackClick()
-            NotificationsEvent.OnClearNotificationsClick -> onClearNotificationsClick()
         }
-    }
-
-    private fun onDeleteNotificationClick(id: String) {
-
     }
 
     private fun onBackClick() {
         viewAction = NotificationsAction.OpenPreviousScreen
-    }
-
-    private fun onClearNotificationsClick() {
-
     }
 }

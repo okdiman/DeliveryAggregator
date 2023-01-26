@@ -12,7 +12,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import network.state.domain.NetworkStateRepository
-import utils.offerSafe
+import utils.ext.offerSafe
 
 class AndroidNetworkStateRepository(private val context: Context) : NetworkStateRepository {
 

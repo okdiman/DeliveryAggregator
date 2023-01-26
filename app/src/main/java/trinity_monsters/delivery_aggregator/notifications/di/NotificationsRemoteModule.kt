@@ -12,7 +12,7 @@ import trinity_monsters.delivery_aggregator.notifications.domain.NotificationsRe
 import trinity_monsters.delivery_aggregator.notifications.domain.usecase.ClearAllNotificationsUseCaseImpl
 import trinity_monsters.delivery_aggregator.notifications.domain.usecase.CreateNotificationChannelUseCaseImpl
 
-internal fun notificationsModule() = module {
+internal fun remoteNotificationsModule() = module {
     factory<NotificationsRepository> { NotificationsChannelsRepository() }
     single { NotificationManagerCompat.from(androidContext()) }
     factory<CreateNotificationChannelUseCase> {
@@ -21,7 +21,7 @@ internal fun notificationsModule() = module {
             repository = get()
         )
     }
-    factory { NotificationsFactory(androidContext()) }
+    factory { NotificationsFactory(androidContext(), get(), get()) }
     factory { NotificationsManager(get()) }
     factory<ClearAllNotificationsUseCase> { ClearAllNotificationsUseCaseImpl(get()) }
 }
