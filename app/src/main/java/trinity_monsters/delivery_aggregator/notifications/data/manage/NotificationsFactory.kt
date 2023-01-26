@@ -8,7 +8,7 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
-import notifications.domain.RouteNotificationsStatus
+import notifications.domain.model.RouteNotificationsStatus
 import trinity_monsters.delivery_aggregator.R
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 import trinity_monsters.delivery_aggregator.notifications.data.model.NotificationsModel

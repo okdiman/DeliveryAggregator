@@ -25,7 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import modifiers.advancedShadow
-import notifications.domain.NotificationType
+import notifications.domain.model.NotificationType
 import notifications.presentation.compose.model.NotificationUiModel
 import notifications.presentation.viewmodel.model.NotificationsEvent
 import notifications.presentation.viewmodel.model.NotificationsState

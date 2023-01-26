@@ -1,4 +1,4 @@
-package notifications.domain
+package notifications.domain.model
 
 enum class RouteNotificationsStatus(val status: String) {
     ASSIGNED("assigned"),
