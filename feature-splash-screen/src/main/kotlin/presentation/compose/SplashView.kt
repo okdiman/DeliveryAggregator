@@ -12,7 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import trinity_monsters.delivery_aggregator.feature_splash_screen.R
+import trinity_monsters.delivery_aggregator.core_ui.R
+
 import view.ProgressIndicator
 
 @Composable
@@ -24,7 +25,7 @@ fun SplashView() {
     ) {
         Image(
             modifier = Modifier.size(300.dp),
-            painter = painterResource(id = R.drawable.splash_logo),
+            painter = painterResource(id = R.drawable.app_logo),
             contentDescription = null
         )
         Spacer(modifier = Modifier.height(24.dp))

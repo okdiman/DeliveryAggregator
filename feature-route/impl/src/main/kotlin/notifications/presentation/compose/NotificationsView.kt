@@ -35,7 +35,7 @@ import view.BackButton
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
-fun NotificationsView(state: NotificationsState, eventHandler: (NotificationsEvent) -> Unit) {
+internal fun NotificationsView(state: NotificationsState, eventHandler: (NotificationsEvent) -> Unit) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -57,24 +57,15 @@ fun NotificationsView(state: NotificationsState, eventHandler: (NotificationsEve
 
 @Composable
 private fun NotificationsTitle(eventHandler: (NotificationsEvent) -> Unit) {
-    Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+    Box(modifier = Modifier.fillMaxWidth()) {
         BackButton { eventHandler(NotificationsEvent.OnBackCLick) }
         Text(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.align(Alignment.Center),
             text = stringResource(id = R.string.notifications_title),
             style = Theme.fonts.bold.copy(
                 fontSize = 20.sp
             )
         )
-        Box(
-            modifier = Modifier.clip(Theme.shapes.textFields),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = stringResource(id = R.string.notifications_delete),
-                style = Theme.fonts.regular
-            )
-        }
     }
     Spacer(modifier = Modifier.height(16.dp))
 }

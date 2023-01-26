@@ -4,5 +4,5 @@ import exit.domain.ExitFromProfileUseCase
 import org.koin.dsl.module
 
 internal fun exitModule() = module {
-    factory { ExitFromProfileUseCase(get()) }
+    factory { ExitFromProfileUseCase(get(), get()) }
 }

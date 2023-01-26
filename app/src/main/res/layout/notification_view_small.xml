@@ -1,0 +1,12 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vInfoTextView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:drawablePadding="8dp"
+    android:ellipsize="end"
+    android:fontFamily="@font/sf_ui_display_regular"
+    android:gravity="center_vertical"
+    android:maxLines="1"
+    android:paddingVertical="8dp"
+    tools:text="Изменения подтверждены №234561 " />
