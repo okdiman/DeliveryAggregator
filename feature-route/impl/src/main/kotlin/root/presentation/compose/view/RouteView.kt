@@ -72,10 +72,12 @@ internal fun RouteView(state: RouteState, eventHandler: (RouteEvent) -> Unit) {
                 visibleState = startState,
                 enter = slideInHorizontally()
             ) {
+                val isAcceptButtonAvailable =
+                    state.status == RouteStatusProgress.NEW && !state.isLoading
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(top = 12.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
+                        .padding(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 0.dp)
                 ) {
                     item {
                         RouteNotificationsView(state, eventHandler)
@@ -95,7 +97,10 @@ internal fun RouteView(state: RouteState, eventHandler: (RouteEvent) -> Unit) {
                                 RoutesOrderView(index, item, eventHandler)
                             }
                             item {
-                                Spacer(modifier = Modifier.height(100.dp))
+                                val height = if (isAcceptButtonAvailable) {
+                                    100.dp
+                                } else 16.dp
+                                Spacer(modifier = Modifier.height(height))
                             }
                         }
                         else -> {
@@ -105,7 +110,7 @@ internal fun RouteView(state: RouteState, eventHandler: (RouteEvent) -> Unit) {
                         }
                     }
                 }
-                if (state.status == RouteStatusProgress.NEW && !state.isLoading) {
+                if (isAcceptButtonAvailable) {
                     RouteAcceptButtonView(state, eventHandler)
                 }
             }
@@ -143,7 +148,9 @@ private fun PlaceholderView() {
 @Composable
 private fun RouteNotificationsView(state: RouteState, eventHandler: (RouteEvent) -> Unit) {
     Box(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 8.dp),
         contentAlignment = Alignment.CenterEnd
     ) {
         BadgedBox(
@@ -192,7 +199,7 @@ private fun RouteAcceptButtonView(state: RouteState, eventHandler: (RouteEvent) 
             textRes = R.string.route_accept_route,
             additionalText = state.buttonUiModel.text,
             height = 65.dp,
-            padding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp)
+            padding = PaddingValues(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
         ) { eventHandler(RouteEvent.AcceptOrderClick) }
     }
 }
