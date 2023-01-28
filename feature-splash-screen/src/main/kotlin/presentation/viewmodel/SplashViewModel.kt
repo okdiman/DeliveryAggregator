@@ -28,21 +28,25 @@ class SplashViewModel : BaseViewModel<SplashState, SplashAction, SplashEvent>(
                     createNotificationChannel()
                     checkAuthorization()
                 } else {
-                    openAuthFlow()
+                    viewState = viewState.copy(isError = true)
                 }
             }.launchIn(viewModelScope)
     }
 
-    private fun checkAuthorization() {
-        launchJob(context = appDispatchers.network, onError = {
-            openAuthFlow()
-        }) {
-            getAuthInfo()
-            viewAction = SplashAction.OpenMainFlow
+    override fun obtainEvent(viewEvent: SplashEvent) {
+        when (viewEvent) {
+            SplashEvent.OnRetryClick -> checkAuthorization()
         }
     }
 
-    private fun openAuthFlow() {
-        viewAction = SplashAction.OpenAuthorizationFlow
+    private fun checkAuthorization() {
+        if (networkStateInteractor.isInternetOn()) {
+            launchJob(context = appDispatchers.network, onError = {
+                viewAction = SplashAction.OpenAuthorizationFlow
+            }) {
+                getAuthInfo()
+                viewAction = SplashAction.OpenMainFlow
+            }
+        }
     }
 }

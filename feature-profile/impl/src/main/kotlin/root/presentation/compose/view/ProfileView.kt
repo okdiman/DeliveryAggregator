@@ -5,6 +5,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -51,7 +53,7 @@ internal fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Un
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(top = 54.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
+                        .padding(top = 54.dp, start = 8.dp, end = 8.dp)
                 ) {
                     item {
                         ProfileUserNameView(state, eventHandler)
@@ -61,7 +63,12 @@ internal fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Un
                     }
                     item {
                         Spacer(modifier = Modifier.height(20.dp))
-                        Divider(thickness = 1.dp, color = Theme.colors.hintColor)
+                        Divider(
+                            modifier = Modifier.padding(horizontal = 8.dp),
+                            thickness = 1.dp,
+                            color = Theme.colors.hintColor
+                        )
+                        Spacer(modifier = Modifier.height(10.dp))
                     }
                     items(state.uiModels) { ProfileItemView(it, eventHandler) }
                 }
@@ -72,22 +79,31 @@ internal fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Un
 
 @Composable
 private fun ProfileUserNameView(state: ProfileState, eventHandler: (ProfileEvent) -> Unit) {
-    Row(modifier = Modifier.fillMaxWidth()) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 8.dp)
+    ) {
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = state.name,
                 style = Theme.fonts.bold.copy(fontSize = 24.sp)
             )
         }
-        Icon(
+        Box(
             modifier = Modifier
+                .size(32.dp)
                 .clip(Theme.shapes.roundedButton)
                 .clickable {
                     eventHandler(ProfileEvent.OnEditProfileClick)
                 },
-            painter = painterResource(id = R.drawable.profile_edit_ic),
-            contentDescription = null
-        )
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.profile_edit_ic),
+                contentDescription = null
+            )
+        }
     }
 }
 
@@ -95,16 +111,21 @@ private fun ProfileUserNameView(state: ProfileState, eventHandler: (ProfileEvent
 private fun ProfileUserInfoView(state: ProfileState) {
     Spacer(modifier = Modifier.height(20.dp))
     Text(
+        modifier = Modifier.padding(horizontal = 8.dp),
         text = state.organizationName,
         style = Theme.fonts.regular
     )
     Spacer(modifier = Modifier.height(12.dp))
     Text(
-        text = state.phone, style = Theme.fonts.regular
+        modifier = Modifier.padding(horizontal = 8.dp),
+        text = state.phone,
+        style = Theme.fonts.regular
     )
     Spacer(modifier = Modifier.height(12.dp))
     Text(
-        text = state.email, style = Theme.fonts.regular
+        modifier = Modifier.padding(horizontal = 8.dp),
+        text = state.email,
+        style = Theme.fonts.regular
     )
 }
 
@@ -113,14 +134,15 @@ private fun ProfileItemView(
     item: ProfileItemUiModel,
     eventHandler: (ProfileEvent) -> Unit
 ) {
-    Spacer(modifier = Modifier.height(20.dp))
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clip(Theme.shapes.textFields)
             .clickable {
                 eventHandler(ProfileEvent.OnListItemClick(item))
-            }, verticalAlignment = Alignment.CenterVertically
+            }
+            .padding(horizontal = 8.dp, vertical = 10.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(painter = painterResource(id = item.icon), contentDescription = null)
         Spacer(modifier = Modifier.width(8.dp))

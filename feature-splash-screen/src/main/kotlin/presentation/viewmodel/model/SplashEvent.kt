@@ -1,3 +1,5 @@
 package presentation.viewmodel.model
 
-sealed interface SplashEvent
+sealed interface SplashEvent {
+    object OnRetryClick : SplashEvent
+}

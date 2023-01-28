@@ -46,7 +46,7 @@ internal fun DepartureView(state: DepartureState, eventHandler: (DepartureEvent)
         AnimatedVisibility(visibleState = startState, enter = slideInVertically()) {
             LazyColumn(
                 modifier = Modifier
-                    .padding(PaddingValues(start = 16.dp, end = 16.dp))
+                    .padding(PaddingValues(start = 8.dp, end = 8.dp))
             ) {
                 item {
                     DepartureTitleView(eventHandler)
@@ -73,7 +73,7 @@ private fun DepartureTitleView(eventHandler: (DepartureEvent) -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 4.dp)
+            .padding(top = 4.dp, start = 8.dp, end = 8.dp)
     ) {
         BackButton(modifier = Modifier.padding(top = 3.dp)) {
             eventHandler(DepartureEvent.OnBackClick)
@@ -84,7 +84,7 @@ private fun DepartureTitleView(eventHandler: (DepartureEvent) -> Unit) {
             style = Theme.fonts.bold.copy(fontSize = 20.sp)
         )
     }
-    Spacer(Modifier.height(30.dp))
+    Spacer(Modifier.height(18.dp))
 }
 
 @Composable
@@ -93,13 +93,19 @@ private fun DepartureAddressView(
     eventHandler: (DepartureEvent) -> Unit
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(Theme.shapes.textFields)
+            .clickable {
+                eventHandler(DepartureEvent.OnAddressClick(model.id))
+            }
+            .padding(horizontal = 8.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         RadioButton(
             modifier = Modifier.size(20.dp),
             selected = model.isActive,
-            onClick = { eventHandler(DepartureEvent.OnAddressClick(model.id)) },
+            onClick = {},
             colors = RadioButtonDefaults.colors(
                 selectedColor = Theme.colors.radioButtonColor,
                 unselectedColor = Theme.colors.radioButtonColor
@@ -121,15 +127,16 @@ private fun DepartureAddressView(
             contentDescription = null
         )
     }
-    Spacer(modifier = Modifier.height(24.dp))
 }
 
 @Composable
 private fun DepartureAddNewAddressView(eventHandler: (DepartureEvent) -> Unit) {
     Row(modifier = Modifier
         .fillMaxWidth()
-        .clip(Theme.shapes.roundedButton)
-        .clickable { eventHandler(DepartureEvent.OnAddAddressClick) }) {
+        .clip(Theme.shapes.textFields)
+        .clickable { eventHandler(DepartureEvent.OnAddAddressClick) }
+        .padding(horizontal = 8.dp, vertical = 12.dp)
+    ) {
         Text(
             modifier = Modifier.weight(1f),
             text = stringResource(id = R.string.departure_add_new_address)

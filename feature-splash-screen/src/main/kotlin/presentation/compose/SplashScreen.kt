@@ -14,8 +14,11 @@ import ru.alexgladkov.odyssey.core.LaunchFlag
 fun SplashScreen() {
     val rootController = LocalRootController.current
     ViewModel(factory = { SplashViewModel() }) { viewModel ->
+        val state = viewModel.viewStates().observeAsState()
         val action = viewModel.viewActions().observeAsState()
-        SplashView()
+        SplashView(state.value) { event ->
+            viewModel.obtainEvent(event)
+        }
         when (action.value) {
             SplashAction.OpenMainFlow -> {
                 rootController.present(

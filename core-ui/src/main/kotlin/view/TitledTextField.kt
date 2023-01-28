@@ -4,11 +4,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.selection.LocalTextSelectionColors
+import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldColors
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -48,7 +51,7 @@ fun TitledTextField(
         focusedIndicatorColor = Color.Transparent,
         unfocusedIndicatorColor = Color.Transparent,
         backgroundColor = Color.White,
-        cursorColor = Color.Black
+        cursorColor = Theme.colors.textPrimaryColor
     ),
 ) {
     val isFocused = remember {
@@ -63,66 +66,75 @@ fun TitledTextField(
         )
         Spacer(modifier = Modifier.height(4.dp))
     }
-    OutlinedTextField(
-        modifier = modifier.then(
-            Modifier
-                .fillMaxWidth()
-                .onFocusEvent {
-                    isFocused.value = it.isFocused
-                }
-        ),
-        maxLines = 1,
-        isError = state.isFillingError && !isFocused.value,
-        value = state.stateText,
-        enabled = enabled,
-        textStyle = textStyle,
-        keyboardOptions = keyboardOptions,
-        singleLine = singleLine,
-        colors = colors,
-        shape = Theme.shapes.textFields,
-        readOnly = readOnly,
-        trailingIcon = trailingIcon,
-        leadingIcon = leadingIcon,
-        placeholder = {
-            Text(
-                text = hint,
-                style = hintStyle
-            )
-        },
-        onValueChange = { value ->
-            when {
-                isDigits -> {
-                    onValueChanged(value.filter { it.isDigit() }.take(maxChar))
-                }
-                else -> {
-                    onValueChanged(value.take(maxChar))
+    /**
+     * цвета для выделения текста подставляются через CompositionLocalProvider
+     */
+    val customTextSelectionColors = TextSelectionColors(
+        handleColor = Theme.colors.selectionTextColor,
+        backgroundColor = Theme.colors.selectionTextColor.copy(alpha = 0.5f)
+    )
+    CompositionLocalProvider(LocalTextSelectionColors provides customTextSelectionColors) {
+        OutlinedTextField(
+            modifier = modifier.then(
+                Modifier
+                    .fillMaxWidth()
+                    .onFocusEvent {
+                        isFocused.value = it.isFocused
+                    }
+            ),
+            maxLines = 1,
+            isError = state.isFillingError && !isFocused.value,
+            value = state.stateText,
+            enabled = enabled,
+            textStyle = textStyle,
+            keyboardOptions = keyboardOptions,
+            singleLine = singleLine,
+            colors = colors,
+            shape = Theme.shapes.textFields,
+            readOnly = readOnly,
+            trailingIcon = trailingIcon,
+            leadingIcon = leadingIcon,
+            placeholder = {
+                Text(
+                    text = hint,
+                    style = hintStyle
+                )
+            },
+            onValueChange = { value ->
+                when {
+                    isDigits -> {
+                        onValueChanged(value.filter { it.isDigit() }.take(maxChar))
+                    }
+                    else -> {
+                        onValueChanged(value.take(maxChar))
+                    }
                 }
             }
-        }
-    )
-    when {
-        (state.isFillingError || state.isValidationError) && !isFocused.value -> {
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = if (state.isFillingError) {
-                    stringResource(state.fillingErrorDiscription)
-                } else {
-                    stringResource(state.validationErrorDiscription)
-                },
-                style = Theme.fonts.regular.copy(
-                    color = Theme.colors.errorColor,
-                    fontSize = 12.sp,
+        )
+        when {
+            (state.isFillingError || state.isValidationError) && !isFocused.value -> {
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = if (state.isFillingError) {
+                        stringResource(state.fillingErrorDiscription)
+                    } else {
+                        stringResource(state.validationErrorDiscription)
+                    },
+                    style = Theme.fonts.regular.copy(
+                        color = Theme.colors.errorColor,
+                        fontSize = 12.sp,
+                    )
                 )
-            )
-        }
-        discription != null -> {
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = discription,
-                style = Theme.fonts.regular.copy(
-                    fontSize = 14.sp,
+            }
+            discription != null -> {
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = discription,
+                    style = Theme.fonts.regular.copy(
+                        fontSize = 14.sp,
+                    )
                 )
-            )
+            }
         }
     }
 }

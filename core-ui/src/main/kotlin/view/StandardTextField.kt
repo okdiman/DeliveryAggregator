@@ -29,7 +29,7 @@ fun StandardTextField(
         focusedIndicatorColor = Color.Transparent,
         unfocusedIndicatorColor = Color.Transparent,
         backgroundColor = Theme.colors.hintBackgroundColor,
-        cursorColor = Color.Black,
+        cursorColor = Theme.colors.textPrimaryColor,
         errorIndicatorColor = Theme.colors.errorColor,
         disabledIndicatorColor = Color.Transparent,
         disabledTrailingIconColor = Color.Black

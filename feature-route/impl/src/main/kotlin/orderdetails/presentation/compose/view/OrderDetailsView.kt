@@ -32,7 +32,6 @@ import orderdetails.presentation.viewmodel.model.OrderDetailsEvent
 import orderdetails.presentation.viewmodel.model.OrderDetailsState
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
-import utils.CommonConstants.Helpers.NUMBER
 import view.BackButton
 
 @Composable
@@ -103,7 +102,9 @@ private fun OrderDetailsTitleView(
         if (!state.isLoading) {
             Text(
                 modifier = Modifier.align(Alignment.Center),
-                text = buildString { append(NUMBER + state.uiModel.id) },
+                text = buildString {
+                    append(stringResource(id = R.string.route_order_numben) + state.uiModel.id)
+                },
                 style = Theme.fonts.bold.copy(fontSize = 20.sp)
             )
         }

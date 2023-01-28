@@ -18,7 +18,7 @@ internal fun DepartureLoadingView() {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 24.dp)
+                .padding(bottom = 12.dp, start = 8.dp, end = 8.dp, top = 12.dp)
                 .height(22.dp)
                 .clip(Theme.shapes.textFields)
                 .shimmerEffect()

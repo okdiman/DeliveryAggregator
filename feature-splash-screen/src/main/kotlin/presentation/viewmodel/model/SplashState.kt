@@ -1,3 +1,5 @@
 package presentation.viewmodel.model
 
-class SplashState
+data class SplashState(
+    val isError: Boolean = false
+)
