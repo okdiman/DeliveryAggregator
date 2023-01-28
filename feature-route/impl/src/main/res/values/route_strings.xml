@@ -8,4 +8,6 @@
     <string name="route_departure_address">Адрес склада</string>
     <string name="route_delivery_adddress">Склад назначения</string>
     <string name="route_accept_route">Взять в работу</string>
+    <string name="route_order_numben">Заказ №</string>
+    <string name="route_notifications_permission">Нажмите «Разрешить», чтобы получать уведомления о новых рейсах и статусах</string>
 </resources>

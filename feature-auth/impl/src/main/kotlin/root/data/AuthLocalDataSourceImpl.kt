@@ -40,10 +40,6 @@ class AuthLocalDataSourceImpl(
         return sharedPreferences.getString(USER_TOKEN, null)
     }
 
-    override suspend fun clear() {
-        sharedPreferences.edit().clear().apply()
-    }
-
     private companion object {
         const val USER_TOKEN = "user_token"
         const val PUSH_TOKEN = "push_token"

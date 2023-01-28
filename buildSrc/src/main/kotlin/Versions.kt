@@ -22,4 +22,5 @@ object Versions {
     const val firebaseMessaging = "23.1.1"
     const val firebaseCrashlytics = "18.3.3"
     const val threeTenAbp = "1.4.4"
+    const val permissions = "0.28.0"
 }

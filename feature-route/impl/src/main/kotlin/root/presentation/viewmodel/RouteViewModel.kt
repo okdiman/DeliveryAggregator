@@ -3,8 +3,10 @@ package root.presentation.viewmodel
 import BaseViewModel
 import coroutines.AppDispatchers
 import network.exceptions.NotFoundException
+import notifications.permission.domain.interactor.NotificationPermissionInteractor
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import permissions.AppPermissionState
 import root.domain.usecase.AcceptRouteUseCase
 import root.domain.usecase.GetActiveRouteUseCase
 import root.presentation.mapper.RouteButtonUiModelMapper
@@ -21,6 +23,7 @@ class RouteViewModel : BaseViewModel<RouteState, RouteAction, RouteEvent>(
     private val appDispatchers by inject<AppDispatchers>()
     private val mapper by inject<RouteUiMapper>()
     private val buttonUiMapper by inject<RouteButtonUiModelMapper>()
+    private val notificationPermission by inject<NotificationPermissionInteractor>()
 
     init {
         getContent()
@@ -29,10 +32,12 @@ class RouteViewModel : BaseViewModel<RouteState, RouteAction, RouteEvent>(
     override fun obtainEvent(viewEvent: RouteEvent) {
         when (viewEvent) {
             is RouteEvent.OnRouteClick -> onRouteClick(viewEvent.id, viewEvent.index)
+            is RouteEvent.OnPermissionStateChanged -> onNotificationPermissionStateChanged(viewEvent.state)
             RouteEvent.AcceptOrderClick -> onAcceptOrderClick()
             RouteEvent.OnNotificationsClick -> onNotificationsClick()
             RouteEvent.ResetAction -> onResetAction()
             RouteEvent.OnRetryClick -> getContent()
+            RouteEvent.OnRationaleDismiss -> onRationaleDismiss()
             RouteEvent.OnRefreshSwipe -> {
                 viewState = viewState.copy(isRefreshing = true)
                 getContent()
@@ -73,6 +78,28 @@ class RouteViewModel : BaseViewModel<RouteState, RouteAction, RouteEvent>(
                 isLoading = false,
                 isRefreshing = false
             )
+        }
+    }
+
+    private fun onNotificationPermissionStateChanged(state: AppPermissionState) {
+        launchJob {
+            when (state) {
+                AppPermissionState.Rationale -> {
+                    if (!notificationPermission.isShowRationaleDismissed()) {
+                        viewState = viewState.copy(notificationsPermission = state)
+                    }
+                }
+                else -> {
+                    viewState = viewState.copy(notificationsPermission = state)
+                }
+            }
+        }
+    }
+
+    private fun onRationaleDismiss() {
+        launchJob {
+            viewState = viewState.copy(notificationsPermission = AppPermissionState.Denied)
+            notificationPermission.setRationaleDismissed()
         }
     }
 

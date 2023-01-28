@@ -3,8 +3,8 @@ package root.data
 import root.data.mapper.RouteMapper
 import root.data.mapper.RouteOrderMapper
 import root.domain.RouteRepository
-import root.domain.model.RouteOrderModel
 import root.domain.model.RouteModel
+import root.domain.model.RouteOrderModel
 
 class RouteRepositoryImpl(
     private val api: RouteApi,

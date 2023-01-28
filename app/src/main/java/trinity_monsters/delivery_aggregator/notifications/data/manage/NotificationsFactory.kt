@@ -12,8 +12,8 @@ import trinity_monsters.delivery_aggregator.R
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 import trinity_monsters.delivery_aggregator.notifications.data.model.NotificationsModel
 import notifications.NotificationsConstant
-import notifications.domain.usecase.RouteNotificationBodyMapper
-import notifications.domain.usecase.RouteNotificationIconMapper
+import notifications.root.domain.usecase.RouteNotificationBodyMapper
+import notifications.root.domain.usecase.RouteNotificationIconMapper
 
 class NotificationsFactory(
     private val context: Context,

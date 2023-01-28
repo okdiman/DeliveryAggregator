@@ -1,7 +1,7 @@
 package root.di
 
 import additionalInfo.di.additionalInfoModule
-import notifications.di.notificationsModule
+import notifications.root.di.notificationsModule
 import orderdetails.di.orderDetailsModule
 
 fun routeModules() =

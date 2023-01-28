@@ -61,6 +61,10 @@ fun DependencyHandler.time() {
     add("implementation", Libraries.DateTime.time)
 }
 
+fun DependencyHandler.accompanist() {
+    add("implementation", Libraries.Accompanist.permissions)
+}
+
 fun DependencyHandler.firebase() {
     add("implementation", Libraries.Firebase.messaging)
     add("implementation", Libraries.Firebase.crashlytics)

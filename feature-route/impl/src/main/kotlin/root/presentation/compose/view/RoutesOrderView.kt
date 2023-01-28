@@ -27,7 +27,6 @@ import root.presentation.compose.model.RouteOrderUiModel
 import root.presentation.viewmodel.model.RouteEvent
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
-import utils.CommonConstants
 
 @Composable
 internal fun RoutesOrderView(
@@ -67,7 +66,7 @@ private fun OrderTitleView(model: RouteOrderUiModel) {
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = buildString {
-                    append(CommonConstants.Helpers.NUMBER + model.id.toString())
+                    append(stringResource(id = R.string.route_order_numben) + model.id.toString())
                 },
                 style = Theme.fonts.bold.copy(fontSize = 20.sp)
             )

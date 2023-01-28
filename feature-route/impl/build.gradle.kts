@@ -19,6 +19,7 @@ android {
 }
 
 dependencies {
+    accompanist()
     compose()
     koin()
     time()

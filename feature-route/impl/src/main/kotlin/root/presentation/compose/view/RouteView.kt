@@ -5,11 +5,8 @@ import ScrollScreenActionButton
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.slideInHorizontally
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -33,7 +30,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import root.domain.model.RouteStatusProgress
@@ -114,34 +110,8 @@ internal fun RouteView(state: RouteState, eventHandler: (RouteEvent) -> Unit) {
                     RouteAcceptButtonView(state, eventHandler)
                 }
             }
+            RouteCheckNotificationPermission(state, eventHandler)
         }
-    }
-}
-
-@Composable
-private fun PlaceholderView() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Image(
-            painter = painterResource(R.drawable.route_placeholder_ic),
-            contentDescription = null
-        )
-        Spacer(Modifier.height(24.dp))
-        Text(
-            text = stringResource(R.string.route_will_be_here),
-            textAlign = TextAlign.Center,
-            style = Theme.fonts.bold.copy(fontSize = 20.sp)
-        )
-        Spacer(Modifier.height(8.dp))
-        Text(
-            modifier = Modifier.padding(horizontal = 36.dp),
-            text = stringResource(R.string.route_can_includes_some_orders),
-            textAlign = TextAlign.Center,
-            style = Theme.fonts.regular
-        )
     }
 }
 

@@ -6,5 +6,4 @@ interface AuthLocalDataSource {
     suspend fun savePushToken(token: String)
     fun getPushTokenSync(): String?
     fun getAccessTokenSync(): String?
-    suspend fun clear()
 }

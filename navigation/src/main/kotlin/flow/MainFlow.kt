@@ -4,7 +4,7 @@ import departure.root.presentation.compose.DepartureScreen
 import editing.presentation.EditProfileParameters
 import editing.presentation.compose.EditProfileScreen
 import navigation.NavigationTree
-import notifications.presentation.compose.NotificationsScreen
+import notifications.root.presentation.compose.NotificationsScreen
 import offer.presentation.compose.OfferScreen
 import orderdetails.presentation.OrderDetailsParameters
 import orderdetails.presentation.compose.OrderDetailsScreen

@@ -89,4 +89,9 @@ object Libraries {
         const val crashlytics =
             "com.google.firebase:firebase-crashlytics-ktx:${Versions.firebaseCrashlytics}"
     }
+
+    object Accompanist {
+        const val permissions =
+            "com.google.accompanist:accompanist-permissions:${Versions.permissions}"
+    }
 }

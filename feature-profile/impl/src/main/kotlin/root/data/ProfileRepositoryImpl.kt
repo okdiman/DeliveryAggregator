@@ -1,15 +1,15 @@
 package root.data
 
+import android.content.SharedPreferences
 import domain.ProfileRepository
-import data.AuthLocalDataSource
-import root.data.mapper.ProfileModelMapper
 import domain.model.ProfileModel
 import domain.usecase.notifications.GetNewFCMTokenUseCase
+import root.data.mapper.ProfileModelMapper
 
 class ProfileRepositoryImpl(
     private val api: ProfileApi,
     private val mapper: ProfileModelMapper,
-    private val localDataSource: AuthLocalDataSource,
+    private val sharedPreferences: SharedPreferences,
     private val getNewFCMToken: GetNewFCMTokenUseCase
 ) : ProfileRepository {
     override suspend fun getProfile(): ProfileModel {
@@ -28,7 +28,11 @@ class ProfileRepositoryImpl(
     }
 
     override suspend fun exitFromProfile() {
-        localDataSource.clear()
+        clearSharedPrefs()
         getNewFCMToken()
+    }
+
+    private fun clearSharedPrefs() {
+        sharedPreferences.edit().clear().apply()
     }
 }
