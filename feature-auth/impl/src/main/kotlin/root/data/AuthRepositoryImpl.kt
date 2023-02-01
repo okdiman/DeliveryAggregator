@@ -1,19 +1,23 @@
 package root.data
 
-import domain.AuthRepository
 import data.AuthLocalDataSource
-import root.data.model.request.AuthSendVerifyCodeRequest
-import root.data.model.request.AuthSignInRequest
+import domain.AuthRepository
 import domain.model.AuthSignInModel
 import domain.model.AuthSignUpModel
 import domain.model.AuthVerifyCodeModel
 import root.data.mapper.AuthSignUpMapper
+import root.data.model.request.AuthSendVerifyCodeRequest
+import root.data.model.request.AuthSignInRequest
 
 class AuthRepositoryImpl(
     private val api: AuthApi,
     private val localDataSource: AuthLocalDataSource,
     private val mapper: AuthSignUpMapper
 ) : AuthRepository {
+    override suspend fun isAuthorized(): Boolean {
+        return localDataSource.getAccessToken() != null
+    }
+
     override suspend fun getVerifyCode(model: AuthVerifyCodeModel) {
         api.getVerifyCode(AuthSendVerifyCodeRequest(model.phone))
     }

@@ -5,6 +5,7 @@ import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
 import navigation.NavigationTree
 import orderdetails.presentation.OrderDetailsParameters
+import presentation.DeeplinkParameters
 import root.presentation.compose.view.RouteView
 import root.presentation.viewmodel.RouteViewModel
 import root.presentation.viewmodel.model.RouteAction
@@ -13,9 +14,9 @@ import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 
 @Composable
-fun RouteScreen() {
+fun RouteScreen(deeplinkParameters: DeeplinkParameters?) {
     val rootController = LocalRootController.current
-    StoredViewModel({ RouteViewModel() }) { viewModel ->
+    StoredViewModel({ RouteViewModel(deeplinkParameters) }) { viewModel ->
         val state = viewModel.viewStates().observeAsState()
         val action = viewModel.viewActions().observeAsState()
         RouteView(state.value) { event ->

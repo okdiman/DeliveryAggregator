@@ -23,6 +23,7 @@ dependencies {
     navigation()
     koin()
     implementation(project(Modules.auth_api))
+    implementation(project(Modules.route_api))
     implementation(project(Modules.core_ui))
     implementation(project(Modules.core))
 }

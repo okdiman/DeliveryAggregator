@@ -1,4 +1,4 @@
-package trinity_monsters.delivery_aggregator.root.presentation
+package trinity_monsters.delivery_aggregator.app
 
 import android.app.Application
 import com.jakewharton.threetenabp.AndroidThreeTen

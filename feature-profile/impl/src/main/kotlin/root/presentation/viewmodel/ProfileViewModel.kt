@@ -20,7 +20,7 @@ class ProfileViewModel : BaseViewModel<ProfileState, ProfileAction, ProfileEvent
     private val appDispatchers by inject<AppDispatchers>()
     private val mapper by inject<ProfileUiMapper>()
 
-    lateinit var model: ProfileModel
+    private lateinit var model: ProfileModel
 
     init {
         loadContent()

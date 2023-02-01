@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
 import navigation.NavigationTree
+import presentation.DeeplinkParameters
 import presentation.viewmodel.SplashViewModel
 import presentation.viewmodel.model.SplashAction
 import ru.alexgladkov.odyssey.compose.extensions.present
@@ -11,7 +12,7 @@ import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import ru.alexgladkov.odyssey.core.LaunchFlag
 
 @Composable
-fun SplashScreen() {
+fun SplashScreen(parameters: DeeplinkParameters?) {
     val rootController = LocalRootController.current
     ViewModel(factory = { SplashViewModel() }) { viewModel ->
         val state = viewModel.viewStates().observeAsState()
@@ -23,7 +24,8 @@ fun SplashScreen() {
             SplashAction.OpenMainFlow -> {
                 rootController.present(
                     screen = NavigationTree.Main.MainFlow.name,
-                    launchFlag = LaunchFlag.SingleNewTask
+                    launchFlag = LaunchFlag.SingleNewTask,
+                    params = parameters
                 )
             }
             SplashAction.OpenAuthorizationFlow -> {

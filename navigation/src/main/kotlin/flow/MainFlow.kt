@@ -8,6 +8,7 @@ import notifications.root.presentation.compose.NotificationsScreen
 import offer.presentation.compose.OfferScreen
 import orderdetails.presentation.OrderDetailsParameters
 import orderdetails.presentation.compose.OrderDetailsScreen
+import presentation.DeeplinkParameters
 import root.presentation.compose.ProfileScreen
 import root.presentation.compose.RouteScreen
 import ru.alexgladkov.odyssey.compose.extensions.customNavigation
@@ -22,7 +23,7 @@ import transport.presentation.compose.TransportProfileScreen
 import trinity_monsters.delivery_aggregator.navigation.R
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
-fun RootComposeBuilder.mainFlow() {
+fun RootComposeBuilder.mainFlow(deeplinkParameters: DeeplinkParameters?) {
     customNavigation(
         name = NavigationTree.Main.MainFlow.name,
         tabsNavModel = BottomConfiguration()
@@ -33,8 +34,8 @@ fun RootComposeBuilder.mainFlow() {
                 icon = R.drawable.route_ic
             )
         ) {
-            screen(NavigationTree.Main.Routes.name) {
-                RouteScreen()
+            screen(NavigationTree.Main.Routes.name) { parameters ->
+                RouteScreen(parameters as? DeeplinkParameters ?: deeplinkParameters)
             }
         }
         tab(

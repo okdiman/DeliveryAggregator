@@ -2,7 +2,6 @@ package notifications
 
 object NotificationsConstant {
     const val PUSH_TYPE = "type"
-    const val PUSH_BUNDLE = "push_bundle"
 
     object PushChannel {
         object Route {
@@ -20,5 +19,6 @@ object NotificationsConstant {
         const val ROUTE_ID = "route_id"
         const val STATUS = "status"
         const val DATE = "date"
+        const val DESTINATION = "destination"
     }
 }

@@ -2,11 +2,14 @@ package root.presentation.viewmodel
 
 import BaseViewModel
 import coroutines.AppDispatchers
+import navigation.NavigationTree
 import network.exceptions.NotFoundException
 import notifications.permission.domain.interactor.NotificationPermissionInteractor
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import permissions.AppPermissionState
+import presentation.DeeplinkParameters
+import root.DeeplinkNavigatorHandler
 import root.domain.usecase.AcceptRouteUseCase
 import root.domain.usecase.GetActiveRouteUseCase
 import root.presentation.mapper.RouteButtonUiModelMapper
@@ -15,17 +18,18 @@ import root.presentation.viewmodel.model.RouteAction
 import root.presentation.viewmodel.model.RouteEvent
 import root.presentation.viewmodel.model.RouteState
 
-class RouteViewModel : BaseViewModel<RouteState, RouteAction, RouteEvent>(
-    initialState = RouteState()
-), KoinComponent {
+class RouteViewModel(private val deeplinkParameters: DeeplinkParameters?) :
+    BaseViewModel<RouteState, RouteAction, RouteEvent>(initialState = RouteState()), KoinComponent {
     private val getActiveRoute by inject<GetActiveRouteUseCase>()
     private val acceptRoute by inject<AcceptRouteUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
     private val mapper by inject<RouteUiMapper>()
     private val buttonUiMapper by inject<RouteButtonUiModelMapper>()
     private val notificationPermission by inject<NotificationPermissionInteractor>()
+    private val deeplinkNavigatorHandler by inject<DeeplinkNavigatorHandler>()
 
     init {
+        checkDeeplink()
         getContent()
     }
 
@@ -109,5 +113,15 @@ class RouteViewModel : BaseViewModel<RouteState, RouteAction, RouteEvent>(
 
     private fun onNotificationsClick() {
         viewAction = RouteAction.OpenNotifications
+    }
+
+    /**
+     * навигация по диплинкам
+     */
+    private fun checkDeeplink() {
+        viewAction = when (deeplinkNavigatorHandler.getDestination(deeplinkParameters?.uri)) {
+            NavigationTree.Routes.Notifications.name -> RouteAction.OpenNotifications
+            else -> null
+        }
     }
 }

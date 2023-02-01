@@ -3,6 +3,7 @@ package root.di
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.create
+import root.DeeplinkNavigatorHandler
 import root.data.RouteApi
 import root.data.RouteRepositoryImpl
 import root.data.mapper.RouteMapper
@@ -22,4 +23,5 @@ internal fun routeRootModule() = module {
     factory { RouteMapper(get()) }
     factory { RouteUiMapper() }
     factory { RouteButtonUiModelMapper() }
+    factory { DeeplinkNavigatorHandler() }
 }
