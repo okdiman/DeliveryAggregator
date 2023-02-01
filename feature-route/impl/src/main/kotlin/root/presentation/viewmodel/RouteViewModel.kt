@@ -5,6 +5,7 @@ import coroutines.AppDispatchers
 import navigation.NavigationTree
 import network.exceptions.NotFoundException
 import notifications.permission.domain.interactor.NotificationPermissionInteractor
+import notifications.root.domain.usecase.GetUnreadNotificationsCountUseCase
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import permissions.AppPermissionState
@@ -21,6 +22,7 @@ import root.presentation.viewmodel.model.RouteState
 class RouteViewModel(private val deeplinkParameters: DeeplinkParameters?) :
     BaseViewModel<RouteState, RouteAction, RouteEvent>(initialState = RouteState()), KoinComponent {
     private val getActiveRoute by inject<GetActiveRouteUseCase>()
+    private val getUnreadNotificationsCount by inject<GetUnreadNotificationsCountUseCase>()
     private val acceptRoute by inject<AcceptRouteUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
     private val mapper by inject<RouteUiMapper>()
@@ -31,6 +33,7 @@ class RouteViewModel(private val deeplinkParameters: DeeplinkParameters?) :
     init {
         checkDeeplink()
         getContent()
+        getUnreadNotificationCount()
     }
 
     override fun obtainEvent(viewEvent: RouteEvent) {
@@ -113,6 +116,15 @@ class RouteViewModel(private val deeplinkParameters: DeeplinkParameters?) :
 
     private fun onNotificationsClick() {
         viewAction = RouteAction.OpenNotifications
+    }
+
+    private fun getUnreadNotificationCount() {
+        launchJob(appDispatchers.network) {
+            val count = getUnreadNotificationsCount()
+            viewState = viewState.copy(
+                notificationsCount = count
+            )
+        }
     }
 
     /**

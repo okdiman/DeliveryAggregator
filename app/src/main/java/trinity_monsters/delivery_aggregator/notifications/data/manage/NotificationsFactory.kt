@@ -8,12 +8,12 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
-import trinity_monsters.delivery_aggregator.R
-import trinity_monsters.delivery_aggregator.core_ui.R as R_core
-import trinity_monsters.delivery_aggregator.notifications.data.model.NotificationsModel
 import notifications.NotificationsConstant
-import notifications.root.domain.usecase.RouteNotificationBodyMapper
-import notifications.root.domain.usecase.RouteNotificationIconMapper
+import notifications.root.data.mapper.RouteNotificationBodyMapper
+import notifications.root.data.mapper.RouteNotificationIconMapper
+import trinity_monsters.delivery_aggregator.R
+import trinity_monsters.delivery_aggregator.notifications.data.model.NotificationsModel
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 class NotificationsFactory(
     private val context: Context,

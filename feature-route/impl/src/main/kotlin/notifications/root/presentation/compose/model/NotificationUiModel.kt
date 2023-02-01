@@ -1,10 +1,10 @@
 package notifications.root.presentation.compose.model
 
+import android.text.Spanned
 import androidx.annotation.DrawableRes
-import notifications.root.domain.model.NotificationType
 
 data class NotificationUiModel(
-    val text: String,
-    @DrawableRes val imageRes: Int,
-    val type: NotificationType
+    val id: Long,
+    val text: Spanned,
+    @DrawableRes val imageRes: Int? = null
 )

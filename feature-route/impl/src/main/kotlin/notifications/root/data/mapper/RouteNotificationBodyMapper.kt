@@ -1,12 +1,14 @@
-package notifications.root.domain.usecase
+package notifications.root.data.mapper
 
 import android.text.Spanned
 import androidx.core.text.toSpannable
 import notifications.NotificationsConstant
+import notifications.NotificationsConstant.Route.ROUTE_ID
+import notifications.NotificationsConstant.Route.STATUS
 import notifications.root.domain.model.RouteNotificationsStatus
 import org.threeten.bp.format.DateTimeFormatter
 import trinity_monsters.delivery_aggregator.core_ui.R
-import utils.CommonConstants
+import utils.CommonConstants.Helpers.NUMBER
 import utils.ext.DateFormats
 import utils.ext.toLocalZonedDateTime
 import utils.ext.toString
@@ -17,9 +19,9 @@ class RouteNotificationBodyMapper(
     private val resourceInteractor: ResourceInteractor
 ) {
     operator fun invoke(data: Map<String, String>): Spanned {
-        val remoteStatus = data[NotificationsConstant.Route.STATUS].orEmpty()
+        val remoteStatus = data[STATUS].orEmpty()
         val routeId = buildString {
-            append(CommonConstants.Helpers.NUMBER + data[NotificationsConstant.Route.ROUTE_ID].orEmpty())
+            append(NUMBER + data[ROUTE_ID].orEmpty())
         }.toSpannable()
             .apply {
                 setBoldSpan()
