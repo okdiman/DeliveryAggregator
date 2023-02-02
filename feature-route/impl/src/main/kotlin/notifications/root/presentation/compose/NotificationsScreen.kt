@@ -3,6 +3,7 @@ package notifications.root.presentation.compose
 import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
+import notifications.root.presentation.compose.view.NotificationsView
 import notifications.root.presentation.viewmodel.NotificationsViewModel
 import notifications.root.presentation.viewmodel.model.NotificationsAction
 import ru.alexgladkov.odyssey.compose.local.LocalRootController

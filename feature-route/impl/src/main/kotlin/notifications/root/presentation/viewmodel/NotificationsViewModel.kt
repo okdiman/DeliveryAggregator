@@ -21,6 +21,18 @@ class NotificationsViewModel :
     private val mapper by inject<NotificationUiMapper>()
 
     init {
+        getContent()
+    }
+
+    override fun obtainEvent(viewEvent: NotificationsEvent) {
+        when (viewEvent) {
+            NotificationsEvent.OnBackCLick -> onBackClick()
+            NotificationsEvent.OnReplyClick -> getContent()
+            NotificationsEvent.OnActiveNotificationCLick -> onBackClick()
+        }
+    }
+
+    private fun getContent() {
         launchJob(context = appDispatchers.network, onError = {
             viewState = viewState.copy(isLoading = false, isError = true)
         }) {
@@ -40,12 +52,6 @@ class NotificationsViewModel :
                     markNotificationsAsRead(unreadNotifications)
                 }
             }
-        }
-    }
-
-    override fun obtainEvent(viewEvent: NotificationsEvent) {
-        when (viewEvent) {
-            NotificationsEvent.OnBackCLick -> onBackClick()
         }
     }
 

@@ -1,4 +1,4 @@
-package utils.formatters
+package utils
 
 import android.text.SpannableStringBuilder
 import android.text.Spanned

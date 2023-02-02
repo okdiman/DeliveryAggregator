@@ -1,7 +1,9 @@
-package notifications.root.presentation.compose
+package notifications.root.presentation.compose.view
 
+import CommonErrorScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,6 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import modifiers.advancedShadow
+import notifications.root.domain.model.RouteNotificationsStatus
 import notifications.root.presentation.compose.model.NotificationUiModel
 import notifications.root.presentation.viewmodel.model.NotificationsEvent
 import notifications.root.presentation.viewmodel.model.NotificationsState
@@ -35,20 +38,33 @@ internal fun NotificationsView(
     state: NotificationsState,
     eventHandler: (NotificationsEvent) -> Unit
 ) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(
-                top = 4.dp,
-                start = 16.dp,
-                end = 16.dp
-            )
-    ) {
-        item {
-            NotificationsTitle(eventHandler)
-        }
-        items(state.notifications) { uiModel ->
-            NotificationItemView(uiModel)
+    if (state.isError) {
+        CommonErrorScreen { eventHandler(NotificationsEvent.OnReplyClick) }
+    } else {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(
+                    top = 4.dp,
+                    start = 16.dp,
+                    end = 16.dp
+                )
+        ) {
+            item {
+                NotificationsTitle(eventHandler)
+            }
+            when {
+                state.isLoading -> {
+                    items(2) {
+                        NotificationLoadingView()
+                    }
+                }
+                else -> {
+                    items(state.notifications) { uiModel ->
+                        NotificationItemView(uiModel, eventHandler)
+                    }
+                }
+            }
         }
     }
 }
@@ -69,7 +85,10 @@ private fun NotificationsTitle(eventHandler: (NotificationsEvent) -> Unit) {
 }
 
 @Composable
-private fun NotificationItemView(model: NotificationUiModel) {
+private fun NotificationItemView(
+    model: NotificationUiModel,
+    eventHandler: (NotificationsEvent) -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -81,6 +100,13 @@ private fun NotificationItemView(model: NotificationUiModel) {
             )
             .clip(Theme.shapes.bigCard)
             .background(Color.White)
+            .clickable {
+                if (model.status == RouteNotificationsStatus.ASSIGNED ||
+                    model.status == RouteNotificationsStatus.CHANGED
+                ) {
+                    eventHandler(NotificationsEvent.OnActiveNotificationCLick)
+                }
+            }
     ) {
         Row(
             modifier = Modifier
@@ -97,7 +123,7 @@ private fun NotificationItemView(model: NotificationUiModel) {
                 modifier = Modifier
                     .padding(start = 10.dp)
                     .weight(1f),
-                text = model.text.toString(),
+                text = model.text,
                 style = Theme.fonts.regular
             )
         }

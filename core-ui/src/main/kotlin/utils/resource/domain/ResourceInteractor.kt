@@ -3,7 +3,7 @@ package utils.resource.domain
 import android.text.Spanned
 import androidx.annotation.RawRes
 import androidx.annotation.StringRes
-import utils.formatters.SpannableFormatter
+import utils.SpannableFormatter
 
 class ResourceInteractor(
     private val resourceRepository: ResourceRepository
