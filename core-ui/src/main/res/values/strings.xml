@@ -5,7 +5,7 @@
     <string name="common_smth_wrong">Что-то пошло не так</string>
     <string name="common_try_again_description">Попробуйте перезагрузить приложение и проверьте подключение к интернету</string>
     <string name="common_try_again">Попробовать еще раз</string>
-    <string name="common_few_symbols_error">Введено недостаточное количество символов</string>
+    <string name="common_few_symbols_error">Не менее двух символов</string>
     <string name="common_choose_address_from_suggest">Выберите адрес из предложенных</string>
     <string name="common_save">Сохранить</string>
     <string name="common_company_name">Название организации</string>

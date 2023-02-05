@@ -1,7 +1,7 @@
 package additionalInfo.presentation
 
 import androidx.compose.runtime.Immutable
-import orderdetails.domain.model.extras.OrderDetailsExtrasModel
+import orderdetails.root.domain.model.extras.OrderDetailsExtrasModel
 
 @Immutable
 data class AdditionalInfoParameters(

@@ -12,5 +12,5 @@
     <string name="user_second_name_error">Некорректное отчество</string>
     <string name="user_email">Email</string>
     <string name="user_email_hint">Введите email</string>
-    <string name="user_email_error">Некорректная электронная почта</string>
+    <string name="user_email_error">Укажите корректный e-mail: example@gmail.com</string>
 </resources>

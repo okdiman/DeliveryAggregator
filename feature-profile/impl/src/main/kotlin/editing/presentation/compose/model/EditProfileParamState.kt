@@ -6,10 +6,10 @@ import view.model.DefaultParamState
 
 sealed class EditProfileParamState(
     override val stateText: String,
-    override val isFillingError: Boolean,
-    override val isValidationError: Boolean,
-    @StringRes override val fillingErrorDiscription: Int,
-    @StringRes override val validationErrorDiscription: Int
+    override val isFillingError: Boolean = false,
+    override val isValidationError: Boolean = false,
+    @StringRes override val fillingErrorDiscription: Int = R.string.common_empty_error,
+    @StringRes override val validationErrorDiscription: Int = R.string.common_empty_error
 ) : DefaultParamState(
     stateText,
     isFillingError,
@@ -74,30 +74,10 @@ sealed class EditProfileParamState(
     )
 
     data class PhoneState(
-        override val stateText: String = "",
-        override val isFillingError: Boolean = false,
-        override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.common_empty_error,
-        @StringRes override val validationErrorDiscription: Int = R.string.common_empty_error
-    ) : EditProfileParamState(
-        stateText,
-        isFillingError,
-        isValidationError,
-        fillingErrorDiscription,
-        validationErrorDiscription
-    )
+        override val stateText: String = ""
+    ) : EditProfileParamState(stateText)
 
     data class OrganizationNameState(
-        override val stateText: String = "",
-        override val isFillingError: Boolean = false,
-        override val isValidationError: Boolean = false,
-        @StringRes override val fillingErrorDiscription: Int = R.string.common_empty_error,
-        @StringRes override val validationErrorDiscription: Int = R.string.common_empty_error
-    ) : EditProfileParamState(
-        stateText,
-        isFillingError,
-        isValidationError,
-        fillingErrorDiscription,
-        validationErrorDiscription
-    )
+        override val stateText: String = ""
+    ) : EditProfileParamState(stateText)
 }

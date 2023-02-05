@@ -2,7 +2,7 @@ package additionalInfo.presentation.mapper
 
 import additionalInfo.presentation.AdditionalInfoParameters
 import additionalInfo.presentation.compose.model.AdditionalInfoUiModel
-import orderdetails.domain.model.extras.OrderDetailsExtrasModel
+import orderdetails.root.domain.model.extras.OrderDetailsExtrasModel
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import utils.CommonConstants.Helpers.COMMA
 import utils.CommonConstants.Helpers.LINE_BREAK

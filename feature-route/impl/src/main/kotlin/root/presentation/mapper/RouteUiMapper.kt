@@ -1,6 +1,6 @@
 package root.presentation.mapper
 
-import orderdetails.domain.model.status.OrderDetailsStatusProgress
+import orderdetails.root.domain.model.status.OrderDetailsStatusProgress
 import root.domain.model.RouteOrderModel
 import root.presentation.compose.model.RouteOrderStatusUiModel
 import root.presentation.compose.model.RouteOrderUiModel

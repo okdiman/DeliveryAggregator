@@ -1,7 +1,7 @@
 package root.domain.model
 
-import orderdetails.domain.model.details.OrderDetailsClientModel
-import orderdetails.domain.model.OrderDetailsModel
+import orderdetails.root.domain.model.details.OrderDetailsClientModel
+import orderdetails.root.domain.model.OrderDetailsModel
 
 data class RouteOrderModel(
     val details: OrderDetailsModel,

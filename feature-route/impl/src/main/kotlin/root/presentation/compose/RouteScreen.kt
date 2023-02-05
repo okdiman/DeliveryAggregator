@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
 import navigation.NavigationTree
-import orderdetails.presentation.OrderDetailsParameters
+import orderdetails.root.presentation.OrderDetailsParameters
 import presentation.DeeplinkParameters
 import root.presentation.compose.view.RouteView
 import root.presentation.viewmodel.RouteViewModel

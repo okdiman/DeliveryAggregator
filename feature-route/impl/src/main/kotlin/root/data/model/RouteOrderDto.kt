@@ -1,8 +1,8 @@
 package root.data.model
 
 import com.google.gson.annotations.SerializedName
-import orderdetails.data.model.details.OrderDetailsClientDto
-import orderdetails.data.model.OrderDetailsDto
+import orderdetails.root.data.model.details.OrderDetailsClientDto
+import orderdetails.root.data.model.OrderDetailsDto
 
 data class RouteOrderDto(
     @SerializedName("request")
