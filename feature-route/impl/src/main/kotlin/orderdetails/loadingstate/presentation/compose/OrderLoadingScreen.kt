@@ -3,6 +3,7 @@ package orderdetails.loadingstate.presentation.compose
 import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
+import orderdetails.additionaloptions.presentation.AdditionalOptionsScreen
 import orderdetails.cargotype.presentation.CargoTypeScreen
 import orderdetails.loadingstate.presentation.OrderStateParameters
 import orderdetails.loadingstate.presentation.viewmodel.OrderLoadingViewModel
@@ -23,6 +24,15 @@ import utils.UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
         }
         when (action.value) {
             OrderLoadingAction.OpenAdditionalOptionsScreen -> {
+                rootController.findModalController().present(
+                    modalSheetConfiguration = ModalSheetConfiguration(
+                        cornerRadius = SCREEN_CORNER_RADIUS
+                    )
+                ) {
+                    AdditionalOptionsScreen(state.value) { options ->
+                        viewModel.obtainEvent(OrderLoadingEvent.OnAdditionalOptionsChanged(options))
+                    }
+                }
                 viewModel.obtainEvent(OrderLoadingEvent.ResetAction)
             }
             OrderLoadingAction.OpenCamera -> {

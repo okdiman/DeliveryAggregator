@@ -11,4 +11,5 @@
     <string name="loading_choose">Выбрать</string>
     <string name="loading_step">1. Погрузка</string>
     <string name="loading_step_done">Выполнено</string>
+    <string name="loading_step_complete">Готово</string>
 </resources>

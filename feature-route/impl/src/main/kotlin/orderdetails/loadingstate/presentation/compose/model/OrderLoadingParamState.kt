@@ -1,7 +1,7 @@
 package orderdetails.loadingstate.presentation.compose.model
 
 import androidx.annotation.StringRes
-import orderdetails.loadingstate.model.OrderLoadingCargoType
+import orderdetails.cargotype.domain.model.OrderLoadingCargoType
 import trinity_monsters.delivery_aggregator.core_ui.R
 import view.model.DefaultParamState
 

@@ -1,7 +1,7 @@
 package orderdetails.loadingstate.presentation.viewmodel
 
 import BaseViewModel
-import orderdetails.loadingstate.model.OrderLoadingCargoType
+import orderdetails.cargotype.domain.model.OrderLoadingCargoType
 import orderdetails.loadingstate.presentation.OrderStateParameters
 import orderdetails.loadingstate.presentation.compose.model.OrderLoadingParamState
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingAction
@@ -29,7 +29,7 @@ class OrderLoadingViewModel(private val parameters: OrderStateParameters) :
         }
     }
 
-    private fun onAdditionalOptionsChanged(options: ArrayList<String>) {
+    private fun onAdditionalOptionsChanged(options: List<String>) {
         viewState = viewState.copy(
             additionalOptions = OrderLoadingParamState.AdditionalOptionsState(
                 stateText = options.joinToString(COMMA),
