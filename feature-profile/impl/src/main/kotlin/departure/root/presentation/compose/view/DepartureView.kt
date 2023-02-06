@@ -84,7 +84,7 @@ private fun DepartureTitleView(eventHandler: (DepartureEvent) -> Unit) {
             style = Theme.fonts.bold.copy(fontSize = 20.sp)
         )
     }
-    Spacer(Modifier.height(18.dp))
+    Spacer(Modifier.height(12.dp))
 }
 
 @Composable
@@ -105,7 +105,7 @@ private fun DepartureAddressView(
         RadioButton(
             modifier = Modifier.size(20.dp),
             selected = model.isActive,
-            onClick = {},
+            onClick = null,
             colors = RadioButtonDefaults.colors(
                 selectedColor = Theme.colors.radioButtonColor,
                 unselectedColor = Theme.colors.radioButtonColor

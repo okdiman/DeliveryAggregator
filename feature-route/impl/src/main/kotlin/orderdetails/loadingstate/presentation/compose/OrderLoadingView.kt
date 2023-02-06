@@ -34,6 +34,7 @@ import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import utils.CommonConstants.LIMITS.Transport.CAR_CAPACITY_MAX_CHARS
 import view.BackButton
 import view.StandardTextField
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
 internal fun OrderLoadingView(state: OrderLoadingState, eventHandler: (OrderLoadingEvent) -> Unit) {
@@ -140,7 +141,7 @@ fun OrderLoadingPhotoView(state: OrderLoadingState) {
                 modifier = Modifier
                     .size(78.dp)
                     .clip(Theme.shapes.photo),
-                painter = painterResource(id = trinity_monsters.delivery_aggregator.core_ui.R.drawable.app_logo),
+                painter = painterResource(id = R_core.drawable.app_logo),
                 contentDescription = null
             )
             Column(
@@ -201,7 +202,7 @@ private fun OrderLoadingTextFieldBlock(
         title = stringResource(R.string.loading_cargo_type),
         state = state.cargoType,
         hint = stringResource(R.string.loading_choose),
-        readOnly = true,
+        enabled = false,
         trailingIcon = {
             Icon(
                 painter = painterResource(id = trinity_monsters.delivery_aggregator.core_ui.R.drawable.chevron_ic),
@@ -216,10 +217,10 @@ private fun OrderLoadingTextFieldBlock(
         title = stringResource(R.string.loading_add_info),
         state = state.additionalOptions,
         hint = stringResource(R.string.loading_choose),
-        readOnly = true,
+        enabled = false,
         trailingIcon = {
             Icon(
-                painter = painterResource(id = trinity_monsters.delivery_aggregator.core_ui.R.drawable.chevron_ic),
+                painter = painterResource(id = R_core.drawable.chevron_ic),
                 contentDescription = null
             )
         }
