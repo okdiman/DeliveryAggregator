@@ -22,6 +22,7 @@ dependencies {
     accompanist()
     compose()
     koin()
+    coil()
     time()
     navigation()
     network()

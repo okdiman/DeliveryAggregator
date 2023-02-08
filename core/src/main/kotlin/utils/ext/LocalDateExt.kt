@@ -1,5 +1,6 @@
 package utils.ext
 
+import org.threeten.bp.Instant
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZoneOffset
@@ -7,6 +8,11 @@ import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import utils.ext.DateFormats.ZONE_ID_UTC
 import java.util.Locale
+
+fun Long.toLocalZonedDateTime(): LocalDateTime {
+    val localDateTime = Instant.ofEpochMilli(this).atZone(ZONE_ID_UTC).toLocalDateTime()
+    return ZonedDateTime.of(localDateTime, ZONE_ID_UTC).toLocalLocalDateTime()
+}
 
 fun String.toLocalZonedDateTime(formatter: DateTimeFormatter): LocalDateTime {
     return ZonedDateTime.of(this.toLocalDateTime(formatter), ZONE_ID_UTC)
@@ -43,6 +49,7 @@ fun LocalDateTime.toString(formatter: DateTimeFormatter): String {
 
 object DateFormats {
     private const val FULL_DISPLAYED_DAY_MONTH = "d MMMM"
+    private const val TIME = "HH:mm"
     const val FULL_DATE_TIME = "yyyy-MM-dd HH:mm"
     const val FULL_DISPLAYED_DATE_TIME = "d MMMM HH:mm"
     const val DOT_DAY_FORMAT = "dd.MM.yyyy"
@@ -53,5 +60,7 @@ object DateFormats {
             .withLocale(LOCALE_RU)
     val FULL_DISPLAYED_DAY_MONTH_FORMATTER: DateTimeFormatter =
         DateTimeFormatter.ofPattern(FULL_DISPLAYED_DAY_MONTH)
+    val TIME_FORMATTER: DateTimeFormatter =
+        DateTimeFormatter.ofPattern(TIME)
     val ZONE_ID_UTC: ZoneId = ZoneId.ofOffset("UTC", ZoneOffset.UTC)
 }
