@@ -1,6 +1,8 @@
 package orderdetails.loadingstate.presentation.compose
 
 import ScrollScreenActionButton
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -22,13 +24,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import camera.PhotoFileProvider
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingEvent
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingState
+import permissions.AppPermissionState
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import utils.CommonConstants.LIMITS.Transport.CAR_CAPACITY_MAX_CHARS
@@ -51,7 +59,7 @@ internal fun OrderLoadingView(state: OrderLoadingState, eventHandler: (OrderLoad
         }
         item {
             if (state.photo == null) {
-                OrderLoadingPhotoPlaceholder(eventHandler)
+                OrderLoadingPhotoPlaceholder(state, eventHandler)
             } else {
                 OrderLoadingPhotoView(state)
             }
@@ -102,7 +110,14 @@ private fun OrderLoadingPhotoHintView() {
 }
 
 @Composable
-private fun OrderLoadingPhotoPlaceholder(eventHandler: (OrderLoadingEvent) -> Unit) {
+private fun OrderLoadingPhotoPlaceholder(state: OrderLoadingState, eventHandler: (OrderLoadingEvent) -> Unit) {
+    val context = LocalContext.current
+    val uri = PhotoFileProvider.getImageUri(context)
+    val cameraLauncher = rememberLauncherForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+        if (success) {
+            eventHandler(OrderLoadingEvent.OnPhotoAdded(uri))
+        }
+    }
     Spacer(modifier = Modifier.height(12.dp))
     Box(
         modifier = Modifier
@@ -110,7 +125,11 @@ private fun OrderLoadingPhotoPlaceholder(eventHandler: (OrderLoadingEvent) -> Un
             .clip(Theme.shapes.roundedButton)
             .background(Theme.colors.disabledButtonColor)
             .clickable {
-                eventHandler(OrderLoadingEvent.OnPhotoClick)
+                if (state.permissionState == AppPermissionState.Granted) {
+                    cameraLauncher.launch(uri)
+                } else {
+                    eventHandler(OrderLoadingEvent.OnPhotoClick)
+                }
             },
         contentAlignment = Alignment.Center
     ) {
@@ -136,12 +155,17 @@ fun OrderLoadingPhotoView(state: OrderLoadingState) {
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            //TODO заменить на норм картинку
             Image(
                 modifier = Modifier
                     .size(78.dp)
                     .clip(Theme.shapes.photo),
-                painter = painterResource(id = R_core.drawable.app_logo),
+                painter = rememberAsyncImagePainter(
+                    ImageRequest
+                        .Builder(LocalContext.current)
+                        .data(data = state.photo?.uri)
+                        .build()
+                ),
+                contentScale = ContentScale.Crop,
                 contentDescription = null
             )
             Column(
@@ -151,9 +175,8 @@ fun OrderLoadingPhotoView(state: OrderLoadingState) {
             ) {
                 Text(text = stringResource(id = R.string.loading_step), style = Theme.fonts.bold)
                 Spacer(modifier = Modifier.height(4.dp))
-                //TODO текст сделать норм
                 Text(
-                    text = "22 ноября в 10:00", style = Theme.fonts.regular.copy(
+                    text = state.photo?.date ?: "", style = Theme.fonts.regular.copy(
                         color = Theme.colors.textPrimaryColor.copy(alpha = 0.7f),
                         fontSize = 14.sp
                     )

@@ -34,12 +34,6 @@ object Libraries {
         const val core = "io.gitlab.arturbosch.detekt:detekt-cli:${Versions.detekt}"
     }
 
-    object Database {
-        const val runtime = "androidx.room:room-runtime:${Versions.room}"
-        const val ktx = "androidx.room:room-ktx:${Versions.room}"
-        const val compile = "androidx.room:room-compiler:${Versions.room}"
-    }
-
     object Json {
         const val gson = "com.google.code.gson:gson:${Versions.gson}"
     }

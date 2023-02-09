@@ -10,7 +10,7 @@ import navigation.NavigationTree
 import notifications.NotificationsConstant
 import notifications.NotificationsConstant.Route.ROUTE_ID
 import notifications.NotificationsConstant.Route.STATUS
-import notifications.root.domain.model.RouteNotificationsStatus
+import notifications.domain.model.RouteNotificationsStatus
 import trinity_monsters.delivery_aggregator.notifications.data.manage.NotificationsFactory
 import trinity_monsters.delivery_aggregator.notifications.data.manage.NotificationsManager
 import trinity_monsters.delivery_aggregator.notifications.data.model.NotificationsModel

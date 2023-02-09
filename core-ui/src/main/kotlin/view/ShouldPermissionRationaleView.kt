@@ -12,15 +12,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberPermissionState
 import theme.Theme
 import trinity_monsters.delivery_aggregator.core_ui.R
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun ShouldPermissionRationaleBSScreen(
+    permission: String,
     text: String,
     onAcceptClick: () -> Unit,
     onDeclineClick: () -> Unit
 ) {
+    val notificationsPermissionState = rememberPermissionState(permission)
     Column(
         modifier = Modifier.padding(vertical = 40.dp, horizontal = 16.dp),
         verticalArrangement = Arrangement.Center,
@@ -38,7 +43,10 @@ fun ShouldPermissionRationaleBSScreen(
             textColor = Theme.colors.textSecondaryColor,
             alignment = Alignment.Center,
             padding = PaddingValues(top = 24.dp)
-        ) { onAcceptClick() }
+        ) {
+            notificationsPermissionState.launchPermissionRequest()
+            onAcceptClick()
+        }
         ActionButton(
             textRes = R.string.notifications_decline_permission,
             textColor = Theme.colors.textPrimaryColor,

@@ -1,8 +1,9 @@
 package root.di
 
 import additionalInfo.di.additionalInfoModule
-import notifications.root.di.notificationsModule
+import notifications.di.notificationsModule
 import orderdetails.root.di.orderDetailsModule
+import permissions.di.permissionsModule
 
 fun routeModules() =
-    listOf(routeRootModule(), orderDetailsModule(), additionalInfoModule(), notificationsModule())
+    listOf(routeRootModule(), orderDetailsModule(), additionalInfoModule(), notificationsModule(), permissionsModule())

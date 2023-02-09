@@ -23,6 +23,14 @@ fun openNotificationSettings(context: Context) {
     context.startActivity(intent)
 }
 
+fun openApplicationSettings(context: Context) {
+    val intent = Intent().apply {
+        action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+        data = Uri.fromParts("package", context.packageName, null)
+    }
+    context.startActivity(intent)
+}
+
 //FIXME Убрать хардкод номера, как только появится нормальный в ТЗ
 fun openDial(context: Context) {
     val intent = Intent().apply {

@@ -4,11 +4,12 @@ import BaseViewModel
 import coroutines.AppDispatchers
 import navigation.NavigationTree
 import network.exceptions.NotFoundException
-import notifications.permission.domain.interactor.NotificationPermissionInteractor
-import notifications.root.domain.usecase.GetUnreadNotificationsCountUseCase
+import notifications.domain.usecase.GetUnreadNotificationsCountUseCase
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import permissions.AppPermissionState
+import permissions.PermissionsConstants.Notification
+import permissions.domain.interactor.PermissionsInteractor
 import presentation.DeeplinkParameters
 import root.DeeplinkNavigatorHandler
 import root.domain.usecase.AcceptRouteUseCase
@@ -27,7 +28,7 @@ class RouteViewModel(private val deeplinkParameters: DeeplinkParameters?) :
     private val appDispatchers by inject<AppDispatchers>()
     private val mapper by inject<RouteUiMapper>()
     private val buttonUiMapper by inject<RouteButtonUiModelMapper>()
-    private val notificationPermission by inject<NotificationPermissionInteractor>()
+    private val permission by inject<PermissionsInteractor>()
     private val deeplinkNavigatorHandler by inject<DeeplinkNavigatorHandler>()
 
     init {
@@ -92,7 +93,7 @@ class RouteViewModel(private val deeplinkParameters: DeeplinkParameters?) :
         launchJob {
             when (state) {
                 AppPermissionState.Rationale -> {
-                    if (!notificationPermission.isShowRationaleDismissed()) {
+                    if (!permission.isShowRationaleDismissed(Notification)) {
                         viewState = viewState.copy(notificationsPermission = state)
                     }
                 }
@@ -106,7 +107,7 @@ class RouteViewModel(private val deeplinkParameters: DeeplinkParameters?) :
     private fun onRationaleDismiss() {
         launchJob {
             viewState = viewState.copy(notificationsPermission = AppPermissionState.Denied)
-            notificationPermission.setRationaleDismissed()
+            permission.setRationaleDismissed(Notification)
         }
     }
 

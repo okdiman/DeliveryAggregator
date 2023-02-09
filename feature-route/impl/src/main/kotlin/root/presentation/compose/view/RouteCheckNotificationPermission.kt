@@ -50,6 +50,7 @@ internal fun RouteCheckNotificationPermission(
                     )
                 ) {
                     ShouldPermissionRationaleBSScreen(
+                        permission = Notification,
                         text = stringResource(id = R.string.route_notifications_permission),
                         onAcceptClick = {
                             notificationsPermissionState.launchPermissionRequest()

@@ -3,7 +3,6 @@ object Versions {
     const val koin = "3.2.2"
     const val coil = "2.2.2"
     const val androidxCore = "1.9.0"
-    const val room = "2.4.3"
     const val material = "1.7.0"
     const val gson = "2.10"
     const val splashScreen = "1.0.0"

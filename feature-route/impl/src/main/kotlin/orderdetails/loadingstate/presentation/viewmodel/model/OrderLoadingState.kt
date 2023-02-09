@@ -1,13 +1,16 @@
 package orderdetails.loadingstate.presentation.viewmodel.model
 
-import android.net.Uri
 import orderdetails.loadingstate.presentation.compose.model.OrderLoadingParamState
+import permissions.AppPermissionState
+import view.model.PermissionState
+import view.model.PhotoParamState
 
 data class OrderLoadingState(
-    val photo: Uri? = null,
+    val photo: PhotoParamState? = null,
     val boxesCount: OrderLoadingParamState.BoxesCountState = OrderLoadingParamState.BoxesCountState(),
     val palletsCount: OrderLoadingParamState.PalletsCountState = OrderLoadingParamState.PalletsCountState(),
     val cargoType: OrderLoadingParamState.CargoTypeState = OrderLoadingParamState.CargoTypeState(),
     val additionalOptions: OrderLoadingParamState.AdditionalOptionsState = OrderLoadingParamState.AdditionalOptionsState(),
-    val isDoneButtonVisible: Boolean = false
-)
+    val isDoneButtonVisible: Boolean = false,
+    val cameraPermissionState: AppPermissionState? = null
+) : PermissionState(cameraPermissionState)
