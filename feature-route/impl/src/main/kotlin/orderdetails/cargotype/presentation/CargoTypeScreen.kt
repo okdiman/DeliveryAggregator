@@ -1,6 +1,8 @@
 package orderdetails.cargotype.presentation
 
+import ActionButton
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -31,6 +33,7 @@ internal fun CargoTypeScreen(
     state: OrderLoadingState,
     onCargoTypeClick: (OrderLoadingCargoType) -> Unit
 ) {
+    val rootController = LocalRootController.current
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
@@ -41,6 +44,13 @@ internal fun CargoTypeScreen(
         }
         item {
             CargoTypesRadioButtonGroupView(state, onCargoTypeClick)
+        }
+        item {
+            ActionButton(
+                textRes = R.string.loading_step_complete,
+                alignment = Alignment.Center,
+                padding = PaddingValues(vertical = 16.dp, horizontal = 8.dp)
+            ) { rootController.findModalController().popBackStack(null) }
         }
     }
 }

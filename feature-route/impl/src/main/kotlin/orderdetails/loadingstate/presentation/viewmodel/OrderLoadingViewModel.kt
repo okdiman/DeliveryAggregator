@@ -59,7 +59,8 @@ class OrderLoadingViewModel(private val parameters: OrderStateParameters) :
             additionalOptions = OrderLoadingParamState.AdditionalOptionsState(
                 stateText = options.joinToString(COMMA),
                 optionsList = options
-            )
+            ),
+            isDoneButtonVisible = inDoneButtonVisible(additionalOptions = options)
         )
     }
 
@@ -68,14 +69,18 @@ class OrderLoadingViewModel(private val parameters: OrderStateParameters) :
             formatter = arrayOf(FULL_DISPLAYED_DAY_MONTH_FORMATTER, TIME_FORMATTER),
             separator = resourceInteractor.getString(R.string.loading_in_time_separator)
         )
-        viewState = viewState.copy(photo = PhotoParamState(uri = uri, date = date))
+        viewState = viewState.copy(
+            photo = PhotoParamState(uri = uri, date = date),
+            isDoneButtonVisible = inDoneButtonVisible(photo = uri)
+        )
     }
 
     private fun onBoxesCountChanged(count: String) {
         viewState = viewState.copy(
             boxesCount = OrderLoadingParamState.BoxesCountState(
                 stateText = count
-            )
+            ),
+            isDoneButtonVisible = inDoneButtonVisible(boxesCount = count)
         )
     }
 
@@ -84,15 +89,17 @@ class OrderLoadingViewModel(private val parameters: OrderStateParameters) :
             cargoType = OrderLoadingParamState.CargoTypeState(
                 stateText = cargoType.text,
                 cargoType = cargoType
-            )
+            ),
+            isDoneButtonVisible = inDoneButtonVisible(cargoType = cargoType)
         )
     }
 
     private fun onPalletsCountChanged(count: String) {
         viewState = viewState.copy(
             palletsCount = OrderLoadingParamState.PalletsCountState(
-                stateText = count
-            )
+                stateText = count,
+            ),
+            isDoneButtonVisible = inDoneButtonVisible(palletsCount = count)
         )
     }
 
@@ -138,4 +145,13 @@ class OrderLoadingViewModel(private val parameters: OrderStateParameters) :
             permission.setRationaleDismissed(PermissionsConstants.Camera)
         }
     }
+
+    private fun inDoneButtonVisible(
+        boxesCount: String = viewState.boxesCount.stateText,
+        palletsCount: String = viewState.palletsCount.stateText,
+        cargoType: OrderLoadingCargoType? = viewState.cargoType.cargoType,
+        additionalOptions: List<String> = viewState.additionalOptions.optionsList,
+        photo: Uri? = viewState.photo?.uri
+    ) = boxesCount.isNotEmpty() && palletsCount.isNotEmpty() && cargoType != null && additionalOptions.isNotEmpty() &&
+        photo != null
 }
