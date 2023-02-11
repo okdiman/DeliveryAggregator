@@ -1,5 +1,7 @@
 package root.data
 
+import orderdetails.loadingstate.data.mapper.LoadingStateMapper
+import orderdetails.loadingstate.domain.model.LoadingStateRequestModel
 import root.data.mapper.RouteMapper
 import root.data.mapper.RouteOrderMapper
 import root.domain.RouteRepository
@@ -9,7 +11,8 @@ import root.domain.model.RouteOrderModel
 class RouteRepositoryImpl(
     private val api: RouteApi,
     private val orderMapper: RouteOrderMapper,
-    private val routeMapper: RouteMapper
+    private val routeMapper: RouteMapper,
+    private val loadingStateMapper: LoadingStateMapper
 ) : RouteRepository {
     override suspend fun getActiveRoute(): RouteModel {
         val request = api.getActiveRoute()
@@ -23,5 +26,9 @@ class RouteRepositoryImpl(
 
     override suspend fun acceptRoute(id: Long) {
         api.acceptRoute(id)
+    }
+
+    override suspend fun confirmLoadingState(id: Long, model: LoadingStateRequestModel) {
+        api.confirmLoadingState(id, loadingStateMapper.map(model))
     }
 }

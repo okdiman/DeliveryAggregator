@@ -4,5 +4,6 @@ import android.net.Uri
 
 class PhotoParamState(
     val uri: Uri,
-    val date: String
+    val date: String,
+    val remoteLink: String? = null
 )

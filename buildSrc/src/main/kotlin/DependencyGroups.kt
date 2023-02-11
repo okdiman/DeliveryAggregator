@@ -1,78 +1,78 @@
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
-private const val implementation = "implementation"
+private const val IMPLEMENTATION = "implementation"
 
 fun DependencyHandler.core() {
-    add(implementation, Libraries.Core.coreKtx)
-    add(implementation, Libraries.Core.material)
-    add(implementation, Libraries.Core.lifecycle)
-    add(implementation, Libraries.Core.lifecycleExt)
+    add(IMPLEMENTATION, Libraries.Core.coreKtx)
+    add(IMPLEMENTATION, Libraries.Core.material)
+    add(IMPLEMENTATION, Libraries.Core.lifecycle)
+    add(IMPLEMENTATION, Libraries.Core.lifecycleExt)
 }
 
 fun DependencyHandler.koin() {
-    add(implementation, Libraries.Koin.core)
-    add(implementation, Libraries.Koin.android)
+    add(IMPLEMENTATION, Libraries.Koin.core)
+    add(IMPLEMENTATION, Libraries.Koin.android)
 }
 
 fun DependencyHandler.network() {
-    add(implementation, Libraries.Retrofit.converter)
-    add(implementation, Libraries.Retrofit.core)
-    add(implementation, Libraries.Serialization.core)
-    add(implementation, Libraries.OkHttp.logging)
-    add(implementation, Libraries.OkHttp.base)
+    add(IMPLEMENTATION, Libraries.Retrofit.converter)
+    add(IMPLEMENTATION, Libraries.Retrofit.core)
+    add(IMPLEMENTATION, Libraries.Serialization.core)
+    add(IMPLEMENTATION, Libraries.OkHttp.logging)
+    add(IMPLEMENTATION, Libraries.OkHttp.base)
 }
 
 fun DependencyHandler.kotlin() {
-    add(implementation, Libraries.Kotlin.stdLib)
-    add(implementation, Libraries.Kotlin.coroutinesAndroid)
-    add(implementation, Libraries.Kotlin.coroutinesCore)
-    add(implementation, Libraries.Kotlin.coroutinesGms)
+    add(IMPLEMENTATION, Libraries.Kotlin.stdLib)
+    add(IMPLEMENTATION, Libraries.Kotlin.coroutinesAndroid)
+    add(IMPLEMENTATION, Libraries.Kotlin.coroutinesCore)
+    add(IMPLEMENTATION, Libraries.Kotlin.coroutinesGms)
 }
 
 fun DependencyHandler.compose() {
-    add(implementation, Libraries.Compose.composeActivity)
-    add(implementation, Libraries.Compose.ui)
-    add(implementation, Libraries.Compose.tooling)
-    add(implementation, Libraries.Compose.material)
+    add(IMPLEMENTATION, Libraries.Compose.composeActivity)
+    add(IMPLEMENTATION, Libraries.Compose.ui)
+    add(IMPLEMENTATION, Libraries.Compose.tooling)
+    add(IMPLEMENTATION, Libraries.Compose.material)
 }
 
 fun DependencyHandler.coil() {
-    add(implementation, Libraries.Coil.compose)
-    add(implementation, Libraries.Coil.core)
+    add(IMPLEMENTATION, Libraries.Coil.compose)
+    add(IMPLEMENTATION, Libraries.Coil.core)
 }
 
 fun DependencyHandler.splash() {
-    add(implementation, Libraries.Core.splashScreen)
+    add(IMPLEMENTATION, Libraries.Core.splashScreen)
 }
 
 fun DependencyHandler.json() {
-    add(implementation, Libraries.Json.gson)
+    add(IMPLEMENTATION, Libraries.Json.gson)
 }
 
 fun DependencyHandler.security() {
-    add(implementation, Libraries.Security.crypto)
+    add(IMPLEMENTATION, Libraries.Security.crypto)
 }
 
 fun DependencyHandler.time() {
-    add(implementation, Libraries.DateTime.time)
+    add(IMPLEMENTATION, Libraries.DateTime.time)
 }
 
 fun DependencyHandler.accompanist() {
-    add(implementation, Libraries.Accompanist.permissions)
+    add(IMPLEMENTATION, Libraries.Accompanist.permissions)
 }
 
 fun DependencyHandler.firebase() {
-    add(implementation, Libraries.Firebase.messaging)
-    add(implementation, Libraries.Firebase.crashlytics)
+    add(IMPLEMENTATION, Libraries.Firebase.messaging)
+    add(IMPLEMENTATION, Libraries.Firebase.crashlytics)
 }
 
 fun DependencyHandler.viewModel() {
-    add(implementation, Libraries.ViewModel.compose)
-    add(implementation, Libraries.ViewModel.core)
-    add(implementation, Libraries.ViewModel.odyssey)
+    add(IMPLEMENTATION, Libraries.ViewModel.compose)
+    add(IMPLEMENTATION, Libraries.ViewModel.core)
+    add(IMPLEMENTATION, Libraries.ViewModel.odyssey)
 }
 
 fun DependencyHandler.navigation() {
-    add(implementation, Libraries.Navigation.compose)
-    add(implementation, Libraries.Navigation.core)
+    add(IMPLEMENTATION, Libraries.Navigation.compose)
+    add(IMPLEMENTATION, Libraries.Navigation.core)
 }

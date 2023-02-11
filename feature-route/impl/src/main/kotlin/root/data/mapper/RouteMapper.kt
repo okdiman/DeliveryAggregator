@@ -1,6 +1,6 @@
 package root.data.mapper
 
-import root.data.model.RouteDto
+import root.data.model.response.RouteDto
 import root.domain.model.RouteStatusProgress
 import root.domain.model.RouteModel
 

@@ -9,6 +9,7 @@ import notifications.presentation.compose.NotificationsScreen
 import offer.presentation.compose.OfferScreen
 import orderdetails.loadingstate.presentation.compose.OrderLoadingScreen
 import orderdetails.root.presentation.OrderDetailsParameters
+import orderdetails.root.presentation.OrderStatesParameters
 import orderdetails.root.presentation.compose.OrderDetailsScreen
 import presentation.DeeplinkParameters
 import root.presentation.compose.ProfileScreen
@@ -70,8 +71,8 @@ fun RootComposeBuilder.mainFlow(deeplinkParameters: DeeplinkParameters?) {
         screen(NavigationTree.Routes.RouteDetails.name) { parameters ->
             OrderDetailsScreen(parameters as OrderDetailsParameters)
         }
-        screen(NavigationTree.Routes.LoadingState.name) {
-            OrderLoadingScreen()
+        screen(NavigationTree.Routes.LoadingState.name) { parameters ->
+            OrderLoadingScreen(parameters as OrderStatesParameters)
         }
         screen(NavigationTree.Routes.DeliveryState.name) {
             Text(text = "DeliveryState")

@@ -10,7 +10,8 @@ data class OrderLoadingState(
     val boxesCount: OrderLoadingParamState.BoxesCountState = OrderLoadingParamState.BoxesCountState(),
     val palletsCount: OrderLoadingParamState.PalletsCountState = OrderLoadingParamState.PalletsCountState(),
     val cargoType: OrderLoadingParamState.CargoTypeState = OrderLoadingParamState.CargoTypeState(),
-    val additionalOptions: OrderLoadingParamState.AdditionalOptionsState = OrderLoadingParamState.AdditionalOptionsState(),
+    val additionalOptions: OrderLoadingParamState.AdditionalOptionsState =
+        OrderLoadingParamState.AdditionalOptionsState(),
     val isDoneButtonVisible: Boolean = false,
     val cameraPermissionState: AppPermissionState? = null
 ) : PermissionState(cameraPermissionState)

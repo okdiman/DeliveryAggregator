@@ -5,10 +5,13 @@ import android.net.Uri
 import coroutines.AppDispatchers
 import domain.LoadImageUseCase
 import orderdetails.cargotype.domain.model.OrderLoadingCargoType
+import orderdetails.loadingstate.domain.ConfirmLoadingStateUseCase
+import orderdetails.loadingstate.domain.model.LoadingStateRequestModel
 import orderdetails.loadingstate.presentation.compose.model.OrderLoadingParamState
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingAction
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingEvent
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingState
+import orderdetails.root.presentation.OrderStatesParameters
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import permissions.AppPermissionState
@@ -22,15 +25,16 @@ import utils.ext.DateFormats.TIME_FORMATTER
 import utils.resource.domain.ResourceInteractor
 import view.model.PhotoParamState
 
-class OrderLoadingViewModel : BaseViewModel<OrderLoadingState, OrderLoadingAction, OrderLoadingEvent>(
-    initialState = OrderLoadingState()
-), KoinComponent {
+class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
+    BaseViewModel<OrderLoadingState, OrderLoadingAction, OrderLoadingEvent>(initialState = OrderLoadingState()),
+    KoinComponent {
 
     private val currentDateUtil by inject<CurrentDateUtil>()
     private val resourceInteractor by inject<ResourceInteractor>()
     private val permission by inject<PermissionsInteractor>()
     private val loadImage by inject<LoadImageUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
+    private val confirmLoadingState by inject<ConfirmLoadingStateUseCase>()
 
     init {
         if (permission.isPermissionGranted(PermissionsConstants.Camera)) {
@@ -72,12 +76,13 @@ class OrderLoadingViewModel : BaseViewModel<OrderLoadingState, OrderLoadingActio
             separator = resourceInteractor.getString(R.string.loading_in_time_separator)
         )
         launchJob(appDispatchers.network) {
-            loadImage(uri)
+            val remoteLink = loadImage(uri)
+            viewState = viewState.copy(
+                photo = PhotoParamState(uri = uri, date = date, remoteLink = remoteLink),
+                isDoneButtonVisible = inDoneButtonVisible(remoteLink = remoteLink)
+            )
         }
-        viewState = viewState.copy(
-            photo = PhotoParamState(uri = uri, date = date),
-            isDoneButtonVisible = inDoneButtonVisible(photo = uri)
-        )
+        viewState = viewState.copy(photo = PhotoParamState(uri = uri, date = date))
     }
 
     private fun onBoxesCountChanged(count: String) {
@@ -113,8 +118,10 @@ class OrderLoadingViewModel : BaseViewModel<OrderLoadingState, OrderLoadingActio
     }
 
     private fun onDoneButtonClick() {
-        //TODO запрос на смену статуса
-        viewAction = OrderLoadingAction.OpenPreviousScreen
+        launchJob(appDispatchers.network) {
+            confirmLoadingState(parameters.id, getLoadingStateRequest())
+            viewAction = OrderLoadingAction.OpenPreviousScreen
+        }
     }
 
     private fun onPhotoClick() {
@@ -151,12 +158,20 @@ class OrderLoadingViewModel : BaseViewModel<OrderLoadingState, OrderLoadingActio
         }
     }
 
+    private fun getLoadingStateRequest() = LoadingStateRequestModel(
+        boxes = viewState.boxesCount.stateText.toInt(),
+        pallets = viewState.palletsCount.stateText.toInt(),
+        cargoType = viewState.cargoType.cargoType!!.text,
+        images = arrayListOf(viewState.photo?.remoteLink!!),
+        extras = arrayListOf()
+    )
+
     private fun inDoneButtonVisible(
         boxesCount: String = viewState.boxesCount.stateText,
         palletsCount: String = viewState.palletsCount.stateText,
         cargoType: OrderLoadingCargoType? = viewState.cargoType.cargoType,
         additionalOptions: List<String> = viewState.additionalOptions.optionsList,
-        photo: Uri? = viewState.photo?.uri
+        remoteLink: String? = viewState.photo?.remoteLink
     ) = boxesCount.isNotEmpty() && palletsCount.isNotEmpty() && cargoType != null && additionalOptions.isNotEmpty() &&
-        photo != null
+        remoteLink != null
 }

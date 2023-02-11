@@ -200,13 +200,14 @@ private fun OrderDetailsStatusView(
     Spacer(modifier = Modifier.height(20.dp))
     OrderDetailsStatusCardView(
         title = stringResource(id = R.string.order_details_loading_status),
-        isCompleted = state.uiModel.status == OrderDetailsStatusProgress.DELIVERY ||
-            state.uiModel.status == OrderDetailsStatusProgress.DONE
+        isCompleted = state.uiModel.status != OrderDetailsStatusProgress.CREATED ||
+            state.uiModel.status != OrderDetailsStatusProgress.ACTIVE
     ) { eventHandler(OrderDetailsEvent.OnLoadingStateClick) }
     Spacer(modifier = Modifier.height(8.dp))
     OrderDetailsStatusCardView(
         title = stringResource(id = R.string.order_details_delivery_status),
-        isCompleted = state.uiModel.status == OrderDetailsStatusProgress.DONE
+        isCompleted = state.uiModel.status == OrderDetailsStatusProgress.DONE  ||
+            state.uiModel.status == OrderDetailsStatusProgress.DELIVERY
     ) { eventHandler(OrderDetailsEvent.OnDeliveryStateClick) }
 }
 
@@ -222,7 +223,11 @@ private fun OrderDetailsStatusCardView(title: String, isCompleted: Boolean, onCl
             )
             .clip(Theme.shapes.card)
             .background(Color.White)
-            .clickable { onClick() })
+            .clickable {
+                if (!isCompleted) {
+                    onClick()
+                }
+            })
     {
         Row(
             modifier = Modifier

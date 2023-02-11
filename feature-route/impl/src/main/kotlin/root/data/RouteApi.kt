@@ -1,9 +1,14 @@
 package root.data
 
+import orderdetails.deliverystate.data.model.DeliveryStateRequest
+import orderdetails.loadingstate.data.model.LoadingStateRequest
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
-import root.data.model.RouteDto
-import root.data.model.RouteOrderDto
+import root.data.model.response.RouteDto
+import root.data.model.response.RouteOrderDto
 
 interface RouteApi {
 
@@ -18,5 +23,17 @@ interface RouteApi {
     @GET("api/contractors/routes/{id}/accept")
     suspend fun acceptRoute(
         @Path("id") id: Long
+    )
+
+    @PUT("api/contractors/requests/{id}")
+    suspend fun confirmLoadingState(
+        @Path("id") id: Long,
+        @Body request: LoadingStateRequest
+    )
+
+    @POST("api/contractors/requests/{id}")
+    suspend fun confirmDeliveryState(
+        @Path("id") id: Long,
+        @Body request: DeliveryStateRequest
     )
 }

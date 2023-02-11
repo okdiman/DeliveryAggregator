@@ -16,7 +16,7 @@ import root.presentation.mapper.RouteUiMapper
 
 internal fun routeRootModule() = module {
     single<RouteApi> { get<Retrofit>().create() }
-    factory<RouteRepository> { RouteRepositoryImpl(get(), get(), get()) }
+    factory<RouteRepository> { RouteRepositoryImpl(get(), get(), get(), get()) }
     factory { GetActiveRouteUseCase(get()) }
     factory { AcceptRouteUseCase(get()) }
     factory { RouteOrderMapper() }

@@ -9,6 +9,7 @@ import orderdetails.cargotype.presentation.CargoTypeScreen
 import orderdetails.loadingstate.presentation.viewmodel.OrderLoadingViewModel
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingAction
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingEvent
+import orderdetails.root.presentation.OrderStatesParameters
 import permissions.PermissionsConstants
 import permissions.presentation.PermissionHandler
 import ru.alexgladkov.odyssey.compose.extensions.present
@@ -18,9 +19,9 @@ import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import utils.UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
 
 @Composable
-fun OrderLoadingScreen() {
+fun OrderLoadingScreen(parameters: OrderStatesParameters) {
     val rootController = LocalRootController.current
-    ViewModel(factory = { OrderLoadingViewModel() }) { viewModel ->
+    ViewModel(factory = { OrderLoadingViewModel(parameters) }) { viewModel ->
         val action = viewModel.viewActions().observeAsState()
         val state = viewModel.viewStates().observeAsState()
         OrderLoadingView(state.value) { event ->
