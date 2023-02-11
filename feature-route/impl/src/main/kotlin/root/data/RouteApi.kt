@@ -2,8 +2,8 @@ package root.data
 
 import retrofit2.http.GET
 import retrofit2.http.Path
-import root.data.model.RouteOrderDto
 import root.data.model.RouteDto
+import root.data.model.RouteOrderDto
 
 interface RouteApi {
 

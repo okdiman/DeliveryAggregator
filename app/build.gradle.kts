@@ -65,4 +65,6 @@ dependencies {
     implementation(project(Modules.navigation))
     implementation(project(Modules.address_api))
     implementation(project(Modules.address_impl))
+    implementation(project(Modules.image_uploading_api))
+    implementation(project(Modules.image_uploading_impl))
 }

@@ -2,8 +2,9 @@ package orderdetails.loadingstate.presentation.viewmodel
 
 import BaseViewModel
 import android.net.Uri
+import coroutines.AppDispatchers
+import domain.LoadImageUseCase
 import orderdetails.cargotype.domain.model.OrderLoadingCargoType
-import orderdetails.loadingstate.presentation.OrderStateParameters
 import orderdetails.loadingstate.presentation.compose.model.OrderLoadingParamState
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingAction
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingEvent
@@ -21,14 +22,15 @@ import utils.ext.DateFormats.TIME_FORMATTER
 import utils.resource.domain.ResourceInteractor
 import view.model.PhotoParamState
 
-class OrderLoadingViewModel(private val parameters: OrderStateParameters) :
-    BaseViewModel<OrderLoadingState, OrderLoadingAction, OrderLoadingEvent>(
-        initialState = OrderLoadingState()
-    ), KoinComponent {
+class OrderLoadingViewModel : BaseViewModel<OrderLoadingState, OrderLoadingAction, OrderLoadingEvent>(
+    initialState = OrderLoadingState()
+), KoinComponent {
 
     private val currentDateUtil by inject<CurrentDateUtil>()
     private val resourceInteractor by inject<ResourceInteractor>()
     private val permission by inject<PermissionsInteractor>()
+    private val loadImage by inject<LoadImageUseCase>()
+    private val appDispatchers by inject<AppDispatchers>()
 
     init {
         if (permission.isPermissionGranted(PermissionsConstants.Camera)) {
@@ -69,6 +71,9 @@ class OrderLoadingViewModel(private val parameters: OrderStateParameters) :
             formatter = arrayOf(FULL_DISPLAYED_DAY_MONTH_FORMATTER, TIME_FORMATTER),
             separator = resourceInteractor.getString(R.string.loading_in_time_separator)
         )
+        launchJob(appDispatchers.network) {
+            loadImage(uri)
+        }
         viewState = viewState.copy(
             photo = PhotoParamState(uri = uri, date = date),
             isDoneButtonVisible = inDoneButtonVisible(photo = uri)

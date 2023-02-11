@@ -27,5 +27,7 @@ include(
     ":feature-registration:impl",
     ":feature-route:api",
     ":feature-route:impl",
+    ":feature-image-uploading:api",
+    ":feature-image-uploading:impl",
     ":feature-splash-screen"
 )

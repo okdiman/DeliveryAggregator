@@ -6,7 +6,6 @@ import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
 import orderdetails.additionaloptions.presentation.AdditionalOptionsScreen
 import orderdetails.cargotype.presentation.CargoTypeScreen
-import orderdetails.loadingstate.presentation.OrderStateParameters
 import orderdetails.loadingstate.presentation.viewmodel.OrderLoadingViewModel
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingAction
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingEvent
@@ -19,9 +18,9 @@ import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import utils.UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
 
 @Composable
-fun OrderLoadingScreen(parameters: OrderStateParameters) {
+fun OrderLoadingScreen() {
     val rootController = LocalRootController.current
-    ViewModel(factory = { OrderLoadingViewModel(parameters) }) { viewModel ->
+    ViewModel(factory = { OrderLoadingViewModel() }) { viewModel ->
         val action = viewModel.viewActions().observeAsState()
         val state = viewModel.viewStates().observeAsState()
         OrderLoadingView(state.value) { event ->

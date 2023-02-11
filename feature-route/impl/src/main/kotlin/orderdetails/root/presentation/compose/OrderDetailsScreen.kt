@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
 import navigation.NavigationTree
-import orderdetails.loadingstate.presentation.OrderStateParameters
 import orderdetails.root.presentation.OrderDetailsParameters
 import orderdetails.root.presentation.compose.view.OrderDetailsView
 import orderdetails.root.presentation.viewmodel.OrderDetailsViewModel
@@ -33,15 +32,13 @@ fun OrderDetailsScreen(parameters: OrderDetailsParameters) {
         when (action.value) {
             is OrderDetailsAction.OpenDeliveryStateScreen -> {
                 rootController.push(
-                    screen = NavigationTree.Routes.DeliveryState.name,
-                    params = OrderStateParameters((action.value as OrderDetailsAction.OpenDeliveryStateScreen).id)
+                    screen = NavigationTree.Routes.DeliveryState.name
                 )
                 viewModel.obtainEvent(OrderDetailsEvent.ResetAction)
             }
             is OrderDetailsAction.OpenLoadingStateScreen -> {
                 rootController.push(
-                    screen = NavigationTree.Routes.LoadingState.name,
-                    params = OrderStateParameters((action.value as OrderDetailsAction.OpenLoadingStateScreen).id)
+                    screen = NavigationTree.Routes.LoadingState.name
                 )
                 viewModel.obtainEvent(OrderDetailsEvent.ResetAction)
             }

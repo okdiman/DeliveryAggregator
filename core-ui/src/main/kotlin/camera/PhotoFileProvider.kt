@@ -25,7 +25,7 @@ class PhotoFileProvider : FileProvider(R.xml.photo_authorities) {
         }
 
         private const val FILE_CHILD_DIR = "images"
-        private const val FILE_NAME_PREFIX = "current_photo_"
+        private const val FILE_NAME_PREFIX = "selected_photo_"
         private const val FILE_NAME_SUFFIX = ".jpg"
         private const val AUTHORITY_PATH = "trinity_monsters.delivery_aggregator.core_ui.camera.PhotoFileProvider"
     }

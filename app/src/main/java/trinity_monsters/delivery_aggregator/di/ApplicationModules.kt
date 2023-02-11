@@ -4,6 +4,7 @@ import di.addressModule
 import di.authModule
 import di.coreModules
 import di.coreUiiModule
+import di.imageUploadingModule
 import di.splashModule
 import root.di.profileModules
 import root.di.registrationModule
@@ -16,7 +17,8 @@ fun applicationModules() = listOf(
     registrationModule(),
     addressModule(),
     splashModule(),
-    remoteNotificationsModule()
+    remoteNotificationsModule(),
+    imageUploadingModule()
 ) +
     coreModules() +
     authModule() +

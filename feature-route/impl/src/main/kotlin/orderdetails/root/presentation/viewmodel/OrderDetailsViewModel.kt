@@ -68,10 +68,10 @@ class OrderDetailsViewModel(
     }
 
     private fun onDeliveryStateClick() {
-        viewAction = OrderDetailsAction.OpenDeliveryStateScreen(parameters.id)
+        viewAction = OrderDetailsAction.OpenDeliveryStateScreen
     }
 
     private fun onLoadingStateClick() {
-        viewAction = OrderDetailsAction.OpenLoadingStateScreen(parameters.id)
+        viewAction = OrderDetailsAction.OpenLoadingStateScreen
     }
 }
