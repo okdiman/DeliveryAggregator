@@ -200,7 +200,7 @@ private fun OrderDetailsStatusView(
     Spacer(modifier = Modifier.height(20.dp))
     OrderDetailsStatusCardView(
         title = stringResource(id = R.string.order_details_loading_status),
-        isCompleted = state.uiModel.status != OrderDetailsStatusProgress.CREATED ||
+        isCompleted = state.uiModel.status != OrderDetailsStatusProgress.CREATED &&
             state.uiModel.status != OrderDetailsStatusProgress.ACTIVE
     ) { eventHandler(OrderDetailsEvent.OnLoadingStateClick) }
     Spacer(modifier = Modifier.height(8.dp))

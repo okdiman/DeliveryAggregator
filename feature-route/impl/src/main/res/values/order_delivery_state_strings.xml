@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="delivery_state_title">Доставка</string>
+    <string name="delivery_step">2. Доставка</string>
+    <string name="delivery_problems">Возникли проблемы при отгрузке</string>
+    <string name="delivery_note_title">Примечания к рейсу</string>
+    <string name="delivery_note_hint">Напишите примечания</string>
+</resources>

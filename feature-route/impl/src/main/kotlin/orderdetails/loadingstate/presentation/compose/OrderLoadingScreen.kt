@@ -67,7 +67,7 @@ fun OrderLoadingScreen(parameters: OrderStatesParameters) {
                 viewModel.obtainEvent(OrderLoadingEvent.ResetAction)
             }
             OrderLoadingAction.OpenPreviousScreen -> rootController.popBackStack()
-            null -> {}
+            else -> {}
         }
     }
 }

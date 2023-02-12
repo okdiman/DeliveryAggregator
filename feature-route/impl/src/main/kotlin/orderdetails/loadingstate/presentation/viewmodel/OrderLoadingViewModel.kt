@@ -49,7 +49,7 @@ class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
             is OrderLoadingEvent.OnCargoTypeChanged -> onCargoTypeChanged(viewEvent.type)
             is OrderLoadingEvent.OnPalletsCountChanged -> onPalletsCountChanged(viewEvent.count)
             is OrderLoadingEvent.OnPhotoAdded -> onPhotoAdded(viewEvent.uri)
-            is OrderLoadingEvent.OnPermissionStateChanged -> onNotificationPermissionStateChanged(viewEvent.state)
+            is OrderLoadingEvent.OnPermissionStateChanged -> onPermissionStateChanged(viewEvent.state)
             OrderLoadingEvent.OnBackClick -> onBackClick()
             OrderLoadingEvent.OnDoneButtonClick -> onDoneButtonClick()
             OrderLoadingEvent.OnPhotoClick -> onPhotoClick()
@@ -136,7 +136,7 @@ class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
         viewAction = OrderLoadingAction.OpenAdditionalOptionsScreen
     }
 
-    private fun onNotificationPermissionStateChanged(state: AppPermissionState) {
+    private fun onPermissionStateChanged(state: AppPermissionState) {
         launchJob {
             when (state) {
                 AppPermissionState.Rationale -> {
@@ -161,8 +161,8 @@ class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
     private fun getLoadingStateRequest() = LoadingStateRequestModel(
         boxes = viewState.boxesCount.stateText.toInt(),
         pallets = viewState.palletsCount.stateText.toInt(),
-        cargoType = viewState.cargoType.cargoType!!.text,
-        images = arrayListOf(viewState.photo?.remoteLink!!),
+        cargoType = viewState.cargoType.cargoType?.text.orEmpty(),
+        images = arrayListOf(viewState.photo?.remoteLink.orEmpty()),
         extras = arrayListOf()
     )
 

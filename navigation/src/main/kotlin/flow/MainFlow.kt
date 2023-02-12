@@ -1,12 +1,12 @@
 package flow
 
-import androidx.compose.material.Text
 import departure.root.presentation.compose.DepartureScreen
 import editing.presentation.EditProfileParameters
 import editing.presentation.compose.EditProfileScreen
 import navigation.NavigationTree
 import notifications.presentation.compose.NotificationsScreen
 import offer.presentation.compose.OfferScreen
+import orderdetails.deliverystate.presentation.compose.OrderDeliveryScreen
 import orderdetails.loadingstate.presentation.compose.OrderLoadingScreen
 import orderdetails.root.presentation.OrderDetailsParameters
 import orderdetails.root.presentation.OrderStatesParameters
@@ -74,8 +74,8 @@ fun RootComposeBuilder.mainFlow(deeplinkParameters: DeeplinkParameters?) {
         screen(NavigationTree.Routes.LoadingState.name) { parameters ->
             OrderLoadingScreen(parameters as OrderStatesParameters)
         }
-        screen(NavigationTree.Routes.DeliveryState.name) {
-            Text(text = "DeliveryState")
+        screen(NavigationTree.Routes.DeliveryState.name) { parameters ->
+            OrderDeliveryScreen(parameters as OrderStatesParameters)
         }
     }
 }

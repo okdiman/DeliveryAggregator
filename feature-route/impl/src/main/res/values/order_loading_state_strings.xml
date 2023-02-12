@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="loading">Погрузка</string>
-    <string name="loading_hint">На фото должны быть отображены следующие элементы: номер автомобиля, место погрузки</string>
+    <string name="loading_hint">На фото должны быть отображены следующие элементы: номер автомобиля, место отгрузки</string>
     <string name="loading_specify_info">Уточните информацию</string>
     <string name="loading_boxes_count">Сколько было принято коробок?</string>
     <string name="loading_count_hint">Введите количество</string>
