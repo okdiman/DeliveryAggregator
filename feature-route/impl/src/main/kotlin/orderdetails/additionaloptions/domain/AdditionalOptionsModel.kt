@@ -1,4 +1,4 @@
-package orderdetails.additionaloptions.presentation.domain
+package orderdetails.additionaloptions.domain
 
 enum class AdditionalOptionsModel(val text: String) {
     Pallet("Паллет (250 ₽)"),
