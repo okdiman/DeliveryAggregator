@@ -55,7 +55,7 @@ internal fun OrderDeliveryView(state: OrderDeliveryState, eventHandler: (OrderDe
                     onPhotoAdded = { eventHandler(OrderDeliveryEvent.OnPhotoAdded(it)) }
                 )
             } else {
-                OrderPhotoView(state.photo.uri, state.photo.date)
+                OrderPhotoView(state.photo.uri, state.photo.date, state.photo.isLoading)
             }
         }
         item {

@@ -48,7 +48,6 @@ dependencies {
     splash()
     compose()
     navigation()
-    viewModel()
     firebase()
     time()
     implementation(project(Modules.core))

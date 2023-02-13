@@ -66,14 +66,18 @@ class OrderDeliveryViewModel(private val parameters: OrderStatesParameters) :
             formatter = arrayOf(DateFormats.FULL_DISPLAYED_DAY_MONTH_FORMATTER, DateFormats.TIME_FORMATTER),
             separator = resourceInteractor.getString(R.string.loading_in_time_separator)
         )
-        launchJob(appDispatchers.network) {
+        launchJob(
+            context = appDispatchers.network,
+            onError = {
+                viewState = viewState.copy(photo = null)
+            }) {
             val remoteLink = loadImage(uri)
             viewState = viewState.copy(
-                photo = PhotoParamState(uri = uri, date = date, remoteLink = remoteLink),
+                photo = PhotoParamState(uri = uri, date = date, remoteLink = remoteLink, isLoading = false),
                 isDoneButtonVisible = true
             )
         }
-        viewState = viewState.copy(photo = PhotoParamState(uri = uri, date = date))
+        viewState = viewState.copy(photo = PhotoParamState(uri = uri, date = date, isLoading = true))
     }
 
     private fun onDoneButtonClick() {

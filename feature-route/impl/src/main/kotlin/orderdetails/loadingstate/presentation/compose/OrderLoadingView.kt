@@ -52,7 +52,7 @@ internal fun OrderLoadingView(state: OrderLoadingState, eventHandler: (OrderLoad
                     onPhotoAdded = { eventHandler(OrderLoadingEvent.OnPhotoAdded(it)) }
                 )
             } else {
-                OrderPhotoView(state.photo.uri, state.photo.date)
+                OrderPhotoView(state.photo.uri, state.photo.date, state.photo.isLoading)
             }
         }
         item {

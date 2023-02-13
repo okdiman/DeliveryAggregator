@@ -75,14 +75,18 @@ class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
             formatter = arrayOf(FULL_DISPLAYED_DAY_MONTH_FORMATTER, TIME_FORMATTER),
             separator = resourceInteractor.getString(R.string.loading_in_time_separator)
         )
-        launchJob(appDispatchers.network) {
+        launchJob(
+            context = appDispatchers.network,
+            onError = {
+                viewState = viewState.copy(photo = null)
+            }) {
             val remoteLink = loadImage(uri)
             viewState = viewState.copy(
-                photo = PhotoParamState(uri = uri, date = date, remoteLink = remoteLink),
+                photo = PhotoParamState(uri = uri, date = date, remoteLink = remoteLink, isLoading = false),
                 isDoneButtonVisible = inDoneButtonVisible(remoteLink = remoteLink)
             )
         }
-        viewState = viewState.copy(photo = PhotoParamState(uri = uri, date = date))
+        viewState = viewState.copy(photo = PhotoParamState(uri = uri, date = date, isLoading = true))
     }
 
     private fun onBoxesCountChanged(count: String) {
