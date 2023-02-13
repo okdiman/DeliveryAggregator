@@ -30,7 +30,7 @@ class AdditionalInfoUiMapper(
         ),
         AdditionalInfoUiModel(
             title = R.string.additional_info_additional_services,
-            text = mapAdditionalOptions(parameters.additionalOptions).joinToString(LINE_BREAK)
+            text = mapExtras(parameters.extras).joinToString(LINE_BREAK)
         ),
         AdditionalInfoUiModel(
             title = R.string.additional_info_comment,
@@ -38,7 +38,7 @@ class AdditionalInfoUiMapper(
         )
     )
 
-    private fun mapAdditionalOptions(extrasModel: List<OrderDetailsExtrasModel>?): List<String> {
+    private fun mapExtras(extrasModel: List<OrderDetailsExtrasModel>?): List<String> {
         return extrasModel?.map {
             if (it.priceDescription.isValid) {
                 buildString { append(it.name + COMMA + it.priceDescription.text) }

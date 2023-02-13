@@ -38,4 +38,8 @@ class RouteRepositoryImpl(
     override suspend fun confirmDeliveryState(id: Long, model: DeliveryStateRequestModel) {
         api.confirmDeliveryState(id, deliveryStateMapper.map(model))
     }
+
+    override suspend fun getExtras() = api.getExtras().extras.map {
+        orderMapper.mapExtrasToDomain(it)
+    }
 }

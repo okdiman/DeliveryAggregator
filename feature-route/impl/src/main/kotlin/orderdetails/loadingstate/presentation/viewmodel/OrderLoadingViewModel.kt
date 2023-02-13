@@ -6,8 +6,11 @@ import coroutines.AppDispatchers
 import domain.LoadImageUseCase
 import orderdetails.cargotype.domain.model.OrderLoadingCargoType
 import orderdetails.loadingstate.domain.ConfirmLoadingStateUseCase
+import orderdetails.loadingstate.domain.GetExtrasUseCase
 import orderdetails.loadingstate.domain.model.LoadingStateRequestModel
+import orderdetails.loadingstate.presentation.compose.model.OrderLoadingExtrasUiModel
 import orderdetails.loadingstate.presentation.compose.model.OrderLoadingParamState
+import orderdetails.loadingstate.presentation.mapper.ExtrasUiMapper
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingAction
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingEvent
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingState
@@ -35,16 +38,24 @@ class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
     private val loadImage by inject<LoadImageUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
     private val confirmLoadingState by inject<ConfirmLoadingStateUseCase>()
+    private val getExtras by inject<GetExtrasUseCase>()
+    private val extrasMapper by inject<ExtrasUiMapper>()
 
     init {
         if (permission.isPermissionGranted(PermissionsConstants.Camera)) {
             viewState = viewState.copy(cameraPermissionState = AppPermissionState.Granted)
         }
+        launchJob(appDispatchers.network) {
+            val extras = getExtras()
+            viewState = viewState.copy(
+                extras = OrderLoadingParamState.ExtrasState(uiModel = extrasMapper.map(extras))
+            )
+        }
     }
 
     override fun obtainEvent(viewEvent: OrderLoadingEvent) {
         when (viewEvent) {
-            is OrderLoadingEvent.OnAdditionalOptionsChanged -> onAdditionalOptionsChanged(viewEvent.options)
+            is OrderLoadingEvent.OnExtrasChanged -> onExtrasChanged(viewEvent.extras)
             is OrderLoadingEvent.OnBoxesCountChanged -> onBoxesCountChanged(viewEvent.count)
             is OrderLoadingEvent.OnCargoTypeChanged -> onCargoTypeChanged(viewEvent.type)
             is OrderLoadingEvent.OnPalletsCountChanged -> onPalletsCountChanged(viewEvent.count)
@@ -54,19 +65,20 @@ class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
             OrderLoadingEvent.OnDoneButtonClick -> onDoneButtonClick()
             OrderLoadingEvent.OnPhotoClick -> onPhotoClick()
             OrderLoadingEvent.ResetAction -> onResetAction()
-            OrderLoadingEvent.OnOpenAdditionalOptBSClick -> onOpenAdditionalOptBSClick()
+            OrderLoadingEvent.OnOpenExtrasBSClick -> onOpenExtrasBSClick()
             OrderLoadingEvent.OnOpenCargoTypeBSClick -> onOpenCargoTypeBSClick()
             OrderLoadingEvent.OnRationaleDismiss -> onRationaleDismiss()
         }
     }
 
-    private fun onAdditionalOptionsChanged(options: List<String>) {
+    private fun onExtrasChanged(extras: List<OrderLoadingExtrasUiModel>) {
         viewState = viewState.copy(
-            additionalOptions = OrderLoadingParamState.AdditionalOptionsState(
-                stateText = options.joinToString(COMMA),
-                optionsList = options
+            extras = OrderLoadingParamState.ExtrasState(
+                stateText = extras.joinToString(COMMA) { it.text },
+                extrasActive = extras,
+                uiModel = viewState.extras.uiModel
             ),
-            isDoneButtonVisible = inDoneButtonVisible(additionalOptions = options)
+            isDoneButtonVisible = inDoneButtonVisible(extras = extras.map { it.id })
         )
     }
 
@@ -136,8 +148,8 @@ class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
         viewAction = OrderLoadingAction.OpenCargoTypeScreen
     }
 
-    private fun onOpenAdditionalOptBSClick() {
-        viewAction = OrderLoadingAction.OpenAdditionalOptionsScreen
+    private fun onOpenExtrasBSClick() {
+        viewAction = OrderLoadingAction.OpenExtrasScreen
     }
 
     private fun onPermissionStateChanged(state: AppPermissionState) {
@@ -166,16 +178,16 @@ class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
         boxes = viewState.boxesCount.stateText.toInt(),
         pallets = viewState.palletsCount.stateText.toInt(),
         cargoType = viewState.cargoType.cargoType?.text.orEmpty(),
-        images = arrayListOf(viewState.photo?.remoteLink.orEmpty()),
-        extras = arrayListOf()
+        images = listOf(viewState.photo?.remoteLink.orEmpty()),
+        extras = viewState.extras.extrasActive.filterNot { it == OrderLoadingExtrasUiModel.Default }.map { it.id }
     )
 
     private fun inDoneButtonVisible(
         boxesCount: String = viewState.boxesCount.stateText,
         palletsCount: String = viewState.palletsCount.stateText,
         cargoType: OrderLoadingCargoType? = viewState.cargoType.cargoType,
-        additionalOptions: List<String> = viewState.additionalOptions.optionsList,
+        extras: List<Long> = viewState.extras.extrasActive.map { it.id },
         remoteLink: String? = viewState.photo?.remoteLink
-    ) = boxesCount.isNotEmpty() && palletsCount.isNotEmpty() && cargoType != null && additionalOptions.isNotEmpty() &&
+    ) = boxesCount.isNotEmpty() && palletsCount.isNotEmpty() && cargoType != null && extras.isNotEmpty() &&
         remoteLink != null
 }

@@ -116,10 +116,10 @@ private fun OrderLoadingTextFieldBlock(
     )
     StandardTextField(
         modifier = Modifier.clickable {
-            eventHandler(OrderLoadingEvent.OnOpenAdditionalOptBSClick)
+            eventHandler(OrderLoadingEvent.OnOpenExtrasBSClick)
         },
         title = stringResource(R.string.loading_add_info),
-        state = state.additionalOptions,
+        state = state.extras,
         hint = stringResource(R.string.loading_choose),
         enabled = false,
         trailingIcon = {

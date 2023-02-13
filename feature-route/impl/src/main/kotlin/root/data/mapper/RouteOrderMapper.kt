@@ -53,7 +53,7 @@ class RouteOrderMapper {
         street = dto.street
     )
 
-    private fun mapExtrasToDomain(dto: OrderDetailsExtrasDto) = OrderDetailsExtrasModel(
+    internal fun mapExtrasToDomain(dto: OrderDetailsExtrasDto) = OrderDetailsExtrasModel(
         price = dto.price,
         id = dto.id,
         name = dto.name,

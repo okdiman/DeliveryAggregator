@@ -52,7 +52,7 @@ class OrderDetailsViewModel(
                 comment = order.details.comment,
                 weight = order.details.weight.toString(),
                 organization = order.details.organizationName,
-                additionalOptions = order.details.extras
+                extras = order.details.extras
             )
             viewState =
                 viewState.copy(isLoading = false, uiModel = mapper.map(order, parameters.index))

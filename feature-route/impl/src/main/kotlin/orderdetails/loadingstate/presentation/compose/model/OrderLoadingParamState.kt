@@ -13,8 +13,9 @@ sealed class OrderLoadingParamState(
         val cargoType: OrderLoadingCargoType? = null
     ) : OrderLoadingParamState(stateText)
 
-    data class AdditionalOptionsState(
+    data class ExtrasState(
         override val stateText: String = "",
-        val optionsList: List<String> = emptyList()
+        val uiModel: List<OrderLoadingExtrasUiModel> = emptyList(),
+        val extrasActive: List<OrderLoadingExtrasUiModel> = emptyList()
     ) : OrderLoadingParamState(stateText)
 }

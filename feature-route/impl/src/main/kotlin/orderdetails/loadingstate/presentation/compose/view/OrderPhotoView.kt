@@ -62,17 +62,7 @@ internal fun OrderPhotoView(uri: Uri?, date: String?, isLoading: Boolean) {
                     contentDescription = null
                 )
                 if (isLoading) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(Color.White.copy(alpha = 0.7f)),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator(
-                            modifier = Modifier.size(40.dp),
-                            color = Theme.colors.selectionTextColor
-                        )
-                    }
+                    OrderPhotoLoader()
                 }
             }
             Column(
@@ -90,5 +80,20 @@ internal fun OrderPhotoView(uri: Uri?, date: String?, isLoading: Boolean) {
                 )
             }
         }
+    }
+}
+
+@Composable
+private fun OrderPhotoLoader() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White.copy(alpha = 0.7f)),
+        contentAlignment = Alignment.Center
+    ) {
+        CircularProgressIndicator(
+            modifier = Modifier.size(40.dp),
+            color = Theme.colors.selectionTextColor
+        )
     }
 }

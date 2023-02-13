@@ -2,6 +2,7 @@ package root.data
 
 import orderdetails.deliverystate.data.model.DeliveryStateRequest
 import orderdetails.loadingstate.data.model.LoadingStateRequest
+import orderdetails.root.data.model.extras.ExtrasDto
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -36,4 +37,7 @@ interface RouteApi {
         @Path("id") id: Long,
         @Body request: DeliveryStateRequest
     )
+
+    @GET("api/users/extras")
+    suspend fun getExtras(): ExtrasDto
 }

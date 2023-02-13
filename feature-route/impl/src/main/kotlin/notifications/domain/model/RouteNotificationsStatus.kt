@@ -1,7 +1,7 @@
 package notifications.domain.model
 
 enum class RouteNotificationsStatus(val status: String) {
-    ASSIGNED("assigned"),
+    NEW("new"),
     CANCELLED("cancelled"),
     CHANGED("changed"),
     DONE("done")

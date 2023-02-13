@@ -101,7 +101,7 @@ private fun NotificationItemView(
             .clip(Theme.shapes.bigCard)
             .background(Color.White)
             .clickable {
-                if (model.status == RouteNotificationsStatus.ASSIGNED ||
+                if (model.status == RouteNotificationsStatus.NEW ||
                     model.status == RouteNotificationsStatus.CHANGED
                 ) {
                     eventHandler(NotificationsEvent.OnActiveNotificationCLick)

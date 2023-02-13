@@ -1,4 +1,4 @@
-package orderdetails.additionaloptions.presentation
+package orderdetails.extras.presentation
 
 import ActionButton
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,7 +20,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
-import orderdetails.additionaloptions.domain.AdditionalOptionsModel
+import orderdetails.loadingstate.presentation.compose.model.OrderLoadingExtrasUiModel
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingState
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import theme.Theme
@@ -28,9 +28,9 @@ import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import view.BSTitleView
 
 @Composable
-internal fun AdditionalOptionsScreen(
+internal fun ExtrasScreen(
     state: OrderLoadingState,
-    onAdditionalOptionsClick: (List<String>) -> Unit
+    onExtrasClick: (List<OrderLoadingExtrasUiModel>) -> Unit
 ) {
     val rootController = LocalRootController.current
     LazyColumn(
@@ -42,7 +42,7 @@ internal fun AdditionalOptionsScreen(
             BSTitleView(stringResource(id = R.string.loading_add_info))
         }
         item {
-            AdditionalOptionsCheckboxesView(state, onAdditionalOptionsClick)
+            ExtrasCheckboxesView(state, onExtrasClick)
         }
         item {
             ActionButton(
@@ -56,21 +56,20 @@ internal fun AdditionalOptionsScreen(
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-private fun AdditionalOptionsCheckboxesView(
+private fun ExtrasCheckboxesView(
     state: OrderLoadingState,
-    onAdditionalOptionsClick: (List<String>) -> Unit
+    onExtrasClick: (List<OrderLoadingExtrasUiModel>) -> Unit
 ) {
-    val additionalOptions = AdditionalOptionsModel.values().map { it.text }
-    additionalOptions.forEach { label ->
+    state.extras.uiModel.forEach { uiModel ->
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(Theme.shapes.textFields)
                 .selectable(
-                    selected = label == state.cargoType.stateText,
+                    selected = state.extras.stateText.contains(uiModel.text),
                     onClick = {
-                        val result = getAdditionalOptions(label, state.additionalOptions.optionsList)
-                        onAdditionalOptionsClick(result)
+                        val result = getExtras(uiModel, state.extras.extrasActive)
+                        onExtrasClick(result)
                     },
                     role = Role.RadioButton
                 )
@@ -82,7 +81,7 @@ private fun AdditionalOptionsCheckboxesView(
              */
             CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
                 Checkbox(
-                    checked = state.additionalOptions.optionsList.contains(label),
+                    checked = state.extras.extrasActive.contains(uiModel),
                     colors = CheckboxDefaults.colors(
                         checkedColor = Theme.colors.radioButtonColor,
                         uncheckedColor = Theme.colors.radioButtonColor
@@ -92,17 +91,18 @@ private fun AdditionalOptionsCheckboxesView(
             }
             Text(
                 modifier = Modifier.padding(horizontal = 6.dp),
-                text = label,
+                text = uiModel.text,
                 style = Theme.fonts.regular
             )
         }
     }
 }
 
-private fun getAdditionalOptions(label: String, activeOptionsList: List<String>) = when {
-    label == AdditionalOptionsModel.NotNeed.text && !activeOptionsList.contains(label) -> {
-        listOf(label)
+private fun getExtras(selectedExtra: OrderLoadingExtrasUiModel, activeExtrasList: List<OrderLoadingExtrasUiModel>) =
+    when {
+        selectedExtra == OrderLoadingExtrasUiModel.Default && !activeExtrasList.contains(selectedExtra) -> {
+            listOf(OrderLoadingExtrasUiModel.Default)
+        }
+        activeExtrasList.contains(selectedExtra) -> activeExtrasList - selectedExtra
+        else -> activeExtrasList + selectedExtra - OrderLoadingExtrasUiModel.Default
     }
-    activeOptionsList.contains(label) -> activeOptionsList - label
-    else -> activeOptionsList + label - AdditionalOptionsModel.NotNeed.text
-}

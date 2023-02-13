@@ -9,6 +9,6 @@ data class AdditionalInfoParameters(
     val organization: String,
     val boxesCount: String,
     val weight: String,
-    val additionalOptions: List<OrderDetailsExtrasModel>?,
+    val extras: List<OrderDetailsExtrasModel>?,
     val comment: String
 )

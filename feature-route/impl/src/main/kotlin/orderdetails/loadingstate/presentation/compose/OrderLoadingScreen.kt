@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
-import orderdetails.additionaloptions.presentation.AdditionalOptionsScreen
 import orderdetails.cargotype.presentation.CargoTypeScreen
+import orderdetails.extras.presentation.ExtrasScreen
 import orderdetails.loadingstate.presentation.viewmodel.OrderLoadingViewModel
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingAction
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingEvent
@@ -28,14 +28,14 @@ fun OrderLoadingScreen(parameters: OrderStatesParameters) {
             viewModel.obtainEvent(event)
         }
         when (action.value) {
-            OrderLoadingAction.OpenAdditionalOptionsScreen -> {
+            OrderLoadingAction.OpenExtrasScreen -> {
                 rootController.findModalController().present(
                     modalSheetConfiguration = ModalSheetConfiguration(
                         cornerRadius = SCREEN_CORNER_RADIUS
                     )
                 ) {
-                    AdditionalOptionsScreen(state.value) { options ->
-                        viewModel.obtainEvent(OrderLoadingEvent.OnAdditionalOptionsChanged(options))
+                    ExtrasScreen(state.value) { extras ->
+                        viewModel.obtainEvent(OrderLoadingEvent.OnExtrasChanged(extras))
                     }
                 }
                 viewModel.obtainEvent(OrderLoadingEvent.ResetAction)

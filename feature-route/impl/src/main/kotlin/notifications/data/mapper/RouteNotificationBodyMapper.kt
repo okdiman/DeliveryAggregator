@@ -28,7 +28,7 @@ class RouteNotificationBodyMapper(
             }
         val bodyBase = getBodyBase(remoteStatus)
         return if (RouteNotificationsStatus.values()
-                .firstOrNull { it.status == remoteStatus } == RouteNotificationsStatus.ASSIGNED
+                .firstOrNull { it.status == remoteStatus } == RouteNotificationsStatus.NEW
         ) {
             val date = getDate(data)
                 .toSpannable()
@@ -48,7 +48,7 @@ class RouteNotificationBodyMapper(
         val bodyBase = getBodyBase(remoteStatus)
         val body =
             when (RouteNotificationsStatus.values().firstOrNull { it.status == remoteStatus }) {
-                RouteNotificationsStatus.ASSIGNED -> {
+                RouteNotificationsStatus.NEW -> {
                     String.format(
                         resourceInteractor.getString(bodyBase),
                         routeId,
@@ -67,7 +67,7 @@ class RouteNotificationBodyMapper(
             }
         return if (RouteNotificationsStatus.values().firstOrNull {
                 it.status == remoteStatus
-            } == RouteNotificationsStatus.ASSIGNED
+            } == RouteNotificationsStatus.NEW
         ) {
             getAnnotatedString(body, listOf(routeId, date))
         } else {
@@ -88,7 +88,7 @@ class RouteNotificationBodyMapper(
 
     private fun getBodyBase(remoteStatus: String) =
         when (RouteNotificationsStatus.values().firstOrNull { it.status == remoteStatus }) {
-            RouteNotificationsStatus.ASSIGNED -> R.string.notifications_info
+            RouteNotificationsStatus.NEW -> R.string.notifications_info
             RouteNotificationsStatus.CANCELLED -> R.string.notifications_cancelled
             RouteNotificationsStatus.CHANGED -> R.string.notifications_changed
             RouteNotificationsStatus.DONE -> R.string.notifications_done

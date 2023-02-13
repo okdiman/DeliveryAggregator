@@ -200,19 +200,25 @@ private fun OrderDetailsStatusView(
     Spacer(modifier = Modifier.height(20.dp))
     OrderDetailsStatusCardView(
         title = stringResource(id = R.string.order_details_loading_status),
-        isCompleted = state.uiModel.status != OrderDetailsStatusProgress.CREATED &&
-            state.uiModel.status != OrderDetailsStatusProgress.ACTIVE
+        isEnabled = state.uiModel.status == OrderDetailsStatusProgress.CREATED ||
+            state.uiModel.status == OrderDetailsStatusProgress.ACTIVE
     ) { eventHandler(OrderDetailsEvent.OnLoadingStateClick) }
     Spacer(modifier = Modifier.height(8.dp))
     OrderDetailsStatusCardView(
         title = stringResource(id = R.string.order_details_delivery_status),
-        isCompleted = state.uiModel.status == OrderDetailsStatusProgress.DONE  ||
+        isEnabled = state.uiModel.status == OrderDetailsStatusProgress.LOADING,
+        isCompleted = state.uiModel.status == OrderDetailsStatusProgress.DONE ||
             state.uiModel.status == OrderDetailsStatusProgress.DELIVERY
     ) { eventHandler(OrderDetailsEvent.OnDeliveryStateClick) }
 }
 
 @Composable
-private fun OrderDetailsStatusCardView(title: String, isCompleted: Boolean, onClick: () -> Unit) {
+private fun OrderDetailsStatusCardView(
+    title: String,
+    isEnabled: Boolean,
+    isCompleted: Boolean = !isEnabled,
+    onClick: () -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -224,7 +230,7 @@ private fun OrderDetailsStatusCardView(title: String, isCompleted: Boolean, onCl
             .clip(Theme.shapes.card)
             .background(Color.White)
             .clickable {
-                if (!isCompleted) {
+                if (isEnabled) {
                     onClick()
                 }
             })

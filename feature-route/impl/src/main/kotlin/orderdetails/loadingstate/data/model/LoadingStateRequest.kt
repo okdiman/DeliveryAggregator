@@ -4,9 +4,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class LoadingStateRequest(
-    val images: ArrayList<String>,
+    val images: List<String>,
     val boxes: Int,
     val pallets: Int,
-    val extras: ArrayList<Int>,
+    val extras: List<Long>,
     val cargoType: String
 )
