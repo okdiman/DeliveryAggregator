@@ -14,7 +14,7 @@ class NotificationsRepositoryImpl(
     override suspend fun getUnreadNotificationsCount() = api.getUnreadNotificationsCount().unread
     override suspend fun getNotifications(): Array<NotificationServerModel> {
         val response = api.getNotifications()
-        return mapper.map(response)
+        return mapper.map(response) ?: emptyArray()
     }
 
     override suspend fun markNotificationsAsRead(notifications: List<Long>) {

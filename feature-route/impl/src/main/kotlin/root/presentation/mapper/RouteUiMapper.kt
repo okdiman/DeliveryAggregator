@@ -26,8 +26,7 @@ class RouteUiMapper {
 
     private fun mapStatusToUi(model: OrderDetailsStatusProgress?) =
         when (model) {
-            OrderDetailsStatusProgress.DELIVERY, OrderDetailsStatusProgress.LOADING ->
-                RouteOrderStatusUiModel.IN_PROGRESS
+            OrderDetailsStatusProgress.DELIVERY -> RouteOrderStatusUiModel.IN_PROGRESS
             OrderDetailsStatusProgress.ACTIVE -> RouteOrderStatusUiModel.ACTIVE
             OrderDetailsStatusProgress.DONE -> RouteOrderStatusUiModel.DONE
             else -> null

@@ -5,7 +5,7 @@ import notifications.domain.model.NotificationServerDataModel
 import notifications.domain.model.NotificationServerModel
 
 class NotificationMapper {
-    fun map(dto: NotificationsDto) = dto.notifications.map { dtoModel ->
+    fun map(dto: NotificationsDto) = dto.notifications?.map { dtoModel ->
         NotificationServerModel(
             id = dtoModel.id,
             body = dtoModel.body,
@@ -18,5 +18,5 @@ class NotificationMapper {
                 routeId = dtoModel.data.routeId
             )
         )
-    }.toTypedArray()
+    }?.toTypedArray()
 }
