@@ -7,13 +7,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.LocalMinimumTouchTargetEnforcement
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,6 +22,7 @@ import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import view.BSTitleView
+import view.CheckboxView
 
 @Composable
 internal fun ExtrasScreen(
@@ -54,7 +51,6 @@ internal fun ExtrasScreen(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun ExtrasCheckboxesView(
     state: OrderLoadingState,
@@ -76,19 +72,13 @@ private fun ExtrasCheckboxesView(
                 .padding(horizontal = 8.dp, vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            /**
-            Без провайдера используются отступы, которые нельзя контролировать
-             */
-            CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
-                Checkbox(
-                    checked = state.extras.extrasActive.contains(uiModel),
-                    colors = CheckboxDefaults.colors(
-                        checkedColor = Theme.colors.radioButtonColor,
-                        uncheckedColor = Theme.colors.radioButtonColor
-                    ),
-                    onCheckedChange = null
+            CheckboxView(
+                checked = state.extras.extrasActive.contains(uiModel),
+                colors = CheckboxDefaults.colors(
+                    checkedColor = Theme.colors.radioButtonColor,
+                    uncheckedColor = Theme.colors.radioButtonColor
                 )
-            }
+            )
             Text(
                 modifier = Modifier.padding(horizontal = 6.dp),
                 text = uiModel.text,

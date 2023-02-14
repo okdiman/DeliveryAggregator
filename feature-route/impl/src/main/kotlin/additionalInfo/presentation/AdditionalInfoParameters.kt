@@ -4,7 +4,7 @@ import androidx.compose.runtime.Immutable
 import orderdetails.root.domain.model.extras.OrderDetailsExtrasModel
 
 @Immutable
-data class AdditionalInfoParameters(
+class AdditionalInfoParameters(
     val marketplace: String,
     val organization: String,
     val boxesCount: String,

@@ -14,7 +14,7 @@ import user.presentation.viewmodel.model.UserAction
 import user.presentation.viewmodel.model.UserEvent
 import user.presentation.viewmodel.model.UserState
 import utils.CommonConstants.LIMITS.Common.MIN_NAME_CHARS
-import utils.isTextFieldFilled
+import utils.ext.isTextFieldFilled
 import utils.validators.domain.TextFieldValidator
 
 class UserViewModel(
@@ -43,7 +43,7 @@ class UserViewModel(
         viewState = viewState.copy(
             name = viewState.name.copy(
                 stateText = newName,
-                isFillingError = !isTextFieldFilled(newName, MIN_NAME_CHARS),
+                isFillingError = !newName.isTextFieldFilled(MIN_NAME_CHARS),
                 isValidationError = !isValid
             ),
             isCreateAccButtonEnabled = isCreateButtonEnabled(
@@ -62,7 +62,7 @@ class UserViewModel(
         viewState = viewState.copy(
             surname = viewState.surname.copy(
                 stateText = newSurname,
-                isFillingError = !isTextFieldFilled(newSurname, MIN_NAME_CHARS),
+                isFillingError = !newSurname.isTextFieldFilled(MIN_NAME_CHARS),
                 isValidationError = !isValid
             ),
             isCreateAccButtonEnabled = isCreateButtonEnabled(
@@ -81,7 +81,7 @@ class UserViewModel(
         viewState = viewState.copy(
             secondName = viewState.secondName.copy(
                 stateText = newSecondName,
-                isFillingError = !isTextFieldFilled(newSecondName, MIN_NAME_CHARS),
+                isFillingError = !newSecondName.isTextFieldFilled(MIN_NAME_CHARS),
                 isValidationError = !isValid
             ),
             isCreateAccButtonEnabled = isCreateButtonEnabled(
@@ -119,9 +119,9 @@ class UserViewModel(
     }
 
     private fun isCreateButtonEnabled(state: UserState) =
-        isTextFieldFilled(state.name.stateText, MIN_NAME_CHARS) &&
-                isTextFieldFilled(state.surname.stateText, MIN_NAME_CHARS) &&
-                isTextFieldFilled(state.secondName.stateText, MIN_NAME_CHARS) &&
-                !state.name.isValidationError && !state.surname.isValidationError &&
-                !state.secondName.isValidationError && emailValidator.isValidate(state.email.stateText)
+        state.name.stateText.isTextFieldFilled(MIN_NAME_CHARS) &&
+            state.surname.stateText.isTextFieldFilled(MIN_NAME_CHARS) &&
+            state.secondName.stateText.isTextFieldFilled(MIN_NAME_CHARS) &&
+            !state.name.isValidationError && !state.surname.isValidationError &&
+            !state.secondName.isValidationError && emailValidator.isValidate(state.email.stateText)
 }

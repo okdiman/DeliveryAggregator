@@ -5,16 +5,16 @@ import coroutines.AppDispatchers
 import di.modules.EMAIL_VALIDATOR_QUALIFIER
 import di.modules.LETTERS_VALIDATOR_QUALIFIER
 import domain.usecase.GetMaskedPhoneUseCase
+import editing.presentation.EditProfileParameters
 import editing.presentation.viewmodel.model.EditProfileAction
 import editing.presentation.viewmodel.model.EditProfileEvent
 import editing.presentation.viewmodel.model.EditProfileState
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.qualifier.named
-import editing.presentation.EditProfileParameters
 import root.domain.UpdateProfileUseCase
 import utils.CommonConstants.LIMITS.Common.MIN_NAME_CHARS
-import utils.isTextFieldFilled
+import utils.ext.isTextFieldFilled
 import utils.validators.domain.TextFieldValidator
 
 class EditProfileViewModel(
@@ -57,7 +57,7 @@ class EditProfileViewModel(
         viewState = viewState.copy(
             name = viewState.name.copy(
                 stateText = newName,
-                isFillingError = !isTextFieldFilled(newName, MIN_NAME_CHARS),
+                isFillingError = !newName.isTextFieldFilled(MIN_NAME_CHARS),
                 isValidationError = !isValid
             ),
             isSaveButtonVisible = isSaveButtonVisible(
@@ -76,7 +76,7 @@ class EditProfileViewModel(
         viewState = viewState.copy(
             surname = viewState.surname.copy(
                 stateText = newSurname,
-                isFillingError = !isTextFieldFilled(newSurname, MIN_NAME_CHARS),
+                isFillingError = !newSurname.isTextFieldFilled(MIN_NAME_CHARS),
                 isValidationError = !isValid
             ),
             isSaveButtonVisible = isSaveButtonVisible(
@@ -95,7 +95,7 @@ class EditProfileViewModel(
         viewState = viewState.copy(
             secondName = viewState.secondName.copy(
                 stateText = newSecondName,
-                isFillingError = !isTextFieldFilled(newSecondName, MIN_NAME_CHARS),
+                isFillingError = !newSecondName.isTextFieldFilled(MIN_NAME_CHARS),
                 isValidationError = !isValid
             ),
             isSaveButtonVisible = isSaveButtonVisible(
@@ -144,13 +144,13 @@ class EditProfileViewModel(
     }
 
     private fun isSaveButtonVisible(state: EditProfileState) =
-        isTextFieldFilled(state.name.stateText, MIN_NAME_CHARS) &&
-                isTextFieldFilled(state.surname.stateText, MIN_NAME_CHARS) &&
-                isTextFieldFilled(state.secondName.stateText, MIN_NAME_CHARS) &&
-                emailValidator.isValidate(state.email.stateText) &&
-                !state.name.isValidationError && !state.surname.isValidationError &&
-                !state.secondName.isValidationError &&
-                parameters.profileModel != parameters.profileModel.copy(
+        state.name.stateText.isTextFieldFilled(MIN_NAME_CHARS) &&
+            state.surname.stateText.isTextFieldFilled(MIN_NAME_CHARS) &&
+            state.secondName.stateText.isTextFieldFilled(MIN_NAME_CHARS) &&
+            emailValidator.isValidate(state.email.stateText) &&
+            !state.name.isValidationError && !state.surname.isValidationError &&
+            !state.secondName.isValidationError &&
+            parameters.profileModel != parameters.profileModel.copy(
             email = state.email.stateText,
             name = state.name.stateText,
             surname = state.surname.stateText,

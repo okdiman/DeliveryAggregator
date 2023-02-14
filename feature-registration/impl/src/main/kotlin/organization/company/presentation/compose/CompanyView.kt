@@ -33,7 +33,7 @@ import view.StandardTextField
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
-fun CompanyView(state: CompanyState, eventHandler: (CompanyEvent) -> Unit) {
+internal fun CompanyView(state: CompanyState, eventHandler: (CompanyEvent) -> Unit) {
     Column(
         modifier = Modifier
             .padding(PaddingValues(start = 16.dp, end = 16.dp))

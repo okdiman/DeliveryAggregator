@@ -8,7 +8,6 @@ data class EditProfileState(
     val secondName: EditProfileParamState.SecondNameState = EditProfileParamState.SecondNameState(),
     val email: EditProfileParamState.EmailState = EditProfileParamState.EmailState(),
     val phone: EditProfileParamState.PhoneState = EditProfileParamState.PhoneState(),
-    val organizationName: EditProfileParamState.OrganizationNameState =
-        EditProfileParamState.OrganizationNameState(),
+    val organizationName: EditProfileParamState.OrganizationNameState = EditProfileParamState.OrganizationNameState(),
     val isSaveButtonVisible: Boolean = false
 )

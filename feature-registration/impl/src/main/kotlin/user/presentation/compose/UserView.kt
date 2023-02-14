@@ -26,7 +26,7 @@ import view.StandardTextField
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
-fun UserView(state: UserState, eventHandler: (UserEvent) -> Unit) {
+internal fun UserView(state: UserState, eventHandler: (UserEvent) -> Unit) {
     Column(
         modifier = Modifier
             .padding(PaddingValues(start = 16.dp, end = 16.dp))

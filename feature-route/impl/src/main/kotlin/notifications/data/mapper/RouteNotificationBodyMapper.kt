@@ -11,11 +11,11 @@ import org.threeten.bp.format.DateTimeFormatter
 import trinity_monsters.delivery_aggregator.core_ui.R
 import utils.CommonConstants.Helpers.NUMBER
 import utils.ext.DateFormats
+import utils.ext.setBoldSpan
 import utils.ext.toLocalZonedDateTime
 import utils.ext.toString
 import utils.getAnnotatedString
 import utils.resource.domain.ResourceInteractor
-import utils.setBoldSpan
 
 class RouteNotificationBodyMapper(
     private val resourceInteractor: ResourceInteractor

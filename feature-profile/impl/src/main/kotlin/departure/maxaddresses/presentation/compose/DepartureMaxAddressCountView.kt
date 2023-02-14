@@ -18,7 +18,7 @@ import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_profile.impl.R
 
 @Composable
-fun DepartureMaxAddressCountView(eventHandler: (DepartureMaxAddressCountEvent) -> Unit) {
+internal fun DepartureMaxAddressCountView(eventHandler: (DepartureMaxAddressCountEvent) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()

@@ -11,8 +11,7 @@ class DepartureMaxAddressCountViewModel :
     ) {
     override fun obtainEvent(viewEvent: DepartureMaxAddressCountEvent) {
         when (viewEvent) {
-            DepartureMaxAddressCountEvent.OnBackClick ->
-                viewAction = DepartureMaxAddressCountAction.OpenPreviousScreen
+            DepartureMaxAddressCountEvent.OnBackClick -> viewAction = DepartureMaxAddressCountAction.OpenPreviousScreen
         }
     }
 }

@@ -33,7 +33,7 @@ import view.StandardTextField
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
-fun TransportView(state: TransportState, eventHandler: (TransportEvent) -> Unit) {
+internal fun TransportView(state: TransportState, eventHandler: (TransportEvent) -> Unit) {
     Column(
         modifier = Modifier
             .padding(PaddingValues(start = 16.dp, end = 16.dp))

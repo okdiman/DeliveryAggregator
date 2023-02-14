@@ -1,5 +1,5 @@
 package notifications.data.model
 
-data class NotificationsDto(
+class NotificationsDto(
     val notifications: ArrayList<NotificationDto>?
 )

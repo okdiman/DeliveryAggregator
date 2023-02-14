@@ -1,6 +1,6 @@
 package notifications.data.model
 
-data class NotificationDto(
+class NotificationDto(
     val id: Long,
     val data: NotificationDataDto,
     val body: String?,

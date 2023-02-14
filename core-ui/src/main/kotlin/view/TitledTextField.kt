@@ -26,7 +26,7 @@ import view.model.DefaultParamState
 
 @Suppress("LongParameterList", "LongMethod")
 @Composable
-fun TitledTextField(
+internal fun TitledTextField(
     modifier: Modifier = Modifier,
     hasTitle: Boolean = true,
     title: String,

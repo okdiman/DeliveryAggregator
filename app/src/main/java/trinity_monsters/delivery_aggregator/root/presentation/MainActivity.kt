@@ -29,6 +29,10 @@ class MainActivity : ComponentActivity() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
+        /**
+         * к сожалению, на момент написания приложения (02.2023) библиотека навигации Одиссей не умеет в диплинки.
+         * приходится придумывать что то для этого
+         */
         lifecycleScope.launch {
             viewModel.getStartDeeplinkDestination(intent)?.let { startDeeplinkDestination ->
                 navigate(StartScreen.Custom(startDeeplinkDestination), intent?.data)

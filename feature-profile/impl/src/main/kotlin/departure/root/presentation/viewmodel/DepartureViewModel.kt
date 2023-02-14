@@ -4,6 +4,7 @@ import BaseViewModel
 import coroutines.AppDispatchers
 import data.AddressConstants
 import departure.root.domain.AddUserAddressUseCaseImpl
+import departure.root.presentation.compose.constants.DepartureUiConstants.ADDRESSES_MAX_COUNT
 import departure.root.presentation.compose.model.DepartureAddressUiModel
 import departure.root.presentation.mapper.DepartureAddressUiMapper
 import departure.root.presentation.viewmodel.model.DepartureAction
@@ -138,7 +139,7 @@ class DepartureViewModel : BaseViewModel<DepartureState, DepartureAction, Depart
     }
 
     private fun onAddAddressClick() {
-        viewAction = if (viewState.addresses.size < MAX_ADDRESS) {
+        viewAction = if (viewState.addresses.size < ADDRESSES_MAX_COUNT) {
             viewState = viewState.copy(bsAddress = viewState.bsAddress.copy(stateText = ""))
             DepartureAction.OpenAddAddress
         } else {
@@ -173,7 +174,6 @@ class DepartureViewModel : BaseViewModel<DepartureState, DepartureAction, Depart
     }
 
     companion object {
-        private const val MAX_ADDRESS = 6
         internal const val NEW_ID = "new_id"
     }
 }

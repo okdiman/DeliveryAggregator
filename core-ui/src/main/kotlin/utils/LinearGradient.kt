@@ -18,7 +18,7 @@ import kotlin.math.sin
 import kotlin.math.sqrt
 
 @Immutable
-class LinearGradient constructor(
+class LinearGradient (
     private val colors: List<Color>,
     private val stops: List<Float>? = null,
     private val tileMode: TileMode = TileMode.Clamp,
@@ -65,32 +65,5 @@ class LinearGradient constructor(
         val end = size.center + Offset(horizontalOffset, -verticalOffset)
 
         return start to end
-    }
-
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is LinearGradient) return false
-
-        if (colors != other.colors) return false
-        if (stops != other.stops) return false
-        if (normalizedAngle != other.normalizedAngle) return false
-        if (tileMode != other.tileMode) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = colors.hashCode()
-        result = 31 * result + (stops?.hashCode() ?: 0)
-        result = 31 * result + normalizedAngle.hashCode()
-        result = 31 * result + tileMode.hashCode()
-        return result
-    }
-
-    override fun toString(): String {
-        return "LinearGradient(colors=$colors, " +
-                "stops=$stops, " +
-                "angle=$normalizedAngle, " +
-                "tileMode=$tileMode)"
     }
 }

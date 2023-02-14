@@ -23,7 +23,7 @@ import root.RegistrationConstants.Limits.Company.KPP_CHARS
 import root.RegistrationConstants.Limits.Company.OGRN_CHARS
 import utils.CommonConstants.LIMITS.Common.MIN_ADDRESS_CHARS
 import utils.CommonConstants.LIMITS.Common.MIN_NAME_CHARS
-import utils.isTextFieldFilled
+import utils.ext.isTextFieldFilled
 import utils.validators.domain.TextFieldValidator
 
 class CompanyViewModel(
@@ -123,7 +123,7 @@ class CompanyViewModel(
         viewState = viewState.copy(
             ogrn = viewState.ogrn.copy(
                 stateText = newOgrn,
-                isFillingError = !isTextFieldFilled(newOgrn, OGRN_CHARS)
+                isFillingError = !newOgrn.isTextFieldFilled(OGRN_CHARS)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(
                 viewState.copy(ogrn = viewState.ogrn.copy(stateText = newOgrn))
@@ -135,7 +135,7 @@ class CompanyViewModel(
         viewState = viewState.copy(
             kpp = viewState.kpp.copy(
                 stateText = newKpp,
-                isFillingError = !isTextFieldFilled(newKpp, KPP_CHARS)
+                isFillingError = !newKpp.isTextFieldFilled(KPP_CHARS)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(
                 viewState.copy(kpp = viewState.kpp.copy(stateText = newKpp))
@@ -147,7 +147,7 @@ class CompanyViewModel(
         viewState = viewState.copy(
             inn = viewState.inn.copy(
                 stateText = newInn,
-                isFillingError = !isTextFieldFilled(newInn, INN_MIN_CHARS)
+                isFillingError = !newInn.isTextFieldFilled(INN_MIN_CHARS)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(
                 viewState.copy(inn = viewState.inn.copy(stateText = newInn))
@@ -160,7 +160,7 @@ class CompanyViewModel(
         viewState = viewState.copy(
             companyName = viewState.companyName.copy(
                 stateText = newName,
-                isFillingError = !isTextFieldFilled(newName, MIN_NAME_CHARS),
+                isFillingError = !newName.isTextFieldFilled(MIN_NAME_CHARS),
                 isValidationError = !isValid
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(
@@ -207,11 +207,11 @@ class CompanyViewModel(
     }
 
     private fun isContinueButtonEnabled(state: CompanyState) =
-        isTextFieldFilled(state.actualAddress.stateText, MIN_ADDRESS_CHARS) &&
-            isTextFieldFilled(state.legalAddress.stateText, MIN_ADDRESS_CHARS) &&
-            isTextFieldFilled(state.ogrn.stateText, OGRN_CHARS) &&
-            isTextFieldFilled(state.kpp.stateText, KPP_CHARS) &&
-            isTextFieldFilled(state.inn.stateText, INN_MIN_CHARS) &&
-            isTextFieldFilled(state.companyName.stateText, MIN_NAME_CHARS) &&
+        state.actualAddress.stateText.isTextFieldFilled(MIN_ADDRESS_CHARS) &&
+            state.legalAddress.stateText.isTextFieldFilled(MIN_ADDRESS_CHARS) &&
+            state.ogrn.stateText.isTextFieldFilled(OGRN_CHARS) &&
+            state.kpp.stateText.isTextFieldFilled(KPP_CHARS) &&
+            state.inn.stateText.isTextFieldFilled(INN_MIN_CHARS) &&
+            state.companyName.stateText.isTextFieldFilled(MIN_NAME_CHARS) &&
             !state.companyName.isValidationError
 }

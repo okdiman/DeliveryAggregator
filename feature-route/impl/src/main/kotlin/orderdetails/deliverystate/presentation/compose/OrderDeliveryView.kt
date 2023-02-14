@@ -9,13 +9,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.selectable
-import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.LocalMinimumTouchTargetEnforcement
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,6 +26,7 @@ import orderdetails.loadingstate.presentation.compose.view.OrderStateDoneButton
 import orderdetails.loadingstate.presentation.compose.view.OrderStateTitle
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
+import view.CheckboxView
 import view.StandardTextField
 
 @Composable
@@ -75,7 +72,6 @@ internal fun OrderDeliveryView(state: OrderDeliveryState, eventHandler: (OrderDe
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun OrderDeliveryCheckboxView(
     state: OrderDeliveryState,
@@ -95,18 +91,12 @@ private fun OrderDeliveryCheckboxView(
             .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        /**
-        Без провайдера используются отступы, которые нельзя контролировать
-         */
-        CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
-            Checkbox(
-                checked = state.isProblem,
-                colors = CheckboxDefaults.colors(
-                    checkedColor = Theme.colors.textPrimaryColor
-                ),
-                onCheckedChange = null
+        CheckboxView(
+            checked = state.isProblem,
+            colors = CheckboxDefaults.colors(
+                checkedColor = Theme.colors.textPrimaryColor
             )
-        }
+        )
         Text(
             modifier = Modifier.padding(horizontal = 6.dp),
             text = stringResource(id = R.string.delivery_problems),

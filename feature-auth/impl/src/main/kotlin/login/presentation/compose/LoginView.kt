@@ -14,13 +14,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxDefaults
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.LocalMinimumTouchTargetEnforcement
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -33,6 +29,7 @@ import login.presentation.viewmodel.model.LoginState
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_auth.impl.R
 import utils.CommonConstants.LIMITS.Common.MAX_PHONE_CHARS
+import view.CheckboxView
 import view.CommonTextField
 
 @Composable
@@ -92,27 +89,21 @@ private fun PhoneBlock(viewState: LoginState, eventHandler: (LoginEvent) -> Unit
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun AgreementBlock(viewState: LoginState, eventHandler: (LoginEvent) -> Unit) {
     Spacer(modifier = Modifier.height(8.dp))
     Row(
         modifier = Modifier.fillMaxWidth()
     ) {
-        /**
-        Без провайдера используются отступы, которые нельзя контролировать
-         */
-        CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
-            Checkbox(
-                checked = viewState.isAgreementChecked,
-                colors = CheckboxDefaults.colors(
-                    checkedColor = Theme.colors.textPrimaryColor
-                ),
-                onCheckedChange = {
-                    eventHandler(LoginEvent.OnAgreementClick)
-                }
-            )
-        }
+        CheckboxView(
+            checked = viewState.isAgreementChecked,
+            colors = CheckboxDefaults.colors(
+                checkedColor = Theme.colors.textPrimaryColor
+            ),
+            onCheckedChange = {
+                eventHandler(LoginEvent.OnAgreementClick)
+            }
+        )
         Spacer(modifier = Modifier.width(4.dp))
         Column {
             Text(

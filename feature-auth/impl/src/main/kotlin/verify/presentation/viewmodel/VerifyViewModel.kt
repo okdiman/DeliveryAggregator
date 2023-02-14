@@ -8,10 +8,10 @@ import network.exceptions.ForbiddenException
 import network.exceptions.UnauthorizedException
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import verify.presentation.VerifyParameters
 import root.AuthConstants.Limits.MAX_CODE_CHARS
-import utils.isTextFieldFilled
+import utils.ext.isTextFieldFilled
 import verify.domain.GetVerifyTitleUseCase
+import verify.presentation.VerifyParameters
 import verify.presentation.viewmodel.model.VerifyAction
 import verify.presentation.viewmodel.model.VerifyEvent
 import verify.presentation.viewmodel.model.VerifyState
@@ -52,7 +52,7 @@ class VerifyViewModel(
     }
 
     private fun onCodeChanged(code: String) {
-        val isCodeFilled = isTextFieldFilled(code, MAX_CODE_CHARS)
+        val isCodeFilled = code.isTextFieldFilled(MAX_CODE_CHARS)
         viewState = viewState.copy(code = code, isLoading = isCodeFilled, isCodeError = false)
         if (isCodeFilled) {
             launchJob(context = appDispatchers.network, onError = {

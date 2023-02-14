@@ -24,6 +24,9 @@ import androidx.compose.ui.unit.sp
 import theme.Theme
 import trinity_monsters.delivery_aggregator.core_ui.R
 
+/**
+ * принимает градиент в качестве бэкграунда
+ */
 @Suppress("LongParameterList")
 @Composable
 fun ActionButton(
@@ -55,6 +58,9 @@ fun ActionButton(
     }
 }
 
+/**
+ * принимает цвет в качестве бэкграунда
+ */
 @Suppress("LongParameterList")
 @Composable
 fun ActionButton(

@@ -10,7 +10,7 @@ import login.presentation.viewmodel.model.LoginState
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import utils.CommonConstants.LIMITS.Common.MAX_PHONE_CHARS
-import utils.isTextFieldFilled
+import utils.ext.isTextFieldFilled
 
 class LoginViewModel : BaseViewModel<LoginState, LoginAction, LoginEvent>(
     initialState = LoginState()
@@ -56,5 +56,5 @@ class LoginViewModel : BaseViewModel<LoginState, LoginAction, LoginEvent>(
     private fun isButtonEnabled(
         isAgreementChecked: Boolean = viewState.isAgreementChecked,
         phone: String = viewState.phone
-    ) = isAgreementChecked && isTextFieldFilled(phone, MAX_PHONE_CHARS)
+    ) = isAgreementChecked && phone.isTextFieldFilled(MAX_PHONE_CHARS)
 }

@@ -9,15 +9,15 @@ import di.modules.LOAD_CAPACITY_VALIDATOR_QUALIFIER
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.qualifier.named
-import transport.presentation.TransportProfileParameters
 import root.domain.UpdateProfileUseCase
+import transport.presentation.TransportProfileParameters
 import transport.presentation.viewmodel.model.TransportProfileAction
 import transport.presentation.viewmodel.model.TransportProfileEvent
 import transport.presentation.viewmodel.model.TransportProfileState
 import utils.CommonConstants.LIMITS.Transport.CAR_BRAND_MIN_CHARS
 import utils.CommonConstants.LIMITS.Transport.CAR_INFO_MIN_CHARS
 import utils.CommonConstants.LIMITS.Transport.LICENCE_PLATE_MIN_CHARS
-import utils.isTextFieldFilled
+import utils.ext.isTextFieldFilled
 import utils.validators.domain.TextFieldValidator
 
 class TransportProfileViewModel(
@@ -68,7 +68,7 @@ class TransportProfileViewModel(
         viewState = viewState.copy(
             licencePlate = viewState.licencePlate.copy(
                 stateText = newLicencePlate,
-                isFillingError = !isTextFieldFilled(newLicencePlate, LICENCE_PLATE_MIN_CHARS),
+                isFillingError = !newLicencePlate.isTextFieldFilled(LICENCE_PLATE_MIN_CHARS),
                 isValidationError = !isValid
             ),
             isSaveButtonVisible = isSaveButtonVisible(
@@ -87,7 +87,7 @@ class TransportProfileViewModel(
         viewState = viewState.copy(
             carBrand = viewState.carBrand.copy(
                 stateText = newCarBrand,
-                isFillingError = !isTextFieldFilled(newCarBrand, CAR_BRAND_MIN_CHARS),
+                isFillingError = !newCarBrand.isTextFieldFilled(CAR_BRAND_MIN_CHARS),
                 isValidationError = !isValid
             ),
             isSaveButtonVisible = isSaveButtonVisible(
@@ -106,7 +106,7 @@ class TransportProfileViewModel(
         viewState = viewState.copy(
             carLoadCapacity = viewState.carLoadCapacity.copy(
                 stateText = newCarLoadCapacity,
-                isFillingError = !isTextFieldFilled(newCarLoadCapacity, CAR_INFO_MIN_CHARS),
+                isFillingError = !newCarLoadCapacity.isTextFieldFilled(CAR_INFO_MIN_CHARS),
                 isValidationError = !isValid
             ),
             isSaveButtonVisible = isSaveButtonVisible(
@@ -125,7 +125,7 @@ class TransportProfileViewModel(
         viewState = viewState.copy(
             carCategory = viewState.carCategory.copy(
                 stateText = newCarCategory,
-                isFillingError = !isTextFieldFilled(newCarCategory, CAR_INFO_MIN_CHARS),
+                isFillingError = !newCarCategory.isTextFieldFilled(CAR_INFO_MIN_CHARS),
                 isValidationError = !isValid
             ),
             isSaveButtonVisible = isSaveButtonVisible(
@@ -143,7 +143,7 @@ class TransportProfileViewModel(
         viewState = viewState.copy(
             carCapacity = viewState.carCapacity.copy(
                 stateText = newCarCapacity,
-                isFillingError = !isTextFieldFilled(newCarCapacity, CAR_INFO_MIN_CHARS)
+                isFillingError = !newCarCapacity.isTextFieldFilled(CAR_INFO_MIN_CHARS)
             ),
             isSaveButtonVisible = isSaveButtonVisible(
                 viewState.copy(carCapacity = viewState.carCapacity.copy(stateText = newCarCapacity))
@@ -171,14 +171,14 @@ class TransportProfileViewModel(
     }
 
     private fun isSaveButtonVisible(state: TransportProfileState) =
-        isTextFieldFilled(state.licencePlate.stateText, LICENCE_PLATE_MIN_CHARS) &&
-                isTextFieldFilled(state.carBrand.stateText, CAR_BRAND_MIN_CHARS) &&
-                isTextFieldFilled(state.carCategory.stateText, CAR_INFO_MIN_CHARS) &&
-                isTextFieldFilled(state.carLoadCapacity.stateText, CAR_INFO_MIN_CHARS) &&
-                isTextFieldFilled(state.carCapacity.stateText, CAR_INFO_MIN_CHARS) &&
-                !state.licencePlate.isValidationError && !state.carCategory.isValidationError &&
-                !state.carBrand.isValidationError && !state.carLoadCapacity.isValidationError &&
-                isTransportChanged(state)
+        state.licencePlate.stateText.isTextFieldFilled(LICENCE_PLATE_MIN_CHARS) &&
+            state.carBrand.stateText.isTextFieldFilled(CAR_BRAND_MIN_CHARS) &&
+            state.carCategory.stateText.isTextFieldFilled(CAR_INFO_MIN_CHARS) &&
+            state.carLoadCapacity.stateText.isTextFieldFilled(CAR_INFO_MIN_CHARS) &&
+            state.carCapacity.stateText.isTextFieldFilled(CAR_INFO_MIN_CHARS) &&
+            !state.licencePlate.isValidationError && !state.carCategory.isValidationError &&
+            !state.carBrand.isValidationError && !state.carLoadCapacity.isValidationError &&
+            isTransportChanged(state)
 
     private fun isTransportChanged(state: TransportProfileState) =
         parameters.profileModel != parameters.profileModel.copy(

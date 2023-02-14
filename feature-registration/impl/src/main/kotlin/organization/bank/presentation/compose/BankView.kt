@@ -28,7 +28,7 @@ import utils.CommonConstants.LIMITS.Common.MAX_NAME_CHARS
 import view.StandardTextField
 
 @Composable
-fun BankView(state: BankState, eventHandler: (BankEvent) -> Unit) {
+internal fun BankView(state: BankState, eventHandler: (BankEvent) -> Unit) {
     Column(
         modifier = Modifier
             .padding(PaddingValues(start = 16.dp, end = 16.dp))
