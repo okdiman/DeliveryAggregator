@@ -159,6 +159,7 @@ private fun SuggestsItem(
                         }
                     }
                 }
+                .padding(vertical = 8.dp)
         ) {
             Icon(
                 painter = painterResource(id = R_core.drawable.geolocation_ic),
@@ -179,11 +180,11 @@ private fun SuggestsItem(
                 )
             }
         }
-        Spacer(modifier = Modifier.height(14.dp))
+        Spacer(modifier = Modifier.height(6.dp))
         Divider(
             modifier = Modifier.padding(start = 36.dp),
             color = Theme.colors.dividerColor
         )
-        Spacer(modifier = Modifier.height(14.dp))
+        Spacer(modifier = Modifier.height(6.dp))
     }
 }
