@@ -68,7 +68,13 @@
 ```
 feature-module
 ├── api 
-│  ├──                 
+│  ├── minifeature1
+│  │  ├── data                 
+│  │  │  ├── model - MinifeatureModel             
+│  │  │  ├── usecase                 
+│  │  │  │  └── GetMinifeatureDate1UseCase                 
+│  │  ├── presentation   
+│  │  │  └── Minifeature1ScreenParameters                 
 ├── impl   
 │  ├── minifeature1
 │  │  ├── data
@@ -80,7 +86,7 @@ feature-module
 │  │  │  └── Minifeature1Api
 │  │  ├── di - minifeature1Module
 │  │  ├── domain
-│  │  │  ├── usecases - GetMinifeature1UseCase
+│  │  │  ├── usecases - GetMinifeatureDate1UseCaseImpl
 │  │  │  ├── interactor - GetMinifeature1Interactor
 │  │  │  └──  repository - Minifeature1Repository
 │  │  ├── presentation
