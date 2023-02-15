@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_depart_address">Добавить адрес</string>
+    <string name="profile_transport">Транспорт</string>
+    <string name="profile_support">Поддержка</string>
+    <string name="profile_notifications">Настройки уведомлений</string>
+    <string name="profile_offer">Оферта</string>
+</resources>

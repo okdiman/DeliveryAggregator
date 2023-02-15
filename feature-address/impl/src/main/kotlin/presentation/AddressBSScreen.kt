@@ -128,7 +128,7 @@ private fun AddressTextFieldView(
                 contentDescription = null
             )
         },
-        hint = stringResource(id = R_core.string.transport_departure_address_hint),
+        hint = stringResource(id = R_core.string.common_address_hint),
         onValueChanged = { onTextFieldChanged(it) }
     )
     Spacer(modifier = Modifier.height(24.dp))

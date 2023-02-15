@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="navigation_route">Заказы</string>
+    <string name="navigation_new_route">Новый заказ</string>
+    <string name="navigation_profile">Профиль</string>
+</resources>

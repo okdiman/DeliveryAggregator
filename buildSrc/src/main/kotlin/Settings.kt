@@ -12,4 +12,12 @@ object Settings {
     const val serializationPlugin = "1.7.10"
     const val googleServicesPlugin = "4.3.15"
     const val crashlitycsPlugin = "2.9.2"
+
+    object Flavors {
+        const val name = "category"
+        const val client = "client"
+        const val clientSuffix = ".client"
+        const val contractor = "contractor"
+        const val contractorSuffix = ".contractor"
+    }
 }
