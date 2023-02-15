@@ -11,6 +11,16 @@ android {
     defaultConfig {
         minSdk = Settings.minSdk
     }
+
+    flavorDimensions.add(Settings.Flavors.name)
+    productFlavors {
+        create(Settings.Flavors.client) {
+            dimension = Settings.Flavors.name
+        }
+        create(Settings.Flavors.contractor) {
+            dimension = Settings.Flavors.name
+        }
+    }
 }
 
 dependencies {

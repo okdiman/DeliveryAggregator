@@ -1,5 +1,6 @@
 package root.di
 
+import root.data.AuthApi
 import data.AuthLocalDataSource
 import domain.AuthRepository
 import domain.usecase.IsAuthorizedUseCase
@@ -9,7 +10,6 @@ import network.domain.GetPushTokenSyncUseCase
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.create
-import root.data.AuthApi
 import root.data.AuthLocalDataSourceImpl
 import root.data.AuthRepositoryImpl
 import root.data.mapper.AuthSignUpMapper

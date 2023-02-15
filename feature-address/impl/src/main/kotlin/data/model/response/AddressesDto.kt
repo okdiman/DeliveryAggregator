@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 class AddressesDto(
     @SerializedName("Addresses")
-    val addresses: List<AddressDto>
+    val addresses: List<AddressDto>?
 )

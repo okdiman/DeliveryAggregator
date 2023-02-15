@@ -1,11 +1,11 @@
 package data.mapper
 
 import data.model.request.AddressRequest
-import data.model.response.AddressesDto
+import data.model.response.AddressDto
 import domain.model.AddressModel
 
 class AddressMapper {
-    fun mapToDomain(dto: AddressesDto) = dto.addresses.map {
+    fun mapToDomain(dto: List<AddressDto>) = dto.map {
         AddressModel(
             city = it.city,
             geoLat = it.geoLat,

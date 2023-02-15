@@ -2,13 +2,13 @@ package data
 
 import data.mapper.AddressMapper
 import data.mapper.AddressSuggestMapper
-import data.model.request.AddressSuggestRequest
 import data.model.request.AddressAuthSuggestRequest
+import data.model.request.AddressSuggestRequest
 import domain.AddressRepository
 import domain.model.AddressModel
 import domain.model.AddressSuggestModel
-import domain.model.request.AddressSuggestRequestModel
 import domain.model.request.AddressAuthSuggestRequestModel
+import domain.model.request.AddressSuggestRequestModel
 
 class AddressRepositoryImpl(
     private val api: AddressApi,
@@ -17,7 +17,7 @@ class AddressRepositoryImpl(
 ) : AddressRepository {
     override suspend fun getUserAddresses(): List<AddressModel> {
         val addresses = api.getUserAddresses()
-        return mapper.mapToDomain(addresses)
+        return mapper.mapToDomain(addresses.addresses.orEmpty())
     }
 
     override suspend fun addUserAddress(addressModel: AddressModel) {

@@ -16,10 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import root.RegistrationConstants.Step.FOUR
+import root.RegistrationConstants.Step.THREE
 import root.presentation.RegistrationTitleView
+import trinity_monsters.delivery_aggregator.feature_registration.impl.BuildConfig
 import trinity_monsters.delivery_aggregator.feature_registration.impl.R
 import user.presentation.viewmodel.model.UserEvent
 import user.presentation.viewmodel.model.UserState
+import utils.CommonConstants
 import utils.CommonConstants.LIMITS.Common.MAX_NAME_CHARS
 import utils.CommonConstants.LIMITS.User.MAX_USER_NAME_CHARS
 import view.StandardTextField
@@ -33,7 +36,11 @@ internal fun UserView(state: UserState, eventHandler: (UserEvent) -> Unit) {
             .verticalScroll(rememberScrollState())
     ) {
         RegistrationTitleView(
-            step = FOUR,
+            step = if (BuildConfig.FLAVOR == CommonConstants.Flavors.client) {
+                THREE
+            } else {
+                FOUR
+            },
             imageRes = R.drawable.user_info_ic,
             titleRes = R_core.string.user_title,
             isBackButtonVisible = true,

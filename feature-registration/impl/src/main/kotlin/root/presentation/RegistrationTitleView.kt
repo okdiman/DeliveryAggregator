@@ -16,8 +16,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import root.RegistrationConstants.Step.FOUR
+import root.RegistrationConstants.Step.THREE
 import theme.Theme
+import trinity_monsters.delivery_aggregator.feature_registration.impl.BuildConfig
 import trinity_monsters.delivery_aggregator.feature_registration.impl.R
+import utils.CommonConstants
 import view.BackButton
 
 @Composable
@@ -28,15 +32,25 @@ fun RegistrationTitleView(
     @DrawableRes imageRes: Int,
     @StringRes titleRes: Int
 ) {
-    Box(modifier = Modifier.fillMaxWidth().padding(top = 4.dp)) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 4.dp)
+    ) {
         if (isBackButtonVisible) {
             BackButton(modifier = Modifier.padding(top = 3.dp)) { onButtonClick() }
+        }
+        val stepCount = if (BuildConfig.FLAVOR == CommonConstants.Flavors.client) {
+            THREE
+        } else {
+            FOUR
         }
         Text(
             modifier = Modifier.align(Alignment.Center),
             text = String.format(
                 stringResource(R.string.registration_step),
-                step
+                step,
+                stepCount
             ),
             style = Theme.fonts.bold.copy(fontSize = 20.sp)
         )

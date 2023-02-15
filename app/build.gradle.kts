@@ -18,6 +18,18 @@ android {
         versionName = Settings.debugVersionName
     }
 
+    flavorDimensions.add(Settings.Flavors.name)
+    productFlavors {
+        create(Settings.Flavors.client) {
+            dimension = Settings.Flavors.name
+            applicationIdSuffix = Settings.Flavors.clientSuffix
+        }
+        create(Settings.Flavors.contractor) {
+            dimension = Settings.Flavors.name
+            applicationIdSuffix = Settings.Flavors.contractorSuffix
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
