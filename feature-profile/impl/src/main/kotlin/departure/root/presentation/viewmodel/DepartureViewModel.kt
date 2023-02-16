@@ -3,10 +3,11 @@ package departure.root.presentation.viewmodel
 import BaseViewModel
 import coroutines.AppDispatchers
 import data.AddressConstants
+import departure.domain.AddressModelCopyUseCase
+import departure.presentation.mapper.DepartureAddressUiMapper
+import departure.presentation.model.DepartureAddressUiModel
 import departure.root.domain.AddUserAddressUseCaseImpl
 import departure.root.presentation.compose.constants.DepartureUiConstants.ADDRESSES_MAX_COUNT
-import departure.root.presentation.compose.model.DepartureAddressUiModel
-import departure.root.presentation.mapper.DepartureAddressUiMapper
 import departure.root.presentation.viewmodel.model.DepartureAction
 import departure.root.presentation.viewmodel.model.DepartureEvent
 import departure.root.presentation.viewmodel.model.DepartureState
@@ -28,6 +29,7 @@ class DepartureViewModel : BaseViewModel<DepartureState, DepartureAction, Depart
 
     private val addUserAddress by inject<AddUserAddressUseCaseImpl>()
     private val updateUserAddress by inject<UpdateUserAddressUseCase>()
+    private val addressModelCopy by inject<AddressModelCopyUseCase>()
     private val getSuggestByQuery by inject<GetSuggestByQueryUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
     private val addressUiMapper by inject<AddressSuggestUiMapper>()
@@ -69,7 +71,7 @@ class DepartureViewModel : BaseViewModel<DepartureState, DepartureAction, Depart
     }
 
     private fun onSuggestAddressClick(id: String, address: AddressUiModel) {
-        if (address.house.isEmpty()) {
+        if (address.house.isEmpty() || !address.isFinal) {
             viewState = viewState.copy(
                 bsAddress = viewState.bsAddress.copy(
                     stateText = address.subtitle
@@ -82,13 +84,7 @@ class DepartureViewModel : BaseViewModel<DepartureState, DepartureAction, Depart
                     addUserAddress(mapper.mapToDomain(address, id))
                 } else {
                     addresses.find { it.id == id }?.let {
-                        updateUserAddress(
-                            it.copy(
-                                city = address.city,
-                                house = address.house,
-                                street = address.street
-                            )
-                        )
+                        updateUserAddress(addressModelCopy(it, address))
                     }
                 }
                 loadContent()

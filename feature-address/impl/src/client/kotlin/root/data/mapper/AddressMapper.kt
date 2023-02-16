@@ -1,8 +1,8 @@
-package data.mapper
+package root.data.mapper
 
-import data.model.request.AddressRequest
-import data.model.response.AddressDto
 import domain.model.AddressModel
+import root.data.model.AddressDto
+import root.data.model.AddressRequest
 
 class AddressMapper {
     fun mapToDomain(dto: List<AddressDto>) = dto.map {
@@ -13,7 +13,8 @@ class AddressMapper {
             house = it.house,
             street = it.street,
             id = it.id,
-            isActive = it.isActive
+            isActive = it.isActive,
+            comment = it.comment
         )
     }
 
@@ -23,6 +24,7 @@ class AddressMapper {
         geoLon = model.geoLon,
         house = model.house,
         street = model.street,
-        isActive = model.isActive
+        isActive = model.isActive,
+        comment = model.comment
     )
 }

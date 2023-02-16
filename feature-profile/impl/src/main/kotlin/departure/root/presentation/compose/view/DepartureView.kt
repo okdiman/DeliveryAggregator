@@ -6,6 +6,7 @@ import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,7 +29,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import departure.root.presentation.compose.model.DepartureAddressUiModel
+import departure.presentation.model.DepartureAddressUiModel
+import departure.presentation.view.DepartureAddressView
 import departure.root.presentation.viewmodel.model.DepartureEvent
 import departure.root.presentation.viewmodel.model.DepartureState
 import theme.Theme
@@ -57,7 +59,7 @@ internal fun DepartureView(state: DepartureState, eventHandler: (DepartureEvent)
                     }
                 } else {
                     items(state.addresses) {
-                        DepartureAddressView(it, eventHandler)
+                        DepartureAddressItemView(it, eventHandler)
                     }
                     item {
                         DepartureAddNewAddressView(eventHandler)
@@ -88,7 +90,7 @@ private fun DepartureTitleView(eventHandler: (DepartureEvent) -> Unit) {
 }
 
 @Composable
-private fun DepartureAddressView(
+private fun DepartureAddressItemView(
     model: DepartureAddressUiModel,
     eventHandler: (DepartureEvent) -> Unit
 ) {
@@ -111,12 +113,14 @@ private fun DepartureAddressView(
                 unselectedColor = Theme.colors.radioButtonColor
             )
         )
-        Text(
+        Column(
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(start = 10.dp)
                 .weight(1f),
-            text = model.address
-        )
+        ) {
+            DepartureAddressView(model)
+        }
         Icon(
             modifier = Modifier
                 .clip(Theme.shapes.roundedButton)

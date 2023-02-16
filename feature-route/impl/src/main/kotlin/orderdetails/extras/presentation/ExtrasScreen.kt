@@ -21,6 +21,7 @@ import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingState
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 import view.BSTitleView
 import view.CheckboxView
 
@@ -43,7 +44,7 @@ internal fun ExtrasScreen(
         }
         item {
             ActionButton(
-                textRes = R.string.loading_step_complete,
+                textRes = R_core.string.common_complete,
                 alignment = Alignment.Center,
                 padding = PaddingValues(vertical = 16.dp, horizontal = 8.dp)
             ) { rootController.findModalController().popBackStack(null) }

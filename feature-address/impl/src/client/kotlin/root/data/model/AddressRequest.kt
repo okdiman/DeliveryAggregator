@@ -1,4 +1,4 @@
-package data.model.request
+package root.data.model
 
 import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
@@ -12,5 +12,6 @@ data class AddressRequest(
     val geoLon: String,
     val house: String,
     val street: String,
-    val isActive: Boolean
+    val isActive: Boolean,
+    val comment: String
 )

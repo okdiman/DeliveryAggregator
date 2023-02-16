@@ -1,4 +1,4 @@
-package data.model.response
+package root.data.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -17,5 +17,7 @@ class AddressDto(
     @SerializedName("street")
     val street: String,
     @SerializedName("isActive")
-    val isActive: Boolean
+    val isActive: Boolean,
+    @SerializedName("comment")
+    val comment: String,
 )
