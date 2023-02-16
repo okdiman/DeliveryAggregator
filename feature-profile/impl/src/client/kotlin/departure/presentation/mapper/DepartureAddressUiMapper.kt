@@ -1,6 +1,6 @@
-package departure.root.presentation.mapper
+package departure.presentation.mapper
 
-import departure.root.presentation.compose.model.DepartureAddressUiModel
+import departure.presentation.model.DepartureAddressUiModel
 import domain.model.AddressModel
 import presentation.model.AddressUiModel
 import utils.CommonConstants.Helpers.COMMA
@@ -13,7 +13,8 @@ class DepartureAddressUiMapper {
         DepartureAddressUiModel(
             address = address,
             isActive = it.isActive,
-            id = it.id
+            id = it.id,
+            comment = it.comment
         )
     }
 
@@ -24,6 +25,7 @@ class DepartureAddressUiMapper {
         isActive = true,
         id = id,
         geoLon = model.geoLon,
-        geoLat = model.geoLat
+        geoLat = model.geoLat,
+        comment = model.comment
     )
 }

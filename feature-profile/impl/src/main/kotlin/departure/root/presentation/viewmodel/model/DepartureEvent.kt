@@ -1,6 +1,6 @@
 package departure.root.presentation.viewmodel.model
 
-import departure.root.presentation.compose.model.DepartureAddressUiModel
+import departure.presentation.model.DepartureAddressUiModel
 import departure.root.presentation.viewmodel.DepartureViewModel.Companion.NEW_ID
 import presentation.model.AddressUiModel
 

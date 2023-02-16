@@ -11,7 +11,6 @@
     <string name="loading_choose">Выбрать</string>
     <string name="loading_step">1. Погрузка</string>
     <string name="loading_step_done">Выполнено</string>
-    <string name="loading_step_complete">Готово</string>
     <string name="loading_in_time_separator">&#160;в&#160;</string>
     <string name="loading_camera_permission">Разрешить этому приложению доступ к камере?</string>
 </resources>

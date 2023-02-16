@@ -25,6 +25,7 @@ fun StandardTextField(
     enabled: Boolean = true,
     discription: String? = null,
     readOnly: Boolean = false,
+    maxLines: Int = 1,
     colors: TextFieldColors = TextFieldDefaults.textFieldColors(
         focusedIndicatorColor = Color.Transparent,
         unfocusedIndicatorColor = Color.Transparent,
@@ -65,6 +66,7 @@ fun StandardTextField(
         colors = colors,
         textStyle = textStyle,
         onValueChanged = { onValueChanged(it) },
-        discription = discription
+        discription = discription,
+        maxLines = maxLines
     )
 }

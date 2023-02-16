@@ -1,8 +1,7 @@
 package data
 
-import data.model.request.AddressRequest
-import data.model.request.AddressSuggestRequest
 import data.model.request.AddressAuthSuggestRequest
+import data.model.request.AddressSuggestRequest
 import data.model.response.AddressSuggestDto
 import data.model.response.AddressesDto
 import retrofit2.http.Body
@@ -10,6 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
+import root.data.model.AddressRequest
 
 interface AddressApi {
     @POST("/auth/addresses/suggest")

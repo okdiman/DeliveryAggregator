@@ -36,6 +36,7 @@ object CommonConstants {
             const val MIN_ADDRESS_CHARS = 5
             const val MIN_NAME_CHARS = 2
             const val MAX_NAME_CHARS = 50
+            const val MAX_DESCRIPTION_CHARS = 100
         }
     }
 

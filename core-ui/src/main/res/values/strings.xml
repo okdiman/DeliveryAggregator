@@ -11,5 +11,6 @@
     <string name="common_company_name">Название организации</string>
     <string name="common_incorrect_address">Выберете адрес из списка</string>
     <string name="common_address_hint">Введите адрес</string>
+    <string name="common_complete">Готово</string>
     <string name="common_empty_error" />
 </resources>

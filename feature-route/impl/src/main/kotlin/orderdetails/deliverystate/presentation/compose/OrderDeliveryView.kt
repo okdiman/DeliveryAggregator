@@ -61,6 +61,7 @@ internal fun OrderDeliveryView(state: OrderDeliveryState, eventHandler: (OrderDe
                 title = stringResource(R.string.delivery_note_title),
                 state = state.comment,
                 hint = stringResource(R.string.delivery_note_hint),
+                maxLines = Int.MAX_VALUE
             ) { eventHandler(OrderDeliveryEvent.OnCommentChanged(it)) }
         }
         item {

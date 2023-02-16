@@ -1,6 +1,6 @@
 package data
 
-import data.mapper.AddressMapper
+import root.data.mapper.AddressMapper
 import data.mapper.AddressSuggestMapper
 import data.model.request.AddressAuthSuggestRequest
 import data.model.request.AddressSuggestRequest

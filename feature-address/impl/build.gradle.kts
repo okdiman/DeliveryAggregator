@@ -32,6 +32,7 @@ dependencies {
     koin()
     compose()
     navigation()
+    viewModel()
     implementation(project(Modules.core_ui))
     implementation(project(Modules.core))
     implementation(project(Modules.address_api))

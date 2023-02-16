@@ -1,4 +1,4 @@
-package departure.root.presentation.compose.model
+package departure.presentation.model
 
 data class DepartureAddressUiModel(
     val id: String,

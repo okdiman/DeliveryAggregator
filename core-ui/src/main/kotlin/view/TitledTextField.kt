@@ -43,6 +43,7 @@ internal fun TitledTextField(
     singleLine: Boolean = false,
     onValueChanged: (String) -> Unit,
     textStyle: TextStyle,
+    maxLines: Int,
     hintStyle: TextStyle = Theme.fonts.bold.copy(
         color = Theme.colors.hintColor
     ),
@@ -82,7 +83,7 @@ internal fun TitledTextField(
                         isFocused.value = it.isFocused
                     }
             ),
-            maxLines = 1,
+            maxLines = maxLines,
             isError = state.isFillingError && !isFocused.value,
             value = state.stateText,
             enabled = enabled,

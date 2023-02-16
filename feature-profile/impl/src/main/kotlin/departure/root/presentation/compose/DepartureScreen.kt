@@ -74,9 +74,7 @@ fun DepartureScreen() {
                             viewModel.obtainEvent(DepartureEvent.OnBSAddressChanged(it))
                         },
                         onSuggestClick = {
-                            viewModel.obtainEvent(
-                                DepartureEvent.OnSuggestAddressClick(id, it)
-                            )
+                            viewModel.obtainEvent(DepartureEvent.OnSuggestAddressClick(id, it))
                         },
                         onClearClick = {
                             viewModel.obtainEvent(DepartureEvent.OnBSAddressChanged(""))

@@ -25,6 +25,7 @@ import tabs.BottomNavigationTab
 import trinity_monsters.delivery_aggregator.navigation.R
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
+@Suppress("LongMethod")
 fun RootComposeBuilder.mainFlow(deeplinkParameters: DeeplinkParameters?) {
     customNavigation(
         name = NavigationTree.Main.MainFlow.name,

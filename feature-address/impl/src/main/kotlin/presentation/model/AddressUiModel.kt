@@ -7,5 +7,7 @@ data class AddressUiModel(
     val city: String,
     val street: String,
     val house: String,
-    val subtitle: String
+    val subtitle: String,
+    val comment: String = "",
+    val isFinal: Boolean = true
 )
