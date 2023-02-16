@@ -1,0 +1,61 @@
+image: openjdk:11-jdk
+
+variables:
+  # compileSdkVersion
+  ANDROID_COMPILE_SDK: "33"
+
+  # buildToolsVersion
+  ANDROID_BUILD_TOOLS: "33.0.1"
+
+  # See here https://developer.android.com/studio/index.html at "Command line tools only"
+  ANDROID_SDK_TOOLS: "9477386"
+
+# Packages installation before running script
+before_script:
+  - apt-get --quiet update --yes
+  - apt-get --quiet install --yes wget tar unzip lib32stdc++6 lib32z1
+  - export ANDROID_HOME="${PWD}/android-home"
+  - install -d $ANDROID_HOME
+  - wget --output-document=$ANDROID_HOME/cmdline-tools.zip https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_TOOLS}_latest.zip
+
+  - pushd $ANDROID_HOME
+  - unzip -d cmdline-tools cmdline-tools.zip
+  - pushd cmdline-tools
+
+  - mv cmdline-tools tools || true
+  - popd
+  - popd
+  - export PATH=$PATH:${ANDROID_HOME}/cmdline-tools/tools/bin/
+
+  - sdkmanager --version
+  
+  # Yes to accept all licenses
+  - yes | sdkmanager --licenses || true
+  - sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}"
+  - sdkmanager "platform-tools"
+  - sdkmanager "build-tools;${ANDROID_BUILD_TOOLS}"
+
+  # Not necessary, but just for surity
+  - chmod +x ./gradlew
+
+stages:
+  - build
+  - lint
+
+# Gradle tasks
+assembleDebug:
+  interruptible: true
+  stage: build
+  only:
+    - release
+  script:
+    - ./gradlew assembleDebug
+  artifacts:
+    paths:
+      - app/build/outputs/
+
+detektLint:
+  interruptible: true
+  stage: lint
+  script:
+    - ./gradlew detekt
