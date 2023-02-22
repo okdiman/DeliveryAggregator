@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_order_number">Заказ №</string>
+    <string name="common_departure_address">Адрес склада</string>
+    <string name="common_delivery_adddress">Склад назначения</string>
+</resources>

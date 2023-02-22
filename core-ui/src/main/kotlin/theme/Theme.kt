@@ -14,6 +14,7 @@ fun DeliveryAggregatorTheme(
             LocalColorProvider provides palette,
             LocalGradientProvider provides gradients,
             LocalFontProvider provides fonts,
+            LocalFilterChipColorProvider provides filterChipColors,
             content = content
         )
     }
@@ -32,4 +33,7 @@ object Theme {
     val fonts: DeliveryAggregatorFonts
         @Composable
         get() = LocalFontProvider.current
+    val filterChipColors: DeliveryAggregateChipColors
+        @Composable
+        get() = LocalFilterChipColorProvider.current
 }

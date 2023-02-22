@@ -18,7 +18,9 @@ data class DeliveryAggregatorColors(
     val badgeBackgroundColor: Color,
     val deliveryImageBackgroundColor: Color,
     val departureImageBackgroundColor: Color,
-    val selectionTextColor: Color
+    val selectionTextColor: Color,
+    val chipSelectedColor: Color,
+    val chipUnselectedColor: Color,
 )
 
 val palette = DeliveryAggregatorColors(
@@ -36,7 +38,9 @@ val palette = DeliveryAggregatorColors(
     badgeBackgroundColor = Color(0xFFE36B2B),
     deliveryImageBackgroundColor = Color(0xFFEB9583),
     departureImageBackgroundColor = Color(0xFF63BBC3),
-    selectionTextColor = Color(0xFF5B9F57)
+    selectionTextColor = Color(0xFF5B9F57),
+    chipSelectedColor = Color(0xFF3579F5),
+    chipUnselectedColor = Color(0xFFF7F7F7),
 )
 
 val LocalColorProvider =
