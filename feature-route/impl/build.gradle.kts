@@ -37,6 +37,8 @@ dependencies {
     network()
     viewModel()
     implementation(project(Modules.route_api))
+    implementation(project(Modules.address_api))
+    implementation(project(Modules.address_impl))
     implementation(project(Modules.image_uploading_api))
     implementation(project(Modules.core))
     implementation(project(Modules.core_ui))

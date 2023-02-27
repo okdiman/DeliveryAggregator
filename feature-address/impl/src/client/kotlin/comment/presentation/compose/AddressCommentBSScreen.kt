@@ -20,7 +20,9 @@ fun AddressCommentScreen(parameters: AddressCommentParameters) {
         when (action.value) {
             AddressCommentAction.OpenAddressesScreen -> {
                 parameters.onSuggestClick(parameters.uiModel.copy(comment = state.value.comment.stateText))
-                rootController.findModalController().clearBackStack()
+                repeat(2) {
+                    rootController.findModalController().popBackStack(null)
+                }
             }
             AddressCommentAction.OpenPreviousScreen -> rootController.findModalController().popBackStack(null)
             else -> {}

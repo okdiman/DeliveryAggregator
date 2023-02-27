@@ -8,15 +8,15 @@ import di.modules.DIGITS_AND_LETTERS_VALIDATOR_QUALIFIER
 import di.modules.LETTERS_VALIDATOR_QUALIFIER
 import di.modules.LICENCE_PLATE_VALIDATOR_QUALIFIER
 import di.modules.LOAD_CAPACITY_VALIDATOR_QUALIFIER
-import domain.GetAuthSuggestByQueryUseCase
 import domain.model.request.AddressAuthSuggestRequestModel
+import domain.usecase.GetAuthSuggestByQueryUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.qualifier.named
-import presentation.mapper.AddressSuggestUiMapper
-import presentation.model.AddressUiModel
+import presentation.AddressSuggestUiModel
+import root.presentation.mapper.AddressSuggestUiMapper
 import transport.TransportParameters
 import transport.presentation.viewmodel.model.TransportAction
 import transport.presentation.viewmodel.model.TransportEvent
@@ -69,7 +69,7 @@ class TransportViewModel(
         viewAction = TransportAction.OpenDepartureAddressBs
     }
 
-    private fun onSuggestAddressClick(address: AddressUiModel) {
+    private fun onSuggestAddressClick(address: AddressSuggestUiModel) {
         viewState = viewState.copy(
             departureAddress = viewState.departureAddress.copy(
                 stateText = address.value,

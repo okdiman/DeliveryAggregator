@@ -5,8 +5,8 @@ import coroutines.AppDispatchers
 import data.AddressConstants.DEBOUNCE
 import data.AddressConstants.MIN_CHARS_FOR_SUGGEST
 import di.modules.NAMING_VALIDATOR_QUALIFIER
-import domain.GetAuthSuggestByQueryUseCase
 import domain.model.request.AddressAuthSuggestRequestModel
+import domain.usecase.GetAuthSuggestByQueryUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import org.koin.core.component.KoinComponent
@@ -15,8 +15,8 @@ import org.koin.core.qualifier.named
 import organization.company.presentation.viewmodel.model.CompanyAction
 import organization.company.presentation.viewmodel.model.CompanyEvent
 import organization.company.presentation.viewmodel.model.CompanyState
-import presentation.mapper.AddressSuggestUiMapper
-import presentation.model.AddressUiModel
+import root.presentation.mapper.AddressSuggestUiMapper
+import presentation.AddressSuggestUiModel
 import presentation.parameters.CompanyParameters
 import root.RegistrationConstants.Limits.Company.INN_MIN_CHARS
 import root.RegistrationConstants.Limits.Company.KPP_CHARS
@@ -66,7 +66,7 @@ class CompanyViewModel(
         )
     }
 
-    private fun onLegalAddressSuggestClick(address: AddressUiModel) {
+    private fun onLegalAddressSuggestClick(address: AddressSuggestUiModel) {
         viewState = viewState.copy(
             legalAddress = viewState.legalAddress.copy(
                 stateText = address.value,
@@ -82,7 +82,7 @@ class CompanyViewModel(
         )
     }
 
-    private fun onActualAddressSuggestClick(address: AddressUiModel) {
+    private fun onActualAddressSuggestClick(address: AddressSuggestUiModel) {
         viewState = viewState.copy(
             actualAddress = viewState.actualAddress.copy(
                 stateText = address.value,

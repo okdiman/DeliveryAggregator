@@ -1,6 +1,7 @@
 package root.di
 
 import additionalInfo.di.additionalInfoModule
+import extras.di.extrasModule
 import notifications.di.notificationsModule
 import orderdetails.deliverystate.di.deliveryStateModule
 import orderdetails.loadingstate.di.loadingStateModule
@@ -15,5 +16,6 @@ fun routeModules() =
         notificationsModule(),
         permissionsModule(),
         loadingStateModule(),
-        deliveryStateModule()
+        deliveryStateModule(),
+        extrasModule()
     )

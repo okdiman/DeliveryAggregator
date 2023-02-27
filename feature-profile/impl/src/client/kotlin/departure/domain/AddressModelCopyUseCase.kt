@@ -1,10 +1,10 @@
 package departure.domain
 
 import domain.model.AddressModel
-import presentation.model.AddressUiModel
+import presentation.AddressSuggestUiModel
 
 class AddressModelCopyUseCase {
-    operator fun invoke(model: AddressModel, uiModel: AddressUiModel) = model.copy(
+    operator fun invoke(model: AddressModel, uiModel: AddressSuggestUiModel) = model.copy(
         city = uiModel.city,
         house = uiModel.house,
         street = uiModel.street,

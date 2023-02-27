@@ -1,6 +1,7 @@
 package root.data.model.response
 
 import com.google.gson.annotations.SerializedName
+import root.domain.model.RouteOrderDto
 
 class RouteDto(
     val id: Long,

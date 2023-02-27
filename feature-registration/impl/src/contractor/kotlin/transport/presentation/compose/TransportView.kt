@@ -61,7 +61,7 @@ internal fun TransportView(state: TransportState, eventHandler: (TransportEvent)
 }
 
 @Composable
-fun TransportTextFieldsBlock(state: TransportState, eventHandler: (TransportEvent) -> Unit) {
+private fun TransportTextFieldsBlock(state: TransportState, eventHandler: (TransportEvent) -> Unit) {
     StandardTextField(
         title = stringResource(R_core.string.transport_license_plate),
         state = state.licencePlate,

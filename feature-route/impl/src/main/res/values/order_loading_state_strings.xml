@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loading">Погрузка</string>
+    <string name="loading_hint">На фото должны быть отображены следующие элементы: номер автомобиля, место отгрузки</string>
+    <string name="loading_specify_info">Уточните информацию</string>
+    <string name="loading_boxes_count">Сколько было принято коробок?</string>
+    <string name="loading_pallets_count">Сколько было принято паллет?</string>
+    <string name="loading_cargo_type">Тип груза</string>
+    <string name="loading_step">1. Погрузка</string>
+    <string name="loading_step_done">Выполнено</string>
+    <string name="loading_in_time_separator">&#160;в&#160;</string>
+    <string name="loading_camera_permission">Разрешить этому приложению доступ к камере?</string>
+</resources>

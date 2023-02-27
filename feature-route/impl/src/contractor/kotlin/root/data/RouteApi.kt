@@ -9,7 +9,7 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
 import root.data.model.response.RouteDto
-import root.data.model.response.RouteOrderDto
+import root.domain.model.RouteOrderDto
 
 interface RouteApi {
 

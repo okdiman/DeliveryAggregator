@@ -1,6 +1,6 @@
 package root.di
 
-import departure.root.di.departureModule
+import departure.di.departureModule
 import editing.di.editingModule
 import exit.di.exitModule
 

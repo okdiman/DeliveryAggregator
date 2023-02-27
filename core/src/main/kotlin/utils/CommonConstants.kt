@@ -25,6 +25,7 @@ object CommonConstants {
             const val CAR_INFO_MIN_CHARS = 1
             const val CAR_CATEGORY_MAX_CHARS = 10
             const val CAR_CAPACITY_MAX_CHARS = 5
+            const val CAR_PALLETS_MAX_CHARS = 3
         }
 
         object User {

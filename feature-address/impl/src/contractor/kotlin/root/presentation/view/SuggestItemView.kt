@@ -20,16 +20,22 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
-import presentation.model.AddressUiModel
+import presentation.AddressSuggestUiModel
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import theme.Theme
 import trinity_monsters.delivery_aggregator.core_ui.R
 
+/**
+ * Для исполнителя не нужен параметр isNeedComment на данный момент, но он должен быть здесь, чтобы SuggestItemView
+ * для обеих сборок имел одинаковый конструктор
+ */
+@Suppress("UnusedPrivateMember")
 @Composable
 fun SuggestItemView(
     scrollState: LazyListState,
-    item: AddressUiModel,
-    onSuggestClick: (AddressUiModel) -> Unit
+    item: AddressSuggestUiModel,
+    isNeedComment: Boolean,
+    onSuggestClick: (AddressSuggestUiModel) -> Unit
 ) {
     val rootController = LocalRootController.current
     val coroutineScope = rememberCoroutineScope()

@@ -1,7 +1,7 @@
 package organization.company.presentation.compose.model
 
 import androidx.annotation.StringRes
-import presentation.model.AddressUiModel
+import presentation.AddressSuggestUiModel
 import trinity_monsters.delivery_aggregator.feature_registration.impl.R
 import view.model.DefaultParamState
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
@@ -81,7 +81,7 @@ sealed class CompanyParamState(
         override val isValidationError: Boolean = false,
         @StringRes override val fillingErrorDiscription: Int = R_core.string.common_incorrect_address,
         @StringRes override val validationErrorDiscription: Int = R_core.string.common_empty_error,
-        val address: AddressUiModel? = null,
+        val address: AddressSuggestUiModel? = null,
     ) : CompanyParamState(
         stateText,
         isFillingError,
@@ -96,7 +96,7 @@ sealed class CompanyParamState(
         override val isValidationError: Boolean = false,
         @StringRes override val fillingErrorDiscription: Int = R_core.string.common_incorrect_address,
         @StringRes override val validationErrorDiscription: Int = R_core.string.common_empty_error,
-        val address: AddressUiModel? = null
+        val address: AddressSuggestUiModel? = null
     ) : CompanyParamState(
         stateText,
         isFillingError,

@@ -48,9 +48,12 @@ fun LocalDateTime.toString(formatter: DateTimeFormatter): String {
 }
 
 object DateFormats {
-    private const val FULL_DISPLAYED_DAY_MONTH = "d MMMM"
+    const val FULL_DISPLAYED_DAY_MONTH = "d MMMM"
     private const val TIME = "HH:mm"
+    const val DAY_MONTH_YEAR_FORMAT = "d MMMM yyyy"
+    const val MONTH_FORMAT = "LLLL"
     const val FULL_DATE_TIME = "yyyy-MM-dd HH:mm"
+    const val YEAR_MONTH_DAY = "yyyy-MM-dd"
     const val FULL_DISPLAYED_DATE_TIME = "d MMMM HH:mm"
     const val DOT_DAY_FORMAT = "dd.MM.yyyy"
     private val LOCALE_RU = Locale("ru", "RU")

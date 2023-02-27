@@ -2,10 +2,10 @@ package orderdetails.loadingstate.presentation.compose
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import cargotype.presentation.CargoTypeScreen
 import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
-import orderdetails.cargotype.presentation.CargoTypeScreen
-import orderdetails.extras.presentation.ExtrasScreen
+import extras.presentation.ExtrasScreen
 import orderdetails.loadingstate.presentation.viewmodel.OrderLoadingViewModel
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingAction
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingEvent
@@ -34,7 +34,7 @@ fun OrderLoadingScreen(parameters: OrderStatesParameters) {
                         cornerRadius = SCREEN_CORNER_RADIUS
                     )
                 ) {
-                    ExtrasScreen(state.value) { extras ->
+                    ExtrasScreen(state.value.extras) { extras ->
                         viewModel.obtainEvent(OrderLoadingEvent.OnExtrasChanged(extras))
                     }
                 }
@@ -60,7 +60,7 @@ fun OrderLoadingScreen(parameters: OrderStatesParameters) {
                         cornerRadius = SCREEN_CORNER_RADIUS
                     )
                 ) {
-                    CargoTypeScreen(state.value) { type ->
+                    CargoTypeScreen(state.value.cargoType) { type ->
                         viewModel.obtainEvent(OrderLoadingEvent.OnCargoTypeChanged(type))
                     }
                 }

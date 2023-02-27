@@ -9,11 +9,11 @@ import organization.company.presentation.viewmodel.CompanyViewModel
 import organization.company.presentation.viewmodel.model.CompanyAction
 import organization.company.presentation.viewmodel.model.CompanyEvent
 import organization.company.presentation.viewmodel.model.CompanyState
-import presentation.model.AddressUiModel
+import presentation.AddressSuggestUiModel
 import root.presentation.model.RegistrationCompanyModel
 import organization.bank.presentation.BankParameters
 import presentation.parameters.CompanyParameters
-import presentation.AddressBSScreen
+import root.presentation.AddressBSScreen
 import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
@@ -77,7 +77,7 @@ fun CompanyScreen(parameters: CompanyParameters) {
 fun ObtainBSScreenAction(
     state: State<CompanyState>,
     onChangeEvent: (String) -> Unit,
-    onSuggestClick: (AddressUiModel) -> Unit,
+    onSuggestClick: (AddressSuggestUiModel) -> Unit,
     onFinishEvent: () -> Unit
 ) {
     val rootController = LocalRootController.current

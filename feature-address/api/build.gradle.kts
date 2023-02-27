@@ -9,6 +9,12 @@ android {
     defaultConfig {
         minSdk = Settings.minSdk
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Settings.composeCompiler
+    }
     flavorDimensions.add(Settings.Flavors.name)
     productFlavors {
         create(Settings.Flavors.client) {
@@ -23,4 +29,6 @@ android {
 dependencies {
     network()
     compose()
+    implementation(project(Modules.core))
+    implementation(project(Modules.core_ui))
 }
