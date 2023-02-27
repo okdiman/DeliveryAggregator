@@ -15,7 +15,11 @@ object NavigationTree {
     }
 
     enum class Main {
-        MainFlow, OrderRequests, Profile, NewRoute
+        MainFlow, Orders, Profile
+    }
+
+    enum class NewOrder {
+        Creating, Storages, OrderCreated
     }
 
     enum class Profile {

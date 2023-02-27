@@ -22,6 +22,7 @@ import trinity_monsters.delivery_aggregator.feature_address.impl.R
 import utils.CommonConstants.LIMITS.Common.MAX_DESCRIPTION_CHARS
 import view.BackButton
 import view.StandardTextField
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
 fun AddressCommentView(state: AddressCommentState, eventHandler: (AddressCommentEvent) -> Unit) {
@@ -40,7 +41,7 @@ fun AddressCommentView(state: AddressCommentState, eventHandler: (AddressComment
                     }
                     Text(
                         modifier = Modifier.align(Alignment.Center),
-                        text = stringResource(id = R.string.address_comment_title),
+                        text = stringResource(id = R_core.string.common_info_comment),
                         style = Theme.fonts.bold.copy(fontSize = 20.sp)
                     )
                 }

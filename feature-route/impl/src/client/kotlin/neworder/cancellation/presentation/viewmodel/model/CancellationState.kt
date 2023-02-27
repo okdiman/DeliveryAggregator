@@ -1,0 +1,3 @@
+package neworder.cancellation.presentation.viewmodel.model
+
+class CancellationState

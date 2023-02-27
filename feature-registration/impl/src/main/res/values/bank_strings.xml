@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="bank_payment_acc">Рассчетный счет</string>
+    <string name="bank_payment_acc">Расчетный счет</string>
     <string name="bank_payment_acc_hint">40817810099910004312</string>
     <string name="bank_payment_acc_error">Расчетный счет должен содержать 20 символов.</string>
     <string name="bank_payment_acc_validate_error">Некорректный расчётный счёт.</string>

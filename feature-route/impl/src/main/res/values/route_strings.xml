@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="route_will_be_here">Здесь будет отображаться рейс</string>
+    <string name="route_can_includes_some_orders">В рейсе может быть несколько заказов</string>
+    <string name="route_active_status">Активный</string>
+    <string name="route_inprogress_status">В пути</string>
+    <string name="route_done_status">Выполнен</string>
+    <string name="route_accept_route">Взять в работу</string>
+    <string name="route_notifications_permission">Нажмите «Разрешить», чтобы получать уведомления о новых рейсах и статусах</string>
+    <string name="route_extras">Дополнительные услуги</string>
+    <string name="route_cargo_type">Тип груза</string>
+    <string name="route_boxes_count">Количество коробов</string>
+    <string name="route_count_hint">Введите количество</string>
+    <string name="route_weight">Масса поставки (кг)</string>
+    <string name="route_delivery_time">Время прибытия</string>
+</resources>

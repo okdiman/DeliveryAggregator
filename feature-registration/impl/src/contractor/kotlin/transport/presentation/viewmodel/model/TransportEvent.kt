@@ -1,6 +1,6 @@
 package transport.presentation.viewmodel.model
 
-import presentation.model.AddressUiModel
+import presentation.AddressSuggestUiModel
 
 sealed interface TransportEvent {
     data class OnLicencePlateChanged(val licencePlate: String) : TransportEvent
@@ -9,7 +9,7 @@ sealed interface TransportEvent {
     data class OnCarLoadCapacityChanged(val carLoadCapacity: String) : TransportEvent
     data class OnCarCapacityChanged(val carCapacity: String) : TransportEvent
     data class OnBSAddressChanged(val bsAddress: String) : TransportEvent
-    data class OnSuggestAddressClick(val address: AddressUiModel) : TransportEvent
+    data class OnSuggestAddressClick(val address: AddressSuggestUiModel) : TransportEvent
     object OnContinueButtonClick : TransportEvent
     object OnDepartAddressClick : TransportEvent
     object OnBackButtonClick : TransportEvent

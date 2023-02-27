@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 import comment.presentation.AddressCommentParameters
 import comment.presentation.compose.AddressCommentScreen
 import kotlinx.coroutines.launch
-import presentation.model.AddressUiModel
+import presentation.AddressSuggestUiModel
 import ru.alexgladkov.odyssey.compose.RootController
 import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
@@ -34,8 +34,9 @@ import utils.UiConstants
 @Composable
 internal fun SuggestItemView(
     scrollState: LazyListState,
-    item: AddressUiModel,
-    onSuggestClick: (AddressUiModel) -> Unit
+    item: AddressSuggestUiModel,
+    isNeedComment: Boolean = false,
+    onSuggestClick: (AddressSuggestUiModel) -> Unit
 ) {
     val rootController = LocalRootController.current
     val coroutineScope = rememberCoroutineScope()
@@ -46,11 +47,19 @@ internal fun SuggestItemView(
                 .clip(Theme.shapes.textFields)
                 .clickable {
                     onSuggestClick(item.copy(isFinal = false))
-                    if (item.house.isNotEmpty()) {
-                        navigateToCommentScreen(rootController, item, onSuggestClick)
-                    } else {
-                        coroutineScope.launch {
-                            scrollState.animateScrollToItem(0)
+                    when {
+                        item.house.isNotEmpty() && isNeedComment -> {
+                            navigateToCommentScreen(rootController, item, onSuggestClick)
+                        }
+                        item.house.isNotEmpty() -> {
+                            rootController
+                                .findModalController()
+                                .popBackStack(null)
+                        }
+                        else -> {
+                            coroutineScope.launch {
+                                scrollState.animateScrollToItem(0)
+                            }
                         }
                     }
                 }
@@ -86,8 +95,8 @@ internal fun SuggestItemView(
 
 private fun navigateToCommentScreen(
     rootController: RootController,
-    item: AddressUiModel,
-    onSuggestClick: (AddressUiModel) -> Unit
+    item: AddressSuggestUiModel,
+    onSuggestClick: (AddressSuggestUiModel) -> Unit
 ) {
     rootController
         .findModalController()

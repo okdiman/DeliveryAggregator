@@ -33,7 +33,6 @@ import root.presentation.compose.model.ProfileItemUiModel
 import root.presentation.viewmodel.model.ProfileEvent
 import root.presentation.viewmodel.model.ProfileState
 import theme.Theme
-import trinity_monsters.delivery_aggregator.feature_profile.impl.R
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
@@ -100,7 +99,7 @@ private fun ProfileUserNameView(state: ProfileState, eventHandler: (ProfileEvent
             contentAlignment = Alignment.Center
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.profile_edit_ic),
+                painter = painterResource(id = R_core.drawable.edit_ic),
                 contentDescription = null
             )
         }

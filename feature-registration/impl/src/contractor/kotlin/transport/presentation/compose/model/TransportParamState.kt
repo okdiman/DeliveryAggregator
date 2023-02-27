@@ -1,7 +1,7 @@
 package transport.presentation.compose.model
 
 import androidx.annotation.StringRes
-import presentation.model.AddressUiModel
+import presentation.AddressSuggestUiModel
 import view.model.DefaultParamState
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
@@ -38,7 +38,7 @@ sealed class TransportParamState(
         override val isValidationError: Boolean = false,
         @StringRes override val fillingErrorDiscription: Int = R_core.string.common_few_symbols_error,
         @StringRes override val validationErrorDiscription: Int = R_core.string.common_choose_address_from_suggest,
-        val address: AddressUiModel? = null
+        val address: AddressSuggestUiModel? = null
     ) : TransportParamState(
         stateText,
         isFillingError,

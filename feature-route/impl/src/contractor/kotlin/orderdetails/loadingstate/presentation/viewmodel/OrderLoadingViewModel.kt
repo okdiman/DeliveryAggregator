@@ -2,15 +2,16 @@ package orderdetails.loadingstate.presentation.viewmodel
 
 import BaseViewModel
 import android.net.Uri
+import cargotype.domain.model.CargoType
 import coroutines.AppDispatchers
 import domain.LoadImageUseCase
-import orderdetails.cargotype.domain.model.OrderLoadingCargoType
+import extras.domain.GetExtrasUseCase
+import extras.presentation.mapper.ExtrasUiMapper
+import extras.presentation.model.ExtrasState
+import extras.presentation.model.ExtrasUiModel
 import orderdetails.loadingstate.domain.ConfirmLoadingStateUseCase
-import orderdetails.loadingstate.domain.GetExtrasUseCase
 import orderdetails.loadingstate.domain.model.LoadingStateRequestModel
-import orderdetails.loadingstate.presentation.compose.model.OrderLoadingExtrasUiModel
 import orderdetails.loadingstate.presentation.compose.model.OrderLoadingParamState
-import orderdetails.loadingstate.presentation.mapper.ExtrasUiMapper
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingAction
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingEvent
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingState
@@ -48,7 +49,7 @@ class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
         launchJob(appDispatchers.network) {
             val extras = getExtras()
             viewState = viewState.copy(
-                extras = OrderLoadingParamState.ExtrasState(uiModel = extrasMapper.map(extras))
+                extras = ExtrasState(uiModel = extrasMapper.map(extras))
             )
         }
     }
@@ -71,9 +72,9 @@ class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
         }
     }
 
-    private fun onExtrasChanged(extras: List<OrderLoadingExtrasUiModel>) {
+    private fun onExtrasChanged(extras: List<ExtrasUiModel>) {
         viewState = viewState.copy(
-            extras = OrderLoadingParamState.ExtrasState(
+            extras = ExtrasState(
                 stateText = extras.joinToString(COMMA) { it.text },
                 extrasActive = extras,
                 uiModel = viewState.extras.uiModel
@@ -110,7 +111,7 @@ class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
         )
     }
 
-    private fun onCargoTypeChanged(cargoType: OrderLoadingCargoType) {
+    private fun onCargoTypeChanged(cargoType: CargoType) {
         viewState = viewState.copy(
             cargoType = OrderLoadingParamState.CargoTypeState(
                 stateText = cargoType.text,
@@ -179,13 +180,13 @@ class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
         pallets = viewState.palletsCount.stateText.toInt(),
         cargoType = viewState.cargoType.cargoType?.text.orEmpty(),
         images = listOf(viewState.photo?.remoteLink.orEmpty()),
-        extras = viewState.extras.extrasActive.filterNot { it == OrderLoadingExtrasUiModel.Default }.map { it.id }
+        extras = viewState.extras.extrasActive.filterNot { it == ExtrasUiModel.Default }.map { it.id }
     )
 
     private fun inDoneButtonVisible(
         boxesCount: String = viewState.boxesCount.stateText,
         palletsCount: String = viewState.palletsCount.stateText,
-        cargoType: OrderLoadingCargoType? = viewState.cargoType.cargoType,
+        cargoType: CargoType? = viewState.cargoType.cargoType,
         extras: List<Long> = viewState.extras.extrasActive.map { it.id },
         remoteLink: String? = viewState.photo?.remoteLink
     ) = boxesCount.isNotEmpty() && palletsCount.isNotEmpty() && cargoType != null && extras.isNotEmpty() &&

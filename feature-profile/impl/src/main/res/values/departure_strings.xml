@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="departure_add_new_address">Добавить новый адрес</string>
-    <string name="departure_max_address">У Вас сохранено максимальное количество адресов</string>
-    <string name="departure_good">Хорошо</string>
-    <string name="departure_edit_address">Редактировать адрес</string>
-</resources>

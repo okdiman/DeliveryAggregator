@@ -2,5 +2,4 @@
 <resources>
     <string name="support_call">Позвонить</string>
     <string name="support_send_email">Написать e-mail</string>
-    <string name="support_reject">Отменить</string>
 </resources>

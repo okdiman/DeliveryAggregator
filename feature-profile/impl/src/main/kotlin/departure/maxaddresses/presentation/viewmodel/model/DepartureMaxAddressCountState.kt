@@ -1,3 +1,0 @@
-package departure.maxaddresses.presentation.viewmodel.model
-
-class DepartureMaxAddressCountState

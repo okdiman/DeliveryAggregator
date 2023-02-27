@@ -75,7 +75,7 @@ fun EditProfileFieldsBlock(state: EditProfileState, eventHandler: (EditProfileEv
         hint = stringResource(R_core.string.user_name_hint),
         maxChar = CommonConstants.LIMITS.User.MAX_USER_NAME_CHARS
     ) { eventHandler(EditProfileEvent.OnNameChanged(it)) }
-    StandardTextField(
+        StandardTextField(
         title = stringResource(R_core.string.user_surname),
         state = state.surname,
         hint = stringResource(R_core.string.user_surname_hint),

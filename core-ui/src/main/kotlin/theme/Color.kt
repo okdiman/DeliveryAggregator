@@ -21,6 +21,7 @@ data class DeliveryAggregatorColors(
     val selectionTextColor: Color,
     val chipSelectedColor: Color,
     val chipUnselectedColor: Color,
+    val calendarBackgroundColor: Color
 )
 
 val palette = DeliveryAggregatorColors(
@@ -41,6 +42,7 @@ val palette = DeliveryAggregatorColors(
     selectionTextColor = Color(0xFF5B9F57),
     chipSelectedColor = Color(0xFF3579F5),
     chipUnselectedColor = Color(0xFFF7F7F7),
+    calendarBackgroundColor = Color(0xFFECF2ED)
 )
 
 val LocalColorProvider =

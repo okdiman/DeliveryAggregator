@@ -1,15 +1,21 @@
 package flow
 
-import androidx.compose.material.Text
-import departure.root.presentation.compose.DepartureScreen
+import departure.presentation.compose.DepartureScreen
 import editing.presentation.EditProfileParameters
 import editing.presentation.compose.EditProfileScreen
 import navigation.NavigationTree
+import neworder.ordercreated.presentation.OrderCreatedParameters
+import neworder.ordercreated.presentation.OrderCreatedScreen
+import neworder.root.presentation.compose.NewOrderScreen
+import neworder.storage.presentation.compose.NewOrderStorageParameters
+import neworder.storage.presentation.compose.NewOrderStorageScreen
+import notifications.presentation.compose.NotificationsScreen
 import offer.presentation.compose.OfferScreen
 import presentation.DeeplinkParameters
 import root.presentation.compose.OrderRequestsScreen
 import root.presentation.compose.ProfileScreen
 import ru.alexgladkov.odyssey.compose.extensions.customNavigation
+import ru.alexgladkov.odyssey.compose.extensions.flow
 import ru.alexgladkov.odyssey.compose.extensions.screen
 import ru.alexgladkov.odyssey.compose.extensions.tab
 import ru.alexgladkov.odyssey.compose.navigation.RootComposeBuilder
@@ -30,7 +36,7 @@ fun RootComposeBuilder.mainFlow(deeplinkParameters: DeeplinkParameters?) {
                 icon = R.drawable.route_ic
             )
         ) {
-            screen(NavigationTree.Main.OrderRequests.name) { parameters ->
+            screen(NavigationTree.Main.Orders.name) {
                 OrderRequestsScreen()
             }
         }
@@ -39,11 +45,7 @@ fun RootComposeBuilder.mainFlow(deeplinkParameters: DeeplinkParameters?) {
                 title = R_core.string.navigation_new_order,
                 icon = R_core.drawable.navigation_new_route
             )
-        ) {
-            screen(NavigationTree.Main.NewRoute.name) {
-                Text(text = "Создание нового заказа")
-            }
-        }
+        ) {}
         tab(
             BottomNavigationTab(
                 title = R_core.string.navigation_profile,
@@ -63,5 +65,19 @@ fun RootComposeBuilder.mainFlow(deeplinkParameters: DeeplinkParameters?) {
     }
     screen(NavigationTree.Profile.DepartureAddress.name) {
         DepartureScreen()
+    }
+    screen(NavigationTree.Routes.Notifications.name) {
+        NotificationsScreen()
+    }
+    flow(NavigationTree.NewOrder.Creating.name) {
+        screen(NavigationTree.NewOrder.Creating.name) {
+            NewOrderScreen()
+        }
+        screen(NavigationTree.NewOrder.Storages.name) { parameters ->
+            NewOrderStorageScreen(parameters as NewOrderStorageParameters)
+        }
+        screen(NavigationTree.NewOrder.OrderCreated.name){parameters->
+            OrderCreatedScreen(parameters as OrderCreatedParameters)
+        }
     }
 }

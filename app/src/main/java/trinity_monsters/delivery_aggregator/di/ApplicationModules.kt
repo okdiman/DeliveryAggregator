@@ -1,6 +1,6 @@
 package trinity_monsters.delivery_aggregator.di
 
-import di.addressModule
+import root.di.addressModule
 import di.authModule
 import di.coreModules
 import di.coreUiiModule

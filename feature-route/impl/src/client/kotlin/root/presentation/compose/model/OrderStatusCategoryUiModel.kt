@@ -8,5 +8,5 @@ enum class OrderStatusCategoryUiModel(
 ) {
     ACTIVE(R.string.order_filter_active),
     DONE(R.string.order_filter_done),
-    PAID(R.string.order_filter_paid),
+    PAID(R.string.order_filter_paid)
 }

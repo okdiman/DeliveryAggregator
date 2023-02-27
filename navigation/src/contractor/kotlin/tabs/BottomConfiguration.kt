@@ -11,7 +11,9 @@ class BottomConfiguration : TabsNavModel<CustomNavConfiguration>() {
         @Composable
         get() {
             return CustomNavConfiguration {
-                CustomBottomBarNavigator(startScreen = NavigationTree.Main.Routes.name)
+                CustomBottomBarNavigator(
+                    startScreen = NavigationTree.Main.Routes.name
+                )
             }
         }
 }

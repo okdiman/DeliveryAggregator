@@ -88,7 +88,7 @@ private fun OrderLoadingTextFieldBlock(
         state = state.boxesCount,
         isDigits = true,
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-        hint = stringResource(R.string.loading_count_hint),
+        hint = stringResource(R.string.route_count_hint),
         maxChar = CAR_CAPACITY_MAX_CHARS
     ) { eventHandler(OrderLoadingEvent.OnBoxesCountChanged(it)) }
     StandardTextField(
@@ -96,20 +96,20 @@ private fun OrderLoadingTextFieldBlock(
         state = state.palletsCount,
         isDigits = true,
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-        hint = stringResource(R.string.loading_count_hint),
+        hint = stringResource(R.string.route_count_hint),
         maxChar = CAR_CAPACITY_MAX_CHARS
     ) { eventHandler(OrderLoadingEvent.OnPalletsCountChanged(it)) }
     StandardTextField(
         modifier = Modifier.clickable {
             eventHandler(OrderLoadingEvent.OnOpenCargoTypeBSClick)
         },
-        title = stringResource(R.string.loading_cargo_type),
+        title = stringResource(R.string.route_cargo_type),
         state = state.cargoType,
-        hint = stringResource(R.string.loading_choose),
+        hint = stringResource(R_core.string.common_choose),
         enabled = false,
         trailingIcon = {
             Icon(
-                painter = painterResource(id = trinity_monsters.delivery_aggregator.core_ui.R.drawable.chevron_ic),
+                painter = painterResource(id = R_core.drawable.chevron_ic),
                 contentDescription = null
             )
         }
@@ -118,9 +118,9 @@ private fun OrderLoadingTextFieldBlock(
         modifier = Modifier.clickable {
             eventHandler(OrderLoadingEvent.OnOpenExtrasBSClick)
         },
-        title = stringResource(R.string.loading_add_info),
+        title = stringResource(R.string.route_extras),
         state = state.extras,
-        hint = stringResource(R.string.loading_choose),
+        hint = stringResource(R_core.string.common_choose),
         enabled = false,
         trailingIcon = {
             Icon(

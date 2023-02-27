@@ -1,8 +1,8 @@
 package organization.company.presentation.viewmodel.model
 
 import organization.company.presentation.compose.model.CompanyParamState
-import presentation.model.AddressUiModel
-import presentation.model.AddressState
+import presentation.AddressSuggestUiModel
+import root.presentation.model.AddressState
 
 data class CompanyState(
     val companyName: CompanyParamState.NameState = CompanyParamState.NameState(),
@@ -12,6 +12,6 @@ data class CompanyState(
     val legalAddress: CompanyParamState.LegalAddressState = CompanyParamState.LegalAddressState(),
     val actualAddress: CompanyParamState.ActualAddressState = CompanyParamState.ActualAddressState(),
     val bsAddress: AddressState = AddressState(),
-    val suggests: List<AddressUiModel> = emptyList(),
+    val suggests: List<AddressSuggestUiModel> = emptyList(),
     val isContinueButtonEnabled: Boolean = false
 )

@@ -7,7 +7,7 @@ import root.DeeplinkNavigatorHandler
 import root.data.RouteApi
 import root.data.RouteRepositoryImpl
 import root.data.mapper.RouteMapper
-import root.data.mapper.OrderMapper
+import root.data.mapper.RouteOrderMapper
 import root.domain.RouteRepository
 import root.domain.usecase.AcceptRouteUseCase
 import root.domain.usecase.GetActiveRouteUseCase
@@ -19,7 +19,7 @@ internal fun routeRootModule() = module {
     factory<RouteRepository> { RouteRepositoryImpl(get(), get(), get(), get(), get()) }
     factory { GetActiveRouteUseCase(get()) }
     factory { AcceptRouteUseCase(get()) }
-    factory { OrderMapper() }
+    factory { RouteOrderMapper() }
     factory { RouteMapper(get()) }
     factory { RouteUiMapper() }
     factory { RouteButtonUiModelMapper() }

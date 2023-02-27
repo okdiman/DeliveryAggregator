@@ -177,7 +177,7 @@ private fun ActionButtonView(
                     color = textColor
                 )
             )
-            if (additionalText != null) {
+            if (!additionalText.isNullOrEmpty()) {
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = additionalText,

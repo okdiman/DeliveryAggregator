@@ -5,14 +5,14 @@ import orderdetails.deliverystate.domain.model.DeliveryStateRequestModel
 import orderdetails.loadingstate.data.mapper.LoadingStateMapper
 import orderdetails.loadingstate.domain.model.LoadingStateRequestModel
 import root.data.mapper.RouteMapper
-import root.data.mapper.OrderMapper
+import root.data.mapper.RouteOrderMapper
 import root.domain.RouteRepository
 import root.domain.model.RouteModel
 import root.domain.model.RouteOrderModel
 
 class RouteRepositoryImpl(
     private val api: RouteApi,
-    private val orderMapper: OrderMapper,
+    private val orderMapper: RouteOrderMapper,
     private val routeMapper: RouteMapper,
     private val loadingStateMapper: LoadingStateMapper,
     private val deliveryStateMapper: DeliveryStateMapper
@@ -24,7 +24,7 @@ class RouteRepositoryImpl(
 
     override suspend fun getOrderDetails(id: Long): RouteOrderModel {
         val request = api.getOrderDetails(id)
-        return routeMapper.mapRouteOrder(request)
+        return orderMapper.map(request)
     }
 
     override suspend fun acceptRoute(id: Long) {

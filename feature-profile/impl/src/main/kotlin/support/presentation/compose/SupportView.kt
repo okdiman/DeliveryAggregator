@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import support.presentation.viewmodel.model.SupportEvent
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_profile.impl.R
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
 internal fun SupportView(eventHandler: (SupportEvent) -> Unit) {
@@ -31,7 +32,7 @@ internal fun SupportView(eventHandler: (SupportEvent) -> Unit) {
             padding = PaddingValues(top = 16.dp)
         ) { eventHandler(SupportEvent.OnEmailClick) }
         ActionButton(
-            textRes = R.string.support_reject,
+            textRes = R_core.string.common_reject,
             textColor = Theme.colors.textPrimaryColor,
             color = Theme.colors.disabledButtonColor,
             alignment = Alignment.Center,

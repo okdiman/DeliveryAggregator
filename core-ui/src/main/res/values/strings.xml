@@ -12,5 +12,11 @@
     <string name="common_incorrect_address">Выберете адрес из списка</string>
     <string name="common_address_hint">Введите адрес</string>
     <string name="common_complete">Готово</string>
+    <string name="common_choose">Выбрать</string>
+    <string name="common_info_comment">Комментарий к заказу</string>
+    <string name="common_reject">Отменить</string>
+    <string name="common_add_new_address">Добавить новый адрес</string>
+    <string name="common_edit_address">Редактировать адрес</string>
+    <string name="common_good">Хорошо</string>
     <string name="common_empty_error" />
 </resources>

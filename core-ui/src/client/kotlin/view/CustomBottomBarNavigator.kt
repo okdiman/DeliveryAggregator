@@ -1,5 +1,6 @@
 package view
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.defaultMinSize
@@ -12,28 +13,35 @@ import androidx.compose.material.Icon
 import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import modifiers.advancedShadow
-import ru.alexgladkov.odyssey.compose.base.TabNavigator
+import ru.alexgladkov.odyssey.compose.base.AnimatedHost
 import ru.alexgladkov.odyssey.compose.controllers.MultiStackRootController
+import ru.alexgladkov.odyssey.compose.controllers.TabNavigationModel
+import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
+import ru.alexgladkov.odyssey.core.toScreenBundle
 import theme.Theme
 
 @Suppress("LongMethod")
 @Composable
-fun CustomBottomBarNavigator(startScreen: String?) {
+fun CustomBottomBarNavigator(startScreen: String?, alternativeScreen: String? = null) {
     val rootController = LocalRootController.current as MultiStackRootController
     val tabItem = rootController.stackChangeObserver.collectAsState().value ?: return
 
     Column(modifier = Modifier.fillMaxSize()) {
-        TabNavigator(
+        CustomTabNavigator(
             modifier = Modifier.weight(1f),
             startScreen,
-            tabItem
+            tabItem,
+            alternativeScreen
         )
         BottomNavigation(
             modifier = Modifier
@@ -94,4 +102,45 @@ fun CustomBottomBarNavigator(startScreen: String?) {
         }
     }
     rootController.tabsNavModel.launchedEffect.invoke()
+}
+
+@Composable
+private fun CustomTabNavigator(
+    modifier: Modifier = Modifier,
+    startScreen: String?,
+    currentTab: TabNavigationModel,
+    alternativeScreen: String?
+) {
+    val rootController = LocalRootController.current
+    val configuration = currentTab.rootController.currentScreen.collectAsState()
+    val saveableStateHolder = rememberSaveableStateHolder()
+
+    saveableStateHolder.SaveableStateProvider(currentTab.tabInfo.tabItem.name) {
+        Box(modifier = modifier) {
+            CompositionLocalProvider(
+                LocalRootController provides currentTab.rootController
+            ) {
+                configuration.value?.let { navConfig ->
+                    AnimatedHost(
+                        currentScreen = navConfig.screen.toScreenBundle(),
+                        animationType = navConfig.screen.animationType,
+                        screenToRemove = navConfig.screenToRemove?.toScreenBundle(),
+                        isForward = navConfig.screen.isForward,
+                        onScreenRemove = currentTab.rootController.onScreenRemove
+                    ) { currentTab.rootController.renderScreen(it.realKey, it.params) }
+                }
+            }
+        }
+    }
+
+    LaunchedEffect(currentTab) {
+        val tabStartScreen = currentTab.rootController.getFirstScreenName()
+        if (tabStartScreen != null) {
+            currentTab.rootController.drawCurrentScreen(startScreen = startScreen)
+        } else {
+            rootController.findRootController().present(
+                screen = alternativeScreen.toString()
+            )
+        }
+    }
 }

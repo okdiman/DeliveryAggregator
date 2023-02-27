@@ -1,6 +1,6 @@
 package flow
 
-import departure.root.presentation.compose.DepartureScreen
+import departure.presentation.compose.DepartureScreen
 import editing.presentation.EditProfileParameters
 import editing.presentation.compose.EditProfileScreen
 import navigation.NavigationTree
