@@ -40,11 +40,11 @@ internal fun TitledTextField(
     isDigits: Boolean = false,
     maxChar: Int = Int.MAX_VALUE,
     enabled: Boolean = true,
-    singleLine: Boolean = false,
     onValueChanged: (String) -> Unit,
     textStyle: TextStyle,
     maxLines: Int,
-    hintStyle: TextStyle = Theme.fonts.bold.copy(
+    singleLine: Boolean = maxLines == 1,
+    hintStyle: TextStyle = Theme.fonts.regular.copy(
         color = Theme.colors.hintColor
     ),
     colors: TextFieldColors = TextFieldDefaults.textFieldColors(

@@ -3,6 +3,7 @@ package root.presentation.mapper
 import orderdetails.root.domain.model.OrderDetailsModel
 import root.domain.model.status.OrderStatusProgress
 import root.domain.model.status.OrderStatusProgress.ASSIGNED
+import root.domain.model.status.OrderStatusProgress.CHANGED
 import root.domain.model.status.OrderStatusProgress.CREATED
 import root.domain.model.status.OrderStatusProgress.DELIVERY
 import root.domain.model.status.OrderStatusProgress.DONE
@@ -29,13 +30,14 @@ class OrdersUiMapper {
     private fun mapStatusToStatusCategoryUi(model: OrderStatusProgress): OrderStatusCategoryUiModel =
         when (model) {
             //FIXME Пока нельзя получить статус PAID
-            CREATED, ASSIGNED, DELIVERY -> OrderStatusCategoryUiModel.ACTIVE
+            CREATED, ASSIGNED, DELIVERY, CHANGED -> OrderStatusCategoryUiModel.ACTIVE
             DONE -> OrderStatusCategoryUiModel.DONE
         }
 
     private fun mapStatusToUi(model: OrderStatusProgress): OrderStatusUiModel =
         when (model) {
             CREATED -> OrderStatusUiModel.CREATED
+            CHANGED -> OrderStatusUiModel.CHANGED
             ASSIGNED -> OrderStatusUiModel.ASSIGNED
             DELIVERY -> OrderStatusUiModel.DELIVERY
             DONE -> OrderStatusUiModel.DONE

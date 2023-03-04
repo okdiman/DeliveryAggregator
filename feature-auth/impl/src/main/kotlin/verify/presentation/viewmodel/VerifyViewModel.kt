@@ -3,6 +3,8 @@ package verify.presentation.viewmodel
 import BaseViewModel
 import coroutines.AppDispatchers
 import domain.model.AuthSignInModel
+import domain.model.AuthVerifyCodeModel
+import domain.usecase.GetCodeUseCase
 import domain.usecase.SignInUseCase
 import network.exceptions.ForbiddenException
 import network.exceptions.UnauthorizedException
@@ -22,6 +24,7 @@ class VerifyViewModel(
     initialState = VerifyState()
 ), KoinComponent {
     private val getVerifyTitle by inject<GetVerifyTitleUseCase>()
+    private val getVerifyCode by inject<GetCodeUseCase>()
     private val signIn by inject<SignInUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
 
@@ -44,7 +47,10 @@ class VerifyViewModel(
     }
 
     private fun onRetryCallClick() {
-        viewState = viewState.copy(isRetryButtonAvailable = false, isTimerVisible = true)
+        launchJob {
+            getVerifyCode(AuthVerifyCodeModel(parameters.phone))
+            viewState = viewState.copy(isRetryButtonAvailable = false, isTimerVisible = true)
+        }
     }
 
     private fun onBackClick() {

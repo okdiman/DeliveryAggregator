@@ -8,15 +8,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import modifiers.autoScrollInFocus
 import orderdetails.deliverystate.presentation.viewmodel.model.OrderDeliveryEvent
 import orderdetails.deliverystate.presentation.viewmodel.model.OrderDeliveryState
 import orderdetails.loadingstate.presentation.compose.view.OrderPhotoHintView
@@ -31,10 +35,15 @@ import view.StandardTextField
 
 @Composable
 internal fun OrderDeliveryView(state: OrderDeliveryState, eventHandler: (OrderDeliveryEvent) -> Unit) {
+    val buttonHeight = remember {
+        mutableStateOf(0f)
+    }
+    val scrollState = rememberLazyListState()
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = 16.dp),
+        state = scrollState
     ) {
         item {
             OrderStateTitle(stringResource(R.string.delivery_state_title)) {
@@ -47,7 +56,6 @@ internal fun OrderDeliveryView(state: OrderDeliveryState, eventHandler: (OrderDe
         item {
             if (state.photo == null) {
                 OrderPhotoPlaceholder(
-                    permissionState = state.permissionState,
                     onPhotoClick = { eventHandler(OrderDeliveryEvent.OnPhotoClick) },
                     onPhotoAdded = { eventHandler(OrderDeliveryEvent.OnPhotoAdded(it)) }
                 )
@@ -57,7 +65,9 @@ internal fun OrderDeliveryView(state: OrderDeliveryState, eventHandler: (OrderDe
         }
         item {
             StandardTextField(
-                modifier = Modifier.defaultMinSize(minHeight = 90.dp),
+                modifier = Modifier
+                    .defaultMinSize(minHeight = 90.dp)
+                    .autoScrollInFocus(scrollState, buttonHeight),
                 title = stringResource(R.string.delivery_note_title),
                 state = state.comment,
                 hint = stringResource(R.string.delivery_note_hint),
@@ -69,7 +79,9 @@ internal fun OrderDeliveryView(state: OrderDeliveryState, eventHandler: (OrderDe
         }
     }
     if (state.isDoneButtonVisible) {
-        OrderStateDoneButton { eventHandler(OrderDeliveryEvent.OnDoneButtonClick) }
+        OrderStateDoneButton(
+            onPositioned = { buttonHeight.value = it }
+        ) { eventHandler(OrderDeliveryEvent.OnDoneButtonClick) }
     }
 }
 

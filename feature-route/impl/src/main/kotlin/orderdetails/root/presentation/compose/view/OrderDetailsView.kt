@@ -27,9 +27,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import modifiers.advancedShadow
-import root.domain.model.status.OrderStatusProgress
 import orderdetails.root.presentation.viewmodel.model.OrderDetailsEvent
 import orderdetails.root.presentation.viewmodel.model.OrderDetailsState
+import root.domain.model.status.OrderStatusProgress
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import view.BackButton
@@ -200,7 +200,10 @@ private fun OrderDetailsStatusView(
     Spacer(modifier = Modifier.height(20.dp))
     OrderDetailsStatusCardView(
         title = stringResource(id = R.string.order_details_loading_status),
-        isEnabled = state.uiModel.status == OrderStatusProgress.ASSIGNED
+        isEnabled = state.uiModel.status == OrderStatusProgress.ASSIGNED,
+        isCompleted = state.uiModel.status == OrderStatusProgress.DELIVERY ||
+            state.uiModel.status == OrderStatusProgress.DONE,
+        isWaiting = state.uiModel.status == OrderStatusProgress.CHANGED
     ) { eventHandler(OrderDetailsEvent.OnLoadingStateClick) }
     Spacer(modifier = Modifier.height(8.dp))
     OrderDetailsStatusCardView(
@@ -215,6 +218,7 @@ private fun OrderDetailsStatusCardView(
     title: String,
     isEnabled: Boolean,
     isCompleted: Boolean = !isEnabled,
+    isWaiting: Boolean = false,
     onClick: () -> Unit
 ) {
     Card(
@@ -241,11 +245,19 @@ private fun OrderDetailsStatusCardView(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(text = title, style = Theme.fonts.bold)
-            if (isCompleted) {
+            if (isCompleted || isWaiting) {
                 Text(
                     modifier = Modifier.padding(start = 8.dp),
-                    text = stringResource(id = R.string.order_details_delivery_status_completed),
-                    style = Theme.fonts.regular
+                    text = stringResource(
+                        id = if (isCompleted) {
+                            R.string.order_details_delivery_status_completed
+                        } else {
+                            R.string.order_details_delivery_status_waiting
+                        }
+                    ),
+                    style = Theme.fonts.regular.copy(
+                        color = Theme.colors.textPrimaryColor.copy(alpha = 0.7f)
+                    )
                 )
             }
         }

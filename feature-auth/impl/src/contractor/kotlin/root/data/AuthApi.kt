@@ -3,10 +3,10 @@ package root.data
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import root.data.model.AuthSignUpRequest
 import root.data.model.request.AuthSendVerifyCodeRequest
 import root.data.model.request.AuthSignInRequest
-import root.data.model.AuthSignUpRequest
-import root.data.model.response.AuthSuccessResponse
+import root.data.model.response.AuthSuccessDto
 
 interface AuthApi {
     @POST("/auth/send-code")
@@ -17,12 +17,12 @@ interface AuthApi {
     @POST("/auth/sign-in")
     suspend fun signIn(
         @Body request: AuthSignInRequest
-    ): AuthSuccessResponse
+    ): AuthSuccessDto
 
     @POST("/auth/contractor/sign-up")
     suspend fun signUp(
         @Body request: AuthSignUpRequest
-    ): AuthSuccessResponse
+    ): AuthSuccessDto
 
     /**
      * возвращает инфу о токене, но пока она не нужна

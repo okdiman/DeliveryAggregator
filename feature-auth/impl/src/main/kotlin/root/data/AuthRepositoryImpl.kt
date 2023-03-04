@@ -5,9 +5,11 @@ import domain.AuthRepository
 import domain.model.AuthSignInModel
 import domain.model.AuthSignUpModel
 import domain.model.AuthVerifyCodeModel
+import network.exceptions.UnauthorizedException
 import root.data.mapper.AuthSignUpMapper
 import root.data.model.request.AuthSendVerifyCodeRequest
 import root.data.model.request.AuthSignInRequest
+import trinity_monsters.delivery_aggregator.core.BuildConfig
 
 class AuthRepositoryImpl(
     private val api: AuthApi,
@@ -24,6 +26,9 @@ class AuthRepositoryImpl(
 
     override suspend fun signIn(model: AuthSignInModel) {
         val response = api.signIn(AuthSignInRequest(model.code, model.phone))
+        if (response.tokenInfo?.role != BuildConfig.FLAVOR) {
+            throw UnauthorizedException(Throwable("Incorrect role"))
+        }
         localDataSource.saveAccessToken(response.token)
     }
 

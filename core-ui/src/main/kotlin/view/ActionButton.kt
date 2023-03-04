@@ -1,3 +1,4 @@
+
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -117,12 +120,16 @@ fun ScrollScreenActionButton(
     textColor: Color = Theme.colors.textSecondaryColor,
     enabled: Boolean = true,
     padding: PaddingValues = PaddingValues(start = 16.dp, end = 16.dp, bottom = 44.dp),
+    onPositioned: (Float) -> Unit = {},
     onClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(140.dp)
+            .onGloballyPositioned {
+                onPositioned(it.positionInRoot().y)
+            }
             .background(Theme.gradients.buttonBackgroundGradient),
         contentAlignment = alignment
     ) {
