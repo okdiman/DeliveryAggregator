@@ -10,6 +10,7 @@ import trinity_monsters.delivery_aggregator.feature_route.impl.R
 
 @Composable
 internal fun OrderStateDoneButton(
+    onPositioned: (Float) -> Unit,
     onClick: () -> Unit
 ) {
     Box(
@@ -17,7 +18,8 @@ internal fun OrderStateDoneButton(
         contentAlignment = Alignment.BottomCenter
     ) {
         ScrollScreenActionButton(
-            textRes = R.string.loading_step_done
+            textRes = R.string.loading_step_done,
+            onPositioned = onPositioned
         ) { onClick() }
     }
 }

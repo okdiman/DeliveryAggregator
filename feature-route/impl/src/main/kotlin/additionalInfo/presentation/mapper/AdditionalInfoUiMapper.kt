@@ -4,10 +4,11 @@ import additionalInfo.presentation.AdditionalInfoParameters
 import additionalInfo.presentation.compose.model.AdditionalInfoUiModel
 import root.domain.model.extras.OrderExtrasModel
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
-import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 import utils.CommonConstants.Helpers.COMMA
 import utils.CommonConstants.Helpers.LINE_BREAK
+import utils.CommonConstants.Helpers.SPACER
 import utils.resource.domain.ResourceInteractor
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 class AdditionalInfoUiMapper(
     private val resourceInteractor: ResourceInteractor
@@ -27,10 +28,12 @@ class AdditionalInfoUiMapper(
         ),
         AdditionalInfoUiModel(
             title = R.string.route_weight,
-            text = parameters.weight
+            text = buildString {
+                append(parameters.weight + SPACER + resourceInteractor.getString(R.string.route_weight_prefix))
+            }
         ),
         AdditionalInfoUiModel(
-            title = R.string.route_extras,
+            title = R_core.string.common_extras,
             text = mapExtras(parameters.extras).joinToString(LINE_BREAK)
         ),
         AdditionalInfoUiModel(

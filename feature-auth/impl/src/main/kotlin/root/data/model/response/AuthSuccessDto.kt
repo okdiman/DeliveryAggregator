@@ -2,8 +2,9 @@ package root.data.model.response
 
 import com.google.gson.annotations.SerializedName
 
-@JvmInline
-value class AuthSuccessResponse(
+class AuthSuccessDto(
     @SerializedName("token")
-    val token: String
+    val token: String,
+    @SerializedName("tokenInfo")
+    val tokenInfo: AuthTokenInfoDto?
 )

@@ -20,7 +20,6 @@ import extras.presentation.model.ExtrasState
 import extras.presentation.model.ExtrasUiModel
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import theme.Theme
-import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import view.BSTitleView
 import view.CheckboxView
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
@@ -37,7 +36,7 @@ internal fun ExtrasScreen(
             .padding(vertical = 16.dp, horizontal = 8.dp)
     ) {
         item {
-            BSTitleView(stringResource(id = R.string.route_extras))
+            BSTitleView(stringResource(id = R_core.string.common_extras))
         }
         item {
             ExtrasCheckboxesView(state, onExtrasClick)

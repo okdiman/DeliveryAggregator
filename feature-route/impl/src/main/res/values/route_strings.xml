@@ -7,10 +7,10 @@
     <string name="route_done_status">Выполнен</string>
     <string name="route_accept_route">Взять в работу</string>
     <string name="route_notifications_permission">Нажмите «Разрешить», чтобы получать уведомления о новых рейсах и статусах</string>
-    <string name="route_extras">Дополнительные услуги</string>
     <string name="route_cargo_type">Тип груза</string>
     <string name="route_boxes_count">Количество коробов</string>
     <string name="route_count_hint">Введите количество</string>
-    <string name="route_weight">Масса поставки (кг)</string>
+    <string name="route_weight">Масса поставки</string>
+    <string name="route_weight_prefix">кг</string>
     <string name="route_delivery_time">Время прибытия</string>
 </resources>

@@ -16,6 +16,8 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import modifiers.autoScrollInFocus
 import neworder.root.presentation.viewmodel.model.NewOrderEvent
 import neworder.root.presentation.viewmodel.model.NewOrderState
 import theme.Theme
@@ -32,30 +35,47 @@ import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import utils.CommonConstants.LIMITS.Common.MAX_DESCRIPTION_CHARS
 import utils.CommonConstants.LIMITS.Transport.CAR_CAPACITY_MAX_CHARS
 import utils.CommonConstants.LIMITS.Transport.CAR_PALLETS_MAX_CHARS
+import view.ExtrasTextField
 import view.StandardTextField
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
 internal fun NewOrderView(state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
+    val buttonHeight = remember {
+        mutableStateOf(0f)
+    }
+    val scrollState = rememberScrollState()
+    val modifier = Modifier.autoScrollInFocus(scrollState, buttonHeight)
     Column(
         modifier = Modifier
             .padding(PaddingValues(start = 16.dp, end = 16.dp, top = 4.dp))
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
     ) {
         TitleView(eventHandler)
         MarketplaceItem(state)
         CargoTypeItem(state, eventHandler)
-        BoxesItem(state, eventHandler)
-        PalletsItem(state, eventHandler)
-        WeightItem(state, eventHandler)
+        BoxesItem(modifier, state, eventHandler)
+        PalletsItem(modifier, state, eventHandler)
+        WeightItem(modifier, state, eventHandler)
         AddressItem(state, eventHandler)
         DateItem(state, eventHandler)
         TimeItem(state, eventHandler)
         StorageItem(state, eventHandler)
-        ExtrasItem(state, eventHandler)
-        CommentItem(state, eventHandler)
+        ExtrasTextField(
+            modifier = modifier,
+            text = state.extras.stateText
+        ) {
+            eventHandler(NewOrderEvent.OnExtrasClick)
+        }
+        CommentItem(modifier, state, eventHandler)
     }
-    CreateOrderButtonItem(state, eventHandler)
+    CreateOrderButtonItem(
+        state = state,
+        onPositioned = {
+            buttonHeight.value = it
+        },
+        eventHandler = eventHandler
+    )
 }
 
 @Composable
@@ -116,8 +136,9 @@ private fun CargoTypeItem(state: NewOrderState, eventHandler: (NewOrderEvent) ->
 }
 
 @Composable
-private fun BoxesItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
+private fun BoxesItem(modifier: Modifier, state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
     StandardTextField(
+        modifier = modifier,
         title = stringResource(R.string.route_boxes_count),
         state = state.boxesCount,
         hint = stringResource(R.string.route_count_hint),
@@ -129,8 +150,9 @@ private fun BoxesItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> Uni
 }
 
 @Composable
-private fun PalletsItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
+private fun PalletsItem(modifier: Modifier, state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
     StandardTextField(
+        modifier = modifier,
         title = stringResource(R.string.new_order_pallet_title),
         state = state.palletsCount,
         hint = stringResource(R.string.route_count_hint),
@@ -141,8 +163,9 @@ private fun PalletsItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> U
 }
 
 @Composable
-private fun WeightItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
+private fun WeightItem(modifier: Modifier, state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
     StandardTextField(
+        modifier = modifier,
         title = stringResource(R.string.route_weight),
         state = state.weight,
         hint = stringResource(R.string.new_order_weight_hint),
@@ -229,30 +252,13 @@ private fun StorageItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> U
 }
 
 @Composable
-private fun ExtrasItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
+private fun CommentItem(modifier: Modifier, state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
     StandardTextField(
-        modifier = Modifier
-            .clip(Theme.shapes.textFields)
-            .clickable { eventHandler(NewOrderEvent.OnExtrasClick) },
-        title = stringResource(R.string.route_extras),
-        state = state.extras,
-        hint = stringResource(R_core.string.common_choose),
-        enabled = false,
-        trailingIcon = {
-            Icon(
-                painter = painterResource(id = R_core.drawable.chevron_ic),
-                contentDescription = null
-            )
-        }
-    )
-}
-
-@Composable
-private fun CommentItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
-    StandardTextField(
-        modifier = Modifier
-            .padding(bottom = 100.dp)
-            .defaultMinSize(minHeight = 90.dp),
+        modifier = modifier.then(
+            Modifier
+                .padding(bottom = 100.dp)
+                .defaultMinSize(minHeight = 90.dp)
+        ),
         title = stringResource(R_core.string.common_info_comment),
         state = state.comment,
         hint = stringResource(R.string.new_order_comment_hint),
@@ -262,13 +268,18 @@ private fun CommentItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> U
 }
 
 @Composable
-private fun CreateOrderButtonItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
+private fun CreateOrderButtonItem(
+    state: NewOrderState,
+    onPositioned: (Float) -> Unit,
+    eventHandler: (NewOrderEvent) -> Unit
+) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.BottomCenter
     ) {
         ScrollScreenActionButton(
             textRes = R.string.new_order_create,
+            onPositioned = onPositioned,
             additionalText = state.createButton.subtitle,
             enabled = state.createButton.isEnabled,
             height = 65.dp,
