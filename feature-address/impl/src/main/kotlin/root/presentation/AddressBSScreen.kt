@@ -6,23 +6,34 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.text.selection.LocalTextSelectionColors
+import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import presentation.AddressSuggestUiModel
@@ -31,7 +42,6 @@ import root.presentation.view.SuggestItemView
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import theme.Theme
 import view.ProgressIndicator
-import view.StandardTextField
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Suppress("LongMethod")
@@ -47,16 +57,27 @@ fun AddressBSScreen(
 ) {
     val scrollState = rememberLazyListState()
     val focusRequester = remember { FocusRequester() }
+    val textFieldValue = remember { mutableStateOf(TextFieldValue(state.stateText, TextRange(state.stateText.length))) }
     LazyColumn(
         state = scrollState,
-        modifier = Modifier
-            .padding(start = 16.dp, end = 16.dp),
+        modifier = Modifier.padding(start = 16.dp, end = 16.dp),
     ) {
         item {
             AddressTitleView(titleRes)
         }
         item {
-            AddressTextFieldView(state, onClearClick, onTextFieldChanged, focusRequester)
+            AddressTextFieldView(
+                textFieldValue = textFieldValue,
+                focusRequester = focusRequester,
+                onClearClick = {
+                    textFieldValue.value = textFieldValue.value.copy(text = "")
+                    onClearClick()
+                },
+                onTextFieldChanged = { newTextFieldValue ->
+                    textFieldValue.value = newTextFieldValue
+                    onTextFieldChanged(newTextFieldValue.text)
+                }
+            )
         }
         if (state.isSuggestLoading) {
             item {
@@ -65,7 +86,15 @@ fun AddressBSScreen(
                 }
             }
         } else {
-            items(suggests) { SuggestItemView(scrollState, it, isNeedComment, onSuggestClick) }
+            items(suggests) {
+                SuggestItemView(scrollState, it, isNeedComment) { uiModel ->
+                    onSuggestClick(uiModel)
+                    textFieldValue.value = textFieldValue.value.copy(
+                        text = uiModel.subtitle,
+                        selection = TextRange(uiModel.subtitle.length)
+                    )
+                }
+            }
         }
     }
     LaunchedEffect(Unit) {
@@ -99,32 +128,56 @@ private fun AddressTitleView(@StringRes titleRes: Int) {
 
 @Composable
 private fun AddressTextFieldView(
-    state: AddressState,
+    textFieldValue: State<TextFieldValue>,
+    focusRequester: FocusRequester,
     onClearClick: () -> Unit,
-    onTextFieldChanged: (String) -> Unit,
-    focusRequester: FocusRequester
+    onTextFieldChanged: (TextFieldValue) -> Unit
 ) {
-    StandardTextField(
-        modifier = Modifier.focusRequester(focusRequester),
-        state = state,
-        hasTitle = false,
-        leadingIcon = {
-            Icon(
-                painter = painterResource(id = R_core.drawable.search_ic),
-                contentDescription = null
-            )
-        },
-        trailingIcon = {
-            Icon(
-                modifier = Modifier
-                    .clip(Theme.shapes.roundedButton)
-                    .clickable { onClearClick() },
-                painter = painterResource(id = R_core.drawable.delete_ic),
-                contentDescription = null
-            )
-        },
-        hint = stringResource(id = R_core.string.common_address_hint),
-        onValueChanged = { onTextFieldChanged(it) }
+    val customTextSelectionColors = TextSelectionColors(
+        handleColor = Theme.colors.selectionTextColor,
+        backgroundColor = Theme.colors.selectionTextColor.copy(alpha = 0.5f)
     )
+    CompositionLocalProvider(LocalTextSelectionColors provides customTextSelectionColors) {
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth()
+                .focusRequester(focusRequester),
+            value = textFieldValue.value,
+            textStyle = Theme.fonts.regular.copy(
+                platformStyle = null,
+                lineHeightStyle = null
+            ),
+            colors = TextFieldDefaults.textFieldColors(
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                backgroundColor = Theme.colors.hintBackgroundColor,
+                cursorColor = Theme.colors.textPrimaryColor,
+                errorIndicatorColor = Theme.colors.errorColor,
+                disabledIndicatorColor = Color.Transparent,
+                disabledTrailingIconColor = Color.Black
+            ),
+            shape = Theme.shapes.textFields,
+            trailingIcon = {
+                Icon(
+                    modifier = Modifier
+                        .clip(Theme.shapes.roundedButton)
+                        .clickable { onClearClick() },
+                    painter = painterResource(id = R_core.drawable.delete_ic),
+                    contentDescription = null
+                )
+            },
+            placeholder = {
+                Text(
+                    text = stringResource(id = R_core.string.common_address_hint),
+                    style = Theme.fonts.regular.copy(
+                        color = Theme.colors.hintColor
+                    )
+                )
+            },
+            onValueChange = { value ->
+                onTextFieldChanged(value)
+            }
+        )
+    }
     Spacer(modifier = Modifier.height(24.dp))
 }
