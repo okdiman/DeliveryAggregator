@@ -88,6 +88,12 @@ fun NewOrderScreen() {
                     )
                 )
             }
+            is NewOrderAction.OpenCreationErrorScreen -> {
+                rootController.findRootController().push(
+                    NavigationTree.NewOrder.CreationError.name,
+                    params = (action.value as NewOrderAction.OpenCreationErrorScreen).parameters
+                )
+            }
             NewOrderAction.OpenTimeScreen -> {
                 OpenModalScreen {
                     ArrivalTimeScreen(state.value.arrivalTime) { arrivalTime ->

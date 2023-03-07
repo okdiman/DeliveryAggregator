@@ -2,25 +2,42 @@ package root.presentation.viewmodel
 
 import BaseViewModel
 import coroutines.AppDispatchers
+import network.domain.GetAuthTokenSyncUseCase
 import network.exceptions.NotFoundException
+import neworder.creationerror.presentation.CreationErrorParameters
+import neworder.payment.domain.GetPaymentUriUseCase
+import orderdetails.root.domain.model.OrderDetailsModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import presentation.DeeplinkParameters
+import root.DeeplinkNavigatorHandler
+import root.domain.model.status.OrderStatusProgress
 import root.domain.usecase.GetOrdersUseCase
 import root.presentation.compose.model.OrderStatusCategoryUiModel
 import root.presentation.mapper.OrdersUiMapper
 import root.presentation.viewmodel.model.OrdersAction
 import root.presentation.viewmodel.model.OrdersEvent
 import root.presentation.viewmodel.model.OrdersState
+import trinity_monsters.delivery_aggregator.feature_route.impl.R
+import utils.CommonConstants.Helpers.RUBBLES
+import utils.ext.getSafeQueryParameter
+import utils.resource.domain.ResourceInteractor
 
-class OrdersViewModel : BaseViewModel<OrdersState, OrdersAction, OrdersEvent>(
-    initialState = OrdersState()
-), KoinComponent {
+class OrdersViewModel(private val deeplinkParameters: DeeplinkParameters?) :
+    BaseViewModel<OrdersState, OrdersAction, OrdersEvent>(initialState = OrdersState()), KoinComponent {
 
     private val getOrderRequests by inject<GetOrdersUseCase>()
+    private val getAuthTokenSyncUseCase by inject<GetAuthTokenSyncUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
     private val mapper by inject<OrdersUiMapper>()
+    private val deeplinkNavigatorHandler by inject<DeeplinkNavigatorHandler>()
+    private val resourceInteractor by inject<ResourceInteractor>()
+    private val getPaymentUri by inject<GetPaymentUriUseCase>()
+
+    private var orderRequests: List<OrderDetailsModel> = emptyList()
 
     init {
+        checkDeeplink()
         getContent()
     }
 
@@ -56,7 +73,17 @@ class OrdersViewModel : BaseViewModel<OrdersState, OrdersAction, OrdersEvent>(
     }
 
     private fun onCreateNewOrderClick() {
-        viewAction = OrdersAction.OpenNewOrderScreen
+        val unpaidOrders = orderRequests.filter { it.status == OrderStatusProgress.DONE && !it.isPaid }
+            .sortedBy { it.arrivalDay }
+        viewAction = if (unpaidOrders.isNotEmpty()) {
+            getAuthTokenSyncUseCase()?.let { token ->
+                OrdersAction.OpenCreationErrorScreen(
+                    CreationErrorParameters(getPaymentUri(unpaidOrders.first().id, token))
+                )
+            }
+        } else {
+            OrdersAction.OpenNewOrderScreen
+        }
     }
 
     private fun onOpenNotificationsClick() {
@@ -80,12 +107,36 @@ class OrdersViewModel : BaseViewModel<OrdersState, OrdersAction, OrdersEvent>(
             }
         ) {
             viewState = viewState.copy(isError = false, isLoading = true)
-            val orderRequests = getOrderRequests()
+            orderRequests = getOrderRequests()
             viewState = viewState.copy(
                 isLoading = false,
                 isRefreshing = false,
                 orders = mapper.map(orderRequests),
             )
         }
+    }
+
+    /**
+     * навигация по диплинкам
+     */
+    private fun checkDeeplink() {
+        viewAction = when (deeplinkNavigatorHandler.getDestination(deeplinkParameters?.uri)) {
+            PAYMENT_SUCCESS -> {
+                val price = deeplinkParameters?.uri?.getSafeQueryParameter(PRICE)?.let {
+                    val withRubbles = buildString { append(it + RUBBLES) }
+                    String.format(
+                        resourceInteractor.getString(R.string.new_order_payment_subtitle),
+                        withRubbles
+                    )
+                }
+                OrdersAction.OpenPaymentSuccess(price)
+            }
+            else -> null
+        }
+    }
+
+    private companion object {
+        const val PAYMENT_SUCCESS = "success"
+        const val PRICE = "price"
     }
 }

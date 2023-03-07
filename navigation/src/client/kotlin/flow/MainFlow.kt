@@ -4,8 +4,12 @@ import departure.presentation.compose.DepartureScreen
 import editing.presentation.EditProfileParameters
 import editing.presentation.compose.EditProfileScreen
 import navigation.NavigationTree
+import neworder.creationerror.presentation.CreationErrorParameters
+import neworder.creationerror.presentation.CreationErrorScreen
 import neworder.ordercreated.presentation.OrderCreatedParameters
 import neworder.ordercreated.presentation.OrderCreatedScreen
+import neworder.payment.presentation.PaymentSuccessParameters
+import neworder.payment.presentation.PaymentSuccessScreen
 import neworder.root.presentation.compose.NewOrderScreen
 import neworder.storage.presentation.compose.NewOrderStorageParameters
 import neworder.storage.presentation.compose.NewOrderStorageScreen
@@ -37,7 +41,7 @@ fun RootComposeBuilder.mainFlow(deeplinkParameters: DeeplinkParameters?) {
             )
         ) {
             screen(NavigationTree.Main.Orders.name) {
-                OrderRequestsScreen()
+                OrderRequestsScreen(deeplinkParameters)
             }
         }
         tab(
@@ -76,8 +80,14 @@ fun RootComposeBuilder.mainFlow(deeplinkParameters: DeeplinkParameters?) {
         screen(NavigationTree.NewOrder.Storages.name) { parameters ->
             NewOrderStorageScreen(parameters as NewOrderStorageParameters)
         }
-        screen(NavigationTree.NewOrder.OrderCreated.name){parameters->
+        screen(NavigationTree.NewOrder.OrderCreated.name) { parameters ->
             OrderCreatedScreen(parameters as OrderCreatedParameters)
         }
+    }
+    screen(NavigationTree.NewOrder.CreationError.name) { parameters ->
+        CreationErrorScreen(parameters as CreationErrorParameters)
+    }
+    screen(NavigationTree.NewOrder.PaymentSuccess.name) { parameters ->
+        PaymentSuccessScreen(parameters as PaymentSuccessParameters)
     }
 }

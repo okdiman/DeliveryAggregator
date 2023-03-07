@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import modifiers.shimmerEffect
-import neworder.storage.presentation.compose.constants.NewOrderStorageUiConstants.STORAGE_ITEMS_COUNT
+import neworder.root.presentation.compose.constants.NewOrderUiConstants.STORAGE_ITEMS_COUNT
 import theme.Theme
 
 @Composable

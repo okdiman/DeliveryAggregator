@@ -22,4 +22,6 @@ object Versions {
     const val firebaseCrashlytics = "18.3.3"
     const val threeTenAbp = "1.4.4"
     const val permissions = "0.28.0"
+    const val browser = "1.5.0"
+    const val leakCanary = "2.10"
 }

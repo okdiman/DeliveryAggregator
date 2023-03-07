@@ -1,6 +1,7 @@
 package login.presentation.compose
 
 import ActionButton
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -18,6 +19,7 @@ import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -31,23 +33,27 @@ import trinity_monsters.delivery_aggregator.feature_auth.impl.R
 import utils.CommonConstants.LIMITS.Common.MAX_PHONE_CHARS
 import view.CheckboxView
 import view.CommonTextField
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
-internal fun LoginView(viewState: LoginState, eventHandler: (LoginEvent) -> Unit) {
+internal fun LoginView(state: LoginState, eventHandler: (LoginEvent) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
         TitleBlock()
-        PhoneBlock(viewState = viewState, eventHandler = eventHandler)
-        AgreementBlock(viewState = viewState, eventHandler = eventHandler)
+        PhoneBlock(viewState = state, eventHandler = eventHandler)
+        AgreementBlock(viewState = state, eventHandler = eventHandler)
         ActionButton(
             modifier = Modifier.fillMaxSize(),
             textRes = R.string.login_entrance,
-            enabled = viewState.isButtonEnabled,
+            enabled = state.isButtonEnabled,
             padding = PaddingValues(0.dp)
         ) { eventHandler(LoginEvent.OnEntranceButtonCLick) }
+    }
+    if (state.isError) {
+        Toast.makeText(LocalContext.current, R_core.string.common_smth_wrong, Toast.LENGTH_SHORT).show()
     }
 }
 

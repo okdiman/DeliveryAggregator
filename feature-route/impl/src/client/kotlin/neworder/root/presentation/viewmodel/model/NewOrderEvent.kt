@@ -26,5 +26,6 @@ sealed interface NewOrderEvent {
     object OnExtrasClick : NewOrderEvent
     object OnBackClick : NewOrderEvent
     object OnCreateButtonClick : NewOrderEvent
+    object OnRetryClick : NewOrderEvent
     object ResetAction : NewOrderEvent
 }

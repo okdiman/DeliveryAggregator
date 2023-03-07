@@ -31,6 +31,7 @@ dependencies {
     accompanist()
     compose()
     koin()
+    browser()
     viewModel()
     navigation()
     implementation(project(Modules.core))

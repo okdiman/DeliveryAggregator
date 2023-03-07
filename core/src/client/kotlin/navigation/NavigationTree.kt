@@ -19,7 +19,7 @@ object NavigationTree {
     }
 
     enum class NewOrder {
-        Creating, Storages, OrderCreated
+        Creating, Storages, OrderCreated, CreationError, PaymentSuccess
     }
 
     enum class Profile {

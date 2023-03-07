@@ -47,7 +47,13 @@ class LoginViewModel : BaseViewModel<LoginState, LoginAction, LoginEvent>(
     }
 
     private fun onEntranceButtonClick() {
-        launchJob(appDispatchers.network) {
+        launchJob(
+            context = appDispatchers.network,
+            onError = {
+                viewState = viewState.copy(isError = true)
+            }
+        ) {
+            viewState = viewState.copy(isError = false)
             getVerifyCode(AuthVerifyCodeModel(viewState.phone))
             viewAction = LoginAction.OpenVerifyScreen
         }

@@ -1,5 +1,6 @@
 package verify.presentation.compose
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -31,11 +33,13 @@ import root.AuthConstants.Limits.SECOND
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_auth.impl.R
 import utils.formatters.formatTicks
+import verify.presentation.compose.model.VerifyStepError
 import verify.presentation.viewmodel.model.VerifyEvent
 import verify.presentation.viewmodel.model.VerifyState
 import view.BackButton
 import view.CommonTextField
 import view.ProgressIndicator
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
 internal fun VerifyView(viewState: VerifyState, eventHandler: (VerifyEvent) -> Unit) {
@@ -68,8 +72,10 @@ private fun InfoBlock(viewState: VerifyState) {
     )
 }
 
+@Suppress("LongMethod")
 @Composable
 private fun CodeBlock(viewState: VerifyState, eventHandler: (VerifyEvent) -> Unit) {
+    val context = LocalContext.current
     var ticks by remember { mutableStateOf(viewState.renewalPeriod) }
     LaunchedEffect(viewState.isTimerVisible) {
         launch {
@@ -96,7 +102,7 @@ private fun CodeBlock(viewState: VerifyState, eventHandler: (VerifyEvent) -> Uni
         maxChar = MAX_CODE_CHARS,
         enabled = !viewState.isLoading
     )
-    if (viewState.isCodeError) {
+    if (viewState.error == VerifyStepError.Forbidden) {
         Text(
             text = stringResource(id = R.string.verify_code_error),
             style = Theme.fonts.regular.copy(fontSize = 14.sp, color = Theme.colors.errorColor)
@@ -125,5 +131,14 @@ private fun CodeBlock(viewState: VerifyState, eventHandler: (VerifyEvent) -> Uni
     }
     LaunchedEffect(Unit) {
         focusRequester.requestFocus()
+    }
+    LaunchedEffect(key1 = viewState.error) {
+        if (viewState.error == VerifyStepError.Common) {
+            Toast.makeText(
+                context,
+                R_core.string.common_smth_wrong,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }
