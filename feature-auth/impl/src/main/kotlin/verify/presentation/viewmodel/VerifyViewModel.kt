@@ -14,6 +14,7 @@ import root.AuthConstants.Limits.MAX_CODE_CHARS
 import utils.ext.isTextFieldFilled
 import verify.domain.GetVerifyTitleUseCase
 import verify.presentation.VerifyParameters
+import verify.presentation.compose.model.VerifyStepError
 import verify.presentation.viewmodel.model.VerifyAction
 import verify.presentation.viewmodel.model.VerifyEvent
 import verify.presentation.viewmodel.model.VerifyState
@@ -59,7 +60,7 @@ class VerifyViewModel(
 
     private fun onCodeChanged(code: String) {
         val isCodeFilled = code.isTextFieldFilled(MAX_CODE_CHARS)
-        viewState = viewState.copy(code = code, isLoading = isCodeFilled, isCodeError = false)
+        viewState = viewState.copy(code = code, isLoading = isCodeFilled, error = null)
         if (isCodeFilled) {
             launchJob(context = appDispatchers.network, onError = {
                 when (it) {
@@ -67,7 +68,10 @@ class VerifyViewModel(
                         viewAction = VerifyAction.OpenRegistrationFlow
                     }
                     is ForbiddenException -> {
-                        viewState = viewState.copy(isCodeError = true)
+                        viewState = viewState.copy(error = VerifyStepError.Forbidden)
+                    }
+                    else -> {
+                        viewState = viewState.copy(error = VerifyStepError.Common)
                     }
                 }
             }, onFinally = {

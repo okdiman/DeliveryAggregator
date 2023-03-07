@@ -16,4 +16,9 @@
     <string name="new_order_price">Стоимость</string>
     <string name="new_order_created">Заказ сделан!</string>
     <string name="new_order_created_text">Поставка запланирована\n</string>
+    <string name="new_order_creation_text">Вы можете создать новый заказ только при оплате предыдущих</string>
+    <string name="new_order_creation_button">Перейти к оплате</string>
+    <string name="new_order_payment_button">Вернуться в заказы</string>
+    <string name="new_order_payment_title">Заказ оплачен!</string>
+    <string name="new_order_payment_subtitle">Оплачено %1s</string>
 </resources>

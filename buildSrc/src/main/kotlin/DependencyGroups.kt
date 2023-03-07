@@ -1,6 +1,7 @@
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
 private const val IMPLEMENTATION = "implementation"
+private const val DEBUG_IMPLEMENTATION = "debugImplementation"
 
 fun DependencyHandler.core() {
     add(IMPLEMENTATION, Libraries.Core.coreKtx)
@@ -61,6 +62,10 @@ fun DependencyHandler.accompanist() {
     add(IMPLEMENTATION, Libraries.Accompanist.permissions)
 }
 
+fun DependencyHandler.browser() {
+    add(IMPLEMENTATION, Libraries.Core.browser)
+}
+
 fun DependencyHandler.firebase() {
     add(IMPLEMENTATION, Libraries.Firebase.messaging)
     add(IMPLEMENTATION, Libraries.Firebase.crashlytics)
@@ -75,4 +80,8 @@ fun DependencyHandler.viewModel() {
 fun DependencyHandler.navigation() {
     add(IMPLEMENTATION, Libraries.Navigation.compose)
     add(IMPLEMENTATION, Libraries.Navigation.core)
+}
+
+fun DependencyHandler.leakCanary() {
+    add(DEBUG_IMPLEMENTATION, Libraries.LeakCanary.core)
 }

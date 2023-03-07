@@ -1,5 +1,6 @@
 package neworder.root.presentation.compose.view
 
+import CommonErrorScreen
 import ScrollScreenActionButton
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -46,36 +47,44 @@ internal fun NewOrderView(state: NewOrderState, eventHandler: (NewOrderEvent) ->
     }
     val scrollState = rememberScrollState()
     val modifier = Modifier.autoScrollInFocus(scrollState, buttonHeight)
-    Column(
-        modifier = Modifier
-            .padding(PaddingValues(start = 16.dp, end = 16.dp, top = 4.dp))
-            .verticalScroll(scrollState)
-    ) {
-        TitleView(eventHandler)
-        MarketplaceItem(state)
-        CargoTypeItem(state, eventHandler)
-        BoxesItem(modifier, state, eventHandler)
-        PalletsItem(modifier, state, eventHandler)
-        WeightItem(modifier, state, eventHandler)
-        AddressItem(state, eventHandler)
-        DateItem(state, eventHandler)
-        TimeItem(state, eventHandler)
-        StorageItem(state, eventHandler)
-        ExtrasTextField(
-            modifier = modifier,
-            text = state.extras.stateText
+    if (state.isError) {
+        CommonErrorScreen { eventHandler(NewOrderEvent.OnRetryClick) }
+    } else {
+        Column(
+            modifier = Modifier
+                .padding(PaddingValues(start = 16.dp, end = 16.dp, top = 4.dp))
+                .verticalScroll(scrollState)
         ) {
-            eventHandler(NewOrderEvent.OnExtrasClick)
+            TitleView(eventHandler)
+            if (state.isLoading) {
+                NewOrderLoadingView()
+            } else {
+                MarketplaceItem(state)
+                CargoTypeItem(state, eventHandler)
+                BoxesItem(modifier, state, eventHandler)
+                PalletsItem(modifier, state, eventHandler)
+                WeightItem(modifier, state, eventHandler)
+                AddressItem(state, eventHandler)
+                DateItem(state, eventHandler)
+                TimeItem(state, eventHandler)
+                StorageItem(state, eventHandler)
+                ExtrasTextField(
+                    modifier = modifier,
+                    text = state.extras.stateText
+                ) {
+                    eventHandler(NewOrderEvent.OnExtrasClick)
+                }
+                CommentItem(modifier, state, eventHandler)
+            }
+            CreateOrderButtonItem(
+                state = state,
+                onPositioned = {
+                    buttonHeight.value = it
+                },
+                eventHandler = eventHandler
+            )
         }
-        CommentItem(modifier, state, eventHandler)
     }
-    CreateOrderButtonItem(
-        state = state,
-        onPositioned = {
-            buttonHeight.value = it
-        },
-        eventHandler = eventHandler
-    )
 }
 
 @Composable

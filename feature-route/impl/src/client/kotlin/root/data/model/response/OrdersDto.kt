@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 import orderdetails.root.data.model.OrderDetailsDto
 
 data class OrdersDto(
-    @SerializedName("Requests")
+    @SerializedName("ContractorRequest")
     val orders: List<OrderDetailsDto>?
 )

@@ -21,5 +21,6 @@ data class OrderDetailsDto(
     val price: Int,
     val status: String?,
     val storage: OrderStorageDto,
-    val weight: Int
+    val weight: Int,
+    val isPaid: Boolean
 )

@@ -79,6 +79,7 @@ internal fun EditProfileView(state: EditProfileState, eventHandler: (EditProfile
     }
 }
 
+@Suppress("LongMethod")
 @Composable
 private fun EditProfileFieldsBlock(
     modifier: Modifier,

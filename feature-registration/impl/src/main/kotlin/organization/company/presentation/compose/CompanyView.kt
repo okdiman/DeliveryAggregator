@@ -70,6 +70,7 @@ internal fun CompanyView(state: CompanyState, eventHandler: (CompanyEvent) -> Un
     }
 }
 
+@Suppress("LongMethod")
 @Composable
 private fun CompanyTextFieldsBlock(
     modifier: Modifier,

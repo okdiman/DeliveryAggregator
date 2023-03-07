@@ -16,5 +16,7 @@ data class NewOrderState(
     val storage: NewOrderParamState.StorageState = NewOrderParamState.StorageState(),
     val extras: ExtrasState = ExtrasState(),
     val comment: NewOrderParamState.CommentState = NewOrderParamState.CommentState(),
-    val createButton: NewOrderParamState.CreateButtonState = NewOrderParamState.CreateButtonState()
+    val createButton: NewOrderParamState.CreateButtonState = NewOrderParamState.CreateButtonState(),
+    val isLoading: Boolean = true,
+    val isError: Boolean = false
 )

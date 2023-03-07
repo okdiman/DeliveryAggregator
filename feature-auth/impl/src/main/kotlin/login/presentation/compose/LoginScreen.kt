@@ -17,7 +17,7 @@ fun LoginScreen() {
     StoredViewModel(factory = { LoginViewModel() }) { viewModel ->
         val state = viewModel.viewStates().observeAsState()
         val action = viewModel.viewActions().observeAsState()
-        LoginView(viewState = state.value) { event ->
+        LoginView(state = state.value) { event ->
             viewModel.obtainEvent(event)
         }
         when (action.value) {

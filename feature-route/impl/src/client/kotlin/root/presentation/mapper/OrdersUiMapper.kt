@@ -19,7 +19,7 @@ class OrdersUiMapper {
             id = it.id,
             arrivalDate = it.arrivalTime,
             status = mapStatusToUi(it.status),
-            statusCategory = mapStatusToStatusCategoryUi(it.status),
+            statusCategory = mapStatusToStatusCategoryUi(it.status, it.isPaid),
             departureAddress = buildString {
                 append(it.address.city + COMMA + it.address.street + COMMA + it.address.house)
             },
@@ -27,11 +27,12 @@ class OrdersUiMapper {
         )
     }
 
-    private fun mapStatusToStatusCategoryUi(model: OrderStatusProgress): OrderStatusCategoryUiModel =
+    private fun mapStatusToStatusCategoryUi(model: OrderStatusProgress, isPaid: Boolean): OrderStatusCategoryUiModel =
         when (model) {
-            //FIXME Пока нельзя получить статус PAID
-            CREATED, ASSIGNED, DELIVERY, CHANGED -> OrderStatusCategoryUiModel.ACTIVE
-            DONE -> OrderStatusCategoryUiModel.DONE
+            CREATED, ASSIGNED, CHANGED, DELIVERY -> OrderStatusCategoryUiModel.ACTIVE
+            DONE -> {
+                if (isPaid) OrderStatusCategoryUiModel.PAID else OrderStatusCategoryUiModel.DONE
+            }
         }
 
     private fun mapStatusToUi(model: OrderStatusProgress): OrderStatusUiModel =
