@@ -42,13 +42,13 @@ class NotificationsViewModel : BaseViewModel<NotificationsState, NotificationsAc
             viewState = viewState.copy(isLoading = true, isError = false)
             val notificationsDomain = getNotificationsList()
             viewState = viewState.copy(
-                notifications = notificationsDomain.map { mapper.map(it) },
+                notifications = notificationsDomain.map { mapper.map(it) }.sortedByDescending { it.notificationId },
                 isLoading = false,
                 isError = false
             )
             launchJob(appDispatchers.network) {
                 val unreadNotifications = notificationsDomain
-                    .filter { it.isRead }
+                    .filter { !it.isRead }
                     .map { it.id }
                     .sorted()
                 if (unreadNotifications.isNotEmpty()) {

@@ -14,16 +14,16 @@ class OrderChangesMapper(
         before = OrderChangedValuesModel(
             boxes = dto.order.boxes,
             pallets = dto.order.pallets,
-            cargoType = CargoType.values().first { it.name == dto.order.cargoType },
+            cargoType = CargoType.values().first { it.text == dto.order.cargoType },
             price = dto.order.price,
             extras = dto.order.extras.orEmpty().map(orderMapper::mapExtrasToDomain),
         ),
         after = OrderChangedValuesModel(
             boxes = dto.changedOrder.boxes,
             pallets = dto.changedOrder.pallets,
-            cargoType = CargoType.values().first { it.name == dto.changedOrder.cargoType },
+            cargoType = CargoType.values().first { it.text == dto.changedOrder.cargoType },
             price = dto.changedOrder.price,
-            extras = dto.order.extras.orEmpty().map(orderMapper::mapExtrasToDomain)
+            extras = dto.changedOrder.extras.orEmpty().map(orderMapper::mapExtrasToDomain)
         )
     )
 

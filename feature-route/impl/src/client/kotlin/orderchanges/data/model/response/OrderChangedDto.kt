@@ -8,6 +8,6 @@ import orderdetails.root.data.model.OrderDetailsDto
 class OrderChangedDto(
     @SerialName("request")
     val order: OrderDetailsDto,
-    @SerialName("changedRequest")
+    @SerialName("changed")
     val changedOrder: OrderChangesDto,
 )

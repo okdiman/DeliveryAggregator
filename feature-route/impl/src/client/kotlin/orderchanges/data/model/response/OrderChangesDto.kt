@@ -12,6 +12,6 @@ class OrderChangesDto(
     val pallets: Int,
     val cargoType: String,
     val price: Int,
-    val extras: List<OrderExtrasDto>,
-    val images: List<String>,
+    val extras: List<OrderExtrasDto>?,
+    val images: List<String>?,
 )
