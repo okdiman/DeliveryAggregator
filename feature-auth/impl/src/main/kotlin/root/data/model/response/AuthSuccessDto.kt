@@ -4,7 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-class AuthSuccessResponse(
+class AuthSuccessDto(
     @SerialName("token")
-    val token: String
+    val token: String,
+    @SerialName("tokenInfo")
+    val tokenInfo: AuthTokenInfoDto?
 )

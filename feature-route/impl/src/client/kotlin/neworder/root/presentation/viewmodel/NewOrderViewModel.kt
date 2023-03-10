@@ -8,7 +8,10 @@ import extras.presentation.mapper.ExtrasUiMapper
 import extras.presentation.model.ExtrasState
 import extras.presentation.model.ExtrasUiModel
 import kotlinx.coroutines.Job
+import network.domain.GetAuthTokenSyncUseCase
 import neworder.arrivaltime.domain.ArrivalTime
+import neworder.creationerror.presentation.CreationErrorParameters
+import neworder.payment.domain.GetPaymentUriUseCase
 import neworder.root.domain.NewOrderInteractor
 import neworder.root.presentation.compose.model.NewOrderParamState
 import neworder.root.presentation.mapper.NewOrderUiMapper
@@ -18,6 +21,8 @@ import neworder.root.presentation.viewmodel.model.NewOrderState
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import presentation.model.AddressUiModel
+import root.domain.model.status.OrderStatusProgress
+import root.domain.usecase.GetOrdersUseCase
 import root.presentation.compose.model.RouteStorageModel
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import utils.CommonConstants
@@ -35,22 +40,20 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
     initialState = NewOrderState()
 ), KoinComponent {
 
+    private val getOrderRequests by inject<GetOrdersUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
     private val getExtras by inject<GetExtrasUseCase>()
     private val extrasMapper by inject<ExtrasUiMapper>()
     private val interactor by inject<NewOrderInteractor>()
     private val modelMapper by inject<NewOrderUiMapper>()
     private val resourceInteractor by inject<ResourceInteractor>()
+    private val getAuthTokenSyncUseCase by inject<GetAuthTokenSyncUseCase>()
+    private val getPaymentUri by inject<GetPaymentUriUseCase>()
 
     private var priceJob: Job? = null
 
     init {
-        launchJob(appDispatchers.network) {
-            val extras = getExtras()
-            viewState = viewState.copy(
-                extras = ExtrasState(uiModel = extrasMapper.map(extras) + ExtrasUiModel.Default)
-            )
-        }
+        getContent()
     }
 
     @Suppress("CyclomaticComplexMethod")
@@ -65,6 +68,7 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
             NewOrderEvent.OnCargoTypeClick -> onCargoTypeClick()
             NewOrderEvent.OnExtrasClick -> onExtrasClick()
             NewOrderEvent.OnStorageClick -> onStorageClick()
+            NewOrderEvent.OnRetryClick -> getContent()
             is NewOrderEvent.OnCargoTypeChanged -> onCargoTypeChanged(viewEvent.type)
             is NewOrderEvent.OnBoxesCountChanged -> onBoxesCountChanged(viewEvent.count)
             is NewOrderEvent.OnPalletsCountChanged -> onPalletsCountChanged(viewEvent.count)
@@ -75,6 +79,40 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
             is NewOrderEvent.OnStorageChanged -> onStorageChanged(viewEvent.storage)
             is NewOrderEvent.OnExtrasChanged -> onExtrasChanged(viewEvent.extras)
             is NewOrderEvent.OnCommentChanged -> onCommentChanged(viewEvent.comment)
+        }
+    }
+
+    private fun getContent() {
+        launchJob(context = appDispatchers.network, onError = {
+            viewState = viewState.copy(
+                isLoading = false,
+                isError = true
+            )
+        }) {
+            viewState = viewState.copy(
+                isLoading = true,
+                isError = false
+            )
+            checkCreationAvailable()
+            val extras = getExtras()
+            viewState = viewState.copy(
+                extras = ExtrasState(uiModel = extrasMapper.map(extras) + ExtrasUiModel.Default),
+                isError = false
+            )
+        }
+    }
+
+    private suspend fun checkCreationAvailable() {
+        val unpaidOrders = getOrderRequests().filter { it.status == OrderStatusProgress.DONE && !it.isPaid }
+            .sortedBy { it.arrivalDay }
+        if (unpaidOrders.isNotEmpty()) {
+            getAuthTokenSyncUseCase()?.let { token ->
+                viewAction = NewOrderAction.OpenCreationErrorScreen(
+                    CreationErrorParameters(getPaymentUri(unpaidOrders.first().id, token))
+                )
+            }
+        } else {
+            viewState = viewState.copy(isLoading = false, isError = false)
         }
     }
 

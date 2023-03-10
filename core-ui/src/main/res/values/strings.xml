@@ -17,6 +17,7 @@
     <string name="common_reject">Отменить</string>
     <string name="common_add_new_address">Добавить новый адрес</string>
     <string name="common_edit_address">Редактировать адрес</string>
+    <string name="common_extras">Дополнительные услуги</string>
     <string name="common_good">Хорошо</string>
     <string name="common_empty_error" />
 </resources>

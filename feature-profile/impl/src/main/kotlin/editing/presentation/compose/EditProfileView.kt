@@ -15,6 +15,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import editing.presentation.viewmodel.model.EditProfileEvent
 import editing.presentation.viewmodel.model.EditProfileState
+import modifiers.autoScrollInFocus
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_profile.impl.R
 import utils.CommonConstants
@@ -33,10 +36,14 @@ import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
 internal fun EditProfileView(state: EditProfileState, eventHandler: (EditProfileEvent) -> Unit) {
+    val buttonHeight = remember {
+        mutableStateOf(0f)
+    }
+    val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
             .padding(PaddingValues(start = 16.dp, end = 16.dp, top = 4.dp))
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
     ) {
         Box(
             modifier = Modifier
@@ -53,7 +60,11 @@ internal fun EditProfileView(state: EditProfileState, eventHandler: (EditProfile
             )
         }
         Spacer(Modifier.height(24.dp))
-        EditProfileFieldsBlock(state, eventHandler)
+        EditProfileFieldsBlock(
+            modifier = Modifier.autoScrollInFocus(scrollState, buttonHeight),
+            state = state,
+            eventHandler = eventHandler
+        )
     }
     if (state.isSaveButtonVisible) {
         Box(
@@ -61,33 +72,43 @@ internal fun EditProfileView(state: EditProfileState, eventHandler: (EditProfile
             contentAlignment = Alignment.BottomCenter
         ) {
             ScrollScreenActionButton(
-                textRes = R_core.string.common_save
+                textRes = R_core.string.common_save,
+                onPositioned = { buttonHeight.value = it }
             ) { eventHandler(EditProfileEvent.OnSaveEditingClick) }
         }
     }
 }
 
+@Suppress("LongMethod")
 @Composable
-fun EditProfileFieldsBlock(state: EditProfileState, eventHandler: (EditProfileEvent) -> Unit) {
+private fun EditProfileFieldsBlock(
+    modifier: Modifier,
+    state: EditProfileState,
+    eventHandler: (EditProfileEvent) -> Unit
+) {
     StandardTextField(
+        modifier = modifier,
         title = stringResource(R_core.string.user_name),
         state = state.name,
         hint = stringResource(R_core.string.user_name_hint),
         maxChar = CommonConstants.LIMITS.User.MAX_USER_NAME_CHARS
     ) { eventHandler(EditProfileEvent.OnNameChanged(it)) }
-        StandardTextField(
+    StandardTextField(
+        modifier = modifier,
         title = stringResource(R_core.string.user_surname),
         state = state.surname,
         hint = stringResource(R_core.string.user_surname_hint),
         maxChar = CommonConstants.LIMITS.User.MAX_USER_NAME_CHARS
     ) { eventHandler(EditProfileEvent.OnSurnameChanged(it)) }
     StandardTextField(
+        modifier = modifier,
         title = stringResource(R_core.string.user_second_name),
         state = state.secondName,
         hint = stringResource(R_core.string.user_second_name_hint),
         maxChar = CommonConstants.LIMITS.User.MAX_USER_NAME_CHARS
     ) { eventHandler(EditProfileEvent.OnSecondNameChanged(it)) }
     StandardTextField(
+        modifier = modifier,
         title = stringResource(R_core.string.user_email),
         state = state.email,
         hint = stringResource(R_core.string.user_email_hint),

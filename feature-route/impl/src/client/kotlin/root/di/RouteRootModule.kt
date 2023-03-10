@@ -3,6 +3,7 @@ package root.di
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.create
+import root.DeeplinkNavigatorHandler
 import root.data.OrdersApi
 import root.data.OrdersRouteRepositoryImpl
 import root.data.mapper.RouteOrderMapper
@@ -16,4 +17,5 @@ internal fun routeRootModule() = module {
     factory { RouteOrderMapper() }
     factory { GetOrdersUseCase(get()) }
     factory { OrdersUiMapper() }
+    factory { DeeplinkNavigatorHandler() }
 }

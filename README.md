@@ -42,23 +42,23 @@
 ├── core_ui                    # Общий модуль для работы с ui. Содержит тему, утилиты, базовые вьюшки, модифайеры
 ├── feature-address            # Модуль для работы с адресами
 │   ├── api                    
-│   ├── impl      
+│   └── impl      
 ├── feature-auth               # Модуль авторизации
 │   ├── api                    
-│   ├── impl    
+│   └── impl    
 ├── feature-image-uploading    # Модуль для выгрузки фото на сервер
 │   ├── api                    
-│   ├── impl    
+│   └── impl    
 ├── feature-profile            # Модуль для работы с профилем пользователя
 │   ├── api                    
-│   ├── impl    
+│   └── impl    
 ├── feature-registration       # Модуль регистрации пользователя
 │   ├── api                    
-│   ├── impl    
+│   └── impl    
 ├── feature-splash-screen      # Модуль сплэш скрина
 │   ├── api                    
-│   ├── impl     
-├── navigation                 # Модуль навигации
+│   └── impl     
+└──  navigation                 # Модуль навигации
 ```
 
 ### Разбиение классов по слоям
@@ -70,11 +70,11 @@ feature-module
 ├── api 
 │  ├── minifeature1
 │  │  ├── data                 
-│  │  │  ├── model - MinifeatureModel             
-│  │  │  ├── usecase                 
-│  │  │  │  └── GetMinifeatureDate1UseCase                 
-│  │  ├── presentation   
-│  │  │  └── Minifeature1ScreenParameters                 
+│  │  │  └── model - MinifeatureModel             
+│  │  ├── domain                 
+│  │  │  └── usecase - GetMinifeatureDate1UseCase                 
+│  │  └── presentation   
+│  │     └── Minifeature1ScreenParameters                 
 ├── impl   
 │  ├── minifeature1
 │  │  ├── data
@@ -88,16 +88,16 @@ feature-module
 │  │  ├── domain
 │  │  │  ├── usecases - GetMinifeatureDate1UseCaseImpl
 │  │  │  ├── interactor - GetMinifeature1Interactor
-│  │  │  └──  repository - Minifeature1Repository
+│  │  │  └── repository - Minifeature1Repository
 │  │  ├── presentation
 │  │  │  ├── compose 
 │  │  │  │  ├── model - Minifeature1UiModel
 │  │  │  │  ├── screen - Minifeature1Screen
 │  │  │  │  └── view - Minifeature1View
 │  │  │  ├── mapper - Minifeature1UiMapper
-│  │  │  ├── viewmodel
-│  │  │  │  └── model - Minifeature1State
-│  │  │  │  └── Minifeature1ViewModel
+│  │  │  └──  viewmodel
+│  │  │     └── model - Minifeature1State
+│  │  │     └── Minifeature1ViewModel
 ```
 
 ## Работа с API

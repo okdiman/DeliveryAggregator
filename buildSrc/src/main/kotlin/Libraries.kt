@@ -28,6 +28,7 @@ object Libraries {
         const val splashScreen = "androidx.core:core-splashscreen:${Versions.splashScreen}"
         const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
         const val lifecycleExt = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycleExt}"
+        const val browser = "androidx.browser:browser:${Versions.browser}"
     }
 
     object Detekt {
@@ -84,5 +85,9 @@ object Libraries {
     object Accompanist {
         const val permissions =
             "com.google.accompanist:accompanist-permissions:${Versions.permissions}"
+    }
+
+    object LeakCanary {
+        const val core = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
     }
 }

@@ -56,7 +56,7 @@ class RouteViewModel(private val deeplinkParameters: DeeplinkParameters?) :
     private fun onAcceptOrderClick() {
         launchJob {
             acceptRoute(viewState.id)
-            viewAction = RouteAction.OpenRouteDetail(viewState.orders.first().id, 1, true)
+            viewAction = RouteAction.OpenRouteDetail(viewState.orders.first().id, 0, true)
         }
     }
 

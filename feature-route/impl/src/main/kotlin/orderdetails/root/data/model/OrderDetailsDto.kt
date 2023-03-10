@@ -24,5 +24,6 @@ data class OrderDetailsDto(
     val status: String?,
     val cargoType: String,
     val storage: OrderStorageDto,
-    val weight: Int
+    val weight: Int,
+    val isPaid: Boolean
 )

@@ -1,9 +1,11 @@
 package verify.presentation.viewmodel.model
 
+import verify.presentation.compose.model.VerifyStepError
+
 data class VerifyState(
     val title: String = "",
     val code: String = "",
-    val isCodeError: Boolean = false,
+    val error: VerifyStepError? = null,
     val isLoading: Boolean = false,
     val isRetryButtonAvailable: Boolean = false,
     val isTimerVisible: Boolean = true,

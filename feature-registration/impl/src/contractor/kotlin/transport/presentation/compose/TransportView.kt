@@ -14,12 +14,15 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import modifiers.autoScrollInFocus
 import root.RegistrationConstants
 import root.presentation.RegistrationTitleView
 import transport.presentation.viewmodel.model.TransportEvent
@@ -34,10 +37,14 @@ import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
 internal fun TransportView(state: TransportState, eventHandler: (TransportEvent) -> Unit) {
+    val buttonHeight = remember {
+        mutableStateOf(0f)
+    }
+    val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
             .padding(PaddingValues(start = 16.dp, end = 16.dp))
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
     ) {
         RegistrationTitleView(
             isBackButtonVisible = true,
@@ -46,14 +53,19 @@ internal fun TransportView(state: TransportState, eventHandler: (TransportEvent)
             imageRes = R.drawable.transport_info_ic,
             titleRes = R_core.string.transport_title
         )
-        TransportTextFieldsBlock(state = state, eventHandler = eventHandler)
+        TransportTextFieldsBlock(
+            modifier = Modifier.autoScrollInFocus(scrollState, buttonHeight),
+            state = state,
+            eventHandler = eventHandler
+        )
     }
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.BottomCenter
     ) {
         ScrollScreenActionButton(
-            enabled = state.isContinueButtonEnabled
+            enabled = state.isContinueButtonEnabled,
+            onPositioned = { buttonHeight.value = it }
         ) {
             eventHandler(TransportEvent.OnContinueButtonClick)
         }
@@ -61,8 +73,13 @@ internal fun TransportView(state: TransportState, eventHandler: (TransportEvent)
 }
 
 @Composable
-private fun TransportTextFieldsBlock(state: TransportState, eventHandler: (TransportEvent) -> Unit) {
+private fun TransportTextFieldsBlock(
+    modifier: Modifier,
+    state: TransportState,
+    eventHandler: (TransportEvent) -> Unit
+) {
     StandardTextField(
+        modifier = modifier,
         title = stringResource(R_core.string.transport_license_plate),
         state = state.licencePlate,
         hint = stringResource(R_core.string.transport_license_plate_hint),
@@ -82,25 +99,29 @@ private fun TransportTextFieldsBlock(state: TransportState, eventHandler: (Trans
         }
     )
     StandardTextField(
+        modifier = modifier,
         title = stringResource(R_core.string.transport_car_brand),
         state = state.carBrand,
         hint = stringResource(R_core.string.transport_car_brand_hint),
         maxChar = CAR_BRAND_MAX_CHARS
     ) { eventHandler(TransportEvent.OnCarBrandChanged(it)) }
     StandardTextField(
+        modifier = modifier,
         title = stringResource(R_core.string.transport_car_category),
         state = state.carCategory,
         hint = stringResource(R_core.string.transport_car_category_hint),
         maxChar = CAR_CATEGORY_MAX_CHARS
     ) { eventHandler(TransportEvent.OnCarCategoryChanged(it)) }
     StandardTextField(
+        modifier = modifier,
         title = stringResource(R_core.string.transport_car_load_capacity),
         state = state.carLoadCapacity,
         hint = stringResource(R_core.string.transport_car_load_capacity_hint),
-        keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+        keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Decimal),
         maxChar = CAR_CAPACITY_MAX_CHARS
     ) { eventHandler(TransportEvent.OnCarLoadCapacityChanged(it)) }
     StandardTextField(
+        modifier = modifier,
         title = stringResource(R_core.string.transport_car_capacity),
         state = state.carCapacity,
         hint = stringResource(R_core.string.transport_car_capacity_hint),

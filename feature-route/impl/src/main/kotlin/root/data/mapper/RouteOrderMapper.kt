@@ -43,7 +43,8 @@ class RouteOrderMapper {
         pallets = dto.pallets,
         status = OrderStatusProgress.values().first { it.status == dto.status },
         storage = mapStorageToDomain(dto.storage),
-        weight = dto.weight
+        weight = dto.weight,
+        isPaid = dto.isPaid
     )
 
     private fun mapAddressToDomain(dto: OrderAddressDto) = OrderAddressModel(

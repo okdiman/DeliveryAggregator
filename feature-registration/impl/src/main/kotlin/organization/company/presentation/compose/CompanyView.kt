@@ -14,12 +14,15 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import modifiers.autoScrollInFocus
 import organization.company.presentation.viewmodel.model.CompanyEvent
 import organization.company.presentation.viewmodel.model.CompanyState
 import root.RegistrationConstants
@@ -34,42 +37,55 @@ import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
 internal fun CompanyView(state: CompanyState, eventHandler: (CompanyEvent) -> Unit) {
+    val buttonHeight = remember {
+        mutableStateOf(0f)
+    }
+    val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
             .padding(PaddingValues(start = 16.dp, end = 16.dp))
-            .verticalScroll(rememberScrollState())
+            .verticalScroll(scrollState)
     ) {
         RegistrationTitleView(
             step = RegistrationConstants.Step.ONE,
             imageRes = R.drawable.organization_info_ic,
             titleRes = R.string.registration_organization_info
         )
-        CompanyTextFieldsBlock(state, eventHandler)
+        CompanyTextFieldsBlock(
+            modifier = Modifier.autoScrollInFocus(scrollState, buttonHeight),
+            state = state,
+            eventHandler = eventHandler
+        )
     }
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.BottomCenter
     ) {
         ScrollScreenActionButton(
-            enabled = state.isContinueButtonEnabled
+            enabled = state.isContinueButtonEnabled,
+            onPositioned = { buttonHeight.value = it }
         ) {
             eventHandler(CompanyEvent.OnContinueButtonClick)
         }
     }
 }
 
+@Suppress("LongMethod")
 @Composable
 private fun CompanyTextFieldsBlock(
+    modifier: Modifier,
     state: CompanyState,
     eventHandler: (CompanyEvent) -> Unit
 ) {
     StandardTextField(
+        modifier = modifier,
         title = stringResource(R_core.string.common_company_name),
         state = state.companyName,
         hint = stringResource(R.string.company_name_hint),
         maxChar = MAX_NAME_CHARS
     ) { eventHandler(CompanyEvent.OnCompanyNameChanged(it)) }
     StandardTextField(
+        modifier = modifier,
         title = stringResource(R.string.company_inn),
         state = state.inn,
         isDigits = true,
@@ -78,6 +94,7 @@ private fun CompanyTextFieldsBlock(
         maxChar = INN_CHARS
     ) { eventHandler(CompanyEvent.OnInnChanged(it)) }
     StandardTextField(
+        modifier = modifier,
         title = stringResource(R.string.company_kpp),
         state = state.kpp,
         isDigits = true,
@@ -86,6 +103,7 @@ private fun CompanyTextFieldsBlock(
         maxChar = KPP_CHARS
     ) { eventHandler(CompanyEvent.OnKppChanged(it)) }
     StandardTextField(
+        modifier = modifier,
         title = stringResource(R.string.company_ogrn),
         state = state.ogrn,
         isDigits = true,

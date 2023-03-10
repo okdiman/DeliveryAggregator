@@ -1,5 +1,6 @@
 package neworder.root.di
 
+import neworder.payment.domain.GetPaymentUriUseCase
 import neworder.root.data.mapper.NewOrderMapper
 import neworder.root.domain.NewOrderInteractor
 import neworder.root.presentation.mapper.NewOrderUiMapper
@@ -9,4 +10,5 @@ internal fun newOrderModule() = module {
     factory { NewOrderMapper() }
     factory { NewOrderUiMapper() }
     factory { NewOrderInteractor(get()) }
+    factory { GetPaymentUriUseCase() }
 }

@@ -18,13 +18,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import camera.PhotoFileProvider
-import permissions.AppPermissionState
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
+import permissions.PermissionsConstants
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 internal fun OrderPhotoPlaceholder(
-    permissionState: AppPermissionState?,
     onPhotoAdded: (Uri) -> Unit,
     onPhotoClick: () -> Unit
 ) {
@@ -35,6 +38,7 @@ internal fun OrderPhotoPlaceholder(
             onPhotoAdded(uri)
         }
     }
+    val permissionState = rememberPermissionState(PermissionsConstants.Camera)
     Spacer(modifier = Modifier.height(12.dp))
     Box(
         modifier = Modifier
@@ -42,7 +46,7 @@ internal fun OrderPhotoPlaceholder(
             .clip(Theme.shapes.roundedButton)
             .background(Theme.colors.disabledButtonColor)
             .clickable {
-                if (permissionState == AppPermissionState.Granted) {
+                if (permissionState.status.isGranted) {
                     cameraLauncher.launch(uri)
                 } else {
                     onPhotoClick()
