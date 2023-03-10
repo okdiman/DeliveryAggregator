@@ -1,6 +1,7 @@
 package orderchanges.presentation.mapper
 
 import extras.presentation.mapper.ExtrasUiMapper
+import extras.presentation.model.ExtrasUiModel
 import orderchanges.domain.model.OrderChangedModel
 import orderchanges.domain.model.OrderChangedValuesModel
 import orderchanges.presentation.compose.model.OrderChangedValuesUiModel
@@ -21,6 +22,6 @@ class OrderChangesUiMapper(
         pallets = model.pallets,
         cargoType = model.cargoType,
         price = model.price,
-        extras = extrasUiMapper.map(model.extras)
+        extras = extrasUiMapper.map(model.extras).ifEmpty { listOf(ExtrasUiModel.Default) }
     )
 }
