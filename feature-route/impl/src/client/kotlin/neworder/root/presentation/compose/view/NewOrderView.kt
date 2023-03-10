@@ -76,14 +76,14 @@ internal fun NewOrderView(state: NewOrderState, eventHandler: (NewOrderEvent) ->
                 }
                 CommentItem(modifier, state, eventHandler)
             }
-            CreateOrderButtonItem(
-                state = state,
-                onPositioned = {
-                    buttonHeight.value = it
-                },
-                eventHandler = eventHandler
-            )
         }
+        CreateOrderButtonItem(
+            state = state,
+            onPositioned = {
+                buttonHeight.value = it
+            },
+            eventHandler = eventHandler
+        )
     }
 }
 
