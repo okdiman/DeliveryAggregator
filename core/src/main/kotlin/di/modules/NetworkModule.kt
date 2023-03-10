@@ -1,18 +1,25 @@
 package di.modules
 
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
 import network.interceptor.CurlLoggingInterceptor
 import network.interceptor.ErrorInterceptor
 import network.interceptor.HeadersInterceptor
 import network.provider.OkHttpClientBuilderProvider
 import network.provider.RetrofitProvider
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
-import retrofit2.Converter
-import retrofit2.converter.gson.GsonConverterFactory
 
+@OptIn(ExperimentalSerializationApi::class)
 internal fun networkModule() = module {
-    single<Converter.Factory> {
-        GsonConverterFactory.create()
+    single {
+        @Suppress("JSON_FORMAT_REDUNDANT")
+        Json {
+            ignoreUnknownKeys = true
+            explicitNulls = false
+        }.asConverterFactory("application/json".toMediaType())
     }
     single {
         get<OkHttpClient.Builder>().build()

@@ -1,17 +1,19 @@
 package root.data.model.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 @Suppress("LongParameterList")
 class ProfileInfoDto(
-    @SerializedName("email")
+    @SerialName("email")
     val email: String,
-    @SerializedName("name")
+    @SerialName("name")
     val name: String,
-    @SerializedName("surname")
+    @SerialName("surname")
     val surname: String,
-    @SerializedName("secondName")
+    @SerialName("secondName")
     val secondName: String,
-    @SerializedName("organisationName")
+    @SerialName("organisationName")
     val organisationName: String
 )

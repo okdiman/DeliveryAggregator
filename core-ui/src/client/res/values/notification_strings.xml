@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notifications_new">Оформлен %1s</string>
+    <string name="notifications_contractor_assigned">Назначен исполнитель %1s</string>
+    <string name="notifications_done">Заказ выполнен %1s.\nОплатите, пожалуйста</string>
+    <string name="notifications_changed">Исполнитель изменил данные погрузки %1s. Подтвердите внесенные изменения</string>
+    <string name="notifications_processing">Обрабатывается %1s. Данные о водителе будут предоставлены накануне</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="order_changes_see">Посмотреть</string>
+    <string name="order_changes_before">Было</string>
+    <string name="order_changes_after">Стало</string>
+    <string name="order_changes_boxes_count">Количество коробов</string>
+    <string name="order_changes_pallets_count">Количество паллет</string>
+    <string name="order_changes_cargo_type">Тип груза</string>
+    <string name="order_changes_extra">Дополнительные услуги</string>
+    <string name="order_changes_price">Стоимость</string>
+</resources>

@@ -27,7 +27,12 @@ fun OrderRequestsScreen() {
                 )
                 viewModel.obtainEvent(OrdersEvent.ResetAction)
             }
-            OrdersAction.OpenNotificationsScreen -> {}
+            OrdersAction.OpenNotificationsScreen -> {
+                rootController.findRootController().push(
+                    NavigationTree.Routes.Notifications.name
+                )
+                viewModel.obtainEvent(OrdersEvent.ResetAction)
+            }
             else -> {}
         }
     }

@@ -48,7 +48,7 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
         launchJob(appDispatchers.network) {
             val extras = getExtras()
             viewState = viewState.copy(
-                extras = ExtrasState(uiModel = extrasMapper.map(extras))
+                extras = ExtrasState(uiModel = extrasMapper.map(extras) + ExtrasUiModel.Default)
             )
         }
     }
@@ -113,7 +113,7 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
         viewState = viewState.copy(
             address = viewState.address.copy(
                 stateText = uiModel.address,
-                activeId = uiModel.id.toIntOrNull()
+                activeId = uiModel.id.toInt()
             )
         )
         checkPrice()

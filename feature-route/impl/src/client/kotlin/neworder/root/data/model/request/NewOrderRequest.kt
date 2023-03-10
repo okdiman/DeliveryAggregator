@@ -1,5 +1,8 @@
 package neworder.root.data.model.request
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class NewOrderRequest(
     val addressId: Int,
     val arrivalDay: String,

@@ -1,9 +1,25 @@
 package root.data.model.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import orderdetails.root.data.model.OrderDetailsDto
 
+@Serializable
 data class OrdersDto(
-    @SerializedName("Requests")
-    val orders: List<OrderDetailsDto>?
+    @SerialName("ContractorRequests")
+    val ordersWithContractorDto: List<OrdersWithContractorDto>?,
 )
+
+@Serializable
+data class OrdersWithContractorDto(
+    @SerialName("request")
+    val order: OrderDetailsDto,
+    @SerialName("contractor")
+    val contractor: ContractorDto?,
+)
+
+@Serializable
+data class ContractorDto(
+    val phone: String?,
+)
+

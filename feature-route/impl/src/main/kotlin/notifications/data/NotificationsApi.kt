@@ -1,8 +1,8 @@
 package notifications.data
 
-import notifications.data.model.NotificationsDto
-import notifications.data.model.UnreadNotificationsDto
-import notifications.data.model.response.NotificationsMarkedDto
+import notifications.data.model.request.NotificationsMarkedDto
+import notifications.data.model.response.NotificationsDto
+import notifications.data.model.response.UnreadNotificationsDto
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

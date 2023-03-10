@@ -1,6 +1,5 @@
 package di.modules
 
-import com.google.gson.Gson
 import org.koin.core.qualifier.named
 import org.koin.dsl.bind
 import org.koin.dsl.module
@@ -21,7 +20,6 @@ const val EMAIL_VALIDATOR_QUALIFIER = "email"
 const val LOAD_CAPACITY_VALIDATOR_QUALIFIER = "load_capacity"
 
 internal fun utilsModule() = module {
-    factory { Gson() }
     factory { CurrentDateUtil() }
     factory(named(DIGITS_AND_LETTERS_VALIDATOR_QUALIFIER)) {
         DigitsAndLettersValidator()

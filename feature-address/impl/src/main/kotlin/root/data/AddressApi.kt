@@ -32,7 +32,7 @@ interface AddressApi {
 
     @PUT("/api/users/addresses/{id}")
     suspend fun updateUserAddress(
-        @Path("id") addressId: String,
+        @Path("id") addressId: Long,
         @Body address: AddressRequest
     )
 }

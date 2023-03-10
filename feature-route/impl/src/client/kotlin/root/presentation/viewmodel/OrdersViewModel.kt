@@ -3,6 +3,7 @@ package root.presentation.viewmodel
 import BaseViewModel
 import coroutines.AppDispatchers
 import network.exceptions.NotFoundException
+import notifications.domain.usecase.GetUnreadNotificationsCountUseCase
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import root.domain.usecase.GetOrdersUseCase
@@ -16,12 +17,14 @@ class OrdersViewModel : BaseViewModel<OrdersState, OrdersAction, OrdersEvent>(
     initialState = OrdersState()
 ), KoinComponent {
 
+    private val getUnreadNotificationsCount by inject<GetUnreadNotificationsCountUseCase>()
     private val getOrderRequests by inject<GetOrdersUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
     private val mapper by inject<OrdersUiMapper>()
 
     init {
         getContent()
+        getUnreadNotificationCount()
     }
 
     override fun obtainEvent(viewEvent: OrdersEvent) {
@@ -61,6 +64,15 @@ class OrdersViewModel : BaseViewModel<OrdersState, OrdersAction, OrdersEvent>(
 
     private fun onOpenNotificationsClick() {
         viewAction = OrdersAction.OpenNotificationsScreen
+    }
+
+    private fun getUnreadNotificationCount() {
+        launchJob(appDispatchers.network) {
+            val count = getUnreadNotificationsCount()
+            viewState = viewState.copy(
+                notificationsCount = count
+            )
+        }
     }
 
     private fun getContent() {

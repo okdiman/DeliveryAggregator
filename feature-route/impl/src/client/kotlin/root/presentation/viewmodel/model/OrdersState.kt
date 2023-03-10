@@ -1,5 +1,6 @@
 package root.presentation.viewmodel.model
 
+import permissions.AppPermissionState
 import root.presentation.compose.model.OrderClientUiModel
 import root.presentation.compose.model.OrderStatusCategoryUiModel
 
@@ -11,4 +12,5 @@ data class OrdersState(
     val orders: List<OrderClientUiModel> = emptyList(),
     val filteredOrders: List<OrderClientUiModel> = emptyList(),
     val selectedCategoryFilter: OrderStatusCategoryUiModel? = null,
+    val notificationsPermission: AppPermissionState? = null
 )
