@@ -5,5 +5,6 @@ enum class RouteNotificationsStatus(val status: String) {
     CANCELLED("cancelled"),
     CHANGED("changed"),
     ASSIGNED("assigned"),
+    DELIVERY("delivery"),
     DONE("done"),
 }

@@ -4,12 +4,15 @@ import BaseViewModel
 import coroutines.AppDispatchers
 import network.domain.GetAuthTokenSyncUseCase
 import network.exceptions.NotFoundException
-import notifications.domain.usecase.GetUnreadNotificationsCountUseCase
 import neworder.creationerror.presentation.CreationErrorParameters
 import neworder.payment.domain.GetPaymentUriUseCase
+import notifications.domain.usecase.GetUnreadNotificationsCountUseCase
 import orderdetails.root.domain.model.OrderDetailsModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import permissions.AppPermissionState
+import permissions.PermissionsConstants
+import permissions.domain.interactor.PermissionsInteractor
 import presentation.DeeplinkParameters
 import root.DeeplinkNavigatorHandler
 import root.domain.model.status.OrderStatusProgress
@@ -31,6 +34,7 @@ class OrdersViewModel(private val deeplinkParameters: DeeplinkParameters?) :
     private val getOrderRequests by inject<GetOrdersUseCase>()
     private val getAuthTokenSyncUseCase by inject<GetAuthTokenSyncUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
+    private val permission by inject<PermissionsInteractor>()
     private val mapper by inject<OrdersUiMapper>()
     private val deeplinkNavigatorHandler by inject<DeeplinkNavigatorHandler>()
     private val resourceInteractor by inject<ResourceInteractor>()
@@ -48,10 +52,12 @@ class OrdersViewModel(private val deeplinkParameters: DeeplinkParameters?) :
         when (viewEvent) {
             is OrdersEvent.OnFilterByStatusClick -> onFilterOrdersByStatus(viewEvent.status)
             is OrdersEvent.OnOpenOrderDetailsClick -> onOpenOrderDetailsClick(viewEvent.id)
+            is OrdersEvent.OnPermissionStateChanged -> onPermissionStateChanged(viewEvent.permissionState)
             OrdersEvent.OnCreateNewOrderClick -> onCreateNewOrderClick()
             OrdersEvent.OnNotificationsClick -> onOpenNotificationsClick()
             OrdersEvent.OnRetryClick -> getContent()
             OrdersEvent.ResetAction -> onResetAction()
+            OrdersEvent.OnRationaleDismiss -> onRationaleDismiss()
             OrdersEvent.OnRefreshSwipe -> {
                 viewState = viewState.copy(isRefreshing = true)
                 getContent()
@@ -146,6 +152,29 @@ class OrdersViewModel(private val deeplinkParameters: DeeplinkParameters?) :
             else -> null
         }
     }
+
+    private fun onPermissionStateChanged(state: AppPermissionState) {
+        launchJob {
+            when (state) {
+                AppPermissionState.Rationale -> {
+                    if (!permission.isShowRationaleDismissed(PermissionsConstants.Notification)) {
+                        viewState = viewState.copy(notificationsPermission = state)
+                    }
+                }
+                else -> {
+                    viewState = viewState.copy(notificationsPermission = state)
+                }
+            }
+        }
+    }
+
+    private fun onRationaleDismiss() {
+        launchJob {
+            viewState = viewState.copy(notificationsPermission = AppPermissionState.Denied)
+            permission.setRationaleDismissed(PermissionsConstants.Notification)
+        }
+    }
+
 
     private companion object {
         const val PAYMENT_SUCCESS = "success"

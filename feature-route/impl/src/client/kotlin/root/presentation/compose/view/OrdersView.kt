@@ -33,7 +33,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import notifications.presentation.compose.view.CheckNotificationPermission
 import root.presentation.compose.model.OrderStatusCategoryUiModel
 import root.presentation.compose.model.OrderUiModel
 import root.presentation.viewmodel.model.OrdersEvent
@@ -124,14 +123,6 @@ internal fun OrderRequestsView(state: OrdersState, eventHandler: (OrdersEvent) -
                 state = pullRefreshState,
                 modifier = Modifier.align(Alignment.TopCenter),
                 scale = true
-            )
-            CheckNotificationPermission(
-                state = state.notificationsPermission,
-                onPermissionStateChanged = { newPermissionState ->
-
-                }, onRationaleDismiss = {
-
-                }
             )
         }
     }

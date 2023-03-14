@@ -60,7 +60,7 @@ class NotificationsViewModel : BaseViewModel<NotificationsState, NotificationsAc
 
     private fun onNotificationClick(notificationId: Long) {
         viewState.notifications.firstOrNull { it.notificationId == notificationId }?.let { clickedNotification ->
-            val orderId = clickedNotification.notificationId
+            val orderId = clickedNotification.routeId ?: return@let
 
             when (clickedNotification.status) {
                 RouteNotificationsStatus.NEW,

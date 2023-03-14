@@ -9,7 +9,7 @@ import java.util.Locale
 
 class NewOrderUiMapper {
     fun map(state: NewOrderState) = NewOrderModel(
-        addressId = state.address.activeId ?: 0,
+        addressId = state.address.activeId ?: 0L,
         arrivalDay = getDate(state.arrivalDate.date).orEmpty(),
         arrivalTime = state.arrivalTime.stateText,
         boxes = state.boxesCount.stateText.toInt(),

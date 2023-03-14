@@ -49,6 +49,7 @@ class RouteNotificationBodyMapper(
         when (RouteNotificationsStatus.values().firstOrNull { it.status == remoteStatus }) {
             RouteNotificationsStatus.NEW -> R.string.notifications_new
             RouteNotificationsStatus.ASSIGNED -> R.string.notifications_contractor_assigned
+            RouteNotificationsStatus.DELIVERY -> R.string.notifications_delivery_in_progress
             RouteNotificationsStatus.CANCELLED -> R.string.notifications_cancelled
             RouteNotificationsStatus.CHANGED -> R.string.notifications_changed
             RouteNotificationsStatus.DONE -> R.string.notifications_done

@@ -15,7 +15,7 @@ import org.koin.core.component.inject
 class ConfirmOrderChangesViewModel(
     private val parameters: ConfirmOrderChangesParameters,
 ) : BaseViewModel<ConfirmOrderChangesState, ConfirmOrderChangesAction, ConfirmOrderChangesEvent>(
-    initialState = ConfirmOrderChangesState()
+    initialState = ConfirmOrderChangesState(parameters.id)
 ), KoinComponent {
 
     private val appDispatchers by inject<AppDispatchers>()
@@ -37,7 +37,9 @@ class ConfirmOrderChangesViewModel(
     }
 
     private fun getContent() {
-        launchJob(context = appDispatchers.network) {
+        launchJob(context = appDispatchers.network, onError = {
+            viewState = viewState.copy(isError = true, isLoading = false)
+        }) {
             viewState = viewState.copy(isError = false, isLoading = true)
             val orderChanges = getOrderChanges(parameters.id)
             viewState = viewState.copy(

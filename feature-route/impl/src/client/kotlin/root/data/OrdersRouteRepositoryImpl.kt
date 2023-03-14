@@ -2,7 +2,7 @@ package root.data
 
 import neworder.root.data.mapper.NewOrderMapper
 import orderchanges.data.mapper.OrderChangesMapper
-import orderchanges.domain.model.OrderChangedModel
+import orderchanges.domain.model.OrderChangesModel
 import orderdetails.root.domain.model.OrderDetailsModel
 import root.data.mapper.RouteOrderMapper
 import root.domain.RouteRepository
@@ -21,7 +21,7 @@ class OrdersRouteRepositoryImpl(
         return orderRequests.ordersWithContractorDto?.map { orderMapper.mapOrderToDomain(it.order) }.orEmpty()
     }
 
-    override suspend fun getOrderChanges(id: Long): OrderChangedModel {
+    override suspend fun getOrderChanges(id: Long): OrderChangesModel {
         val orderChanges = api.getOrderChanges(id)
         return orderChangesMapper.mapChangesToDomain(orderChanges)
     }

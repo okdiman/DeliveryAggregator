@@ -1,15 +1,15 @@
 package orderchanges.data.mapper
 
 import cargotype.domain.model.CargoType
-import orderchanges.data.model.response.OrderChangedDto
-import orderchanges.domain.model.OrderChangedModel
+import orderchanges.data.model.response.OrderChangesDto
 import orderchanges.domain.model.OrderChangedValuesModel
+import orderchanges.domain.model.OrderChangesModel
 import root.data.mapper.RouteOrderMapper
 
 class OrderChangesMapper(
     private val orderMapper: RouteOrderMapper
 ) {
-    fun mapChangesToDomain(dto: OrderChangedDto) = OrderChangedModel(
+    fun mapChangesToDomain(dto: OrderChangesDto) = OrderChangesModel(
         orderId = dto.order.id,
         before = OrderChangedValuesModel(
             boxes = dto.order.boxes,
@@ -26,5 +26,4 @@ class OrderChangesMapper(
             extras = dto.changedOrder.extras.orEmpty().map(orderMapper::mapExtrasToDomain)
         )
     )
-
 }

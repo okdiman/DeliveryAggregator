@@ -3,7 +3,7 @@ package root.data
 import neworder.root.data.model.request.NewOrderRequest
 import neworder.root.data.model.response.PriceDto
 import neworder.storage.data.StorageWrapperDto
-import orderchanges.data.model.response.OrderChangedDto
+import orderchanges.data.model.response.OrderChangesDto
 import orderdetails.root.data.model.extras.ExtrasDto
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -37,7 +37,7 @@ interface OrdersApi {
     @GET("api/clients/requests/{id}/changed")
     suspend fun getOrderChanges(
         @Path("id") id: Long,
-    ): OrderChangedDto
+    ): OrderChangesDto
 
     @GET("api/clients/requests/{id}/accept")
     suspend fun confirmOrderChanges(

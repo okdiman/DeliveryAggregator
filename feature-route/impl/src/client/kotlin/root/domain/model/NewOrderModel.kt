@@ -2,7 +2,7 @@ package root.domain.model
 
 @Suppress("LongParameterList")
 class NewOrderModel(
-    val addressId: Int,
+    val addressId: Long,
     val arrivalDay: String,
     val arrivalTime: String,
     val cargoType: String,

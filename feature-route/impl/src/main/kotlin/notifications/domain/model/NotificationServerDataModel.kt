@@ -2,7 +2,7 @@ package notifications.domain.model
 
 import org.threeten.bp.LocalDateTime
 
-interface NotificationServerDataModel {
+sealed interface NotificationServerDataModel {
     val type: String
     val date: String?
     val status: String

@@ -1,6 +1,6 @@
 package root.domain
 
-import orderchanges.domain.model.OrderChangedModel
+import orderchanges.domain.model.OrderChangesModel
 import orderdetails.root.domain.model.OrderDetailsModel
 import root.domain.model.NewOrderModel
 import root.domain.model.RouteOrderModel
@@ -14,6 +14,6 @@ interface RouteRepository {
     suspend fun getExtras(): List<OrderExtrasModel>
     suspend fun getStorages(): List<RouteStorageModel>
     suspend fun getOrderRequests(): List<OrderDetailsModel>
-    suspend fun getOrderChanges(id: Long): OrderChangedModel
+    suspend fun getOrderChanges(id: Long): OrderChangesModel
     suspend fun confirmOrderChanges(id: Long)
 }

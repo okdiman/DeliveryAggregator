@@ -1,13 +1,13 @@
-package orderchanges.data.model.response
+package root.data.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import orderdetails.root.data.model.OrderDetailsDto
 
 @Serializable
-class OrderChangedDto(
+data class OrdersWithContractorDto(
     @SerialName("request")
     val order: OrderDetailsDto,
-    @SerialName("changed")
-    val changedOrder: OrderChangesDto,
+    @SerialName("contractor")
+    val contractor: ContractorDto?,
 )

@@ -1,8 +1,8 @@
 package notifications.presentation.compose
 
 import androidx.compose.runtime.Composable
-import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
+import com.adeo.kviewmodel.odyssey.StoredViewModel
 import navigation.NavigationTree
 import notifications.presentation.compose.view.NotificationsView
 import notifications.presentation.viewmodel.NotificationsViewModel
@@ -15,7 +15,7 @@ import ru.alexgladkov.odyssey.compose.local.LocalRootController
 @Composable
 fun NotificationsScreen() {
     val rootController = LocalRootController.current
-    ViewModel(factory = { NotificationsViewModel() }) { viewModel ->
+    StoredViewModel(factory = { NotificationsViewModel() }) { viewModel ->
         val state = viewModel.viewStates().observeAsState()
         val action = viewModel.viewActions().observeAsState()
         NotificationsView(state.value) { event ->

@@ -26,7 +26,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -55,40 +54,52 @@ internal fun ConfirmOrderChangesView(
                     .fillMaxSize()
                     .padding(16.dp)
             ) {
-                Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                Column(
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                        .padding(bottom = 70.dp)
+                ) {
                     Title(state.orderId, eventHandler)
                     Spacer(modifier = Modifier.height(16.dp))
-                    BeforeAfterText()
-                    Spacer(modifier = Modifier.height(22.dp))
-                    ChangedDetail(
-                        title = stringResource(R.string.order_changes_boxes_count),
-                        oldValue = state.changes?.before?.boxes?.toString().orEmpty(),
-                        newValue = state.changes?.after?.boxes?.toString().orEmpty(),
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    ChangedDetail(
-                        title = stringResource(R.string.order_changes_pallets_count),
-                        oldValue = state.changes?.before?.pallets?.toString().orEmpty(),
-                        newValue = state.changes?.after?.pallets?.toString().orEmpty(),
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    ChangedDetail(
-                        title = stringResource(R.string.order_changes_cargo_type),
-                        oldValue = state.changes?.before?.cargoType?.text.orEmpty(),
-                        newValue = state.changes?.after?.cargoType?.text.orEmpty(),
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    ChangedDetail(
-                        title = stringResource(R.string.order_changes_extra),
-                        oldValue = state.changes?.before?.extras?.joinToString(separator = "\n") { it.text }.orEmpty(),
-                        newValue = state.changes?.after?.extras?.joinToString(separator = "\n") { it.text }.orEmpty()
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    ChangedDetail(
-                        title = stringResource(R.string.order_changes_price),
-                        oldValue = state.changes?.before?.price?.toStringWithEnding().orEmpty(),
-                        newValue = state.changes?.after?.price?.toStringWithEnding().orEmpty()
-                    )
+                    if (state.isLoading) {
+                        ConfirmOrderChangesLoadingView()
+                    } else {
+                        BeforeAfterText()
+                        Spacer(modifier = Modifier.height(22.dp))
+                        ChangedDetail(
+                            title = stringResource(R.string.order_changes_boxes_count),
+                            oldValue = state.changes?.before?.boxes?.toString().orEmpty(),
+                            newValue = state.changes?.after?.boxes?.toString().orEmpty(),
+                        )
+                        Spacer(modifier = Modifier.height(22.dp))
+                        ChangedDetail(
+                            title = stringResource(R.string.order_changes_pallets_count),
+                            oldValue = state.changes?.before?.pallets?.toString().orEmpty(),
+                            newValue = state.changes?.after?.pallets?.toString().orEmpty(),
+                        )
+                        Spacer(modifier = Modifier.height(22.dp))
+                        ChangedDetail(
+                            title = stringResource(R.string.order_changes_cargo_type),
+                            oldValue = state.changes?.before?.cargoType?.text.orEmpty(),
+                            newValue = state.changes?.after?.cargoType?.text.orEmpty(),
+                        )
+                        Spacer(modifier = Modifier.height(22.dp))
+                        ChangedDetail(
+                            title = stringResource(R.string.order_changes_extra),
+                            oldValue = state.changes?.before?.extras
+                                ?.joinToString(separator = "\n") { it.text }
+                                .orEmpty(),
+                            newValue = state.changes?.after?.extras
+                                ?.joinToString(separator = "\n") { it.text }
+                                .orEmpty()
+                        )
+                        Spacer(modifier = Modifier.height(22.dp))
+                        ChangedDetail(
+                            title = stringResource(R.string.order_changes_price),
+                            oldValue = state.changes?.before?.price?.toStringWithEnding().orEmpty(),
+                            newValue = state.changes?.after?.price?.toStringWithEnding().orEmpty()
+                        )
+                    }
                 }
 
                 ConfirmChangesButtonView(state, eventHandler)
@@ -119,13 +130,15 @@ private fun ChangedDetail(title: String, oldValue: String, newValue: String) {
 
     Text(
         text = title,
-        style = Theme.fonts.regular.copy(color = Color(0xFF828282), fontSize = 16.sp)
+        style = Theme.fonts.regular.copy(color = Theme.colors.darkLabelColor, fontSize = 16.sp)
     )
-    Spacer(modifier = Modifier.height(8.dp))
+    Spacer(modifier = Modifier.height(10.dp))
     Row(modifier = Modifier.height(IntrinsicSize.Min)) {
-        Column(modifier = Modifier
-            .weight(0.5f)
-            .fillMaxHeight(), verticalArrangement = Arrangement.SpaceBetween) {
+        Column(
+            modifier = Modifier
+                .weight(0.5f)
+                .fillMaxHeight(), verticalArrangement = Arrangement.SpaceBetween
+        ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = oldValue,
@@ -139,9 +152,11 @@ private fun ChangedDetail(title: String, oldValue: String, newValue: String) {
             )
         }
         Spacer(modifier = Modifier.width(32.dp))
-        Column(modifier = Modifier
-            .weight(0.5f)
-            .fillMaxHeight(), verticalArrangement = Arrangement.SpaceBetween) {
+        Column(
+            modifier = Modifier
+                .weight(0.5f)
+                .fillMaxHeight(), verticalArrangement = Arrangement.SpaceBetween
+        ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = newValue,
@@ -169,7 +184,7 @@ private fun ConfirmChangesButtonView(
         contentAlignment = Alignment.BottomCenter
     ) {
         ScrollScreenActionButton(
-            enabled = !state.isConfirming,
+            enabled = !state.isConfirming && !state.isLoading && !state.isError,
             alignment = Alignment.BottomCenter,
             textRes = R.string.order_confirm_changes,
             padding = PaddingValues(horizontal = 8.dp, vertical = 16.dp)
@@ -183,7 +198,7 @@ private fun Title(id: Long, eventHandler: (ConfirmOrderChangesEvent) -> Unit) {
         BackButton { eventHandler(ConfirmOrderChangesEvent.OnBackClick) }
         Text(
             modifier = Modifier.align(Alignment.Center),
-            text = "${NUMBER}$id",
+            text = buildString { append(NUMBER + id) },
             style = Theme.fonts.bold.copy(
                 fontSize = 20.sp
             )

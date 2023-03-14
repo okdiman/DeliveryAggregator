@@ -1,6 +1,5 @@
 package notifications.presentation.mapper
 
-import androidx.compose.ui.text.buildAnnotatedString
 import notifications.NotificationsConstant
 import notifications.data.mapper.RouteNotificationBodyMapper
 import notifications.data.mapper.RouteNotificationIconMapper
@@ -13,6 +12,7 @@ import notifications.domain.model.RouteNotificationsStatus
 import notifications.presentation.compose.model.NotificationAssignedRequestUiModel
 import notifications.presentation.compose.model.NotificationBasicUiModel
 import notifications.presentation.compose.model.NotificationUiModel
+import utils.CommonConstants.Helpers.SPACER
 import utils.ext.DateFormats
 import utils.ext.toString
 
@@ -25,7 +25,6 @@ class NotificationUiMapper(
             is NotificationServerRouteDataModel -> mapToRouteNotification(model)
             is NotificationServerRequestDataModel -> mapToRequestNotification(model)
             is NotificationServerAssignedRequestDataModel -> mapToAssignedRequestNotification(model)
-            else -> mapToCommonNotification(model)
         }
     }
 
@@ -50,7 +49,7 @@ class NotificationUiMapper(
             text = notificationBodyMapper.mapToAnnotated(notificationMap),
             imageRes = notificationIconMapper(notificationMap),
             status = mapStatus(data.status),
-            fullName = "${data.surname} ${data.name} ${data.secondName}",
+            fullName = buildString { append(data.surname + SPACER + data.name + SPACER + data.secondName) },
             phone = data.phone,
             carPlate = data.carPlate,
             carModel = data.carModel,
@@ -68,15 +67,6 @@ class NotificationUiMapper(
             text = notificationBodyMapper.mapToAnnotated(notificationMap),
             imageRes = notificationIconMapper(notificationMap),
             status = mapStatus(data.status),
-        )
-    }
-
-    private fun mapToCommonNotification(model: NotificationServerModel): NotificationUiModel {
-        return NotificationBasicUiModel(
-            notificationId = model.id,
-            text = buildAnnotatedString {
-                append(model.body.toString())
-            }
         )
     }
 
