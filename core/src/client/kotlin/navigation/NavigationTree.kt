@@ -15,7 +15,7 @@ object NavigationTree {
     }
 
     enum class Main {
-        MainFlow, Orders, Profile
+        MainFlow, Orders, Profile, DevMenu
     }
 
     enum class NewOrder {

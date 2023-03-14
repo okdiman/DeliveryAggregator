@@ -110,6 +110,10 @@ feature-module
 
 * http://51.250.79.83:8080/doc
 
+### Документация по тестовым картам оплаты
+
+* https://developers.cloudpayments.ru/#testirovanie
+
 ## GIT
 
 ### Именование веток

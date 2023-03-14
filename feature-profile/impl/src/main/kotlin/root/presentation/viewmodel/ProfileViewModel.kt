@@ -68,6 +68,7 @@ class ProfileViewModel : BaseViewModel<ProfileState, ProfileAction, ProfileEvent
             ProfileItemType.Notifications -> ProfileAction.OpenNotificationsSettings
             ProfileItemType.Offer -> ProfileAction.OpenOffer
             ProfileItemType.Exit -> ProfileAction.OpenExitFromAccount
+            ProfileItemType.DevMenu -> ProfileAction.OpenDevMenu
         }
     }
 }

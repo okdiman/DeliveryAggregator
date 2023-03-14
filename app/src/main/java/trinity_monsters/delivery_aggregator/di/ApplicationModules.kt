@@ -1,11 +1,12 @@
 package trinity_monsters.delivery_aggregator.di
 
-import root.di.addressModule
 import di.authModule
 import di.coreModules
 import di.coreUiiModule
 import di.imageUploadingModule
 import di.splashModule
+import root.di.addressModule
+import root.di.devMenuModule
 import root.di.profileModules
 import root.di.registrationModule
 import root.di.routeModules
@@ -18,7 +19,8 @@ fun applicationModules() = listOf(
     addressModule(),
     splashModule(),
     remoteNotificationsModule(),
-    imageUploadingModule()
+    imageUploadingModule(),
+    devMenuModule()
 ) +
     coreModules() +
     authModule() +
