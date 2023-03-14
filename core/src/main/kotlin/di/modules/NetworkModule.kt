@@ -1,5 +1,6 @@
 package di.modules
 
+import devmenu.domain.DevMenuRepository
 import network.interceptor.CurlLoggingInterceptor
 import network.interceptor.ErrorInterceptor
 import network.interceptor.HeadersInterceptor
@@ -25,7 +26,7 @@ internal fun networkModule() = module {
         ).provide()
     }
     single {
-        RetrofitProvider(get(), get()).provide()
+        RetrofitProvider(get(), get()).provide(get<DevMenuRepository>().getServerUrlSync())
     }
     factory { ErrorInterceptor() }
     factory { CurlLoggingInterceptor() }

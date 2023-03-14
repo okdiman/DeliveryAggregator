@@ -43,5 +43,10 @@ class ProfileItemUiModel(
                 type = ProfileItemType.Exit
             )
         )
+        val devMenuItem = ProfileItemUiModel(
+            icon = R.drawable.profile_dev_settings_ic,
+            title = R_core.string.common_dev_menu,
+            type = ProfileItemType.DevMenu
+        )
     }
 }

@@ -3,6 +3,7 @@ object Modules {
     const val core = ":core"
     const val core_ui = ":core-ui"
     const val navigation = ":navigation"
+    const val dev_menu = ":dev-menu"
     const val splash = ":feature-splash-screen"
     const val auth_api = ":feature-auth:api"
     const val auth_impl = ":feature-auth:impl"

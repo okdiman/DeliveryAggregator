@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dev_menu_hosts_title">Выберите сервер:</string>
+    <string name="dev_menu_restart_app">Перезагрузите приложение</string>
+    <string name="dev_menu_token_copied">Токен скопирован</string>
+    <string name="dev_menu_firebase_token">Firebase token:</string>
+</resources>

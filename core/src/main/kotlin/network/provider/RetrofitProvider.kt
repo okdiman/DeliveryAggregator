@@ -8,15 +8,11 @@ class RetrofitProvider(
     private val okHttpClient: OkHttpClient,
     private val converterFactory: Converter.Factory
 ) {
-    fun provide(): Retrofit {
+    fun provide(baseUrl: String): Retrofit {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(baseUrl)
             .addConverterFactory(converterFactory)
             .build()
-    }
-
-    private companion object {
-        const val baseUrl = "http://51.250.79.83:8080"
     }
 }
