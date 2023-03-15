@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class NewOrderRequest(
-    val addressId: Int,
+    val addressId: Long,
     val arrivalDay: String,
     val arrivalTime: String,
     val boxes: Int,
