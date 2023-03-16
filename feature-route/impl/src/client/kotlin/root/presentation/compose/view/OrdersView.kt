@@ -68,7 +68,6 @@ internal fun OrderRequestsView(state: OrdersState, eventHandler: (OrdersEvent) -
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(vertical = 16.dp),
-                    userScrollEnabled = state.orders.isNotEmpty()
                 ) {
                     item {
                         NotificationIconView(
