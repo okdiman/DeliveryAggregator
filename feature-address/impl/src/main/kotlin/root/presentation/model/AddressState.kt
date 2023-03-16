@@ -5,7 +5,7 @@ import view.model.DefaultParamState
 
 data class AddressState(
     override val stateText: String = "",
-    val activeId: Int? = null,
+    val activeId: Long? = null,
     val address: AddressSuggestUiModel? = null,
     val isSuggestLoading: Boolean = false
 ) : DefaultParamState(stateText)

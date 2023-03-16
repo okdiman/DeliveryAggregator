@@ -1,45 +1,47 @@
 package root.data.model.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 @Suppress("LongParameterList")
 class ProfileInfoDto(
-    @SerializedName("email")
+    @SerialName("email")
     val email: String,
-    @SerializedName("name")
+    @SerialName("name")
     val name: String,
-    @SerializedName("surname")
+    @SerialName("surname")
     val surname: String,
-    @SerializedName("secondName")
+    @SerialName("secondName")
     val secondName: String,
-    @SerializedName("inn")
+    @SerialName("inn")
     val inn: String,
-    @SerializedName("kpp")
+    @SerialName("kpp")
     val kpp: String,
-    @SerializedName("ogrn")
+    @SerialName("ogrn")
     val ogrn: String,
-    @SerializedName("bik")
+    @SerialName("bik")
     val bik: String,
-    @SerializedName("legalAddress")
+    @SerialName("legalAddress")
     val legalAddress: String,
-    @SerializedName("actualAddress")
+    @SerialName("actualAddress")
     val actualAddress: String,
-    @SerializedName("checkingAccount")
+    @SerialName("checkingAccount")
     val checkingAccount: String,
-    @SerializedName("correspondentAccount")
+    @SerialName("correspondentAccount")
     val correspondentAccount: String,
-    @SerializedName("bank")
+    @SerialName("bank")
     val bank: String,
-    @SerializedName("organisationName")
+    @SerialName("organisationName")
     val organisationName: String,
-    @SerializedName("carPlate")
+    @SerialName("carPlate")
     val carPlate: String,
-    @SerializedName("carModel")
+    @SerialName("carModel")
     val carModel: String,
-    @SerializedName("carCategory")
+    @SerialName("carCategory")
     val carCategory: String,
-    @SerializedName("carPalletCapacity")
+    @SerialName("carPalletCapacity")
     val carCapacity: Int,
-    @SerializedName("carLoadCapacity")
+    @SerialName("carLoadCapacity")
     val carLoadCapacity: Double?
 )

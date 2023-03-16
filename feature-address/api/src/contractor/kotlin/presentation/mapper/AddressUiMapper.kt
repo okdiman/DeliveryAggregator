@@ -17,7 +17,7 @@ class AddressUiMapper {
         )
     }
 
-    fun mapToDomain(model: AddressSuggestUiModel, id: String) = AddressModel(
+    fun mapToDomain(model: AddressSuggestUiModel, id: Long) = AddressModel(
         city = model.city,
         house = model.house,
         street = model.street,

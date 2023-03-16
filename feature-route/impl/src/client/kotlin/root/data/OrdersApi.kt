@@ -3,6 +3,7 @@ package root.data
 import neworder.root.data.model.request.NewOrderRequest
 import neworder.root.data.model.response.PriceDto
 import neworder.storage.data.StorageWrapperDto
+import orderchanges.data.model.response.OrderChangesDto
 import orderdetails.root.data.model.extras.ExtrasDto
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -31,7 +32,17 @@ interface OrdersApi {
     @POST("api/clients/requests")
     suspend fun createOrder(
         @Body request: NewOrderRequest
-    ): PriceDto
+    )
+
+    @GET("api/clients/requests/{id}/changed")
+    suspend fun getOrderChanges(
+        @Path("id") id: Long,
+    ): OrderChangesDto
+
+    @GET("api/clients/requests/{id}/accept")
+    suspend fun confirmOrderChanges(
+        @Path("id") id: Long,
+    )
 
     @GET("api/clients/storages")
     suspend fun getStorages(): StorageWrapperDto

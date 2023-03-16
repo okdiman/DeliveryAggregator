@@ -3,4 +3,10 @@
     <string name="common_order_number">Заказ №</string>
     <string name="common_departure_address">Адрес склада</string>
     <string name="common_delivery_adddress">Склад назначения</string>
+    <string name="common_contractor">Исполнитель</string>
+    <string name="common_car_plate">ГОС номер автомобиля</string>
+    <string name="common_car_model">Марка автомобиля</string>
+    <string name="common_phone">Телефон</string>
+    <string name="common_delivery_date">Дата поставки</string>
+    <string name="common_delivery_time_interval">Временной интервал</string>
 </resources>

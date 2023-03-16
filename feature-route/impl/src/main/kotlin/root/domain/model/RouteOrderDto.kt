@@ -1,14 +1,16 @@
 package root.domain.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import orderdetails.root.data.model.OrderDetailsDto
 import orderdetails.root.data.model.details.OrderDetailsClientDto
 
+@Serializable
 data class RouteOrderDto(
-    @SerializedName("request")
+    @SerialName("request")
     val order: OrderDetailsDto,
-    @SerializedName("index")
+    @SerialName("index")
     val index: Int,
-    @SerializedName("client")
+    @SerialName("client")
     val client: OrderDetailsClientDto
 )

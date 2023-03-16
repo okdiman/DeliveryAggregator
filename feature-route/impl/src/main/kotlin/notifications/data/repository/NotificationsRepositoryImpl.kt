@@ -2,7 +2,7 @@ package notifications.data.repository
 
 import notifications.data.NotificationsApi
 import notifications.data.mapper.NotificationMapper
-import notifications.data.model.response.NotificationsMarkedDto
+import notifications.data.model.request.NotificationsMarkedDto
 import notifications.domain.model.NotificationServerModel
 import notifications.domain.repository.NotificationsRepository
 
@@ -12,6 +12,7 @@ class NotificationsRepositoryImpl(
 ) : NotificationsRepository {
 
     override suspend fun getUnreadNotificationsCount() = api.getUnreadNotificationsCount().unread
+
     override suspend fun getNotifications(): Array<NotificationServerModel> {
         val response = api.getNotifications()
         return mapper.map(response) ?: emptyArray()

@@ -46,10 +46,6 @@ fun DependencyHandler.splash() {
     add(IMPLEMENTATION, Libraries.Core.splashScreen)
 }
 
-fun DependencyHandler.json() {
-    add(IMPLEMENTATION, Libraries.Json.gson)
-}
-
 fun DependencyHandler.security() {
     add(IMPLEMENTATION, Libraries.Security.crypto)
 }

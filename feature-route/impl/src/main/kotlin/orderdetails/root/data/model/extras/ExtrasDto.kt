@@ -1,9 +1,11 @@
 package orderdetails.root.data.model.extras
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import root.data.model.response.OrderExtrasDto
 
+@Serializable
 class ExtrasDto(
-    @SerializedName("Extras")
+    @SerialName("Extras")
     val extras: List<OrderExtrasDto>
 )
