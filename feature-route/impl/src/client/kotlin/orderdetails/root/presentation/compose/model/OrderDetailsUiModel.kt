@@ -15,8 +15,9 @@ data class OrderDetailsUiModel(
     val isPaid: Boolean,
     val price: Int,
 ) {
-    val isLoadedOrDelivered: Boolean
-        get() = (load != null && delivery != null)
+    val isLoadedOrDelivered = (load != null && delivery != null)
+
+    val canPay = (!isPaid && status == OrderStatusProgress.DONE)
 
     companion object {
         val Default =

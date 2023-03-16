@@ -35,7 +35,7 @@ internal fun OrderDetailsView(
     } else {
         val verticalScroll = rememberScrollState()
         Box(modifier = Modifier.fillMaxSize()) {
-            val isPayButtonVisible = !state.uiModel.isPaid
+            val isPayButtonVisible = state.uiModel.canPay
 
             Column(
                 modifier = Modifier
