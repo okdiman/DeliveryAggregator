@@ -22,6 +22,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import theme.Theme
@@ -37,6 +38,8 @@ fun ActionButton(
     @StringRes textRes: Int = R.string.common_continue_button,
     additionalText: String? = null,
     height: Dp = 52.dp,
+    fontSize: TextUnit = 20.sp,
+    additionalTextFontSize: TextUnit = 14.sp,
     gradient: Brush = Theme.gradients.actionButtonGradient,
     alignment: Alignment = Alignment.BottomCenter,
     textColor: Color = Theme.colors.textSecondaryColor,
@@ -49,14 +52,16 @@ fun ActionButton(
         contentAlignment = alignment
     ) {
         ActionButtonView(
-            textRes,
-            additionalText,
-            height,
-            gradient,
-            textColor,
-            enabled,
-            padding,
-            onClick
+            textRes = textRes,
+            additionalText = additionalText,
+            height = height,
+            gradient = gradient,
+            fontSize = fontSize,
+            additionalTextFontSize = additionalTextFontSize,
+            textColor = textColor,
+            enabled = enabled,
+            padding = padding,
+            onClick = onClick
         )
     }
 }
@@ -134,14 +139,14 @@ fun ScrollScreenActionButton(
         contentAlignment = alignment
     ) {
         ActionButtonView(
-            textRes,
-            additionalText,
-            height,
-            gradient,
-            textColor,
-            enabled,
-            padding,
-            onClick
+            textRes = textRes,
+            additionalText = additionalText,
+            height = height,
+            gradient = gradient,
+            textColor = textColor,
+            enabled = enabled,
+            padding = padding,
+            onClick = onClick,
         )
     }
 }
@@ -152,6 +157,8 @@ private fun ActionButtonView(
     @StringRes textRes: Int = R.string.common_continue_button,
     additionalText: String? = null,
     height: Dp = 52.dp,
+    fontSize: TextUnit = 20.sp,
+    additionalTextFontSize: TextUnit = 14.sp,
     gradient: Brush = Theme.gradients.actionButtonGradient,
     textColor: Color = Theme.colors.textSecondaryColor,
     enabled: Boolean = true,
@@ -180,7 +187,7 @@ private fun ActionButtonView(
             Text(
                 text = stringResource(id = textRes),
                 style = Theme.fonts.bold.copy(
-                    fontSize = 20.sp,
+                    fontSize = fontSize,
                     color = textColor
                 )
             )
@@ -189,7 +196,7 @@ private fun ActionButtonView(
                 Text(
                     text = additionalText,
                     style = Theme.fonts.regular.copy(
-                        fontSize = 14.sp,
+                        fontSize = additionalTextFontSize,
                         color = textColor
                     )
                 )

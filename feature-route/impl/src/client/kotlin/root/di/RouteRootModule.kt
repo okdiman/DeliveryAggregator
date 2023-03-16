@@ -13,7 +13,7 @@ import root.presentation.mapper.OrdersUiMapper
 
 internal fun routeRootModule() = module {
     single<OrdersApi> { get<Retrofit>().create() }
-    factory<RouteRepository> { OrdersRouteRepositoryImpl(get(), get(), get()) }
+    factory<RouteRepository> { OrdersRouteRepositoryImpl(get(), get(), get(), get()) }
     factory { RouteOrderMapper() }
     factory { GetOrdersUseCase(get()) }
     factory { OrdersUiMapper() }

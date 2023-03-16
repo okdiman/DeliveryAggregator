@@ -4,9 +4,11 @@ import androidx.annotation.DrawableRes
 import androidx.compose.ui.text.AnnotatedString
 import notifications.domain.model.RouteNotificationsStatus
 
-data class NotificationUiModel(
-    val id: Long,
-    val text: AnnotatedString,
-    @DrawableRes val imageRes: Int? = null,
-    val status: RouteNotificationsStatus? = null
-)
+interface NotificationUiModel {
+    val notificationId: Long
+    val routeId: Long?
+    val text: AnnotatedString
+    @get:DrawableRes
+    val imageRes: Int?
+    val status: RouteNotificationsStatus?
+}

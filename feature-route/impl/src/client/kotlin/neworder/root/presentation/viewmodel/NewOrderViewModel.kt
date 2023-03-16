@@ -9,6 +9,7 @@ import extras.presentation.model.ExtrasState
 import extras.presentation.model.ExtrasUiModel
 import kotlinx.coroutines.Job
 import network.domain.GetAuthTokenSyncUseCase
+import neworder.address.presentation.viewmodel.NewOrderAddressViewModel.Companion.NEW_ID
 import neworder.arrivaltime.domain.ArrivalTime
 import neworder.creationerror.presentation.CreationErrorParameters
 import neworder.payment.domain.GetPaymentUriUseCase
@@ -96,7 +97,7 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
             checkCreationAvailable()
             val extras = getExtras()
             viewState = viewState.copy(
-                extras = ExtrasState(uiModel = extrasMapper.map(extras)),
+                extras = ExtrasState(uiModel = extrasMapper.map(extras) + ExtrasUiModel.Default),
                 isError = false
             )
         }
@@ -151,7 +152,7 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
         viewState = viewState.copy(
             address = viewState.address.copy(
                 stateText = uiModel.address,
-                activeId = uiModel.id.toIntOrNull()
+                activeId = uiModel.id.takeIf { it != NEW_ID }
             )
         )
         checkPrice()

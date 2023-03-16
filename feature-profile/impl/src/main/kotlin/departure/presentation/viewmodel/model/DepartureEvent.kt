@@ -5,10 +5,10 @@ import presentation.AddressSuggestUiModel
 import presentation.model.AddressUiModel
 
 sealed interface DepartureEvent {
-    data class OnSuggestAddressClick(val id: String = NEW_ID, val address: AddressSuggestUiModel) : DepartureEvent
+    data class OnSuggestAddressClick(val id: Long = NEW_ID, val address: AddressSuggestUiModel) : DepartureEvent
     data class OnEditClick(val uiModel: AddressUiModel) : DepartureEvent
     data class OnBSAddressChanged(val bsAddress: String) : DepartureEvent
-    data class OnAddressClick(val id: String) : DepartureEvent
+    data class OnAddressClick(val id: Long) : DepartureEvent
     object OnAddAddressClick : DepartureEvent
     object OnBackClick : DepartureEvent
     object OnRetryClick : DepartureEvent

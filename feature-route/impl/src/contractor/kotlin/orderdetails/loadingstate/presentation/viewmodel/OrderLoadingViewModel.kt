@@ -49,7 +49,7 @@ class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
         launchJob(appDispatchers.network) {
             val extras = getExtras()
             viewState = viewState.copy(
-                extras = ExtrasState(uiModel = extrasMapper.map(extras))
+                extras = ExtrasState(uiModel = extrasMapper.map(extras) + ExtrasUiModel.Default)
             )
         }
     }

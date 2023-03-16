@@ -1,16 +1,18 @@
 package root.data.model.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import root.domain.model.RouteOrderDto
 
+@Serializable
 class RouteDto(
     val id: Long,
-    @SerializedName("clientRequest")
+    @SerialName("clientRequest")
     val orders: List<RouteOrderDto>,
-    @SerializedName("status")
+    @SerialName("status")
     val status: String,
-    @SerializedName("totalPrice")
+    @SerialName("totalPrice")
     val totalPrice: Int,
-    @SerializedName("distance")
+    @SerialName("distance")
     val distance: Double
 )

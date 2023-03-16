@@ -69,7 +69,7 @@ class DepartureViewModel : BaseViewModel<DepartureState, DepartureAction, Depart
         }
     }
 
-    private fun onSuggestAddressClick(id: String, address: AddressSuggestUiModel) {
+    private fun onSuggestAddressClick(id: Long, address: AddressSuggestUiModel) {
         if (address.house.isEmpty() || !address.isFinal) {
             viewState = viewState.copy(
                 bsAddress = viewState.bsAddress.copy(
@@ -100,7 +100,7 @@ class DepartureViewModel : BaseViewModel<DepartureState, DepartureAction, Depart
         )
     }
 
-    private fun onAddressClick(id: String) {
+    private fun onAddressClick(id: Long) {
         launchJob(context = appDispatchers.network) {
             addresses = addresses.map {
                 if (it.id == id) {
@@ -169,6 +169,6 @@ class DepartureViewModel : BaseViewModel<DepartureState, DepartureAction, Depart
     }
 
     companion object {
-        internal const val NEW_ID = "new_id"
+        internal const val NEW_ID = Long.MIN_VALUE
     }
 }

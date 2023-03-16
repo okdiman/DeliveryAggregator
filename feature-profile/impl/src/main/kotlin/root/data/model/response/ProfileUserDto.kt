@@ -1,12 +1,14 @@
 package root.data.model.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 class ProfileUserDto(
-    @SerializedName("phone")
+    @SerialName("phone")
     val phone: String,
-    @SerializedName("role")
+    @SerialName("role")
     val role: ProfileRoleDto,
-    @SerializedName("settings")
-    val settings: ProfileSettingsDto
+    @SerialName("settings")
+    val settings: ProfileSettingsDto?
 )

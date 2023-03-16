@@ -25,9 +25,13 @@ class NotificationsViewModel : BaseViewModel<NotificationsState, NotificationsAc
 
     override fun obtainEvent(viewEvent: NotificationsEvent) {
         when (viewEvent) {
-            NotificationsEvent.OnBackCLick -> onBackClick()
-            NotificationsEvent.OnReplyClick -> getContent()
-            NotificationsEvent.OnActiveNotificationCLick -> onBackClick()
+            NotificationsEvent.OnBackClick -> onBackClick()
+            NotificationsEvent.ResetAction -> onResetAction()
+            NotificationsEvent.OnRetryClick -> getContent()
+            is NotificationsEvent.OnNotificationClick -> onBackClick()
+            is NotificationsEvent.OnSeeChangesClick -> throw IllegalStateException(
+                "Only client is able to see order's changes"
+            )
         }
     }
 
@@ -44,7 +48,7 @@ class NotificationsViewModel : BaseViewModel<NotificationsState, NotificationsAc
             )
             launchJob(appDispatchers.network) {
                 val unreadNotifications = notificationsDomain
-                    .filter { it.data.isRead }
+                    .filter { !it.isRead }
                     .map { it.id }
                     .sorted()
                 if (unreadNotifications.isNotEmpty()) {

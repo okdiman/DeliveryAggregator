@@ -1,10 +1,12 @@
 package root.data.model.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 class AuthSuccessDto(
-    @SerializedName("token")
+    @SerialName("token")
     val token: String,
-    @SerializedName("tokenInfo")
+    @SerialName("tokenInfo")
     val tokenInfo: AuthTokenInfoDto?
 )

@@ -1,9 +1,11 @@
 package root.data.model.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import root.data.model.AddressDto
 
+@Serializable
 class AddressesDto(
-    @SerializedName("Addresses")
+    @SerialName("Addresses")
     val addresses: List<AddressDto>?
 )
