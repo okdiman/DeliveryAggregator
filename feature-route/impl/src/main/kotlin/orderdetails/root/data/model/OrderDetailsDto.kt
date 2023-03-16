@@ -7,6 +7,11 @@ import root.data.model.response.OrderExtrasDto
 import root.data.model.response.OrderMarketplaceDto
 import root.data.model.response.OrderStorageDto
 
+/**
+ * В приложении используются другие наименования полей: "load" - погрузка,
+ * "delivery" - доставка, тогда как на сервере "delivery" - погрузка, "done" - доставка,
+ * поэтому для этих полей используются `@SerialName`
+ */
 @Serializable
 data class OrderDetailsDto(
     val address: OrderAddressDto,
@@ -21,6 +26,14 @@ data class OrderDetailsDto(
     val marketplace: OrderMarketplaceDto,
     val pallets: Int,
     val price: Int,
+    @SerialName("deliveryImages")
+    val loadImages: List<String>?,
+    @SerialName("doneImages")
+    val deliveryImages: List<String>?,
+    @SerialName("deliveryTime")
+    val loadTime: String?,
+    @SerialName("doneTime")
+    val deliveryTime: String?,
     val status: String?,
     val cargoType: String,
     val storage: OrderStorageDto,

@@ -22,5 +22,7 @@ data class OrderDetailsModel(
     val status: OrderStatusProgress,
     val isPaid: Boolean,
     val storage: RouteStorageModel,
-    val weight: Int
+    val weight: Int,
+    val load: OrderLoadModel?,
+    val delivery: OrderDeliveryModel?,
 )

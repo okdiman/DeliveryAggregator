@@ -78,7 +78,7 @@ class OrdersViewModel(private val deeplinkParameters: DeeplinkParameters?) :
     }
 
     private fun onOpenOrderDetailsClick(orderId: Long) {
-        // ...
+        viewAction = OrdersAction.OpenOrderDetails(orderId)
     }
 
     private fun onCreateNewOrderClick() {

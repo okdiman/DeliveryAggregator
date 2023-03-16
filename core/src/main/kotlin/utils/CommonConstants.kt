@@ -53,9 +53,4 @@ object CommonConstants {
         const val APP_PACKAGE = "app_package"
         const val APP_UID = "app_uid"
     }
-
-    object BottomNavigation {
-        const val ROUTE_TAB = 0
-        const val PROFILE_TAB = 1
-    }
 }

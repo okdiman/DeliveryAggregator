@@ -6,6 +6,7 @@ import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
 import navigation.NavigationTree
 import neworder.payment.presentation.PaymentSuccessParameters
+import orderdetails.root.presentation.OrderDetailsParameters
 import permissions.PermissionsConstants
 import permissions.presentation.PermissionHandler
 import presentation.DeeplinkParameters
@@ -27,6 +28,13 @@ fun OrderRequestsScreen(deeplinkParameters: DeeplinkParameters?) {
             viewModel.obtainEvent(event)
         }
         when (action.value) {
+            is OrdersAction.OpenOrderDetails -> {
+                rootController.findRootController().push(
+                    NavigationTree.Routes.Details.name,
+                    params = OrderDetailsParameters((action.value as OrdersAction.OpenOrderDetails).id)
+                )
+                viewModel.obtainEvent(OrdersEvent.ResetAction)
+            }
             is OrdersAction.OpenCreationErrorScreen -> {
                 rootController.findRootController().push(
                     NavigationTree.NewOrder.CreationError.name,

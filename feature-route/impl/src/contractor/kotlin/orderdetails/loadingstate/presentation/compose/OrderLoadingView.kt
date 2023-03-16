@@ -22,11 +22,11 @@ import androidx.compose.ui.unit.sp
 import modifiers.autoScrollInFocus
 import orderdetails.loadingstate.presentation.compose.view.OrderPhotoHintView
 import orderdetails.loadingstate.presentation.compose.view.OrderPhotoPlaceholder
-import orderdetails.loadingstate.presentation.compose.view.OrderPhotoView
 import orderdetails.loadingstate.presentation.compose.view.OrderStateDoneButton
 import orderdetails.loadingstate.presentation.compose.view.OrderStateTitle
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingEvent
 import orderdetails.loadingstate.presentation.viewmodel.model.OrderLoadingState
+import orderdetails.root.presentation.compose.view.OrderPhotoView
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import utils.CommonConstants.LIMITS.Transport.CAR_CAPACITY_MAX_CHARS
@@ -61,7 +61,13 @@ internal fun OrderLoadingView(state: OrderLoadingState, eventHandler: (OrderLoad
                     onPhotoAdded = { eventHandler(OrderLoadingEvent.OnPhotoAdded(it)) }
                 )
             } else {
-                OrderPhotoView(state.photo.uri, state.photo.date, state.photo.isLoading)
+                Spacer(modifier = Modifier.height(24.dp))
+                OrderPhotoView(
+                    title = stringResource(R.string.loading_step),
+                    uri = state.photo.uri,
+                    date = state.photo.date,
+                    isLoading = state.photo.isLoading
+                )
             }
         }
         item {

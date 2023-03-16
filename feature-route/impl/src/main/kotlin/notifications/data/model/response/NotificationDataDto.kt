@@ -39,6 +39,7 @@ data class NotificationRequestDataDto(
 data class NotificationAssignedRequestDataDto(
     @SerialName("requestId")
     val orderId: Long,
+    @SerialName("conractorId") // TODO: Убрать потом
     val contractorId: Long,
     val surname: String,
     val name: String,

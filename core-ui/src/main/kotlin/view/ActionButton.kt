@@ -52,7 +52,7 @@ fun ActionButton(
         contentAlignment = alignment
     ) {
         ActionButtonView(
-            textRes = textRes,
+            text = stringResource(textRes),
             additionalText = additionalText,
             height = height,
             gradient = gradient,
@@ -117,7 +117,7 @@ fun ActionButton(
 @Suppress("LongParameterList")
 @Composable
 fun ScrollScreenActionButton(
-    @StringRes textRes: Int = R.string.common_continue_button,
+    text: String = stringResource(R.string.common_continue_button),
     additionalText: String? = null,
     height: Dp = 52.dp,
     gradient: Brush = Theme.gradients.actionButtonGradient,
@@ -139,7 +139,7 @@ fun ScrollScreenActionButton(
         contentAlignment = alignment
     ) {
         ActionButtonView(
-            textRes = textRes,
+            text = text,
             additionalText = additionalText,
             height = height,
             gradient = gradient,
@@ -154,7 +154,7 @@ fun ScrollScreenActionButton(
 @Suppress("LongParameterList")
 @Composable
 private fun ActionButtonView(
-    @StringRes textRes: Int = R.string.common_continue_button,
+    text: String = stringResource(R.string.common_continue_button),
     additionalText: String? = null,
     height: Dp = 52.dp,
     fontSize: TextUnit = 20.sp,
@@ -185,7 +185,7 @@ private fun ActionButtonView(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = stringResource(id = textRes),
+                text = text,
                 style = Theme.fonts.bold.copy(
                     fontSize = fontSize,
                     color = textColor

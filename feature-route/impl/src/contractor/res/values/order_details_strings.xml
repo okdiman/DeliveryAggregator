@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="order_details_client_name">Заказчик</string>
+    <string name="order_details_loading_status">1. Погрузка</string>
+    <string name="order_details_delivery_status">2. Доставка</string>
+    <string name="order_details_delivery_status_completed">Выполнен</string>
+    <string name="order_details_delivery_status_waiting">Ждет подтверждения</string>
+    <string name="order_details_status_info">На каждом статусе нужно сделать фото: номера автомобиля, места отгрузки/погрузки</string>
+</resources>

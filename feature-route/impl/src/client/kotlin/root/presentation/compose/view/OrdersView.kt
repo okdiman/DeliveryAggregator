@@ -189,7 +189,7 @@ private fun CreateNewOrderButtonView(eventHandler: (OrdersEvent) -> Unit) {
     ) {
         ScrollScreenActionButton(
             alignment = Alignment.Center,
-            textRes = R.string.order_create,
+            text = stringResource(R.string.order_create),
             padding = PaddingValues(8.dp)
         ) { eventHandler(OrdersEvent.OnCreateNewOrderClick) }
     }

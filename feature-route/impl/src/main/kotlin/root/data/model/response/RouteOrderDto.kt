@@ -1,4 +1,4 @@
-package root.domain.model
+package root.data.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -9,8 +9,6 @@ import orderdetails.root.data.model.details.OrderDetailsClientDto
 data class RouteOrderDto(
     @SerialName("request")
     val order: OrderDetailsDto,
-    @SerialName("index")
-    val index: Int,
     @SerialName("client")
     val client: OrderDetailsClientDto
 )

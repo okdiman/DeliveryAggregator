@@ -7,6 +7,7 @@ import orderdetails.root.domain.model.OrderDetailsModel
 import root.data.mapper.RouteOrderMapper
 import root.domain.RouteRepository
 import root.domain.model.NewOrderModel
+import root.domain.model.OrderModel
 import root.domain.model.RouteOrderModel
 
 class OrdersRouteRepositoryImpl(
@@ -18,7 +19,7 @@ class OrdersRouteRepositoryImpl(
 
     override suspend fun getOrderRequests(): List<OrderDetailsModel> {
         val orderRequests = api.getClientOrders()
-        return orderRequests.ordersWithContractorDto?.map { orderMapper.mapOrderToDomain(it.order) }.orEmpty()
+        return orderRequests.orders?.map { orderMapper.mapOrderToDomain(it.order) }.orEmpty()
     }
 
     override suspend fun getOrderChanges(id: Long): OrderChangesModel {
@@ -30,6 +31,11 @@ class OrdersRouteRepositoryImpl(
 
     override suspend fun getOrderDetails(id: Long): RouteOrderModel {
         val request = api.getOrderDetails(id)
+        return orderMapper.map(request)
+    }
+
+    override suspend fun getClientOrderDetails(id: Long): OrderModel {
+        val request = api.getClientOrderDetails(id).order
         return orderMapper.map(request)
     }
 

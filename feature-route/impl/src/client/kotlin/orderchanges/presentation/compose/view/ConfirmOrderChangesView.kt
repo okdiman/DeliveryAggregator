@@ -52,12 +52,16 @@ internal fun ConfirmOrderChangesView(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp)
             ) {
                 Column(
                     modifier = Modifier
                         .verticalScroll(rememberScrollState())
-                        .padding(bottom = 70.dp)
+                        .padding(
+                            top = 16.dp,
+                            start = 16.dp,
+                            end = 16.dp,
+                            bottom = 70.dp
+                        )
                 ) {
                     Title(state.orderId, eventHandler)
                     Spacer(modifier = Modifier.height(16.dp))
@@ -184,9 +188,9 @@ private fun ConfirmChangesButtonView(
         contentAlignment = Alignment.BottomCenter
     ) {
         ScrollScreenActionButton(
+            text = stringResource(R.string.order_confirm_changes),
             enabled = !state.isConfirming && !state.isLoading && !state.isError,
             alignment = Alignment.BottomCenter,
-            textRes = R.string.order_confirm_changes,
             padding = PaddingValues(horizontal = 8.dp, vertical = 16.dp)
         ) { eventHandler(ConfirmOrderChangesEvent.OnConfirmClick) }
     }

@@ -2,7 +2,6 @@ package root.data.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import root.domain.model.RouteOrderDto
 
 @Serializable
 class RouteDto(
