@@ -20,4 +20,5 @@
     <string name="common_extras">Дополнительные услуги</string>
     <string name="common_good">Хорошо</string>
     <string name="common_empty_error" />
+    <string name="common_dev_menu">Настройки разработчика</string>
 </resources>

@@ -20,6 +20,7 @@ import support.presentation.compose.SupportScreen
 import transport.presentation.TransportProfileParameters
 import utils.UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
 
+@Suppress("LongMethod")
 @Composable
 fun ProfileScreen() {
     val rootController = LocalRootController.current
@@ -74,6 +75,12 @@ fun ProfileScreen() {
                         cornerRadius = SCREEN_CORNER_RADIUS
                     )
                 ) { ExitScreen() }
+                viewModel.obtainEvent(ProfileEvent.ResetAction)
+            }
+            ProfileAction.OpenDevMenu -> {
+                rootController.findRootController().push(
+                    screen = NavigationTree.Main.DevMenu.name
+                )
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             else -> {}

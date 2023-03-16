@@ -32,6 +32,7 @@ dependencies {
     implementation(project(Modules.core))
     implementation(project(Modules.core_ui))
     implementation(project(Modules.splash))
+    implementation(project(Modules.dev_menu))
     implementation(project(Modules.auth_api))
     implementation(project(Modules.auth_impl))
     implementation(project(Modules.profile_api))

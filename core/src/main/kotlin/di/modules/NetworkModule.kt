@@ -1,5 +1,6 @@
 package di.modules
 
+import devmenu.domain.DevMenuRepository
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -32,7 +33,7 @@ internal fun networkModule() = module {
         ).provide()
     }
     single {
-        RetrofitProvider(get(), get()).provide()
+        RetrofitProvider(get(), get()).provide(get<DevMenuRepository>().getServerUrlSync())
     }
     factory { ErrorInterceptor() }
     factory { CurlLoggingInterceptor() }

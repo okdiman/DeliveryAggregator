@@ -17,6 +17,7 @@ include(
     ":core",
     ":core-ui",
     ":navigation",
+    ":dev-menu",
     ":feature-address:api",
     ":feature-address:impl",
     ":feature-profile:api",

@@ -141,6 +141,7 @@ private fun AddressTextFieldView(
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(top = 24.dp)
                 .focusRequester(focusRequester),
             value = textFieldValue.value,
             textStyle = Theme.fonts.regular.copy(

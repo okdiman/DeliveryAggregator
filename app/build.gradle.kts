@@ -14,8 +14,8 @@ android {
         applicationId = Settings.applicationId
         minSdk = Settings.minSdk
         targetSdk = Settings.targetSdk
-        versionCode = Settings.debugVersionCode
-        versionName = Settings.debugVersionName
+        versionCode = Settings.versionCode
+        versionName = Settings.versionName
     }
 
     flavorDimensions.add(Settings.Flavors.name)
@@ -75,6 +75,7 @@ dependencies {
     implementation(project(Modules.route_api))
     implementation(project(Modules.route_impl))
     implementation(project(Modules.navigation))
+    implementation(project(Modules.dev_menu))
     implementation(project(Modules.address_api))
     implementation(project(Modules.address_impl))
     implementation(project(Modules.image_uploading_api))
