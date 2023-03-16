@@ -17,6 +17,8 @@ import notifications.presentation.compose.NotificationsScreen
 import offer.presentation.compose.OfferScreen
 import orderchanges.presentation.ConfirmOrderChangesParameters
 import orderchanges.presentation.compose.ConfirmOrderChangesScreen
+import orderdetails.root.presentation.OrderDetailsParameters
+import orderdetails.root.presentation.compose.OrderDetailsScreen
 import presentation.DeeplinkParameters
 import root.presentation.compose.OrderRequestsScreen
 import root.presentation.compose.ProfileScreen
@@ -68,6 +70,9 @@ fun RootComposeBuilder.mainFlow(deeplinkParameters: DeeplinkParameters?) {
     }
     screen(NavigationTree.Routes.ConfirmChanges.name) { parameters ->
         ConfirmOrderChangesScreen(parameters as ConfirmOrderChangesParameters)
+    }
+    screen(NavigationTree.Routes.Details.name) { parameters ->
+        OrderDetailsScreen(parameters as OrderDetailsParameters)
     }
     screen(NavigationTree.Profile.Offer.name) {
         OfferScreen()

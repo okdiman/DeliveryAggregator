@@ -9,8 +9,9 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
+import root.data.model.response.OrderRequestDto
 import root.data.model.response.OrdersDto
-import root.domain.model.RouteOrderDto
+import root.data.model.response.RouteOrderDto
 
 interface OrdersApi {
     @GET("/api/clients/requests")
@@ -20,6 +21,11 @@ interface OrdersApi {
     suspend fun getOrderDetails(
         @Path("id") id: Long
     ): RouteOrderDto
+
+    @GET("/api/clients/requests/{id}")
+    suspend fun getClientOrderDetails(
+        @Path("id") id: Long
+    ): OrderRequestDto
 
     @GET("api/users/extras")
     suspend fun getExtras(): ExtrasDto

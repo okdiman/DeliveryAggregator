@@ -25,9 +25,9 @@ import orderdetails.deliverystate.presentation.viewmodel.model.OrderDeliveryEven
 import orderdetails.deliverystate.presentation.viewmodel.model.OrderDeliveryState
 import orderdetails.loadingstate.presentation.compose.view.OrderPhotoHintView
 import orderdetails.loadingstate.presentation.compose.view.OrderPhotoPlaceholder
-import orderdetails.loadingstate.presentation.compose.view.OrderPhotoView
 import orderdetails.loadingstate.presentation.compose.view.OrderStateDoneButton
 import orderdetails.loadingstate.presentation.compose.view.OrderStateTitle
+import orderdetails.root.presentation.compose.view.OrderPhotoView
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import view.CheckboxView
@@ -60,7 +60,13 @@ internal fun OrderDeliveryView(state: OrderDeliveryState, eventHandler: (OrderDe
                     onPhotoAdded = { eventHandler(OrderDeliveryEvent.OnPhotoAdded(it)) }
                 )
             } else {
-                OrderPhotoView(state.photo.uri, state.photo.date, state.photo.isLoading)
+                Spacer(modifier = Modifier.height(24.dp))
+                OrderPhotoView(
+                    title = stringResource(R.string.loading_step),
+                    uri = state.photo.uri,
+                    date = state.photo.date,
+                    isLoading = state.photo.isLoading
+                )
             }
         }
         item {

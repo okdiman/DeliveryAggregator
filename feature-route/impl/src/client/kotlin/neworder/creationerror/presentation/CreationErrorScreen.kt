@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import navigation.BottomNavConstants
 import navigation.NavigationTree
 import openBrowser
 import ru.alexgladkov.odyssey.compose.extensions.present
@@ -25,7 +26,6 @@ import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import ru.alexgladkov.odyssey.core.LaunchFlag
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
-import utils.CommonConstants
 
 @Composable
 fun CreationErrorScreen(parameters: CreationErrorParameters) {
@@ -57,7 +57,7 @@ fun CreationErrorScreen(parameters: CreationErrorParameters) {
         rootController.findRootController().present(
             screen = NavigationTree.Main.MainFlow.name,
             launchFlag = LaunchFlag.SingleInstance,
-            startTabPosition = CommonConstants.BottomNavigation.ROUTE_TAB
+            startTabPosition = BottomNavConstants.ROUTE_TAB
         )
     }
 }

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
 
 @Composable
@@ -18,7 +19,7 @@ internal fun OrderStateDoneButton(
         contentAlignment = Alignment.BottomCenter
     ) {
         ScrollScreenActionButton(
-            textRes = R.string.loading_step_done,
+            text = stringResource(R.string.loading_step_done),
             onPositioned = onPositioned
         ) { onClick() }
     }
