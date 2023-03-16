@@ -3,6 +3,7 @@
     <string name="order_status_new">Новый</string>
     <string name="order_status_assigned">В работе</string>
     <string name="order_status_delivery">Доставка</string>
+    <string name="order_status_changed">Ждет подтверждения</string>
     <string name="order_filter_active">Активные</string>
     <string name="order_filter_done">Завершенные</string>
     <string name="order_filter_paid">Оплаченные</string>
