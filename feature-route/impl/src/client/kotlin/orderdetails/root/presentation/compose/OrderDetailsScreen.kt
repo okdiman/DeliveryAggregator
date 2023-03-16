@@ -39,10 +39,9 @@ fun OrderDetailsScreen(parameters: OrderDetailsParameters) {
                 viewModel.obtainEvent(OrderDetailsEvent.ResetAction)
             }
             OrderDetailsAction.OpenPreviousScreen -> rootController.popBackStack()
-            is OrderDetailsAction.OpenPaymentInBrowserAndReturn -> {
-                val uri = (action.value as OrderDetailsAction.OpenPaymentInBrowserAndReturn).paymentUri
+            is OrderDetailsAction.OpenPaymentInBrowser -> {
+                val uri = (action.value as OrderDetailsAction.OpenPaymentInBrowser).paymentUri
                 openBrowser(LocalContext.current, uri)
-                rootController.popBackStack()
             }
             else -> {}
         }

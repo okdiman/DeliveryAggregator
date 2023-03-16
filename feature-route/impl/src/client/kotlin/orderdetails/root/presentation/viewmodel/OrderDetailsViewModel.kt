@@ -63,7 +63,7 @@ class OrderDetailsViewModel(
 
     private fun onPay() {
         getAuthTokenSyncUseCase()?.let { token ->
-            viewAction = OrderDetailsAction.OpenPaymentInBrowserAndReturn(getPaymentUri(parameters.id, token))
+            viewAction = OrderDetailsAction.OpenPaymentInBrowser(getPaymentUri(parameters.id, token))
         }
     }
 
