@@ -137,31 +137,6 @@ private fun OrderDetailsSubtitleView(state: OrderDetailsState) {
 }
 
 @Composable
-private fun OrderDetailsRowView(title: String, info: String) {
-    Spacer(modifier = Modifier.height(16.dp))
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Text(
-            modifier = Modifier
-                .fillMaxWidth(0.5f)
-                .padding(end = 8.dp),
-            text = title,
-            style = Theme.fonts.regular.copy(color = Theme.colors.textPrimaryColor.copy(alpha = 0.7f))
-        )
-        Text(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(start = 8.dp),
-            text = info,
-            style = Theme.fonts.regular,
-            textAlign = TextAlign.End
-        )
-    }
-}
-
-@Composable
 private fun OrderDetailsAdditionalInfoView(eventHandler: (OrderDetailsEvent) -> Unit) {
     Spacer(modifier = Modifier.height(24.dp))
     Box(

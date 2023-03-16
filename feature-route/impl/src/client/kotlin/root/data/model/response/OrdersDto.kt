@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class OrdersDto(
     @SerialName("ContractorRequests")
-    val ordersWithContractorDto: List<OrdersWithContractorDto>?,
+    val orders: List<OrderDto>?,
 )

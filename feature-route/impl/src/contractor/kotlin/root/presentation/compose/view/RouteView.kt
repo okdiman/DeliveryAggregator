@@ -131,7 +131,7 @@ private fun RouteAcceptButtonView(state: RouteState, eventHandler: (RouteEvent) 
         contentAlignment = Alignment.BottomCenter
     ) {
         ScrollScreenActionButton(
-            textRes = R.string.route_accept_route,
+            text = stringResource(R.string.route_accept_route),
             additionalText = state.buttonUiModel.text,
             height = 65.dp,
             padding = PaddingValues(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)

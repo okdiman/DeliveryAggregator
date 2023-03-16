@@ -1,4 +1,4 @@
-package orderdetails.loadingstate.presentation.compose.view
+package orderdetails.root.presentation.compose.view
 
 import android.net.Uri
 import androidx.compose.foundation.Image
@@ -22,16 +22,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import theme.Theme
-import trinity_monsters.delivery_aggregator.feature_route.impl.R
 
 @Composable
-internal fun OrderPhotoView(uri: Uri?, date: String?, isLoading: Boolean) {
+internal fun OrderPhotoView(title: String, uri: Uri?, date: String?, isLoading: Boolean = false) {
     Spacer(modifier = Modifier.height(24.dp))
     Card(
         modifier = Modifier
@@ -70,7 +68,7 @@ internal fun OrderPhotoView(uri: Uri?, date: String?, isLoading: Boolean) {
                     .fillMaxWidth()
                     .padding(start = 16.dp)
             ) {
-                Text(text = stringResource(id = R.string.loading_step), style = Theme.fonts.bold)
+                Text(text = title, style = Theme.fonts.bold)
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
                     text = date ?: "", style = Theme.fonts.regular.copy(

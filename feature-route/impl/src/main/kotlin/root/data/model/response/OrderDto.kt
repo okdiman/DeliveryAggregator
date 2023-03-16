@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 import orderdetails.root.data.model.OrderDetailsDto
 
 @Serializable
-data class OrdersWithContractorDto(
+data class OrderDto(
     @SerialName("request")
     val order: OrderDetailsDto,
     @SerialName("contractor")

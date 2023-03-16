@@ -18,7 +18,7 @@ internal fun OrderStateDoneButton(
         contentAlignment = Alignment.BottomCenter
     ) {
         ScrollScreenActionButton(
-            textRes = R.string.loading_step_done,
+            text = stringResource(R.string.loading_step_done),
             onPositioned = onPositioned
         ) { onClick() }
     }

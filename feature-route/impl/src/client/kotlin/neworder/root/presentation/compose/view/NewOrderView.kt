@@ -36,6 +36,7 @@ import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import utils.CommonConstants.LIMITS.Common.MAX_DESCRIPTION_CHARS
 import utils.CommonConstants.LIMITS.Transport.CAR_CAPACITY_MAX_CHARS
 import utils.CommonConstants.LIMITS.Transport.CAR_PALLETS_MAX_CHARS
+import utils.UiConstants.SCROLL_SCREEN_ACTION_BUTTON_OCCUPIED_HEIGHT
 import view.ExtrasTextField
 import view.StandardTextField
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
@@ -265,7 +266,7 @@ private fun CommentItem(modifier: Modifier, state: NewOrderState, eventHandler: 
     StandardTextField(
         modifier = modifier.then(
             Modifier
-                .padding(bottom = 100.dp)
+                .padding(bottom = SCROLL_SCREEN_ACTION_BUTTON_OCCUPIED_HEIGHT.dp)
                 .defaultMinSize(minHeight = 90.dp)
         ),
         title = stringResource(R_core.string.common_info_comment),
@@ -287,7 +288,7 @@ private fun CreateOrderButtonItem(
         contentAlignment = Alignment.BottomCenter
     ) {
         ScrollScreenActionButton(
-            textRes = R.string.new_order_create,
+            text = stringResource(R.string.new_order_create),
             onPositioned = onPositioned,
             additionalText = state.createButton.subtitle,
             enabled = state.createButton.isEnabled,

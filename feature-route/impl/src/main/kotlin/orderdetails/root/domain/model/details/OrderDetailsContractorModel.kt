@@ -1,14 +1,11 @@
-package root.data.model.response
+package orderdetails.root.domain.model.details
 
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class ContractorDto(
+data class OrderDetailsContractorModel(
     val phone: String,
     val email: String,
     val surname: String,
     val name: String,
     val secondName: String,
     val carPlate: String,
-    val carModel: String,
+    val carModel: String?,
 )
