@@ -2,6 +2,8 @@ package notifications.presentation.viewmodel
 
 import BaseViewModel
 import coroutines.AppDispatchers
+import network.domain.GetAuthTokenSyncUseCase
+import neworder.payment.domain.GetPaymentUriUseCase
 import notifications.domain.model.RouteNotificationsStatus
 import notifications.domain.usecase.GetNotificationsListUseCase
 import notifications.domain.usecase.MarkNotificationsAsReadUseCase
@@ -20,6 +22,8 @@ class NotificationsViewModel : BaseViewModel<NotificationsState, NotificationsAc
     private val appDispatchers by inject<AppDispatchers>()
     private val markNotificationsAsRead by inject<MarkNotificationsAsReadUseCase>()
     private val mapper by inject<NotificationUiMapper>()
+    private val getPaymentUri by inject<GetPaymentUriUseCase>()
+    private val getAuthTokenSync by inject<GetAuthTokenSyncUseCase>()
 
     init {
         getContent()
@@ -78,11 +82,13 @@ class NotificationsViewModel : BaseViewModel<NotificationsState, NotificationsAc
     }
 
     private fun onOpenOrderDetails(orderId: Long) {
-        // ...
+        viewAction = NotificationsAction.OpenOrderDetails(orderId)
     }
 
     private fun onOpenOrderPayment(orderId: Long) {
-        // ...
+        getAuthTokenSync()?.let { token ->
+            viewAction = NotificationsAction.OpenPaymentInBrowser(getPaymentUri(orderId, token))
+        }
     }
 
     private fun onBackClick() {
