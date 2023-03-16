@@ -60,6 +60,7 @@ internal fun OrderDeliveryView(state: OrderDeliveryState, eventHandler: (OrderDe
                     onPhotoAdded = { eventHandler(OrderDeliveryEvent.OnPhotoAdded(it)) }
                 )
             } else {
+                Spacer(modifier = Modifier.height(24.dp))
                 OrderPhotoView(
                     title = stringResource(R.string.loading_step),
                     uri = state.photo.uri,

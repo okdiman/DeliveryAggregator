@@ -132,6 +132,7 @@ private fun OrderDetailsStatusView(
         )
     }
     if (state.uiModel.delivery != null) {
+        Spacer(modifier = Modifier.height(10.dp))
         OrderPhotoView(
             title = stringResource(id = R.string.order_details_delivery_step),
             uri = state.uiModel.delivery.imageUrl,

@@ -61,6 +61,7 @@ internal fun OrderLoadingView(state: OrderLoadingState, eventHandler: (OrderLoad
                     onPhotoAdded = { eventHandler(OrderLoadingEvent.OnPhotoAdded(it)) }
                 )
             } else {
+                Spacer(modifier = Modifier.height(24.dp))
                 OrderPhotoView(
                     title = stringResource(R.string.loading_step),
                     uri = state.photo.uri,

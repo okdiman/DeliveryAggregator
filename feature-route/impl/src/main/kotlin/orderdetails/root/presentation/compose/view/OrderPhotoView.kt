@@ -30,7 +30,6 @@ import theme.Theme
 
 @Composable
 internal fun OrderPhotoView(title: String, uri: Uri?, date: String?, isLoading: Boolean = false) {
-    Spacer(modifier = Modifier.height(24.dp))
     Card(
         modifier = Modifier
             .fillMaxWidth()
