@@ -71,10 +71,12 @@ internal fun OrderDetailsView(
                             info = phone
                         )
                     }
-                    OrderDetailsRowView(
-                        title = stringResource(id = R.string.order_details_delivery_date),
-                        info = state.uiModel.arrivalTime
-                    )
+                    state.uiModel.deliveryDate?.let { deliveryDate ->
+                        OrderDetailsRowView(
+                            title = stringResource(id = R.string.order_details_delivery_date),
+                            info = deliveryDate
+                        )
+                    }
                     OrderDetailsRowView(
                         title = stringResource(id = R.string.route_delivery_time),
                         info = state.uiModel.arrivalTime
