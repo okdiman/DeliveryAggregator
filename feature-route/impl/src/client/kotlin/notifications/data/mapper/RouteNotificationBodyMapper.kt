@@ -6,6 +6,8 @@ import androidx.core.text.toSpannable
 import notifications.NotificationsConstant.Route.ROUTE_ID
 import notifications.NotificationsConstant.Route.STATUS
 import notifications.domain.model.RouteNotificationsStatus
+import orderdetails.root.domain.model.OrderDetailsModel
+import root.domain.model.status.OrderStatusProgress
 import trinity_monsters.delivery_aggregator.core_ui.R
 import utils.CommonConstants.Helpers.NUMBER
 import utils.ext.setBoldSpan
@@ -25,10 +27,10 @@ class RouteNotificationBodyMapper(
         return resourceInteractor.getSpannedString(bodyBase, routeId)
     }
 
-    fun mapToAnnotated(data: Map<String, String>): AnnotatedString {
+    fun mapToAnnotated(data: Map<String, String>, order: OrderDetailsModel? = null): AnnotatedString {
         val remoteStatus = getStatus(data)
         val routeId = getRouteId(data)
-        val bodyBase = getBodyBase(remoteStatus)
+        val bodyBase = getBodyBase(remoteStatus, order)
         val isKnownNotificationStatus = RouteNotificationsStatus.values().find { it.status == remoteStatus } != null
         val body = if (isKnownNotificationStatus) {
             String.format(
@@ -45,14 +47,20 @@ class RouteNotificationBodyMapper(
         append(NUMBER + data[ROUTE_ID].orEmpty())
     }
 
-    private fun getBodyBase(remoteStatus: String) =
+    private fun getBodyBase(remoteStatus: String, order: OrderDetailsModel? = null) =
         when (RouteNotificationsStatus.values().firstOrNull { it.status == remoteStatus }) {
             RouteNotificationsStatus.NEW -> R.string.notifications_new
             RouteNotificationsStatus.ASSIGNED -> R.string.notifications_contractor_assigned
             RouteNotificationsStatus.DELIVERY -> R.string.notifications_delivery_in_progress
             RouteNotificationsStatus.CANCELLED -> R.string.notifications_cancelled
-            RouteNotificationsStatus.CHANGED -> R.string.notifications_changed
-            RouteNotificationsStatus.DONE -> R.string.notifications_done
+            RouteNotificationsStatus.CHANGED -> {
+                val wereChangesAccepted = order?.status != OrderStatusProgress.CHANGED
+                if (wereChangesAccepted) R.string.notifications_changes_accepted else R.string.notifications_changed
+            }
+            RouteNotificationsStatus.DONE -> {
+                val isPaid = order?.isPaid ?: false
+                if (isPaid) R.string.notifications_done_and_paid else R.string.notifications_done
+            }
             else -> R.string.common_empty_error
         }
 }
