@@ -20,6 +20,7 @@ class OrderDetailsMapper {
                 }
             },
             contractorPhone = model.contractor?.phone,
+            deliveryDate = model.details.delivery?.deliveryDateTime?.toString(DateFormats.DOT_DAY_FORMAT),
             arrivalTime = model.details.arrivalTime,
             palletCount = model.details.pallets.toString(),
             deliveryAddress = model.details.storage.address,
