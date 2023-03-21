@@ -71,10 +71,12 @@ internal fun OrderDetailsView(
                             info = phone
                         )
                     }
-                    OrderDetailsRowView(
-                        title = stringResource(id = R.string.order_details_delivery_date),
-                        info = state.uiModel.arrivalTime
-                    )
+                    state.uiModel.deliveryDate?.let { deliveryDate ->
+                        OrderDetailsRowView(
+                            title = stringResource(id = R.string.order_details_delivery_date),
+                            info = deliveryDate
+                        )
+                    }
                     OrderDetailsRowView(
                         title = stringResource(id = R.string.route_delivery_time),
                         info = state.uiModel.arrivalTime
@@ -125,6 +127,7 @@ private fun OrderDetailsStatusView(
         Spacer(modifier = Modifier.height(20.dp))
     }
     if (state.uiModel.load != null) {
+        Spacer(modifier = Modifier.height(24.dp))
         OrderPhotoView(
             title = stringResource(id = R.string.order_details_loading_step),
             uri = state.uiModel.load.imageUrl,
