@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="canellation_order_tilte">Вы уверены, что хотите отменить создание заказа?</string>
-    <string name="canellation_order_no_reject">Не отменять</string>
+    <string name="cancellation_order_title">Вы уверены, что хотите отменить создание заказа?</string>
+    <string name="cancellation_order_no_reject">Не отменять</string>
 </resources>

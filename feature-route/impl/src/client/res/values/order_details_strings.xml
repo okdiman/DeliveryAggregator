@@ -4,5 +4,6 @@
     <string name="order_details_loading_step">1. Погрузка</string>
     <string name="order_details_delivery_step">2. Доставка</string>
     <string name="order_details_pay">Оплатить %1s</string>
+    <string name="order_details_delete">Удалить заказ</string>
     <string name="order_details_status_description">Здесь будут отображаться статусы после погрузки и доставки</string>
 </resources>

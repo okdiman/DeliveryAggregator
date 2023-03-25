@@ -1,0 +1,3 @@
+package deleteorder.presentation.viewmodel.model
+
+class DeleteOrderState

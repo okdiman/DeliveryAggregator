@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
+import deleteorder.presentation.DeleteOrderParameters
+import deleteorder.presentation.compose.DeleteOrderScreen
 import openBrowser
 import orderdetails.root.presentation.OrderDetailsParameters
 import orderdetails.root.presentation.compose.view.OrderDetailsView
@@ -39,6 +41,14 @@ fun OrderDetailsScreen(parameters: OrderDetailsParameters) {
                 viewModel.obtainEvent(OrderDetailsEvent.ResetAction)
             }
             OrderDetailsAction.OpenPreviousScreen -> rootController.popBackStack()
+            OrderDetailsAction.OpenDeleteOrderScreen -> {
+                rootController.findModalController().present(
+                    modalSheetConfiguration = ModalSheetConfiguration(
+                        cornerRadius = UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
+                    )
+                ) { DeleteOrderScreen(DeleteOrderParameters(parameters.id)) }
+                viewModel.obtainEvent(OrderDetailsEvent.ResetAction)
+            }
             is OrderDetailsAction.OpenPaymentInBrowser -> {
                 val uri = (action.value as OrderDetailsAction.OpenPaymentInBrowser).paymentUri
                 openBrowser(LocalContext.current, uri)

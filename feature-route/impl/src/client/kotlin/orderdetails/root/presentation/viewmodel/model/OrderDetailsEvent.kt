@@ -6,4 +6,5 @@ sealed interface OrderDetailsEvent {
     object OnRetryClick : OrderDetailsEvent
     object OnAdditionalInfoClick : OrderDetailsEvent
     object OnPayClick : OrderDetailsEvent
+    object OnDeleteClick : OrderDetailsEvent
 }
