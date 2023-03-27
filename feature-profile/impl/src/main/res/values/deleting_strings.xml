@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="deleting_are_u_sure_want_delete">Вы точно хотите удалить аккаунт?</string>
-    <string name="deleting_delete_acc">Удалить</string>
-    <string name="deleting_not_delete">Не удалять</string>
 </resources>

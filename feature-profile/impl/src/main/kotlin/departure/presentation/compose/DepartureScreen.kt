@@ -10,12 +10,10 @@ import departure.presentation.viewmodel.model.DepartureAction
 import departure.presentation.viewmodel.model.DepartureEvent
 import maxaddresses.presentation.compose.MaxAddressCountScreen
 import root.presentation.AddressBSScreen
-import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
-import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
 import trinity_monsters.delivery_aggregator.core_ui.R
-import utils.UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
 import utils.UiConstants.BottomSheet.SCREEN_MAX_HEIGHT
+import utils.presentStandardBS
 
 @Suppress("LongMethod")
 @Composable
@@ -29,11 +27,8 @@ fun DepartureScreen() {
         }
         when (action.value) {
             DepartureAction.OpenAddAddress -> {
-                rootController.findModalController().present(
-                    modalSheetConfiguration = ModalSheetConfiguration(
-                        cornerRadius = SCREEN_CORNER_RADIUS,
-                        maxHeight = SCREEN_MAX_HEIGHT
-                    )
+                rootController.findModalController().presentStandardBS(
+                    maxHeight = SCREEN_MAX_HEIGHT
                 ) {
                     AddressBSScreen(
                         state = state.value.bsAddress,
@@ -53,21 +48,12 @@ fun DepartureScreen() {
                 viewModel.obtainEvent(DepartureEvent.ResetAction)
             }
             DepartureAction.OpenAddingError -> {
-                rootController.findModalController().present(
-                    modalSheetConfiguration = ModalSheetConfiguration(
-                        cornerRadius = SCREEN_CORNER_RADIUS
-                    )
-                ) { MaxAddressCountScreen() }
+                rootController.findModalController().presentStandardBS { MaxAddressCountScreen() }
                 viewModel.obtainEvent(DepartureEvent.ResetAction)
             }
             is DepartureAction.OpenAddressEdit -> {
                 val id = (action.value as DepartureAction.OpenAddressEdit).id
-                rootController.findModalController().present(
-                    modalSheetConfiguration = ModalSheetConfiguration(
-                        cornerRadius = SCREEN_CORNER_RADIUS,
-                        maxHeight = SCREEN_MAX_HEIGHT
-                    )
-                ) {
+                rootController.findModalController().presentStandardBS(maxHeight = SCREEN_MAX_HEIGHT) {
                     AddressBSScreen(
                         state = state.value.bsAddress,
                         suggests = state.value.suggests,

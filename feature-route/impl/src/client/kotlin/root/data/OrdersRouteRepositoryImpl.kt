@@ -28,6 +28,7 @@ class OrdersRouteRepositoryImpl(
     }
 
     override suspend fun confirmOrderChanges(id: Long) = api.confirmOrderChanges(id)
+    override suspend fun deleteOrder(id: Long) = api.deleteOrder(id)
 
     override suspend fun getOrderDetails(id: Long): RouteOrderModel {
         val request = api.getOrderDetails(id)

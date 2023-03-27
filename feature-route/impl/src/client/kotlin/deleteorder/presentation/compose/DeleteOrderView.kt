@@ -1,4 +1,4 @@
-package deleting.presentation.compose
+package deleteorder.presentation.compose
 
 import ActionButton
 import androidx.compose.foundation.layout.Column
@@ -12,16 +12,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import deleting.presentation.viewmodel.model.DeleteProfileEvent
+import deleteorder.presentation.viewmodel.model.DeleteOrderEvent
 import theme.Theme
-import trinity_monsters.delivery_aggregator.feature_profile.impl.R
+import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
-internal fun DeleteProfileView(eventHandler: (DeleteProfileEvent) -> Unit) {
+internal fun DeleteOrderView(eventHandler: (DeleteOrderEvent) -> Unit) {
     Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 40.dp)) {
         Text(
-            text = stringResource(id = R.string.deleting_are_u_sure_want_delete),
+            text = stringResource(id = R.string.delete_order_title),
             style = Theme.fonts.bold.copy(fontSize = 20.sp),
             textAlign = TextAlign.Center
         )
@@ -29,13 +29,13 @@ internal fun DeleteProfileView(eventHandler: (DeleteProfileEvent) -> Unit) {
             textRes = R_core.string.common_delete,
             alignment = Alignment.Center,
             padding = PaddingValues(top = 24.dp)
-        ) { eventHandler(DeleteProfileEvent.OnDeleteClick) }
+        ) { eventHandler(DeleteOrderEvent.OnConfirmClick) }
         ActionButton(
             textRes = R_core.string.common_not_delete,
             textColor = Theme.colors.textPrimaryColor,
             color = Theme.colors.disabledButtonColor,
             alignment = Alignment.Center,
             padding = PaddingValues(top = 16.dp)
-        ) { eventHandler(DeleteProfileEvent.OnBackClick) }
+        ) { eventHandler(DeleteOrderEvent.OnCancelClick) }
     }
 }

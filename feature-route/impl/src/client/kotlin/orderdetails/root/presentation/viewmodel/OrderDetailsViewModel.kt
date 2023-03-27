@@ -25,7 +25,7 @@ class OrderDetailsViewModel(
     private val mapper by inject<OrderDetailsMapper>()
     private lateinit var additionalInfoParameters: AdditionalInfoParameters
     private val getPaymentUri by inject<GetPaymentUriUseCase>()
-    private val getAuthTokenSyncUseCase by inject<GetAuthTokenSyncUseCase>()
+    private val getAuthTokenSync by inject<GetAuthTokenSyncUseCase>()
 
     init {
         getContent()
@@ -38,6 +38,7 @@ class OrderDetailsViewModel(
             OrderDetailsEvent.OnRetryClick -> getContent()
             OrderDetailsEvent.ResetAction -> onResetAction()
             OrderDetailsEvent.OnPayClick -> onPay()
+            OrderDetailsEvent.OnDeleteClick -> onDeleteClick()
         }
     }
 
@@ -62,7 +63,7 @@ class OrderDetailsViewModel(
     }
 
     private fun onPay() {
-        getAuthTokenSyncUseCase()?.let { token ->
+        getAuthTokenSync()?.let { token ->
             viewAction = OrderDetailsAction.OpenPaymentInBrowser(getPaymentUri(parameters.id, token))
         }
     }
@@ -73,5 +74,9 @@ class OrderDetailsViewModel(
 
     private fun onBackClick() {
         viewAction = OrderDetailsAction.OpenPreviousScreen
+    }
+
+    private fun onDeleteClick() {
+        viewAction = OrderDetailsAction.OpenDeleteOrderScreen
     }
 }
