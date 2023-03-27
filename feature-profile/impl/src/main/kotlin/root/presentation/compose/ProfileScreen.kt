@@ -12,13 +12,11 @@ import root.presentation.compose.view.ProfileView
 import root.presentation.viewmodel.ProfileViewModel
 import root.presentation.viewmodel.model.ProfileAction
 import root.presentation.viewmodel.model.ProfileEvent
-import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
-import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
 import support.presentation.compose.SupportScreen
 import transport.presentation.TransportProfileParameters
-import utils.UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
+import utils.presentStandardBS
 
 @Suppress("LongMethod")
 @Composable
@@ -54,11 +52,7 @@ fun ProfileScreen() {
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             ProfileAction.OpenSupport -> {
-                rootController.findModalController().present(
-                    modalSheetConfiguration = ModalSheetConfiguration(
-                        cornerRadius = SCREEN_CORNER_RADIUS
-                    )
-                ) { SupportScreen() }
+                rootController.findModalController().presentStandardBS { SupportScreen() }
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             ProfileAction.OpenNotificationsSettings -> {
@@ -70,11 +64,7 @@ fun ProfileScreen() {
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             ProfileAction.OpenExitFromAccount -> {
-                rootController.findModalController().present(
-                    modalSheetConfiguration = ModalSheetConfiguration(
-                        cornerRadius = SCREEN_CORNER_RADIUS
-                    )
-                ) { ExitScreen() }
+                rootController.findModalController().presentStandardBS { ExitScreen() }
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
             ProfileAction.OpenDevMenu -> {

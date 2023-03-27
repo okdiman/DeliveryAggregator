@@ -6,14 +6,13 @@ import deleteorder.domain.DeleteOrderUseCase
 import deleteorder.presentation.DeleteOrderParameters
 import deleteorder.presentation.viewmodel.model.DeleteOrderAction
 import deleteorder.presentation.viewmodel.model.DeleteOrderEvent
-import deleteorder.presentation.viewmodel.model.DeleteOrderState
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class DeleteOrderViewModel(
     private val parameters: DeleteOrderParameters
-) : BaseViewModel<DeleteOrderState, DeleteOrderAction, DeleteOrderEvent>(
-    initialState = DeleteOrderState()
+) : BaseViewModel<Unit, DeleteOrderAction, DeleteOrderEvent>(
+    initialState = Unit
 ), KoinComponent {
 
     private val deleteOrder by inject<DeleteOrderUseCase>()

@@ -26,12 +26,12 @@ internal fun DeleteOrderView(eventHandler: (DeleteOrderEvent) -> Unit) {
             textAlign = TextAlign.Center
         )
         ActionButton(
-            textRes = R_core.string.common_reject,
+            textRes = R_core.string.common_delete,
             alignment = Alignment.Center,
             padding = PaddingValues(top = 24.dp)
         ) { eventHandler(DeleteOrderEvent.OnConfirmClick) }
         ActionButton(
-            textRes = R.string.cancellation_order_no_reject,
+            textRes = R_core.string.common_not_delete,
             textColor = Theme.colors.textPrimaryColor,
             color = Theme.colors.disabledButtonColor,
             alignment = Alignment.Center,

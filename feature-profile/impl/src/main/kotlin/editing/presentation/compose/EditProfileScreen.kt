@@ -12,9 +12,8 @@ import navigation.BottomNavConstants
 import navigation.NavigationTree
 import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
-import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
 import ru.alexgladkov.odyssey.core.LaunchFlag
-import utils.UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
+import utils.presentStandardBS
 
 @Composable
 fun EditProfileScreen(parameters: EditProfileParameters) {
@@ -27,11 +26,7 @@ fun EditProfileScreen(parameters: EditProfileParameters) {
         }
         when (action.value) {
             EditProfileAction.OpenDeleteAccScreen -> {
-                rootController.findModalController().present(
-                    modalSheetConfiguration = ModalSheetConfiguration(
-                        cornerRadius = SCREEN_CORNER_RADIUS
-                    )
-                ) { DeleteProfileScreen() }
+                rootController.findModalController().presentStandardBS { DeleteProfileScreen() }
                 viewModel.obtainEvent(EditProfileEvent.ResetAction)
             }
             EditProfileAction.OpenPreviousScreen -> {

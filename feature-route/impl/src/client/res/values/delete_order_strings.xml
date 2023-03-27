@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="delete_order_title">Вы уверены, что хотите отменить заказ?</string>
+    <string name="delete_order_title">Вы уверены, что хотите удалить заказ?</string>
 </resources>

@@ -5,21 +5,19 @@ import androidx.compose.runtime.State
 import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
 import navigation.NavigationTree
+import organization.bank.presentation.BankParameters
 import organization.company.presentation.viewmodel.CompanyViewModel
 import organization.company.presentation.viewmodel.model.CompanyAction
 import organization.company.presentation.viewmodel.model.CompanyEvent
 import organization.company.presentation.viewmodel.model.CompanyState
 import presentation.AddressSuggestUiModel
-import root.presentation.model.RegistrationCompanyModel
-import organization.bank.presentation.BankParameters
 import presentation.parameters.CompanyParameters
 import root.presentation.AddressBSScreen
-import ru.alexgladkov.odyssey.compose.extensions.present
+import root.presentation.model.RegistrationCompanyModel
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
-import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
-import utils.UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
 import utils.UiConstants.BottomSheet.SCREEN_MAX_HEIGHT
+import utils.presentStandardBS
 
 @Composable
 fun CompanyScreen(parameters: CompanyParameters) {
@@ -81,14 +79,7 @@ fun ObtainBSScreenAction(
     onFinishEvent: () -> Unit
 ) {
     val rootController = LocalRootController.current
-    rootController.findModalController().present(
-        modalSheetConfiguration = ModalSheetConfiguration(
-            maxHeight = SCREEN_MAX_HEIGHT,
-            cornerRadius = SCREEN_CORNER_RADIUS,
-            closeOnBackdropClick = false,
-            closeOnSwipe = false
-        )
-    ) {
+    rootController.findModalController().presentStandardBS(maxHeight = SCREEN_MAX_HEIGHT) {
         AddressBSScreen(
             state = state.value.bsAddress,
             suggests = state.value.suggests,
