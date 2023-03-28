@@ -10,5 +10,19 @@ import utils.ext.getSafeQueryParameter
  * реализуется в данной архитектуре)
  */
 class DeeplinkNavigatorHandler {
-    fun getDestination(uri: Uri?) = uri?.getSafeQueryParameter(DESTINATION)
+    /**
+     * Последний обработанный диплинк
+     */
+    private var latestHandledDeeplinkUri: Uri? = null
+
+    fun getDestination(uri: Uri?): String? {
+        latestHandledDeeplinkUri = uri
+        return uri?.getSafeQueryParameter(DESTINATION)
+    }
+
+    /**
+     * Сравнивает [uri] и [latestHandledDeeplinkUri] по ссылкам на объекты. Если это новый диплинк,
+     * то для него был создан новый объект
+     */
+    fun isAlreadyHandled(uri: Uri) = (uri === latestHandledDeeplinkUri)
 }
