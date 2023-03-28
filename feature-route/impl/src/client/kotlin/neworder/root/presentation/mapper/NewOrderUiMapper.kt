@@ -1,5 +1,6 @@
 package neworder.root.presentation.mapper
 
+import extras.presentation.model.ExtrasUiModel
 import neworder.root.presentation.viewmodel.model.NewOrderState
 import root.domain.model.NewOrderModel
 import utils.ext.DateFormats
@@ -19,7 +20,7 @@ class NewOrderUiMapper {
         storageId = state.storage.storage?.id ?: 0,
         weight = state.weight.stateText.toInt(),
         cargoType = state.cargoType.stateText,
-        extras = state.extras.extrasActive.map { it.id }
+        extras = state.extras.extrasActive.filter { it != ExtrasUiModel.Default }.map { it.id }
     )
 
     private fun getDate(date: Date?): String? {
