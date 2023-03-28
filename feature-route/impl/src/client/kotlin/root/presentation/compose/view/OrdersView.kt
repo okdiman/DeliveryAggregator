@@ -93,22 +93,19 @@ internal fun OrderRequestsView(state: OrdersState, eventHandler: (OrdersEvent) -
                                 }
                             }
                             state.selectedCategoryFilter != null -> {
-                                orderRequestItems(orderRequests = state.filteredOrders, eventHandler)
+                                if (state.selectedCategoryFilter == OrderStatusCategoryUiModel.ACTIVE &&
+                                    state.filteredOrders.isEmpty()
+                                ) {
+                                    createNewOrderPlaceholder(eventHandler)
+                                } else {
+                                    orderRequestItems(orderRequests = state.filteredOrders, eventHandler)
+                                }
                             }
                             state.orders.isNotEmpty() -> {
                                 orderRequestItems(orderRequests = state.orders, eventHandler)
                             }
                             else -> {
-                                item {
-                                    PlaceholderView(
-                                        modifier = Modifier.padding(horizontal = 16.dp),
-                                        placeHolderTitle = R.string.order_create_new,
-                                        placeHolderSubtitle = R.string.order_created_orders_are_displayed_here
-                                    )
-                                }
-                                item {
-                                    CreateNewOrderButtonView(eventHandler)
-                                }
+                                createNewOrderPlaceholder(eventHandler)
                             }
                         }
                     }
@@ -142,6 +139,19 @@ private inline fun LazyListScope.orderRequestItems(
         OrderView(modifier = Modifier.padding(horizontal = 16.dp), index = index, model = item) { orderId, _ ->
             eventHandler(OrdersEvent.OnOpenOrderDetailsClick(orderId))
         }
+    }
+}
+
+private fun LazyListScope.createNewOrderPlaceholder(eventHandler: (OrdersEvent) -> Unit) {
+    item {
+        PlaceholderView(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            placeHolderTitle = R.string.order_create_new,
+            placeHolderSubtitle = R.string.order_created_orders_are_displayed_here
+        )
+    }
+    item {
+        CreateNewOrderButtonView(eventHandler)
     }
 }
 
