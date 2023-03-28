@@ -17,5 +17,5 @@ internal fun routeRootModule() = module {
     factory { RouteOrderMapper() }
     factory { GetOrdersUseCase(get()) }
     factory { OrdersUiMapper() }
-    factory { DeeplinkNavigatorHandler() }
+    single { DeeplinkNavigatorHandler() }
 }
