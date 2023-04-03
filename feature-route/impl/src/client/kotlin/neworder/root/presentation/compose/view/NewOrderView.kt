@@ -183,7 +183,7 @@ private fun PalletsItem(modifier: Modifier, state: NewOrderState, eventHandler: 
 private fun WeightItem(modifier: Modifier, state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
     StandardTextField(
         modifier = modifier,
-        title = stringResource(R.string.route_weight),
+        title = stringResource(R.string.route_weight_with_unit),
         state = state.weight,
         hint = stringResource(R.string.new_order_weight_hint),
         isDigits = true,
