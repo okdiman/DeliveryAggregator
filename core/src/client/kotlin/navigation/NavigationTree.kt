@@ -27,6 +27,6 @@ object NavigationTree {
     }
 
     enum class Routes {
-        Notifications, RouteDetails, LoadingState, DeliveryState
+        Notifications, Details, ConfirmChanges
     }
 }

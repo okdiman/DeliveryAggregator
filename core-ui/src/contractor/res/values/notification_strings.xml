@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notifications_info">Вы назначены на рейс %1s. Подтвердите до %2s. По истечению этого времени, мы переведем его на другого исполнителя</string>
+    <string name="notifications_done">Выполнен %1s</string>
+    <string name="notifications_changed">Изменения подтверждены %1s</string>
+</resources>

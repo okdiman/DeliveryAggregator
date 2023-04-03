@@ -72,7 +72,7 @@ internal fun EditProfileView(state: EditProfileState, eventHandler: (EditProfile
             contentAlignment = Alignment.BottomCenter
         ) {
             ScrollScreenActionButton(
-                textRes = R_core.string.common_save,
+                text = stringResource(R_core.string.common_save),
                 onPositioned = { buttonHeight.value = it }
             ) { eventHandler(EditProfileEvent.OnSaveEditingClick) }
         }

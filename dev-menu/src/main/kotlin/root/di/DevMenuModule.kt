@@ -7,5 +7,5 @@ import root.domain.DevMenuInteractor
 
 fun devMenuModule() = module {
     factory<DevMenuRepository> { DevMenuRepositoryImpl(get(), get()) }
-    factory { DevMenuInteractor(get()) }
+    factory { DevMenuInteractor(get(), get()) }
 }

@@ -11,6 +11,7 @@
     <string name="route_boxes_count">Количество коробов</string>
     <string name="route_count_hint">Введите количество</string>
     <string name="route_weight">Масса поставки</string>
-    <string name="route_weight_prefix">кг</string>
+    <string name="route_weight_with_unit">Масса поставки (кг)</string>
+    <string name="route_weight_unit">кг</string>
     <string name="route_delivery_time">Время прибытия</string>
 </resources>

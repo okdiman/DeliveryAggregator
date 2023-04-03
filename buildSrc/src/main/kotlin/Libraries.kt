@@ -35,10 +35,6 @@ object Libraries {
         const val core = "io.gitlab.arturbosch.detekt:detekt-cli:${Versions.detekt}"
     }
 
-    object Json {
-        const val gson = "com.google.code.gson:gson:${Versions.gson}"
-    }
-
     object Koin {
         const val core = "io.insert-koin:koin-core:${Versions.koin}"
         const val android = "io.insert-koin:koin-android:${Versions.koin}"
@@ -51,7 +47,8 @@ object Libraries {
 
     object Retrofit {
         const val core = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-        const val converter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+        const val converter =
+            "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${Versions.kotlinxConverter}"
     }
 
     object ViewModel {

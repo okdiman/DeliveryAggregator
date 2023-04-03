@@ -3,10 +3,14 @@
     <string name="order_status_new">Новый</string>
     <string name="order_status_assigned">В работе</string>
     <string name="order_status_delivery">Доставка</string>
+    <string name="order_status_changed">Ждет подтверждения</string>
+    <string name="order_status_done">Выполнен</string>
     <string name="order_filter_active">Активные</string>
     <string name="order_filter_done">Завершенные</string>
     <string name="order_filter_paid">Оплаченные</string>
     <string name="order_create_new">Создайте новый заказ!</string>
     <string name="order_create">Создать</string>
+    <string name="order_confirm_changes">Подтвердить</string>
     <string name="order_created_orders_are_displayed_here">Здесь будут отображаться созданные вами заказы</string>
+    <string name="order_notifications_permission">Разрешить этому приложению отправлять пуш-уведомления?</string>
 </resources>

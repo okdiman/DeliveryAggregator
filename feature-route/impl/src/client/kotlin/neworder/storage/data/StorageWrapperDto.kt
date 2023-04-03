@@ -1,9 +1,11 @@
 package neworder.storage.data
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import root.data.model.response.OrderStorageDto
 
+@Serializable
 class StorageWrapperDto(
-    @SerializedName("Storages")
+    @SerialName("Storages")
     val request: List<OrderStorageDto>
 )

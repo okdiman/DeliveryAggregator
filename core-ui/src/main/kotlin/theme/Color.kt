@@ -8,6 +8,8 @@ data class DeliveryAggregatorColors(
     val textSecondaryColor: Color,
     val textThirdColor: Color,
     val textFourthColor: Color,
+    val textFiveColor: Color,
+    val darkLabelColor: Color,
     val hintBackgroundColor: Color,
     val disabledTextColor: Color,
     val disabledButtonColor: Color,
@@ -29,6 +31,7 @@ val palette = DeliveryAggregatorColors(
     textSecondaryColor = Color.White,
     textThirdColor = Color(0xFF111111),
     textFourthColor = Color(0xFF979797),
+    darkLabelColor = Color(0xFF5F5F5F),
     dividerColor = Color(0xFFD9D9D9),
     hintBackgroundColor = Color(0xFFF7F7F7),
     disabledTextColor = Color(0xFFB3B3B3),
@@ -42,7 +45,8 @@ val palette = DeliveryAggregatorColors(
     selectionTextColor = Color(0xFF5B9F57),
     chipSelectedColor = Color(0xFF3579F5),
     chipUnselectedColor = Color(0xFFF7F7F7),
-    calendarBackgroundColor = Color(0xFFECF2ED)
+    calendarBackgroundColor = Color(0xFFECF2ED),
+    textFiveColor = Color(0xFFF7EDED)
 )
 
 val LocalColorProvider =

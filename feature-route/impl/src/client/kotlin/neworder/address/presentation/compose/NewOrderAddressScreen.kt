@@ -10,11 +10,10 @@ import neworder.address.presentation.viewmodel.model.NewOrderAddressAction
 import neworder.address.presentation.viewmodel.model.NewOrderAddressEvent
 import presentation.model.AddressUiModel
 import root.presentation.AddressBSScreen
-import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
-import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
 import trinity_monsters.delivery_aggregator.core_ui.R
 import utils.UiConstants
+import utils.presentStandardBS
 
 @Suppress("LongMethod")
 @Composable
@@ -30,61 +29,49 @@ fun NewOrderAddressScreen(
         }
         when (action.value) {
             NewOrderAddressAction.OpenAddAddress -> {
-                rootController.findModalController().present(
-                    modalSheetConfiguration = ModalSheetConfiguration(
-                        cornerRadius = UiConstants.BottomSheet.SCREEN_CORNER_RADIUS,
-                        maxHeight = UiConstants.BottomSheet.SCREEN_MAX_HEIGHT
-                    )
-                ) {
-                    AddressBSScreen(
-                        state = state.value.bsAddress,
-                        suggests = state.value.suggests,
-                        isNeedComment = true,
-                        onTextFieldChanged = {
-                            viewModel.obtainEvent(NewOrderAddressEvent.OnBSAddressChanged(it))
-                        },
-                        onSuggestClick = {
-                            viewModel.obtainEvent(NewOrderAddressEvent.OnSuggestAddressClick(NEW_ID, it))
-                        },
-                        onClearClick = {
-                            viewModel.obtainEvent(NewOrderAddressEvent.OnBSAddressChanged(""))
-                        }
-                    )
-                }
+                rootController.findModalController()
+                    .presentStandardBS(maxHeight = UiConstants.BottomSheet.SCREEN_MAX_HEIGHT) {
+                        AddressBSScreen(
+                            state = state.value.bsAddress,
+                            suggests = state.value.suggests,
+                            isNeedComment = true,
+                            onTextFieldChanged = {
+                                viewModel.obtainEvent(NewOrderAddressEvent.OnBSAddressChanged(it))
+                            },
+                            onSuggestClick = {
+                                viewModel.obtainEvent(NewOrderAddressEvent.OnSuggestAddressClick(NEW_ID, it))
+                            },
+                            onClearClick = {
+                                viewModel.obtainEvent(NewOrderAddressEvent.OnBSAddressChanged(""))
+                            }
+                        )
+                    }
                 viewModel.obtainEvent(NewOrderAddressEvent.ResetAction)
             }
             NewOrderAddressAction.OpenAddingError -> {
-                rootController.findModalController().present(
-                    modalSheetConfiguration = ModalSheetConfiguration(
-                        cornerRadius = UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
-                    )
-                ) { MaxAddressCountScreen() }
+                rootController.findModalController().presentStandardBS { MaxAddressCountScreen() }
                 viewModel.obtainEvent(NewOrderAddressEvent.ResetAction)
             }
             is NewOrderAddressAction.OpenAddressEdit -> {
                 val id = (action.value as NewOrderAddressAction.OpenAddressEdit).id
-                rootController.findModalController().present(
-                    modalSheetConfiguration = ModalSheetConfiguration(
-                        cornerRadius = UiConstants.BottomSheet.SCREEN_CORNER_RADIUS,
-                        maxHeight = UiConstants.BottomSheet.SCREEN_MAX_HEIGHT
-                    )
-                ) {
-                    AddressBSScreen(
-                        state = state.value.bsAddress,
-                        suggests = state.value.suggests,
-                        isNeedComment = true,
-                        onTextFieldChanged = {
-                            viewModel.obtainEvent(NewOrderAddressEvent.OnBSAddressChanged(it))
-                        },
-                        onSuggestClick = {
-                            viewModel.obtainEvent(NewOrderAddressEvent.OnSuggestAddressClick(id, it))
-                        },
-                        onClearClick = {
-                            viewModel.obtainEvent(NewOrderAddressEvent.OnBSAddressChanged(""))
-                        },
-                        titleRes = R.string.common_edit_address
-                    )
-                }
+                rootController.findModalController()
+                    .presentStandardBS(maxHeight = UiConstants.BottomSheet.SCREEN_MAX_HEIGHT) {
+                        AddressBSScreen(
+                            state = state.value.bsAddress,
+                            suggests = state.value.suggests,
+                            isNeedComment = true,
+                            onTextFieldChanged = {
+                                viewModel.obtainEvent(NewOrderAddressEvent.OnBSAddressChanged(it))
+                            },
+                            onSuggestClick = {
+                                viewModel.obtainEvent(NewOrderAddressEvent.OnSuggestAddressClick(id, it))
+                            },
+                            onClearClick = {
+                                viewModel.obtainEvent(NewOrderAddressEvent.OnBSAddressChanged(""))
+                            },
+                            titleRes = R.string.common_edit_address
+                        )
+                    }
                 viewModel.obtainEvent(NewOrderAddressEvent.ResetAction)
             }
             is NewOrderAddressAction.UpdateNewOrderScreen -> {

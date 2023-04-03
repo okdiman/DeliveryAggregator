@@ -7,6 +7,8 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.CompositionContext
+import androidx.compose.runtime.rememberCompositionContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import generateGraph
@@ -21,6 +23,7 @@ import theme.DeliveryAggregatorTheme
 @SuppressLint("SourceLockedOrientationActivity")
 class MainActivity : ComponentActivity() {
     private val viewModel by viewModel<MainViewModel>()
+    private var currentCompositionContext: CompositionContext? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
@@ -46,7 +49,8 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun navigate(startScreen: StartScreen, uri: Uri?) {
-        setContent {
+        setContent(currentCompositionContext) {
+            currentCompositionContext = rememberCompositionContext()
             DeliveryAggregatorTheme {
                 val configuration = OdysseyConfiguration(
                     canvas = this@MainActivity,

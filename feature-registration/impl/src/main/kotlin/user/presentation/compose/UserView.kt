@@ -64,7 +64,7 @@ internal fun UserView(state: UserState, eventHandler: (UserEvent) -> Unit) {
         contentAlignment = Alignment.BottomCenter
     ) {
         ScrollScreenActionButton(
-            textRes = R.string.registration_create_acc_button,
+            text = stringResource(R.string.registration_create_acc_button),
             enabled = state.isCreateAccButtonEnabled,
             onPositioned = { buttonHeight.value = it }
         ) { eventHandler(UserEvent.OnCreateAccClick) }

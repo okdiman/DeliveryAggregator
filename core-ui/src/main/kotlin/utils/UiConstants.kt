@@ -6,6 +6,7 @@ object UiConstants {
         const val SCREEN_MAX_HEIGHT = 0.85f
     }
 
+    const val SCROLL_SCREEN_ACTION_BUTTON_OCCUPIED_HEIGHT = 100
     const val HINT_ALPHA = 0.7f
 
     object External {

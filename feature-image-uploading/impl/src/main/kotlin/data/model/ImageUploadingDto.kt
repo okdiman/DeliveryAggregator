@@ -1,8 +1,10 @@
 package data.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 class ImageUploadingDto(
-    @SerializedName("file")
+    @SerialName("file")
     val link: String
 )

@@ -1,10 +1,12 @@
 package root.data.model.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 class ProfileSettingsDto(
-    @SerializedName("push")
+    @SerialName("push")
     val push: Boolean,
-    @SerializedName("sms")
+    @SerialName("sms")
     val sms: Boolean
 )

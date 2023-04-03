@@ -22,7 +22,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -36,6 +38,7 @@ import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import utils.CommonConstants.LIMITS.Common.MAX_DESCRIPTION_CHARS
 import utils.CommonConstants.LIMITS.Transport.CAR_CAPACITY_MAX_CHARS
 import utils.CommonConstants.LIMITS.Transport.CAR_PALLETS_MAX_CHARS
+import utils.UiConstants.SCROLL_SCREEN_ACTION_BUTTON_OCCUPIED_HEIGHT
 import view.ExtrasTextField
 import view.StandardTextField
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
@@ -47,6 +50,7 @@ internal fun NewOrderView(state: NewOrderState, eventHandler: (NewOrderEvent) ->
     }
     val scrollState = rememberScrollState()
     val modifier = Modifier.autoScrollInFocus(scrollState, buttonHeight)
+    val focusManager = LocalFocusManager.current
     if (state.isError) {
         CommonErrorScreen { eventHandler(NewOrderEvent.OnRetryClick) }
     } else {
@@ -60,18 +64,19 @@ internal fun NewOrderView(state: NewOrderState, eventHandler: (NewOrderEvent) ->
                 NewOrderLoadingView()
             } else {
                 MarketplaceItem(state)
-                CargoTypeItem(state, eventHandler)
+                CargoTypeItem(state, focusManager, eventHandler)
                 BoxesItem(modifier, state, eventHandler)
                 PalletsItem(modifier, state, eventHandler)
                 WeightItem(modifier, state, eventHandler)
-                AddressItem(state, eventHandler)
-                DateItem(state, eventHandler)
-                TimeItem(state, eventHandler)
-                StorageItem(state, eventHandler)
+                AddressItem(state, focusManager, eventHandler)
+                DateItem(state, focusManager, eventHandler)
+                TimeItem(state, focusManager, eventHandler)
+                StorageItem(state, focusManager, eventHandler)
                 ExtrasTextField(
                     modifier = modifier,
                     text = state.extras.stateText
                 ) {
+                    focusManager.clearFocus()
                     eventHandler(NewOrderEvent.OnExtrasClick)
                 }
                 CommentItem(modifier, state, eventHandler)
@@ -126,11 +131,14 @@ private fun MarketplaceItem(state: NewOrderState) {
 }
 
 @Composable
-private fun CargoTypeItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
+private fun CargoTypeItem(state: NewOrderState, focusManager: FocusManager, eventHandler: (NewOrderEvent) -> Unit) {
     StandardTextField(
         modifier = Modifier
             .clip(Theme.shapes.textFields)
-            .clickable { eventHandler(NewOrderEvent.OnCargoTypeClick) },
+            .clickable {
+                focusManager.clearFocus()
+                eventHandler(NewOrderEvent.OnCargoTypeClick)
+            },
         title = stringResource(R.string.route_cargo_type),
         state = state.cargoType,
         hint = stringResource(R_core.string.common_choose),
@@ -175,7 +183,7 @@ private fun PalletsItem(modifier: Modifier, state: NewOrderState, eventHandler: 
 private fun WeightItem(modifier: Modifier, state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
     StandardTextField(
         modifier = modifier,
-        title = stringResource(R.string.route_weight),
+        title = stringResource(R.string.route_weight_with_unit),
         state = state.weight,
         hint = stringResource(R.string.new_order_weight_hint),
         isDigits = true,
@@ -185,11 +193,14 @@ private fun WeightItem(modifier: Modifier, state: NewOrderState, eventHandler: (
 }
 
 @Composable
-private fun AddressItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
+private fun AddressItem(state: NewOrderState, focusManager: FocusManager, eventHandler: (NewOrderEvent) -> Unit) {
     StandardTextField(
         modifier = Modifier
             .clip(Theme.shapes.textFields)
-            .clickable { eventHandler(NewOrderEvent.OnAddressClick) },
+            .clickable {
+                focusManager.clearFocus()
+                eventHandler(NewOrderEvent.OnAddressClick)
+            },
         title = stringResource(R.string.new_order_address_title),
         state = state.address,
         hint = stringResource(R_core.string.common_add_address),
@@ -204,11 +215,14 @@ private fun AddressItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> U
 }
 
 @Composable
-private fun DateItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
+private fun DateItem(state: NewOrderState, focusManager: FocusManager, eventHandler: (NewOrderEvent) -> Unit) {
     StandardTextField(
         modifier = Modifier
             .clip(Theme.shapes.textFields)
-            .clickable { eventHandler(NewOrderEvent.OnArrivalDateClick) },
+            .clickable {
+                focusManager.clearFocus()
+                eventHandler(NewOrderEvent.OnArrivalDateClick)
+            },
         title = stringResource(R.string.new_order_date_title),
         state = state.arrivalDate,
         hint = stringResource(R.string.new_order_date_hint),
@@ -223,11 +237,14 @@ private fun DateItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit
 }
 
 @Composable
-private fun TimeItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
+private fun TimeItem(state: NewOrderState, focusManager: FocusManager, eventHandler: (NewOrderEvent) -> Unit) {
     StandardTextField(
         modifier = Modifier
             .clip(Theme.shapes.textFields)
-            .clickable { eventHandler(NewOrderEvent.OnArrivalTimeClick) },
+            .clickable {
+                focusManager.clearFocus()
+                eventHandler(NewOrderEvent.OnArrivalTimeClick)
+            },
         title = stringResource(R.string.route_delivery_time),
         state = state.arrivalTime,
         hint = stringResource(R_core.string.common_choose),
@@ -242,11 +259,14 @@ private fun TimeItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit
 }
 
 @Composable
-private fun StorageItem(state: NewOrderState, eventHandler: (NewOrderEvent) -> Unit) {
+private fun StorageItem(state: NewOrderState, focusManager: FocusManager, eventHandler: (NewOrderEvent) -> Unit) {
     StandardTextField(
         modifier = Modifier
             .clip(Theme.shapes.textFields)
-            .clickable { eventHandler(NewOrderEvent.OnStorageClick) },
+            .clickable {
+                focusManager.clearFocus()
+                eventHandler(NewOrderEvent.OnStorageClick)
+            },
         title = stringResource(R.string.common_delivery_adddress),
         state = state.storage,
         hint = stringResource(R_core.string.common_choose),
@@ -265,7 +285,7 @@ private fun CommentItem(modifier: Modifier, state: NewOrderState, eventHandler: 
     StandardTextField(
         modifier = modifier.then(
             Modifier
-                .padding(bottom = 100.dp)
+                .padding(bottom = SCROLL_SCREEN_ACTION_BUTTON_OCCUPIED_HEIGHT.dp)
                 .defaultMinSize(minHeight = 90.dp)
         ),
         title = stringResource(R_core.string.common_info_comment),
@@ -287,7 +307,7 @@ private fun CreateOrderButtonItem(
         contentAlignment = Alignment.BottomCenter
     ) {
         ScrollScreenActionButton(
-            textRes = R.string.new_order_create,
+            text = stringResource(R.string.new_order_create),
             onPositioned = onPositioned,
             additionalText = state.createButton.subtitle,
             enabled = state.createButton.isEnabled,

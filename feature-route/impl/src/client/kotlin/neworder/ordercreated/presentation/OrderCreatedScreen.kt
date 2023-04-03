@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import navigation.BottomNavConstants
 import navigation.NavigationTree
 import ru.alexgladkov.odyssey.compose.RootController
 import ru.alexgladkov.odyssey.compose.extensions.present
@@ -25,7 +26,6 @@ import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import ru.alexgladkov.odyssey.core.LaunchFlag
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
-import utils.CommonConstants
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
@@ -51,7 +51,7 @@ fun OrderCreatedScreen(parameters: OrderCreatedParameters) {
         Text(
             modifier = Modifier.padding(horizontal = 52.dp),
             text = parameters.date,
-            style = Theme.fonts.bold.copy(
+            style = Theme.fonts.regular.copy(
                 color = Theme.colors.textPrimaryColor.copy(alpha = 0.6f)
             ),
             textAlign = TextAlign.Center
@@ -71,6 +71,6 @@ private fun navigateToRoutesScreen(rootController: RootController) {
     rootController.findRootController().present(
         screen = NavigationTree.Main.MainFlow.name,
         launchFlag = LaunchFlag.SingleInstance,
-        startTabPosition = CommonConstants.BottomNavigation.ROUTE_TAB
+        startTabPosition = BottomNavConstants.ROUTE_TAB
     )
 }

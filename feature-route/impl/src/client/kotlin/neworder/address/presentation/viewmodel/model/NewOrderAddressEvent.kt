@@ -5,7 +5,7 @@ import presentation.AddressSuggestUiModel
 import presentation.model.AddressUiModel
 
 sealed interface NewOrderAddressEvent {
-    data class OnSuggestAddressClick(val id: String = NEW_ID, val address: AddressSuggestUiModel) : NewOrderAddressEvent
+    data class OnSuggestAddressClick(val id: Long = NEW_ID, val address: AddressSuggestUiModel) : NewOrderAddressEvent
     data class OnEditClick(val uiModel: AddressUiModel) : NewOrderAddressEvent
     data class OnBSAddressChanged(val bsAddress: String) : NewOrderAddressEvent
     data class OnAddressClick(val model: AddressUiModel) : NewOrderAddressEvent

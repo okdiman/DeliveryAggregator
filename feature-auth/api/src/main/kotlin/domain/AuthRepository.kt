@@ -5,6 +5,7 @@ import domain.model.AuthSignUpModel
 import domain.model.AuthVerifyCodeModel
 
 interface AuthRepository {
+    suspend fun clearToken()
     suspend fun isAuthorized(): Boolean
     suspend fun getAuthInfo()
     suspend fun getVerifyCode(model: AuthVerifyCodeModel)
