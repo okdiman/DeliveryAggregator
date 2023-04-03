@@ -2,7 +2,7 @@
 <resources>
     <string name="new_order_title">Новый заказ</string>
     <string name="new_order_marketplace">Маркетплейс</string>
-    <string name="new_order_box_description">Стандартный размер короба 60*40*40  Не более 20 кг за коробку</string>
+    <string name="new_order_box_description">Стандартный размер короба 60*40*40\nНе более 20 кг за коробку</string>
     <string name="new_order_pallet_title">Количество паллет</string>
     <string name="new_order_weight_hint">50</string>
     <string name="new_order_address_title">Ваш адрес</string>
