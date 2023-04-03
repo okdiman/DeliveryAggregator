@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.sp
 import deleting.presentation.viewmodel.model.DeleteProfileEvent
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_profile.impl.R
+import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
 internal fun DeleteProfileView(eventHandler: (DeleteProfileEvent) -> Unit) {
@@ -25,12 +26,12 @@ internal fun DeleteProfileView(eventHandler: (DeleteProfileEvent) -> Unit) {
             textAlign = TextAlign.Center
         )
         ActionButton(
-            textRes = R.string.deleting_delete_acc,
+            textRes = R_core.string.common_delete,
             alignment = Alignment.Center,
             padding = PaddingValues(top = 24.dp)
         ) { eventHandler(DeleteProfileEvent.OnDeleteClick) }
         ActionButton(
-            textRes = R.string.deleting_not_delete,
+            textRes = R_core.string.common_not_delete,
             textColor = Theme.colors.textPrimaryColor,
             color = Theme.colors.disabledButtonColor,
             alignment = Alignment.Center,

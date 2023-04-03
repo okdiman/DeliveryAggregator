@@ -18,4 +18,5 @@ interface RouteRepository {
     suspend fun getOrderRequests(): List<OrderDetailsModel>
     suspend fun getOrderChanges(id: Long): OrderChangesModel
     suspend fun confirmOrderChanges(id: Long)
+    suspend fun deleteOrder(id: Long)
 }

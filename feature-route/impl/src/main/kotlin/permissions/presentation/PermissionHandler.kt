@@ -10,10 +10,8 @@ import com.google.accompanist.permissions.shouldShowRationale
 import openApplicationSettings
 import permissions.AppPermissionState
 import ru.alexgladkov.odyssey.compose.RootController
-import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
-import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
-import utils.UiConstants
+import utils.presentStandardBS
 import view.ShouldPermissionRationaleBSScreen
 import view.model.PermissionState
 
@@ -61,11 +59,7 @@ private fun showPermissionRationale(
     title: String,
     onRationaleDismiss: () -> Unit,
 ) {
-    rootController.findModalController().present(
-        modalSheetConfiguration = ModalSheetConfiguration(
-            cornerRadius = UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
-        )
-    ) {
+    rootController.findModalController().presentStandardBS {
         ShouldPermissionRationaleBSScreen(
             permission = permission,
             text = title,

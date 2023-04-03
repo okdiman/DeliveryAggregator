@@ -23,5 +23,5 @@ internal fun routeRootModule() = module {
     factory { RouteMapper(get()) }
     factory { RouteUiMapper() }
     factory { RouteButtonUiModelMapper() }
-    factory { DeeplinkNavigatorHandler() }
+    single { DeeplinkNavigatorHandler() }
 }

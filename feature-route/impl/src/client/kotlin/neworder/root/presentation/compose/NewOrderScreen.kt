@@ -18,11 +18,9 @@ import neworder.root.presentation.viewmodel.model.NewOrderAction
 import neworder.root.presentation.viewmodel.model.NewOrderEvent
 import neworder.storage.presentation.compose.NewOrderStorageParameters
 import ru.alexgladkov.odyssey.compose.extensions.observeAsState
-import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
-import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
-import utils.UiConstants.BottomSheet.SCREEN_CORNER_RADIUS
+import utils.presentStandardBS
 
 @Suppress("LongMethod")
 @Composable
@@ -120,9 +118,5 @@ private fun OpenModalScreen(
     screen: @Composable () -> Unit
 ) {
     val rootController = LocalRootController.current
-    rootController.findModalController().present(
-        modalSheetConfiguration = ModalSheetConfiguration(
-            cornerRadius = SCREEN_CORNER_RADIUS
-        )
-    ) { screen() }
+    rootController.findModalController().presentStandardBS { screen() }
 }

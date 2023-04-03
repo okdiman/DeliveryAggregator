@@ -29,7 +29,7 @@ class AdditionalInfoUiMapper(
         AdditionalInfoUiModel(
             title = R.string.route_weight,
             text = buildString {
-                append(parameters.weight + SPACER + resourceInteractor.getString(R.string.route_weight_prefix))
+                append(parameters.weight + SPACER + resourceInteractor.getString(R.string.route_weight_unit))
             }
         ),
         AdditionalInfoUiModel(

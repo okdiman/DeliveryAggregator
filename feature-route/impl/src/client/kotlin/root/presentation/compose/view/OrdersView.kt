@@ -8,6 +8,7 @@ import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -65,53 +66,46 @@ internal fun OrderRequestsView(state: OrdersState, eventHandler: (OrdersEvent) -
                 visibleState = startState,
                 enter = slideInHorizontally(),
             ) {
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(vertical = 16.dp),
-                ) {
-                    item {
-                        NotificationIconView(
-                            modifier = Modifier.padding(end = 16.dp),
-                            notificationsCount = state.notificationsCount
-                        ) {
-                            eventHandler(OrdersEvent.OnNotificationsClick)
-                        }
+                Column {
+                    NotificationIconView(
+                        modifier = Modifier.padding(end = 16.dp),
+                        notificationsCount = state.notificationsCount
+                    ) {
+                        eventHandler(OrdersEvent.OnNotificationsClick)
                     }
-                    item {
-                        OrderRequestsTitleView(modifier = Modifier.padding(horizontal = 16.dp))
+                    OrderRequestsTitleView(modifier = Modifier.padding(horizontal = 16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Row(
+                        modifier = Modifier
+                            .horizontalScroll(categoryFilterScrollState)
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+                    ) {
+                        CategoriesFilterChips(state = state, eventHandler)
                     }
-                    item {
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Row(
-                            modifier = Modifier
-                                .horizontalScroll(categoryFilterScrollState)
-                                .padding(horizontal = 16.dp)
-                        ) {
-                            CategoriesFilterChips(state = state, eventHandler)
-                        }
-                    }
-                    when {
-                        state.isLoading -> {
-                            item {
-                                RouteLoadingView(modifier = Modifier.padding(horizontal = 16.dp))
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(vertical = 16.dp),
+                    ) {
+                        when {
+                            state.isLoading -> {
+                                item {
+                                    RouteLoadingView(modifier = Modifier.padding(horizontal = 16.dp))
+                                }
                             }
-                        }
-                        state.selectedCategoryFilter != null -> {
-                            orderRequestItems(orderRequests = state.filteredOrders, eventHandler)
-                        }
-                        state.orders.isNotEmpty() -> {
-                            orderRequestItems(orderRequests = state.orders, eventHandler)
-                        }
-                        else -> {
-                            item {
-                                PlaceholderView(
-                                    modifier = Modifier.padding(horizontal = 16.dp),
-                                    placeHolderTitle = R.string.order_create_new,
-                                    placeHolderSubtitle = R.string.order_created_orders_are_displayed_here
-                                )
+                            state.selectedCategoryFilter != null -> {
+                                if (state.selectedCategoryFilter == OrderStatusCategoryUiModel.ACTIVE &&
+                                    state.filteredOrders.isEmpty()
+                                ) {
+                                    createNewOrderPlaceholder(eventHandler)
+                                } else {
+                                    orderRequestItems(orderRequests = state.filteredOrders, eventHandler)
+                                }
                             }
-                            item {
-                                CreateNewOrderButtonView(eventHandler)
+                            state.orders.isNotEmpty() -> {
+                                orderRequestItems(orderRequests = state.orders, eventHandler)
+                            }
+                            else -> {
+                                createNewOrderPlaceholder(eventHandler)
                             }
                         }
                     }
@@ -141,11 +135,23 @@ private inline fun LazyListScope.orderRequestItems(
     orderRequests: List<OrderUiModel>,
     crossinline eventHandler: (OrdersEvent) -> Unit
 ) {
-    item { Spacer(modifier = Modifier.height(16.dp)) }
     itemsIndexed(orderRequests) { index, item ->
         OrderView(modifier = Modifier.padding(horizontal = 16.dp), index = index, model = item) { orderId, _ ->
             eventHandler(OrdersEvent.OnOpenOrderDetailsClick(orderId))
         }
+    }
+}
+
+private fun LazyListScope.createNewOrderPlaceholder(eventHandler: (OrdersEvent) -> Unit) {
+    item {
+        PlaceholderView(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            placeHolderTitle = R.string.order_create_new,
+            placeHolderSubtitle = R.string.order_created_orders_are_displayed_here
+        )
+    }
+    item {
+        CreateNewOrderButtonView(eventHandler)
     }
 }
 

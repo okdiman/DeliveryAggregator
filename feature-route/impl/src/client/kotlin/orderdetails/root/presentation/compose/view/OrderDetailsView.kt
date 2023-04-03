@@ -1,5 +1,6 @@
 package orderdetails.root.presentation.compose.view
 
+import ActionButton
 import CommonErrorScreen
 import ScrollScreenActionButton
 import androidx.compose.foundation.layout.Box
@@ -21,21 +22,21 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import orderdetails.root.presentation.viewmodel.model.OrderDetailsEvent
 import orderdetails.root.presentation.viewmodel.model.OrderDetailsState
+import root.domain.model.status.OrderStatusProgress
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import utils.UiConstants.SCROLL_SCREEN_ACTION_BUTTON_OCCUPIED_HEIGHT
 import utils.ext.toStringWithEnding
 
 @Composable
-internal fun OrderDetailsView(
-    state: OrderDetailsState, eventHandler: (OrderDetailsEvent) -> Unit,
-) {
+internal fun OrderDetailsView(state: OrderDetailsState, eventHandler: (OrderDetailsEvent) -> Unit) {
     if (state.isError) {
         CommonErrorScreen { eventHandler(OrderDetailsEvent.OnRetryClick) }
     } else {
         val verticalScroll = rememberScrollState()
         Box(modifier = Modifier.fillMaxSize()) {
             val isPayButtonVisible = state.uiModel.canPay
+            val isDeleteButtonVisible = state.uiModel.status == OrderStatusProgress.CREATED
 
             Column(
                 modifier = Modifier
@@ -94,12 +95,14 @@ internal fun OrderDetailsView(
                         state = state,
                         showDescription = !state.uiModel.isLoadedOrDelivered,
                     )
-                    // TODO: Удаление заказа (?)
                 }
             }
 
             if (isPayButtonVisible) {
                 PayButtonView(state, eventHandler)
+            }
+            if (isDeleteButtonVisible) {
+                DeleteButtonView(eventHandler)
             }
         }
     }
@@ -127,6 +130,7 @@ private fun OrderDetailsStatusView(
         Spacer(modifier = Modifier.height(20.dp))
     }
     if (state.uiModel.load != null) {
+        Spacer(modifier = Modifier.height(24.dp))
         OrderPhotoView(
             title = stringResource(id = R.string.order_details_loading_step),
             uri = state.uiModel.load.imageUrl,
@@ -160,5 +164,23 @@ private fun PayButtonView(
             alignment = Alignment.BottomCenter,
             padding = PaddingValues(horizontal = 8.dp, vertical = 16.dp)
         ) { eventHandler(OrderDetailsEvent.OnPayClick) }
+    }
+}
+
+@Composable
+private fun DeleteButtonView(eventHandler: (OrderDetailsEvent) -> Unit) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
+        contentAlignment = Alignment.BottomCenter
+    ) {
+        ActionButton(
+            textRes = R.string.order_details_delete,
+            color = Theme.colors.textFiveColor,
+            textColor = Theme.colors.textPrimaryColor,
+            alignment = Alignment.BottomCenter,
+            padding = PaddingValues(top = 16.dp, bottom = 24.dp)
+        ) { eventHandler(OrderDetailsEvent.OnDeleteClick) }
     }
 }

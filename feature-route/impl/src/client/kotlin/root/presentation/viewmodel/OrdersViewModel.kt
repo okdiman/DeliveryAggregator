@@ -138,9 +138,13 @@ class OrdersViewModel(private val deeplinkParameters: DeeplinkParameters?) :
      * навигация по диплинкам
      */
     private fun checkDeeplink() {
-        viewAction = when (deeplinkNavigatorHandler.getDestination(deeplinkParameters?.uri)) {
+        val deeplinkUri = deeplinkParameters?.uri ?: return
+        if (deeplinkNavigatorHandler.isAlreadyHandled(deeplinkUri))
+            return
+
+        viewAction = when (deeplinkNavigatorHandler.getDestination(deeplinkUri)) {
             PAYMENT_SUCCESS -> {
-                val price = deeplinkParameters?.uri?.getSafeQueryParameter(PRICE)?.let {
+                val price = deeplinkUri.getSafeQueryParameter(PRICE)?.let {
                     val withRubbles = buildString { append(it + RUBBLES) }
                     String.format(
                         resourceInteractor.getString(R.string.new_order_payment_subtitle),

@@ -6,6 +6,7 @@ import neworder.storage.data.StorageWrapperDto
 import orderchanges.data.model.response.OrderChangesDto
 import orderdetails.root.data.model.extras.ExtrasDto
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -52,4 +53,9 @@ interface OrdersApi {
 
     @GET("api/clients/storages")
     suspend fun getStorages(): StorageWrapperDto
+
+    @DELETE("api/clients/requests/{id}")
+    suspend fun deleteOrder(
+        @Path("id") id: Long
+    )
 }

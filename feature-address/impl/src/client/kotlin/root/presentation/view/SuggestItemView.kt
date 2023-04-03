@@ -24,12 +24,11 @@ import comment.presentation.compose.AddressCommentScreen
 import kotlinx.coroutines.launch
 import presentation.AddressSuggestUiModel
 import ru.alexgladkov.odyssey.compose.RootController
-import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
-import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.ModalSheetConfiguration
 import theme.Theme
 import trinity_monsters.delivery_aggregator.core_ui.R
 import utils.UiConstants
+import utils.presentStandardBS
 
 @Composable
 internal fun SuggestItemView(
@@ -100,12 +99,7 @@ private fun navigateToCommentScreen(
 ) {
     rootController
         .findModalController()
-        .present(
-            modalSheetConfiguration = ModalSheetConfiguration(
-                cornerRadius = UiConstants.BottomSheet.SCREEN_CORNER_RADIUS,
-                maxHeight = UiConstants.BottomSheet.SCREEN_MAX_HEIGHT
-            )
-        ) {
+        .presentStandardBS(maxHeight = UiConstants.BottomSheet.SCREEN_MAX_HEIGHT) {
             AddressCommentScreen(
                 parameters = AddressCommentParameters(
                     uiModel = item,

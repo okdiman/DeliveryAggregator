@@ -51,7 +51,7 @@ fun OrderCreatedScreen(parameters: OrderCreatedParameters) {
         Text(
             modifier = Modifier.padding(horizontal = 52.dp),
             text = parameters.date,
-            style = Theme.fonts.bold.copy(
+            style = Theme.fonts.regular.copy(
                 color = Theme.colors.textPrimaryColor.copy(alpha = 0.6f)
             ),
             textAlign = TextAlign.Center

@@ -10,18 +10,21 @@ import notifications.domain.model.NotificationServerDataModel
 import notifications.domain.model.NotificationServerModel
 import notifications.domain.model.NotificationServerRequestDataModel
 import notifications.domain.model.NotificationServerRouteDataModel
+import notifications.domain.model.RouteNotificationsStatus
+import orderdetails.root.domain.model.OrderDetailsModel
 import org.threeten.bp.format.DateTimeFormatter
 import utils.ext.toLocalZonedDateTime
 
 class NotificationMapper {
 
-    fun map(dto: NotificationsDto) = dto.notifications?.map { dtoModel ->
+    fun map(dto: NotificationsDto, order: OrderDetailsModel? = null) = dto.notifications?.map { dtoModel ->
         NotificationServerModel(
             id = dtoModel.id,
             body = dtoModel.body,
             title = dtoModel.title,
             data = mapNotificationData(dtoModel.data),
             isRead = dtoModel.isRead,
+            associatedOrder = order,
         )
     }?.toTypedArray()
 
@@ -31,13 +34,13 @@ class NotificationMapper {
                 routeId = dtoData.routeId,
                 type = dtoData.type,
                 date = dtoData.date,
-                status = dtoData.status.orEmpty(),
+                status = RouteNotificationsStatus.values().first { it.status == dtoData.status },
             )
             is NotificationRequestDataDto -> NotificationServerRequestDataModel(
                 orderId = dtoData.orderId,
                 type = dtoData.type,
                 date = dtoData.date,
-                status = dtoData.status.orEmpty(),
+                status = RouteNotificationsStatus.values().first { it.status == dtoData.status },
             )
             is NotificationAssignedRequestDataDto -> NotificationServerAssignedRequestDataModel(
                 orderId = dtoData.orderId,
@@ -52,7 +55,7 @@ class NotificationMapper {
                 arrivalDay = dtoData.arrivalDay.toLocalZonedDateTime(DateTimeFormatter.ISO_DATE_TIME),
                 type = dtoData.type,
                 date = dtoData.date,
-                status = dtoData.status.orEmpty(),
+                status = RouteNotificationsStatus.values().first { it.status == dtoData.status },
             )
         }
     }

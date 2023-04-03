@@ -10,5 +10,5 @@ internal fun newOrderModule() = module {
     factory { NewOrderMapper() }
     factory { NewOrderUiMapper() }
     factory { NewOrderInteractor(get()) }
-    factory { GetPaymentUriUseCase() }
+    factory { GetPaymentUriUseCase(get()) }
 }

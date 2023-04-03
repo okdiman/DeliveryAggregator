@@ -7,6 +7,7 @@ import notifications.NotificationsConstant
 import notifications.NotificationsConstant.Route.ROUTE_ID
 import notifications.NotificationsConstant.Route.STATUS
 import notifications.domain.model.RouteNotificationsStatus
+import orderdetails.root.domain.model.OrderDetailsModel
 import org.threeten.bp.format.DateTimeFormatter
 import trinity_monsters.delivery_aggregator.core_ui.R
 import utils.CommonConstants.Helpers.NUMBER
@@ -41,7 +42,7 @@ class RouteNotificationBodyMapper(
         }
     }
 
-    fun mapToAnnotated(data: Map<String, String>): AnnotatedString {
+    fun mapToAnnotated(data: Map<String, String>, order: OrderDetailsModel? = null): AnnotatedString {
         val remoteStatus = getStatus(data)
         val routeId = getRouteId(data)
         val date = getDate(data)

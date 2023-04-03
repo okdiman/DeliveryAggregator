@@ -36,6 +36,7 @@ import notifications.presentation.compose.model.NotificationAssignedRequestUiMod
 import notifications.presentation.compose.model.NotificationUiModel
 import notifications.presentation.viewmodel.model.NotificationsEvent
 import notifications.presentation.viewmodel.model.NotificationsState
+import root.domain.model.status.OrderStatusProgress
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import view.BackButton
@@ -152,7 +153,7 @@ private fun NotificationItemContent(model: NotificationUiModel, eventHandler: (N
         NotificationAssignedDetails(model)
     }
 
-    if (model.status == RouteNotificationsStatus.CHANGED) {
+    if (model.status == RouteNotificationsStatus.CHANGED && model.orderStatus == OrderStatusProgress.CHANGED) {
         Spacer(modifier = Modifier.height(10.dp))
         ActionButton(
             modifier = Modifier.fillMaxWidth(0.5f),

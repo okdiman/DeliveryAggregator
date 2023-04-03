@@ -21,7 +21,7 @@ import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 internal fun CancellationOrderView(eventHandler: (CancellationEvent) -> Unit) {
     Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 40.dp)) {
         Text(
-            text = stringResource(id = R.string.canellation_order_tilte),
+            text = stringResource(id = R.string.cancellation_order_title),
             style = Theme.fonts.bold.copy(fontSize = 20.sp),
             textAlign = TextAlign.Center
         )
@@ -31,7 +31,7 @@ internal fun CancellationOrderView(eventHandler: (CancellationEvent) -> Unit) {
             padding = PaddingValues(top = 24.dp)
         ) { eventHandler(CancellationEvent.OnCancelClick) }
         ActionButton(
-            textRes = R.string.canellation_order_no_reject,
+            textRes = R.string.cancellation_order_no_reject,
             textColor = Theme.colors.textPrimaryColor,
             color = Theme.colors.disabledButtonColor,
             alignment = Alignment.Center,

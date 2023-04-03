@@ -24,9 +24,9 @@ internal fun CancellationOrderScreen() {
                 rootController.findModalController().popBackStack(null)
             }
             CancellationAction.OpenStartScreen -> {
-                rootController.present(
+                rootController.findRootController().present(
                     screen = NavigationTree.Main.MainFlow.name,
-                    launchFlag = LaunchFlag.SingleInstance,
+                    launchFlag = LaunchFlag.SingleNewTask,
                     startTabPosition = BottomNavConstants.ROUTE_TAB
                 )
             }
