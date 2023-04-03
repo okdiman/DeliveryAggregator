@@ -16,6 +16,8 @@ class AuthRepositoryImpl(
     private val localDataSource: AuthLocalDataSource,
     private val mapper: AuthSignUpMapper
 ) : AuthRepository {
+    override suspend fun clearToken() = localDataSource.clearToken()
+
     override suspend fun isAuthorized(): Boolean {
         return localDataSource.getAccessToken() != null
     }

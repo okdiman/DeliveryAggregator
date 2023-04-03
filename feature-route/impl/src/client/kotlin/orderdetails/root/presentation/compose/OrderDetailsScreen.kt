@@ -43,6 +43,7 @@ fun OrderDetailsScreen(parameters: OrderDetailsParameters) {
             is OrderDetailsAction.OpenPaymentInBrowser -> {
                 val uri = (action.value as OrderDetailsAction.OpenPaymentInBrowser).paymentUri
                 openBrowser(LocalContext.current, uri)
+                viewModel.obtainEvent(OrderDetailsEvent.ResetAction)
             }
             else -> {}
         }

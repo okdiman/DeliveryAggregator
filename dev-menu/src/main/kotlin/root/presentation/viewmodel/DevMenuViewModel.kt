@@ -49,14 +49,17 @@ class DevMenuViewModel : BaseViewModel<DevMenuState, DevMenuAction, DevMenuEvent
 
     private fun onHostClick(host: HostUiModel) {
         launchJob {
-            devMenuInteractor.setServerUrl(host.baseUrl)
-            viewState = viewState.copy(hosts = viewState.hosts.map {
-                it.isActive = host == it
-                it
-            })
-            viewAction = DevMenuAction.ShowToast(resourceInteractor.getString(R.string.dev_menu_restart_app))
-            delay(TOAST_DELAY)
-            Process.killProcess(Process.myPid())
+            val currentBaseUrl = devMenuInteractor.getServerUrl()
+            if (currentBaseUrl != host.baseUrl) {
+                devMenuInteractor.setServerUrl(host.baseUrl)
+                viewState = viewState.copy(hosts = viewState.hosts.map {
+                    it.isActive = host == it
+                    it
+                })
+                viewAction = DevMenuAction.ShowToast(resourceInteractor.getString(R.string.dev_menu_restart_app))
+                delay(TOAST_DELAY)
+                Process.killProcess(Process.myPid())
+            }
         }
     }
 
