@@ -9,6 +9,13 @@ class AuthLocalDataSourceImpl(
     private val sharedPreferences: SharedPreferences,
     private val dispatchers: AppDispatchers
 ) : AuthLocalDataSource {
+    override suspend fun clearToken() {
+        withContext(dispatchers.storage) {
+            sharedPreferences.edit()
+                .remove(USER_TOKEN)
+                .apply()
+        }
+    }
 
     override suspend fun saveAccessToken(token: String) {
         withContext(dispatchers.storage) {

@@ -133,8 +133,7 @@ class RouteViewModel(private val deeplinkParameters: DeeplinkParameters?) :
      */
     private fun checkDeeplink() {
         val deeplinkUri = deeplinkParameters?.uri ?: return
-        if (deeplinkNavigatorHandler.isAlreadyHandled(deeplinkUri))
-            return
+        if (deeplinkNavigatorHandler.isAlreadyHandled(deeplinkUri)) return
 
         viewAction = when (deeplinkNavigatorHandler.getDestination(deeplinkUri)) {
             NavigationTree.Routes.Notifications.name -> RouteAction.OpenNotifications
