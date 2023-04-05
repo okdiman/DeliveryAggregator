@@ -5,7 +5,7 @@ import domain.AuthRepository
 import domain.model.AuthSignInModel
 import domain.model.AuthSignUpModel
 import domain.model.AuthVerifyCodeModel
-import network.exceptions.UnauthorizedException
+import network.exceptions.UserAlreadyExistException
 import root.data.mapper.AuthSignUpMapper
 import root.data.model.request.AuthSendVerifyCodeRequest
 import root.data.model.request.AuthSignInRequest
@@ -29,7 +29,7 @@ class AuthRepositoryImpl(
     override suspend fun signIn(model: AuthSignInModel) {
         val response = api.signIn(AuthSignInRequest(model.code, model.phone))
         if (response.tokenInfo?.role != BuildConfig.FLAVOR) {
-            throw UnauthorizedException(Throwable("Incorrect role"))
+            throw UserAlreadyExistException(Throwable("Incorrect role"))
         }
         localDataSource.saveAccessToken(response.token)
     }
