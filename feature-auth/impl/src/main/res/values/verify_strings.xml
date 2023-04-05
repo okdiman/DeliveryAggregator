@@ -4,6 +4,7 @@
     <string name="verify_title_end">Введите код из СМС</string>
     <string name="verify_code_hint">00-00</string>
     <string name="verify_code_error">Неверный код</string>
+    <string name="verify_user_already_exist">Пользователь с таким номером уже существует с другой ролью!</string>
     <string name="verify_call_again">Отправить код еще раз</string>
     <string name="verify_send_code_again_timer">Запросить новый код можно через </string>
     <string name="verify_seconds"> сек.</string>
