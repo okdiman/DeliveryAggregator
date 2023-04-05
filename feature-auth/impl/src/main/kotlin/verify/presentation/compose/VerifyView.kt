@@ -109,6 +109,13 @@ private fun CodeBlock(viewState: VerifyState, eventHandler: (VerifyEvent) -> Uni
         )
         Spacer(modifier = Modifier.height(8.dp))
     }
+    if (viewState.error == VerifyStepError.UserAlreadyExist) {
+        Text(
+            text = stringResource(id = R.string.verify_user_already_exist),
+            style = Theme.fonts.regular.copy(fontSize = 14.sp, color = Theme.colors.errorColor)
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+    }
     if (viewState.isTimerVisible) {
         Text(
             text = buildString {

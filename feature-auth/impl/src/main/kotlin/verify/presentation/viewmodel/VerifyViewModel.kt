@@ -8,6 +8,7 @@ import domain.usecase.GetCodeUseCase
 import domain.usecase.SignInUseCase
 import network.exceptions.ForbiddenException
 import network.exceptions.UnauthorizedException
+import network.exceptions.UserAlreadyExistException
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import root.AuthConstants.Limits.MAX_CODE_CHARS
@@ -66,6 +67,9 @@ class VerifyViewModel(
                 when (it) {
                     is UnauthorizedException -> {
                         viewAction = VerifyAction.OpenRegistrationFlow
+                    }
+                    is UserAlreadyExistException -> {
+                        viewState = viewState.copy(error = VerifyStepError.UserAlreadyExist)
                     }
                     is ForbiddenException -> {
                         viewState = viewState.copy(error = VerifyStepError.Forbidden)
