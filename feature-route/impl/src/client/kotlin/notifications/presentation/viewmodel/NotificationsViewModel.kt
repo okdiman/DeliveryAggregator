@@ -58,13 +58,20 @@ class NotificationsViewModel : BaseViewModel<NotificationsState, NotificationsAc
                 notification.data.subjectId to notification.data.status
             }
 
-            associateNotificationsToOrders(
-                notifications = notifications,
-                associateIf = { notification ->
-                    notification.data.status == RouteNotificationsStatus.DONE ||
-                        notification.data.status == RouteNotificationsStatus.CHANGED
+            /**
+             * когда нибудь мы удалим это говно, когда решим проблему со статусом заказа в уведомлениях
+             */
+            notifications.forEach { model ->
+                launchJob {
+                    associateNotificationsToOrders(
+                        notification = model,
+                        associateIf = { notification ->
+                            notification.data.status == RouteNotificationsStatus.DONE ||
+                                notification.data.status == RouteNotificationsStatus.CHANGED
+                        }
+                    )
                 }
-            )
+            }
 
             viewState = viewState.copy(
                 notifications = notifications.map { mapper.map(it) }.sortedByDescending { it.notificationId },
@@ -85,6 +92,7 @@ class NotificationsViewModel : BaseViewModel<NotificationsState, NotificationsAc
 
     private fun onNotificationClick(notificationId: Long) {
         notifications.firstOrNull { it.id == notificationId }?.let { clickedNotification ->
+            if (clickedNotification.associatedOrder == null) return
             val orderId = clickedNotification.data.subjectId
 
             when (clickedNotification.data.status) {

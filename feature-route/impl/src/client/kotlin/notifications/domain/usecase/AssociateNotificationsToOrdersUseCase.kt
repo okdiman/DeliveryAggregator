@@ -11,15 +11,13 @@ class AssociateNotificationsToOrdersUseCase(
     private val repository: RouteRepository
 ) {
     suspend operator fun invoke(
-        notifications: List<NotificationServerModel>,
+        notification: NotificationServerModel,
         associateIf: (NotificationServerModel) -> Boolean,
     ) {
-        for (notification in notifications) {
-            notification.associatedOrder = if (associateIf(notification)) {
-                repository.getClientOrderDetails(notification.data.subjectId).details
-            } else {
-                null
-            }
+        notification.associatedOrder = if (associateIf(notification)) {
+            repository.getClientOrderDetails(notification.data.subjectId).details
+        } else {
+            null
         }
     }
 }
