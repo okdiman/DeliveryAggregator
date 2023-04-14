@@ -38,7 +38,7 @@ fun RouteScreen(deeplinkParameters: DeeplinkParameters?) {
                 rootController.findRootController().push(
                     screen = NavigationTree.Routes.Notifications.name
                 )
-                viewModel.obtainEvent(RouteEvent.ResetAction)
+                viewModel.obtainEvent(RouteEvent.ResetState)
             }
             else -> {}
         }

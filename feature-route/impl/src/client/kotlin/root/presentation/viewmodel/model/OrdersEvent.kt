@@ -9,6 +9,7 @@ sealed interface OrdersEvent {
     object OnRetryClick : OrdersEvent
     object OnRefreshSwipe : OrdersEvent
     object ResetAction : OrdersEvent
+    object ResetState : OrdersEvent
     object OnRationaleDismiss : OrdersEvent
     data class OnPermissionStateChanged(val permissionState: AppPermissionState) : OrdersEvent
     data class OnOpenOrderDetailsClick(val id: Long) : OrdersEvent

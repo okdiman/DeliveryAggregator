@@ -57,6 +57,10 @@ class OrdersViewModel(private val deeplinkParameters: DeeplinkParameters?) :
             OrdersEvent.OnNotificationsClick -> onOpenNotificationsClick()
             OrdersEvent.OnRetryClick -> getContent()
             OrdersEvent.ResetAction -> onResetAction()
+            OrdersEvent.ResetState -> {
+                viewState = viewState.copy(notificationsCount = 0)
+                onResetAction()
+            }
             OrdersEvent.OnRationaleDismiss -> onRationaleDismiss()
             OrdersEvent.OnRefreshSwipe -> {
                 viewState = viewState.copy(isRefreshing = true)
@@ -178,7 +182,6 @@ class OrdersViewModel(private val deeplinkParameters: DeeplinkParameters?) :
             permission.setRationaleDismissed(PermissionsConstants.Notification)
         }
     }
-
 
     private companion object {
         const val PAYMENT_SUCCESS = "success"

@@ -44,6 +44,10 @@ class RouteViewModel(private val deeplinkParameters: DeeplinkParameters?) :
             RouteEvent.AcceptOrderClick -> onAcceptOrderClick()
             RouteEvent.OnNotificationsClick -> onNotificationsClick()
             RouteEvent.ResetAction -> onResetAction()
+            RouteEvent.ResetState -> {
+                viewState = viewState.copy(notificationsCount = 0)
+                onResetAction()
+            }
             RouteEvent.OnRetryClick -> getContent()
             RouteEvent.OnRationaleDismiss -> onRationaleDismiss()
             RouteEvent.OnRefreshSwipe -> {

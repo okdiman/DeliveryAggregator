@@ -59,7 +59,7 @@ fun OrderRequestsScreen(deeplinkParameters: DeeplinkParameters?) {
                 rootController.findRootController().push(
                     NavigationTree.Routes.Notifications.name
                 )
-                viewModel.obtainEvent(OrdersEvent.ResetAction)
+                viewModel.obtainEvent(OrdersEvent.ResetState)
             }
             else -> {}
         }
