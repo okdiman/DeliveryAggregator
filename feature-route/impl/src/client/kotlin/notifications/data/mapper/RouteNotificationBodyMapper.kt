@@ -4,6 +4,7 @@ import android.text.Spanned
 import androidx.compose.ui.text.AnnotatedString
 import androidx.core.text.toSpannable
 import notifications.NotificationsConstant.DataKeys.REQUEST_ID
+import notifications.NotificationsConstant.DataKeys.ROUTE_ID
 import notifications.NotificationsConstant.DataKeys.STATUS
 import notifications.domain.model.RouteNotificationsStatus
 import orderdetails.root.domain.model.OrderDetailsModel
@@ -44,7 +45,7 @@ class RouteNotificationBodyMapper(
     private fun getStatus(data: Map<String, String>) = data[STATUS].orEmpty()
 
     private fun getRouteId(data: Map<String, String>) = buildString {
-        append(NUMBER + data[REQUEST_ID].orEmpty())
+        append(NUMBER + data.id())
     }
 
     private fun getBodyBase(remoteStatus: String, order: OrderDetailsModel? = null) =
@@ -63,4 +64,6 @@ class RouteNotificationBodyMapper(
             }
             else -> R.string.common_empty_error
         }
+
+    private fun Map<String, String>.id(): String = (get(ROUTE_ID) ?: get(REQUEST_ID)).orEmpty()
 }
