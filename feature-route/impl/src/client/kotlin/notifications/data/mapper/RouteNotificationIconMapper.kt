@@ -1,6 +1,6 @@
 package notifications.data.mapper
 
-import notifications.NotificationsConstant.Route.STATUS
+import notifications.NotificationsConstant.DataKeys.STATUS
 import notifications.domain.model.RouteNotificationsStatus
 import trinity_monsters.delivery_aggregator.core_ui.R
 

@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.lifecycle.ViewModel
 import domain.usecase.IsAuthorizedUseCase
 import navigation.NavigationTree
-import notifications.NotificationsConstant.Route.DESTINATION
+import notifications.NotificationsConstant.DataKeys.DESTINATION
 import utils.ext.getSafeQueryParameter
 
 class MainViewModel(

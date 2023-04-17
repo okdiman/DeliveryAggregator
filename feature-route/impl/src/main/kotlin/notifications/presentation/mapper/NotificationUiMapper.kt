@@ -57,13 +57,13 @@ class NotificationUiMapper(
 
     private fun buildNotificationMap(routeId: Long?, data: NotificationServerDataModel): Map<String, String> {
         val notificationMap = mutableMapOf(
-            NotificationsConstant.Route.STATUS to data.status.status
+            NotificationsConstant.DataKeys.STATUS to data.status.status
         )
         routeId?.let {
-            notificationMap[NotificationsConstant.Route.ROUTE_ID] = it.toString()
+            notificationMap[NotificationsConstant.DataKeys.ROUTE_ID] = it.toString()
         }
         data.date?.let {
-            notificationMap[NotificationsConstant.Route.DATE] = it
+            notificationMap[NotificationsConstant.DataKeys.DATE] = it
         }
         return notificationMap
     }

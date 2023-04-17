@@ -1,7 +1,7 @@
 package root
 
 import android.net.Uri
-import notifications.NotificationsConstant.Route.DESTINATION
+import notifications.NotificationsConstant.DataKeys.DESTINATION
 import utils.ext.getSafeQueryParameter
 
 /**

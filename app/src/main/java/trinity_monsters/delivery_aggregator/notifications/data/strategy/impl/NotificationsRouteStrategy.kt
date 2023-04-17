@@ -8,8 +8,7 @@ import deeplinks.DeeplinksConstants.DESTINATION_PARAM
 import deeplinks.DeeplinksConstants.ROUTE_ID_PARAM
 import navigation.NavigationTree
 import notifications.NotificationsConstant
-import notifications.NotificationsConstant.Route.ROUTE_ID
-import notifications.NotificationsConstant.Route.STATUS
+import notifications.NotificationsConstant.DataKeys.STATUS
 import notifications.domain.model.RouteNotificationsStatus
 import trinity_monsters.delivery_aggregator.notifications.data.manage.NotificationsFactory
 import trinity_monsters.delivery_aggregator.notifications.data.manage.NotificationsManager
@@ -32,7 +31,7 @@ class NotificationsRouteStrategy(
             }
             else -> NavigationTree.Main.MainFlow.name
         }
-        val routeId = model.data[ROUTE_ID].orEmpty()
+        val routeId = model.id()?.toString().orEmpty()
         val intent = Intent(context, MainActivity::class.java).apply {
             data = Uri.parse(buildString {
                 append(DEEPLINK_URI_BASE + DESTINATION_PARAM + destination + ROUTE_ID_PARAM + routeId)

@@ -3,8 +3,8 @@ package notifications.data.mapper
 import android.text.Spanned
 import androidx.compose.ui.text.AnnotatedString
 import androidx.core.text.toSpannable
-import notifications.NotificationsConstant.Route.ROUTE_ID
-import notifications.NotificationsConstant.Route.STATUS
+import notifications.NotificationsConstant.DataKeys.REQUEST_ID
+import notifications.NotificationsConstant.DataKeys.STATUS
 import notifications.domain.model.RouteNotificationsStatus
 import orderdetails.root.domain.model.OrderDetailsModel
 import root.domain.model.status.OrderStatusProgress
@@ -44,7 +44,7 @@ class RouteNotificationBodyMapper(
     private fun getStatus(data: Map<String, String>) = data[STATUS].orEmpty()
 
     private fun getRouteId(data: Map<String, String>) = buildString {
-        append(NUMBER + data[ROUTE_ID].orEmpty())
+        append(NUMBER + data[REQUEST_ID].orEmpty())
     }
 
     private fun getBodyBase(remoteStatus: String, order: OrderDetailsModel? = null) =
