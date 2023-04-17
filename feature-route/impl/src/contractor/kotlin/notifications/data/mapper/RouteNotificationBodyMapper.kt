@@ -4,8 +4,8 @@ import android.text.Spanned
 import androidx.compose.ui.text.AnnotatedString
 import androidx.core.text.toSpannable
 import notifications.NotificationsConstant
-import notifications.NotificationsConstant.Route.ROUTE_ID
-import notifications.NotificationsConstant.Route.STATUS
+import notifications.NotificationsConstant.DataKeys.ROUTE_ID
+import notifications.NotificationsConstant.DataKeys.STATUS
 import notifications.domain.model.RouteNotificationsStatus
 import orderdetails.root.domain.model.OrderDetailsModel
 import org.threeten.bp.format.DateTimeFormatter
@@ -82,7 +82,7 @@ class RouteNotificationBodyMapper(
         append(NUMBER + data[ROUTE_ID].orEmpty())
     }
 
-    private fun getDate(data: Map<String, String>) = data[NotificationsConstant.Route.DATE]
+    private fun getDate(data: Map<String, String>) = data[NotificationsConstant.DataKeys.DATE]
         .orEmpty()
         .toLocalZonedDateTime(DateTimeFormatter.ISO_DATE_TIME)
         .toString(DateFormats.FULL_DISPLAYED_DATE_TIME_FORMATTER)
