@@ -28,25 +28,25 @@ internal fun PlaceholderView(
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.SpaceEvenly,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
+            modifier = Modifier.weight(0.7f),
             painter = painterResource(R.drawable.route_placeholder_ic),
             contentDescription = null
         )
-        Spacer(Modifier.height(24.dp))
         Text(
             text = stringResource(placeHolderTitle),
             textAlign = TextAlign.Center,
-            style = Theme.fonts.bold.copy(fontSize = 20.sp)
+            style = Theme.fonts.bold.copy(fontSize = 20.sp),
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            modifier = Modifier.padding(horizontal = 36.dp),
+            modifier = Modifier.padding(horizontal = 42.dp),
             text = stringResource(placeHolderSubtitle),
             textAlign = TextAlign.Center,
-            style = Theme.fonts.regular
+            style = Theme.fonts.regular.copy(color = Theme.colors.darkLabelColor),
         )
     }
 }

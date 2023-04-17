@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -57,6 +58,11 @@ internal fun OrderRequestsView(state: OrdersState, eventHandler: (OrdersEvent) -
             onRefresh = { eventHandler(OrdersEvent.OnRefreshSwipe) }
         )
         val categoryFilterScrollState = rememberScrollState()
+
+        val noActiveOrdersFoundByFilter = state.selectedCategoryFilter == OrderStatusCategoryUiModel.ACTIVE &&
+            state.filteredOrders.isEmpty()
+        val showCreateNewOrder = state.orders.isEmpty() || noActiveOrdersFoundByFilter
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -82,6 +88,9 @@ internal fun OrderRequestsView(state: OrdersState, eventHandler: (OrdersEvent) -
                     ) {
                         CategoriesFilterChips(state = state, eventHandler)
                     }
+                    if (showCreateNewOrder && !state.isLoading) {
+                        CreateNewOrderView(eventHandler)
+                    }
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(vertical = 16.dp),
@@ -92,20 +101,11 @@ internal fun OrderRequestsView(state: OrdersState, eventHandler: (OrdersEvent) -
                                     RouteLoadingView(modifier = Modifier.padding(horizontal = 16.dp))
                                 }
                             }
-                            state.selectedCategoryFilter != null -> {
-                                if (state.selectedCategoryFilter == OrderStatusCategoryUiModel.ACTIVE &&
-                                    state.filteredOrders.isEmpty()
-                                ) {
-                                    createNewOrderPlaceholder(eventHandler)
-                                } else {
-                                    orderRequestItems(orderRequests = state.filteredOrders, eventHandler)
-                                }
+                            state.selectedCategoryFilter != null && !showCreateNewOrder -> {
+                                orderRequestItems(orderRequests = state.filteredOrders, eventHandler)
                             }
                             state.orders.isNotEmpty() -> {
                                 orderRequestItems(orderRequests = state.orders, eventHandler)
-                            }
-                            else -> {
-                                createNewOrderPlaceholder(eventHandler)
                             }
                         }
                     }
@@ -142,19 +142,6 @@ private inline fun LazyListScope.orderRequestItems(
     }
 }
 
-private fun LazyListScope.createNewOrderPlaceholder(eventHandler: (OrdersEvent) -> Unit) {
-    item {
-        PlaceholderView(
-            modifier = Modifier.padding(horizontal = 16.dp),
-            placeHolderTitle = R.string.order_create_new,
-            placeHolderSubtitle = R.string.order_created_orders_are_displayed_here
-        )
-    }
-    item {
-        CreateNewOrderButtonView(eventHandler)
-    }
-}
-
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CategoriesFilterChips(state: OrdersState, eventHandler: (OrdersEvent) -> Unit) {
@@ -182,6 +169,16 @@ fun CategoriesFilterChips(state: OrdersState, eventHandler: (OrdersEvent) -> Uni
         }
         Spacer(modifier = Modifier.width(4.dp))
     }
+}
+
+@Composable
+private fun CreateNewOrderView(eventHandler: (OrdersEvent) -> Unit) {
+    PlaceholderView(
+        modifier = Modifier.padding(start = 16.dp, end = 16.dp).fillMaxHeight(0.75f),
+        placeHolderTitle = R.string.order_create_new,
+        placeHolderSubtitle = R.string.order_created_orders_are_displayed_here
+    )
+    CreateNewOrderButtonView(eventHandler)
 }
 
 @Composable
