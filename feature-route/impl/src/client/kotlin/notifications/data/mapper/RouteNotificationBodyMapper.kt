@@ -52,7 +52,7 @@ class RouteNotificationBodyMapper(
             RouteNotificationsStatus.NEW -> R.string.notifications_new
             RouteNotificationsStatus.ASSIGNED -> R.string.notifications_contractor_assigned
             RouteNotificationsStatus.DELIVERY -> R.string.notifications_delivery_in_progress
-            RouteNotificationsStatus.CANCELLED -> R.string.notifications_cancelled
+            RouteNotificationsStatus.CANCELED -> R.string.notifications_cancelled
             RouteNotificationsStatus.CHANGED -> {
                 val wereChangesAccepted = order?.status != OrderStatusProgress.CHANGED
                 if (wereChangesAccepted) R.string.notifications_changes_accepted else R.string.notifications_changed

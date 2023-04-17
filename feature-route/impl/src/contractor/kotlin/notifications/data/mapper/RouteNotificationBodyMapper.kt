@@ -56,7 +56,7 @@ class RouteNotificationBodyMapper(
                         date
                     )
                 }
-                RouteNotificationsStatus.CANCELLED,
+                RouteNotificationsStatus.CANCELED,
                 RouteNotificationsStatus.CHANGED,
                 RouteNotificationsStatus.DONE -> {
                     String.format(
@@ -90,7 +90,7 @@ class RouteNotificationBodyMapper(
     private fun getBodyBase(remoteStatus: String) =
         when (RouteNotificationsStatus.values().firstOrNull { it.status == remoteStatus }) {
             RouteNotificationsStatus.NEW -> R.string.notifications_info
-            RouteNotificationsStatus.CANCELLED -> R.string.notifications_cancelled
+            RouteNotificationsStatus.CANCELED -> R.string.notifications_cancelled
             RouteNotificationsStatus.CHANGED -> R.string.notifications_changed
             RouteNotificationsStatus.DONE -> R.string.notifications_done
             else -> R.string.common_empty_error

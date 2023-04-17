@@ -26,7 +26,7 @@ class NotificationsRouteStrategy(
         val status = RouteNotificationsStatus.values()
             .firstOrNull { it.status == model.data[STATUS] }
         val destination = when (status) {
-            RouteNotificationsStatus.CANCELLED, RouteNotificationsStatus.DONE -> {
+            RouteNotificationsStatus.CANCELED, RouteNotificationsStatus.DONE -> {
                 NavigationTree.Routes.Notifications.name
             }
             else -> NavigationTree.Main.MainFlow.name
