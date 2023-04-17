@@ -97,7 +97,7 @@ class NotificationsViewModel : BaseViewModel<NotificationsState, NotificationsAc
 
             when (clickedNotification.data.status) {
                 RouteNotificationsStatus.NEW,
-                RouteNotificationsStatus.CANCELLED,
+                RouteNotificationsStatus.CANCELED,
                 RouteNotificationsStatus.ASSIGNED -> onOpenOrderDetails(orderId)
                 RouteNotificationsStatus.DONE -> {
                     if (clickedNotification.associatedOrder?.isPaid == false) {
