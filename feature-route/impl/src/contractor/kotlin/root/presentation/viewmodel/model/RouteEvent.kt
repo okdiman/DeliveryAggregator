@@ -8,6 +8,7 @@ sealed interface RouteEvent {
     object AcceptOrderClick : RouteEvent
     object OnNotificationsClick : RouteEvent
     object ResetAction : RouteEvent
+    object ResetState : RouteEvent
     object OnRetryClick : RouteEvent
     object OnRefreshSwipe : RouteEvent
     object OnRationaleDismiss : RouteEvent
