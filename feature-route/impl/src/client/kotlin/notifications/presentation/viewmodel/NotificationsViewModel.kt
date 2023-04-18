@@ -2,6 +2,7 @@ package notifications.presentation.viewmodel
 
 import BaseViewModel
 import coroutines.AppDispatchers
+import kotlinx.coroutines.joinAll
 import network.domain.GetAuthTokenSyncUseCase
 import neworder.payment.domain.GetPaymentUriUseCase
 import notifications.domain.model.NotificationServerModel
@@ -61,7 +62,7 @@ class NotificationsViewModel : BaseViewModel<NotificationsState, NotificationsAc
             /**
              * когда нибудь мы удалим это говно, когда решим проблему со статусом заказа в уведомлениях
              */
-            notifications.forEach { model ->
+            notifications.map { model ->
                 launchJob {
                     associateNotificationsToOrders(
                         notification = model,
@@ -71,7 +72,7 @@ class NotificationsViewModel : BaseViewModel<NotificationsState, NotificationsAc
                         }
                     )
                 }
-            }
+            }.joinAll()
 
             viewState = viewState.copy(
                 notifications = notifications.map { mapper.map(it) }.sortedByDescending { it.notificationId },
