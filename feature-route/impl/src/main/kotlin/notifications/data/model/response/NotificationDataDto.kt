@@ -2,6 +2,7 @@ package notifications.data.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import notifications.NotificationsConstant
 
 @Serializable
 sealed interface NotificationDataDto {
@@ -16,7 +17,7 @@ sealed interface NotificationDataDto {
  * JSON на классы, наследующие `NotificationDataDto`
  */
 @Serializable
-@SerialName("route")
+@SerialName(NotificationsConstant.Types.ROUTE)
 data class NotificationRouteDataDto(
     val routeId: Long,
     override val type: String,
@@ -25,7 +26,7 @@ data class NotificationRouteDataDto(
 ) : NotificationDataDto
 
 @Serializable
-@SerialName("request")
+@SerialName(NotificationsConstant.Types.REQUEST)
 data class NotificationRequestDataDto(
     @SerialName("requestId")
     val orderId: Long,
@@ -35,7 +36,7 @@ data class NotificationRequestDataDto(
 ) : NotificationDataDto
 
 @Serializable
-@SerialName("assignedRequest")
+@SerialName(NotificationsConstant.Types.ASSIGNED_REQUEST)
 data class NotificationAssignedRequestDataDto(
     @SerialName("requestId")
     val orderId: Long,
