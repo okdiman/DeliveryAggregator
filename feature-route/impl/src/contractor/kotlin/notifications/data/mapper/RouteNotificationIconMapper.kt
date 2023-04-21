@@ -10,7 +10,7 @@ class RouteNotificationIconMapper {
         return when (RouteNotificationsStatus.values().firstOrNull { it.status == remoteStatus }) {
             RouteNotificationsStatus.NEW -> R.drawable.notifications_info_ic
             RouteNotificationsStatus.CANCELED -> R.drawable.notifications_cancelled
-            RouteNotificationsStatus.CHANGED -> R.drawable.notifications_changes_ic
+            RouteNotificationsStatus.ACCEPTED -> R.drawable.notifications_changes_ic
             RouteNotificationsStatus.DONE -> R.drawable.notifications_done_ic
             else -> R.drawable.notifications_info_ic
         }

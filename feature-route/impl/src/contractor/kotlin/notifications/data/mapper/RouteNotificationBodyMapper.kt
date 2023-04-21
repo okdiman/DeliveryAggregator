@@ -4,8 +4,8 @@ import android.text.Spanned
 import androidx.compose.ui.text.AnnotatedString
 import androidx.core.text.toSpannable
 import notifications.NotificationsConstant
-import notifications.NotificationsConstant.DataKeys.ROUTE_ID
 import notifications.NotificationsConstant.DataKeys.REQUEST_ID
+import notifications.NotificationsConstant.DataKeys.ROUTE_ID
 import notifications.NotificationsConstant.DataKeys.STATUS
 import notifications.domain.model.RouteNotificationsStatus
 import orderdetails.root.domain.model.OrderDetailsModel
@@ -58,7 +58,7 @@ class RouteNotificationBodyMapper(
                     )
                 }
                 RouteNotificationsStatus.CANCELED,
-                RouteNotificationsStatus.CHANGED,
+                RouteNotificationsStatus.ACCEPTED,
                 RouteNotificationsStatus.DONE -> {
                     String.format(
                         resourceInteractor.getString(bodyBase),
@@ -92,7 +92,7 @@ class RouteNotificationBodyMapper(
         when (RouteNotificationsStatus.values().firstOrNull { it.status == remoteStatus }) {
             RouteNotificationsStatus.NEW -> R.string.notifications_info
             RouteNotificationsStatus.CANCELED -> R.string.notifications_cancelled
-            RouteNotificationsStatus.CHANGED -> R.string.notifications_changed
+            RouteNotificationsStatus.ACCEPTED -> R.string.notifications_changed
             RouteNotificationsStatus.DONE -> R.string.notifications_done
             else -> R.string.common_empty_error
         }
