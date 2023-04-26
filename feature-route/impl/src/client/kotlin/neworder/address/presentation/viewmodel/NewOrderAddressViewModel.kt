@@ -163,7 +163,7 @@ class NewOrderAddressViewModel : BaseViewModel<NewOrderAddressState, NewOrderAdd
                 )
                 val suggests = getSuggestByQuery(AddressSuggestRequestModel(query = query))
                 viewState = viewState.copy(
-                    suggests = suggestUiMapper.map(suggests),
+                    suggests = suggestUiMapper.map(suggests).filter { it.subtitle.isNotBlank() },
                     bsAddress = viewState.bsAddress.copy(isSuggestLoading = false)
                 )
             }
