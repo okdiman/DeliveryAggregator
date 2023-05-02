@@ -7,4 +7,5 @@ sealed interface OrderDetailsAction {
     object OpenDeleteOrderScreen : OrderDetailsAction
     object OpenAdditionalInfo : OrderDetailsAction
     data class OpenPaymentInBrowser(val paymentUri: Uri) : OrderDetailsAction
+    data class OpenImageViewerDialog(val uri: Uri) : OrderDetailsAction
 }

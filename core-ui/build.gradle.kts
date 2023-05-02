@@ -31,6 +31,7 @@ dependencies {
     accompanist()
     compose()
     koin()
+    coil()
     browser()
     viewModel()
     navigation()

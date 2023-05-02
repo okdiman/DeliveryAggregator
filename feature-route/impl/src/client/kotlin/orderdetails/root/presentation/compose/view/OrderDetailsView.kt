@@ -94,6 +94,7 @@ internal fun OrderDetailsView(state: OrderDetailsState, eventHandler: (OrderDeta
                     OrderDetailsStatusView(
                         state = state,
                         showDescription = !state.uiModel.isLoadedOrDelivered,
+                        eventHandler = eventHandler
                     )
                 }
             }
@@ -112,6 +113,7 @@ internal fun OrderDetailsView(state: OrderDetailsState, eventHandler: (OrderDeta
 private fun OrderDetailsStatusView(
     state: OrderDetailsState,
     showDescription: Boolean = false,
+    eventHandler: (OrderDetailsEvent) -> Unit,
 ) {
     Spacer(modifier = Modifier.height(32.dp))
     Text(
@@ -135,6 +137,7 @@ private fun OrderDetailsStatusView(
             title = stringResource(id = R.string.order_details_loading_step),
             uri = state.uiModel.load.imageUrl,
             date = state.uiModel.load.loadDateTime,
+            onClick = { eventHandler(OrderDetailsEvent.OnOrderPhotoClick(state.uiModel.load.imageUrl)) }
         )
     }
     if (state.uiModel.delivery != null) {
@@ -143,6 +146,7 @@ private fun OrderDetailsStatusView(
             title = stringResource(id = R.string.order_details_delivery_step),
             uri = state.uiModel.delivery.imageUrl,
             date = state.uiModel.delivery.deliveryDateTime,
+            onClick = { eventHandler(OrderDetailsEvent.OnOrderPhotoClick(state.uiModel.delivery.imageUrl)) }
         )
     }
 }
