@@ -11,7 +11,6 @@ data class RouteState(
     val buttonUiModel: RouteButtonUiModel = RouteButtonUiModel(),
     val notificationsCount: Int = 0,
     val status: RouteStatusProgress? = null,
-    val isAcceptButtonEnabled: Boolean = false,
     val isLoading: Boolean = true,
     val isError: Boolean = false,
     val isRefreshing: Boolean = false,
