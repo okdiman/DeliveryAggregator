@@ -3,6 +3,7 @@ package orderdetails.root.presentation.compose.view
 import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,11 +30,20 @@ import coil.request.ImageRequest
 import theme.Theme
 
 @Composable
-internal fun OrderPhotoView(title: String, uri: Uri?, date: String?, isLoading: Boolean = false) {
+internal fun OrderPhotoView(
+    title: String,
+    uri: Uri?,
+    date: String?,
+    isLoading: Boolean = false,
+    onClick: (() -> Unit)? = null,
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(Theme.shapes.card),
+            .clip(Theme.shapes.card)
+            .run {
+                if (onClick != null) clickable(onClick = onClick) else this
+            },
         backgroundColor = Theme.colors.hintBackgroundColor
     ) {
         Row(

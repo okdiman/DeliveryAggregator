@@ -2,6 +2,7 @@ package orderdetails.root.presentation.viewmodel
 
 import BaseViewModel
 import additionalInfo.presentation.AdditionalInfoParameters
+import android.net.Uri
 import coroutines.AppDispatchers
 import network.domain.GetAuthTokenSyncUseCase
 import neworder.payment.domain.GetPaymentUriUseCase
@@ -39,6 +40,7 @@ class OrderDetailsViewModel(
             OrderDetailsEvent.ResetAction -> onResetAction()
             OrderDetailsEvent.OnPayClick -> onPay()
             OrderDetailsEvent.OnDeleteClick -> onDeleteClick()
+            is OrderDetailsEvent.OnOrderPhotoClick -> onOrderPhotoClick(viewEvent.uri)
         }
     }
 
@@ -78,5 +80,9 @@ class OrderDetailsViewModel(
 
     private fun onDeleteClick() {
         viewAction = OrderDetailsAction.OpenDeleteOrderScreen
+    }
+
+    private fun onOrderPhotoClick(uri: Uri) {
+        viewAction = OrderDetailsAction.OpenImageViewerDialog(uri)
     }
 }

@@ -15,8 +15,11 @@ import orderdetails.root.presentation.viewmodel.OrderDetailsViewModel
 import orderdetails.root.presentation.viewmodel.model.OrderDetailsAction
 import orderdetails.root.presentation.viewmodel.model.OrderDetailsEvent
 import ru.alexgladkov.odyssey.compose.extensions.observeAsState
+import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
+import ru.alexgladkov.odyssey.compose.navigation.modal_navigation.AlertConfiguration
 import utils.presentStandardBS
+import view.ImageViewerDialog
 
 @Composable
 fun OrderDetailsScreen(parameters: OrderDetailsParameters) {
@@ -43,6 +46,20 @@ fun OrderDetailsScreen(parameters: OrderDetailsParameters) {
             is OrderDetailsAction.OpenPaymentInBrowser -> {
                 val uri = (action.value as OrderDetailsAction.OpenPaymentInBrowser).paymentUri
                 openBrowser(LocalContext.current, uri)
+                viewModel.obtainEvent(OrderDetailsEvent.ResetAction)
+            }
+            is OrderDetailsAction.OpenImageViewerDialog -> {
+                val uri = (action.value as OrderDetailsAction.OpenImageViewerDialog).uri
+                rootController.findModalController().present(
+                    alertConfiguration = AlertConfiguration()
+                ) {
+                    ImageViewerDialog(
+                        onDismissRequest = {
+                            rootController.findModalController().popBackStack(null)
+                        },
+                        imageUri = uri
+                    )
+                }
                 viewModel.obtainEvent(OrderDetailsEvent.ResetAction)
             }
             else -> {}

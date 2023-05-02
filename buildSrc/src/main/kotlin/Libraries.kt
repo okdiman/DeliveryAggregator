@@ -84,7 +84,7 @@ object Libraries {
 
     object Accompanist {
         const val permissions =
-            "com.google.accompanist:accompanist-permissions:${Versions.permissions}"
+            "com.google.accompanist:accompanist-permissions:${Versions.accompanist}"
     }
 
     object LeakCanary {
