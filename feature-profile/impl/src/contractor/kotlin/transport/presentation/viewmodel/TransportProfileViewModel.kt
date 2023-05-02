@@ -3,7 +3,6 @@ package transport.presentation.viewmodel
 import BaseViewModel
 import coroutines.AppDispatchers
 import di.modules.DIGITS_AND_LETTERS_VALIDATOR_QUALIFIER
-import di.modules.LETTERS_VALIDATOR_QUALIFIER
 import di.modules.LICENCE_PLATE_VALIDATOR_QUALIFIER
 import di.modules.LOAD_CAPACITY_VALIDATOR_QUALIFIER
 import org.koin.core.component.KoinComponent
@@ -28,7 +27,6 @@ class TransportProfileViewModel(
 
     private val appDispatchers by inject<AppDispatchers>()
     private val updateProfile by inject<UpdateProfileUseCase>()
-    private val lettersValidator by inject<TextFieldValidator>(named(LETTERS_VALIDATOR_QUALIFIER))
     private val licencePlateValidator by inject<TextFieldValidator>(
         named(LICENCE_PLATE_VALIDATOR_QUALIFIER)
     )
@@ -83,18 +81,15 @@ class TransportProfileViewModel(
     }
 
     private fun onCarBrandChanged(newCarBrand: String) {
-        val isValid = lettersValidator.isValidate(newCarBrand)
         viewState = viewState.copy(
             carBrand = viewState.carBrand.copy(
                 stateText = newCarBrand,
                 isFillingError = !newCarBrand.isTextFieldFilled(CAR_BRAND_MIN_CHARS),
-                isValidationError = !isValid
             ),
             isSaveButtonVisible = isSaveButtonVisible(
                 viewState.copy(
                     carBrand = viewState.carBrand.copy(
                         stateText = newCarBrand,
-                        isValidationError = !isValid
                     )
                 )
             )
