@@ -73,6 +73,7 @@ class RouteViewModel(private val deeplinkParameters: DeeplinkParameters?) :
                         isLoading = false,
                         isError = false,
                         isRefreshing = false,
+                        status = null,
                         orders = emptyList()
                     )
                 } else {
