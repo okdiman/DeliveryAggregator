@@ -5,7 +5,6 @@ import coroutines.AppDispatchers
 import data.AddressConstants.DEBOUNCE
 import data.AddressConstants.MIN_CHARS_FOR_SUGGEST
 import di.modules.DIGITS_AND_LETTERS_VALIDATOR_QUALIFIER
-import di.modules.LETTERS_VALIDATOR_QUALIFIER
 import di.modules.LICENCE_PLATE_VALIDATOR_QUALIFIER
 import di.modules.LOAD_CAPACITY_VALIDATOR_QUALIFIER
 import domain.model.request.AddressAuthSuggestRequestModel
@@ -36,7 +35,6 @@ class TransportViewModel(
     private val getSuggestByQuery by inject<GetAuthSuggestByQueryUseCase>()
     private val appDispatchers by inject<AppDispatchers>()
     private val addressUiMapper by inject<AddressSuggestUiMapper>()
-    private val lettersValidator by inject<TextFieldValidator>(named(LETTERS_VALIDATOR_QUALIFIER))
     private val licencePlateValidator by inject<TextFieldValidator>(
         named(LICENCE_PLATE_VALIDATOR_QUALIFIER)
     )
@@ -116,18 +114,15 @@ class TransportViewModel(
     }
 
     private fun onCarBrandChanged(newCarBrand: String) {
-        val isValid = lettersValidator.isValidate(newCarBrand)
         viewState = viewState.copy(
             carBrand = viewState.carBrand.copy(
                 stateText = newCarBrand,
                 isFillingError = !newCarBrand.isTextFieldFilled(CAR_BRAND_MIN_CHARS),
-                isValidationError = !isValid
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(
                 viewState.copy(
                     carBrand = viewState.carBrand.copy(
                         stateText = newCarBrand,
-                        isValidationError = !isValid
                     )
                 )
             )
