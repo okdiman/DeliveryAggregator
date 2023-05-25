@@ -34,11 +34,11 @@ class OrderDetailsMapper {
 
     private fun mapLoadToUi(model: OrderLoadModel) = OrderLoadUiModel(
         loadDateTime = model.loadDateTime.toString(DateFormats.FULL_DISPLAYED_DATE_TIME_FORMATTER),
-        imageUrl = model.images.first(),
+        imageUrl = model.images.firstOrNull(),
     )
 
     private fun mapDeliveryToUi(model: OrderDeliveryModel) = OrderDeliveryUiModel(
         deliveryDateTime = model.deliveryDateTime.toString(DateFormats.FULL_DISPLAYED_DATE_TIME_FORMATTER),
-        imageUrl = model.images.first(),
+        imageUrl = model.images.firstOrNull(),
     )
 }

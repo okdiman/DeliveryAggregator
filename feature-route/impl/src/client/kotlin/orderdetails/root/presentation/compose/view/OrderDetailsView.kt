@@ -131,7 +131,7 @@ private fun OrderDetailsStatusView(
         )
         Spacer(modifier = Modifier.height(20.dp))
     }
-    if (state.uiModel.load != null) {
+    if (state.uiModel.load?.imageUrl != null) {
         Spacer(modifier = Modifier.height(24.dp))
         OrderPhotoView(
             title = stringResource(id = R.string.order_details_loading_step),
@@ -140,7 +140,7 @@ private fun OrderDetailsStatusView(
             onClick = { eventHandler(OrderDetailsEvent.OnOrderPhotoClick(state.uiModel.load.imageUrl)) }
         )
     }
-    if (state.uiModel.delivery != null) {
+    if (state.uiModel.delivery?.imageUrl != null) {
         Spacer(modifier = Modifier.height(10.dp))
         OrderPhotoView(
             title = stringResource(id = R.string.order_details_delivery_step),
