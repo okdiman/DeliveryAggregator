@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.sp
 import orderdetails.root.presentation.viewmodel.model.OrderDetailsState
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
-import view.BackButton
+import view.BackButtonView
 
 @Composable
 internal fun OrderDetailsTitleView(
@@ -27,7 +27,7 @@ internal fun OrderDetailsTitleView(
             .fillMaxWidth()
             .padding(top = 12.dp)
     ) {
-        BackButton { onClickBack() }
+        BackButtonView { onClickBack() }
         if (!state.isLoading) {
             Text(
                 modifier = Modifier.align(Alignment.Center),

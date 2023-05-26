@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 import trinity_monsters.delivery_aggregator.core_ui.R
 
 @Composable
-fun BackButton(onClick: () -> Unit) {
+fun BackButtonView(onClick: () -> Unit) {
     IconButton(
         modifier = Modifier.size(24.dp),
         onClick = { onClick() }) {

@@ -31,7 +31,7 @@ import modifiers.autoScrollInFocus
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_profile.impl.R
 import utils.CommonConstants
-import view.BackButton
+import view.BackButtonView
 import view.StandardTextField
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
@@ -51,7 +51,7 @@ internal fun EditProfileView(state: EditProfileState, eventHandler: (EditProfile
                 .fillMaxWidth()
                 .padding(top = 12.dp)
         ) {
-            BackButton { eventHandler(EditProfileEvent.OnBackClick) }
+            BackButtonView { eventHandler(EditProfileEvent.OnBackClick) }
             Text(
                 modifier = Modifier.align(Alignment.Center),
                 text = stringResource(R.string.editing_profile),

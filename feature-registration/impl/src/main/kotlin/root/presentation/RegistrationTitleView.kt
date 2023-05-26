@@ -22,7 +22,7 @@ import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_registration.impl.BuildConfig
 import trinity_monsters.delivery_aggregator.feature_registration.impl.R
 import utils.CommonConstants
-import view.BackButton
+import view.BackButtonView
 
 @Composable
 fun RegistrationTitleView(
@@ -36,7 +36,7 @@ fun RegistrationTitleView(
         modifier = Modifier.fillMaxWidth().padding(top =  12.dp)
     ) {
         if (isBackButtonVisible) {
-            BackButton { onButtonClick() }
+            BackButtonView { onButtonClick() }
         }
         val stepCount = if (BuildConfig.FLAVOR == CommonConstants.Flavors.client) {
             THREE

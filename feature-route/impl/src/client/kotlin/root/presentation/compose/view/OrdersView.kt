@@ -100,9 +100,11 @@ internal fun OrderRequestsView(state: OrdersState, eventHandler: (OrdersEvent) -
                                     RouteLoadingView(modifier = Modifier.padding(horizontal = 16.dp))
                                 }
                             }
+
                             state.selectedCategoryFilter != null && !showCreateNewOrder -> {
                                 orderRequestItems(orderRequests = state.filteredOrders, eventHandler)
                             }
+
                             state.orders.isNotEmpty() -> {
                                 orderRequestItems(orderRequests = state.orders, eventHandler)
                             }
@@ -135,7 +137,7 @@ private inline fun LazyListScope.orderRequestItems(
     crossinline eventHandler: (OrdersEvent) -> Unit
 ) {
     itemsIndexed(orderRequests) { index, item ->
-        OrderView(modifier = Modifier.padding(horizontal = 16.dp), index = index, model = item) { orderId, _ ->
+        OrderView(index = index, model = item) { orderId, _ ->
             eventHandler(OrdersEvent.OnOpenOrderDetailsClick(orderId))
         }
     }
@@ -173,7 +175,9 @@ fun CategoriesFilterChips(state: OrdersState, eventHandler: (OrdersEvent) -> Uni
 @Composable
 private fun CreateNewOrderView(eventHandler: (OrdersEvent) -> Unit) {
     PlaceholderView(
-        modifier = Modifier.padding(start = 16.dp, end = 16.dp).fillMaxHeight(0.75f),
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
+            .fillMaxHeight(0.75f),
         placeHolderTitle = R.string.order_create_new,
         placeHolderSubtitle = R.string.order_created_orders_are_displayed_here
     )

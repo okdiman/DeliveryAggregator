@@ -43,7 +43,6 @@ internal fun OrderDetailsView(state: OrderDetailsState, eventHandler: (OrderDeta
                     .fillMaxSize()
                     .verticalScroll(verticalScroll)
                     .padding(
-                        top = 16.dp,
                         start = 16.dp,
                         end = 16.dp,
                         bottom = if (isPayButtonVisible) SCROLL_SCREEN_ACTION_BUTTON_OCCUPIED_HEIGHT.dp else 0.dp

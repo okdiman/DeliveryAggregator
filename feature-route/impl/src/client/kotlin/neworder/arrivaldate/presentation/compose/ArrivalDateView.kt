@@ -21,7 +21,7 @@ import neworder.arrivaldate.presentation.viewmodel.model.ArrivalDateState
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
-import view.BackButton
+import view.BackButtonView
 import view.calendar.CalendarView
 
 @Composable
@@ -54,9 +54,7 @@ private fun ArrivalDateTitle(eventHandler: (ArrivalDateEvent) -> Unit) {
             .padding(top = 28.dp, bottom = 24.dp, start = 10.dp, end = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        BackButton {
-            rootController.findModalController().popBackStack(null)
-        }
+        BackButtonView { rootController.findModalController().popBackStack(null) }
         Text(
             modifier = Modifier
                 .padding(start = 8.dp, end = 8.dp)

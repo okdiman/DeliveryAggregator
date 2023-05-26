@@ -35,7 +35,7 @@ import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import utils.CommonConstants.Helpers.NUMBER
 import utils.ext.toStringWithEnding
-import view.BackButton
+import view.BackButtonView
 
 @Composable
 internal fun ConfirmOrderChangesView(
@@ -199,7 +199,7 @@ private fun ConfirmChangesButtonView(
 @Composable
 private fun Title(id: Long, eventHandler: (ConfirmOrderChangesEvent) -> Unit) {
     Box(modifier = Modifier.fillMaxWidth()) {
-        BackButton { eventHandler(ConfirmOrderChangesEvent.OnBackClick) }
+        BackButtonView { eventHandler(ConfirmOrderChangesEvent.OnBackClick) }
         Text(
             modifier = Modifier.align(Alignment.Center),
             text = buildString { append(NUMBER + id) },

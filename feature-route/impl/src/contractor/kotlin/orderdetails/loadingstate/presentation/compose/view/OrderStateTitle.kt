@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import theme.Theme
-import view.BackButton
+import view.BackButtonView
 
 @Composable
 internal fun OrderStateTitle(title: String, onBackClick: () -> Unit) {
@@ -19,7 +19,7 @@ internal fun OrderStateTitle(title: String, onBackClick: () -> Unit) {
             .fillMaxWidth()
             .padding(top = 12.dp)
     ) {
-        BackButton { onBackClick() }
+        BackButtonView { onBackClick() }
         Text(
             modifier = Modifier.align(Alignment.Center),
             text = title,

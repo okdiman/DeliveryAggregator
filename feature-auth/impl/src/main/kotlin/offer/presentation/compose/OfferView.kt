@@ -15,7 +15,7 @@ import offer.presentation.viewmodel.model.OfferEvent
 import offer.presentation.viewmodel.model.OfferState
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_auth.impl.R
-import view.BackButton
+import view.BackButtonView
 
 @Composable
 internal fun OfferView(viewState: OfferState, eventHandler: (OfferEvent) -> Unit) {
@@ -24,7 +24,7 @@ internal fun OfferView(viewState: OfferState, eventHandler: (OfferEvent) -> Unit
             .fillMaxSize()
             .padding(top = 12.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
     ) {
-        BackButton { eventHandler(OfferEvent.OnBackClick) }
+        BackButtonView { eventHandler(OfferEvent.OnBackClick) }
         Spacer(modifier = Modifier.height(22.dp))
         Text(
             text = stringResource(id = R.string.offer),

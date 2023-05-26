@@ -31,7 +31,7 @@ import orderdetails.root.presentation.viewmodel.model.OrderDetailsState
 import root.domain.model.status.OrderStatusProgress
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
-import view.BackButton
+import view.BackButtonView
 
 @Composable
 internal fun OrderDetailsView(
@@ -93,7 +93,7 @@ private fun OrderDetailsTitleView(
             .fillMaxWidth()
             .padding(top = 12.dp)
     ) {
-        BackButton { eventHandler(OrderDetailsEvent.OnBackClick) }
+        BackButtonView { eventHandler(OrderDetailsEvent.OnBackClick) }
         if (!state.isLoading) {
             Text(
                 modifier = Modifier.align(Alignment.Center),

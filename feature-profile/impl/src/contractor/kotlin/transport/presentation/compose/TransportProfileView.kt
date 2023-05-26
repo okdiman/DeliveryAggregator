@@ -28,7 +28,7 @@ import transport.presentation.viewmodel.model.TransportProfileEvent
 import transport.presentation.viewmodel.model.TransportProfileState
 import trinity_monsters.delivery_aggregator.feature_profile.impl.R
 import utils.CommonConstants
-import view.BackButton
+import view.BackButtonView
 import view.StandardTextField
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
@@ -51,7 +51,7 @@ internal fun TransportProfileView(
                 .fillMaxWidth()
                 .padding(top = 12.dp)
         ) {
-            BackButton { eventHandler(TransportProfileEvent.OnBackButtonClick) }
+            BackButtonView { eventHandler(TransportProfileEvent.OnBackButtonClick) }
             Text(
                 modifier = Modifier.align(Alignment.Center),
                 text = stringResource(R.string.editing_profile),

@@ -39,7 +39,7 @@ import notifications.presentation.viewmodel.model.NotificationsState
 import root.domain.model.status.OrderStatusProgress
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
-import view.BackButton
+import view.BackButtonView
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
@@ -87,7 +87,7 @@ private fun NotificationsTitle(eventHandler: (NotificationsEvent) -> Unit) {
             .fillMaxWidth()
             .padding(top = 12.dp)
     ) {
-        BackButton { eventHandler(NotificationsEvent.OnBackClick) }
+        BackButtonView { eventHandler(NotificationsEvent.OnBackClick) }
         Text(
             modifier = Modifier.align(Alignment.Center),
             text = stringResource(id = R_core.string.notifications_title),

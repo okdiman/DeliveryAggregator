@@ -37,7 +37,7 @@ import presentation.model.AddressUiModel
 import root.presentation.AddressLoadingView
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_profile.impl.R
-import view.BackButton
+import view.BackButtonView
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
@@ -80,7 +80,7 @@ private fun DepartureTitleView(eventHandler: (DepartureEvent) -> Unit) {
             .fillMaxWidth()
             .padding(top = 12.dp, start = 8.dp, end = 8.dp)
     ) {
-        BackButton { eventHandler(DepartureEvent.OnBackClick) }
+        BackButtonView { eventHandler(DepartureEvent.OnBackClick) }
         Text(
             modifier = Modifier.align(Alignment.Center),
             text = stringResource(R.string.profile_depart_address),

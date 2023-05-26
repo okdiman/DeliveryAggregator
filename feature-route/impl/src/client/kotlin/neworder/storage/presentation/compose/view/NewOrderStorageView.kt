@@ -23,7 +23,7 @@ import neworder.storage.presentation.viewmodel.model.NewOrderStorageEvent
 import neworder.storage.presentation.viewmodel.model.NewOrderStorageState
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
-import view.BackButton
+import view.BackButtonView
 
 @Composable
 internal fun NewOrderStorageView(
@@ -61,11 +61,9 @@ private fun NewOrderStorageTitle(eventHandler: (NewOrderStorageEvent) -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 4.dp, bottom = 16.dp, start = 5.dp, end = 8.dp)
+            .padding(top = 12.dp, bottom = 16.dp, start = 5.dp, end = 8.dp)
     ) {
-        BackButton(modifier = Modifier.padding(top = 3.dp)) {
-            eventHandler(NewOrderStorageEvent.OnBackClick)
-        }
+        BackButtonView { eventHandler(NewOrderStorageEvent.OnBackClick) }
         Text(
             modifier = Modifier.align(Alignment.Center),
             text = stringResource(R.string.common_delivery_adddress),
