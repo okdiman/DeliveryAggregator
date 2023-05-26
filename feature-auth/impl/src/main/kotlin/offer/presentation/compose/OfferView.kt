@@ -22,10 +22,10 @@ internal fun OfferView(viewState: OfferState, eventHandler: (OfferEvent) -> Unit
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 8.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
+            .padding(top = 12.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
     ) {
         BackButton { eventHandler(OfferEvent.OnBackClick) }
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(22.dp))
         Text(
             text = stringResource(id = R.string.offer),
             style = Theme.fonts.bold.copy(fontSize = 24.sp)

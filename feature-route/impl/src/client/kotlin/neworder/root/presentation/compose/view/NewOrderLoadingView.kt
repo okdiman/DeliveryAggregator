@@ -20,7 +20,7 @@ internal fun NewOrderLoadingView() {
         Box(
             modifier = Modifier
                 .fillMaxWidth(0.4f)
-                .padding(top = 12.dp, bottom = 4.dp)
+                .padding(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 4.dp)
                 .height(20.dp)
                 .clip(Theme.shapes.textFields)
                 .shimmerEffect()
@@ -28,7 +28,7 @@ internal fun NewOrderLoadingView() {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 12.dp)
+                .padding(start = 16.dp, end = 16.dp, bottom = 12.dp)
                 .height(48.dp)
                 .clip(Theme.shapes.textFields)
                 .shimmerEffect()

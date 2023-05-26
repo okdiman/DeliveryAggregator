@@ -43,9 +43,9 @@ import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
 internal fun VerifyView(viewState: VerifyState, eventHandler: (VerifyEvent) -> Unit) {
-    Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp, top = 8.dp)) {
+    Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 16.dp, top = 12.dp)) {
         BackButton { eventHandler(VerifyEvent.OnBackClick) }
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(22.dp))
         InfoBlock(viewState = viewState)
         CodeBlock(viewState = viewState, eventHandler = eventHandler)
         if (viewState.isLoading) {

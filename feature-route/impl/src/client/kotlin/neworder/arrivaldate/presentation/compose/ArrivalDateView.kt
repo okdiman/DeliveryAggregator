@@ -29,18 +29,17 @@ internal fun ArrivalDateView(state: ArrivalDateState, eventHandler: (ArrivalDate
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 20.dp)
+            .padding(horizontal = 8.dp)
     ) {
         ArrivalDateTitle(eventHandler)
         CalendarView(
-            modifier = Modifier.padding(top = 16.dp),
             state = state,
             onMonthClick = { eventHandler(ArrivalDateEvent.OnArrowClick(it)) }
         ) { eventHandler(ArrivalDateEvent.OnDateClick(it)) }
         ActionButton(
             textRes = R.string.new_order_date_button_text,
             alignment = Alignment.Center,
-            padding = PaddingValues(top = 24.dp)
+            padding = PaddingValues(top = 24.dp, bottom = 16.dp, start = 16.dp, end = 16.dp)
         ) { eventHandler(ArrivalDateEvent.OnBackClick) }
     }
 }
@@ -52,10 +51,10 @@ private fun ArrivalDateTitle(eventHandler: (ArrivalDateEvent) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 4.dp, bottom = 16.dp, start = 5.dp, end = 8.dp),
+            .padding(top = 28.dp, bottom = 24.dp, start = 10.dp, end = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        BackButton(modifier = Modifier.padding(top = 3.dp)) {
+        BackButton {
             rootController.findModalController().popBackStack(null)
         }
         Text(

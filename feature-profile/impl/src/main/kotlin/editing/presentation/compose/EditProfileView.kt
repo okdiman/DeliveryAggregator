@@ -2,6 +2,7 @@ package editing.presentation.compose
 
 import ScrollScreenActionButton
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -48,11 +49,9 @@ internal fun EditProfileView(state: EditProfileState, eventHandler: (EditProfile
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 4.dp)
+                .padding(top = 12.dp)
         ) {
-            BackButton(modifier = Modifier.padding(top = 3.dp)) {
-                eventHandler(EditProfileEvent.OnBackClick)
-            }
+            BackButton { eventHandler(EditProfileEvent.OnBackClick) }
             Text(
                 modifier = Modifier.align(Alignment.Center),
                 text = stringResource(R.string.editing_profile),
@@ -139,10 +138,11 @@ private fun EditProfileFieldsBlock(
         )
     )
     Spacer(modifier = Modifier.height(32.dp))
+    val interactionSource = remember { MutableInteractionSource() }
     Text(
         modifier = Modifier
             .clip(Theme.shapes.textFields)
-            .clickable { eventHandler(EditProfileEvent.OnDeleteAccClick) },
+            .clickable(interactionSource, null) { eventHandler(EditProfileEvent.OnDeleteAccClick) },
         text = stringResource(id = R.string.editing_delete_profile),
         style = Theme.fonts.bold
     )

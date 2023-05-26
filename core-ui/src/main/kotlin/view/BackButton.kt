@@ -10,12 +10,9 @@ import androidx.compose.ui.unit.dp
 import trinity_monsters.delivery_aggregator.core_ui.R
 
 @Composable
-fun BackButton(
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
-) {
+fun BackButton(onClick: () -> Unit) {
     IconButton(
-        modifier = modifier.then(Modifier.size(24.dp)),
+        modifier = Modifier.size(24.dp),
         onClick = { onClick() }) {
         Icon(painter = painterResource(id = R.drawable.back_ic), contentDescription = "")
     }

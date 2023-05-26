@@ -9,11 +9,13 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -56,7 +58,7 @@ internal fun NewOrderView(state: NewOrderState, eventHandler: (NewOrderEvent) ->
     } else {
         Column(
             modifier = Modifier
-                .padding(PaddingValues(start = 16.dp, end = 16.dp, top = 4.dp))
+                .padding(PaddingValues(horizontal = 16.dp))
                 .verticalScroll(scrollState)
         ) {
             TitleView(eventHandler)
@@ -97,15 +99,15 @@ private fun TitleView(eventHandler: (NewOrderEvent) -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 4.dp)
+            .offset(x = (-16).dp)
     ) {
-        Icon(
-            modifier = Modifier
-                .clip(Theme.shapes.roundedButton)
-                .clickable { eventHandler(NewOrderEvent.OnBackClick) },
-            painter = painterResource(id = R_core.drawable.close_ic),
-            contentDescription = null
-        )
+        IconButton(
+            onClick = { eventHandler(NewOrderEvent.OnBackClick) }) {
+            Icon(
+                painter = painterResource(id = R_core.drawable.close_ic),
+                contentDescription = ""
+            )
+        }
         Text(
             modifier = Modifier.align(Alignment.Center),
             text = stringResource(id = R.string.new_order_title),

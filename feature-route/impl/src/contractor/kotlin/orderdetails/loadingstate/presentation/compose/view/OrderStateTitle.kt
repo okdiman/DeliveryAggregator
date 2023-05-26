@@ -17,11 +17,9 @@ internal fun OrderStateTitle(title: String, onBackClick: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 4.dp)
+            .padding(top = 12.dp)
     ) {
-        BackButton(modifier = Modifier.padding(top = 3.dp)) {
-            onBackClick()
-        }
+        BackButton { onBackClick() }
         Text(
             modifier = Modifier.align(Alignment.Center),
             text = title,

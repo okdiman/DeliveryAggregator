@@ -49,11 +49,9 @@ internal fun TransportProfileView(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 4.dp)
+                .padding(top = 12.dp)
         ) {
-            BackButton(modifier = Modifier.padding(top = 3.dp)) {
-                eventHandler(TransportProfileEvent.OnBackButtonClick)
-            }
+            BackButton { eventHandler(TransportProfileEvent.OnBackButtonClick) }
             Text(
                 modifier = Modifier.align(Alignment.Center),
                 text = stringResource(R.string.editing_profile),

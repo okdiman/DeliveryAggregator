@@ -53,11 +53,7 @@ internal fun NotificationsView(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(
-                    top = 16.dp,
-                    start = 16.dp,
-                    end = 16.dp
-                )
+                .padding(horizontal = 16.dp)
         ) {
             item {
                 NotificationsTitle(eventHandler)
@@ -68,6 +64,7 @@ internal fun NotificationsView(
                         NotificationLoadingView()
                     }
                 }
+
                 else -> {
                     items(state.notifications) { uiModel ->
                         NotificationItemView(
@@ -85,7 +82,11 @@ internal fun NotificationsView(
 
 @Composable
 private fun NotificationsTitle(eventHandler: (NotificationsEvent) -> Unit) {
-    Box(modifier = Modifier.fillMaxWidth()) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 12.dp)
+    ) {
         BackButton { eventHandler(NotificationsEvent.OnBackClick) }
         Text(
             modifier = Modifier.align(Alignment.Center),

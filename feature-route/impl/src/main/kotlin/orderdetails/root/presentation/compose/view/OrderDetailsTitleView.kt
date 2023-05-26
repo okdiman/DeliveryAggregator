@@ -25,11 +25,9 @@ internal fun OrderDetailsTitleView(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 4.dp)
+            .padding(top = 12.dp)
     ) {
-        BackButton(modifier = Modifier.padding(top = 3.dp)) {
-            onClickBack()
-        }
+        BackButton { onClickBack() }
         if (!state.isLoading) {
             Text(
                 modifier = Modifier.align(Alignment.Center),

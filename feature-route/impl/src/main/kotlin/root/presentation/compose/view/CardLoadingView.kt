@@ -19,7 +19,7 @@ internal fun RouteLoadingView(modifier: Modifier = Modifier) {
         Box(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(top = 8.dp)
+                .padding(top = 8.dp, start = 16.dp, end = 16.dp)
                 .height(200.dp)
                 .clip(Theme.shapes.bigCard)
                 .shimmerEffect()

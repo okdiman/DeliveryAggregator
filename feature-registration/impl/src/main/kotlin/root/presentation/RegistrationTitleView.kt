@@ -33,12 +33,10 @@ fun RegistrationTitleView(
     @StringRes titleRes: Int
 ) {
     Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 4.dp)
+        modifier = Modifier.fillMaxWidth().padding(top =  12.dp)
     ) {
         if (isBackButtonVisible) {
-            BackButton(modifier = Modifier.padding(top = 3.dp)) { onButtonClick() }
+            BackButton { onButtonClick() }
         }
         val stepCount = if (BuildConfig.FLAVOR == CommonConstants.Flavors.client) {
             THREE

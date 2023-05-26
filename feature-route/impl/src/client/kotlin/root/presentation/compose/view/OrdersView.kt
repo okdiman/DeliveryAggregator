@@ -74,7 +74,6 @@ internal fun OrderRequestsView(state: OrdersState, eventHandler: (OrdersEvent) -
             ) {
                 Column {
                     NotificationIconView(
-                        modifier = Modifier.padding(end = 16.dp),
                         notificationsCount = state.notificationsCount
                     ) {
                         eventHandler(OrdersEvent.OnNotificationsClick)

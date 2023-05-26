@@ -4,6 +4,7 @@ import ActionButton
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -97,6 +99,7 @@ private fun PhoneBlock(viewState: LoginState, eventHandler: (LoginEvent) -> Unit
 
 @Composable
 private fun AgreementBlock(viewState: LoginState, eventHandler: (LoginEvent) -> Unit) {
+    val interactionSource = remember { MutableInteractionSource() }
     Spacer(modifier = Modifier.height(8.dp))
     Row(
         modifier = Modifier.fillMaxWidth()
@@ -117,7 +120,7 @@ private fun AgreementBlock(viewState: LoginState, eventHandler: (LoginEvent) -> 
                 style = Theme.fonts.regular
             )
             Text(
-                modifier = Modifier.clickable {
+                modifier = Modifier.clickable(interactionSource, null) {
                     eventHandler(LoginEvent.OnOfferCLick)
                 },
                 text = stringResource(id = R.string.login_read_offer),

@@ -15,12 +15,13 @@ import org.koin.core.qualifier.named
 import organization.company.presentation.viewmodel.model.CompanyAction
 import organization.company.presentation.viewmodel.model.CompanyEvent
 import organization.company.presentation.viewmodel.model.CompanyState
-import root.presentation.mapper.AddressSuggestUiMapper
 import presentation.AddressSuggestUiModel
 import presentation.parameters.CompanyParameters
+import root.RegistrationConstants.Limits.Company.INN_CHARS
 import root.RegistrationConstants.Limits.Company.INN_MIN_CHARS
 import root.RegistrationConstants.Limits.Company.KPP_CHARS
 import root.RegistrationConstants.Limits.Company.OGRN_CHARS
+import root.presentation.mapper.AddressSuggestUiMapper
 import utils.CommonConstants.LIMITS.Common.MIN_ADDRESS_CHARS
 import utils.CommonConstants.LIMITS.Common.MIN_NAME_CHARS
 import utils.ext.isTextFieldFilled
@@ -123,7 +124,7 @@ class CompanyViewModel(
         viewState = viewState.copy(
             ogrn = viewState.ogrn.copy(
                 stateText = newOgrn,
-                isFillingError = !newOgrn.isTextFieldFilled(OGRN_CHARS)
+                isFillingError = !newOgrn.isTextFieldFilled(OGRN_CHARS) && isOgrnConsidered(viewState.inn.stateText)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(
                 viewState.copy(ogrn = viewState.ogrn.copy(stateText = newOgrn))
@@ -148,6 +149,11 @@ class CompanyViewModel(
             inn = viewState.inn.copy(
                 stateText = newInn,
                 isFillingError = !newInn.isTextFieldFilled(INN_MIN_CHARS)
+            ),
+            ogrn = viewState.ogrn.copy(
+                isFillingError = !viewState.ogrn.stateText.isTextFieldFilled(OGRN_CHARS) &&
+                    viewState.ogrn.stateText.isNotEmpty() &&
+                    isOgrnConsidered(newInn)
             ),
             isContinueButtonEnabled = isContinueButtonEnabled(
                 viewState.copy(inn = viewState.inn.copy(stateText = newInn))
@@ -209,9 +215,11 @@ class CompanyViewModel(
     private fun isContinueButtonEnabled(state: CompanyState) =
         state.actualAddress.stateText.isTextFieldFilled(MIN_ADDRESS_CHARS) &&
             state.legalAddress.stateText.isTextFieldFilled(MIN_ADDRESS_CHARS) &&
-            state.ogrn.stateText.isTextFieldFilled(OGRN_CHARS) &&
             state.kpp.stateText.isTextFieldFilled(KPP_CHARS) &&
             state.inn.stateText.isTextFieldFilled(INN_MIN_CHARS) &&
             state.companyName.stateText.isTextFieldFilled(MIN_NAME_CHARS) &&
-            !state.companyName.isValidationError
+            !state.companyName.isValidationError &&
+            (state.ogrn.stateText.isTextFieldFilled(OGRN_CHARS) || !isOgrnConsidered(state.inn.stateText))
+
+    private fun isOgrnConsidered(inn: String) = inn.length != INN_CHARS
 }
