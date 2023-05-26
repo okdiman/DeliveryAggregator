@@ -2,6 +2,7 @@ package root.data.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import utils.serializers.BigDecimalAsDoubleSerializer
 import java.math.BigDecimal
 
 @Serializable
