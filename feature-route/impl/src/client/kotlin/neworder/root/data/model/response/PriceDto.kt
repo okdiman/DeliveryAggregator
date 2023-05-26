@@ -1,8 +1,11 @@
 package neworder.root.data.model.response
 
 import kotlinx.serialization.Serializable
+import utils.serializers.BigDecimalAsDoubleSerializer
+import java.math.BigDecimal
 
 @Serializable
 class PriceDto(
-    val price: Int
+    @Serializable(with = BigDecimalAsDoubleSerializer::class)
+    val price: BigDecimal
 )

@@ -23,7 +23,7 @@ import root.presentation.viewmodel.model.OrdersAction
 import root.presentation.viewmodel.model.OrdersEvent
 import root.presentation.viewmodel.model.OrdersState
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
-import utils.CommonConstants.Helpers.RUBBLES
+import utils.CommonConstants.Helpers.RUBLES
 import utils.ext.getSafeQueryParameter
 import utils.resource.domain.ResourceInteractor
 
@@ -149,10 +149,10 @@ class OrdersViewModel(private val deeplinkParameters: DeeplinkParameters?) :
         viewAction = when (deeplinkNavigatorHandler.getDestination(deeplinkUri)) {
             PAYMENT_SUCCESS -> {
                 val price = deeplinkUri.getSafeQueryParameter(PRICE)?.let {
-                    val withRubbles = buildString { append(it + RUBBLES) }
+                    val withRubles = buildString { append(it + RUBLES) }
                     String.format(
                         resourceInteractor.getString(R.string.new_order_payment_subtitle),
-                        withRubbles
+                        withRubles
                     )
                 }
                 OrdersAction.OpenPaymentSuccess(price)

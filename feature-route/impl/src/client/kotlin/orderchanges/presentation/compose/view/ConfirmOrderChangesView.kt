@@ -34,7 +34,7 @@ import orderchanges.presentation.viewmodel.model.ConfirmOrderChangesState
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import utils.CommonConstants.Helpers.NUMBER
-import utils.ext.toStringWithEnding
+import utils.ext.asPriceInRubles
 import view.BackButton
 
 @Composable
@@ -100,8 +100,8 @@ internal fun ConfirmOrderChangesView(
                         Spacer(modifier = Modifier.height(22.dp))
                         ChangedDetail(
                             title = stringResource(R.string.order_changes_price),
-                            oldValue = state.changes?.before?.price?.toStringWithEnding().orEmpty(),
-                            newValue = state.changes?.after?.price?.toStringWithEnding().orEmpty()
+                            oldValue = state.changes?.before?.price?.asPriceInRubles().orEmpty(),
+                            newValue = state.changes?.after?.price?.asPriceInRubles().orEmpty()
                         )
                     }
                 }
