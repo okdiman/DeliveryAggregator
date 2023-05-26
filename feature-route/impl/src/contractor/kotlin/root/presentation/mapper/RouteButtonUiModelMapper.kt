@@ -1,20 +1,20 @@
 package root.presentation.mapper
 
 import root.presentation.compose.model.RouteButtonUiModel
-import utils.ext.toStringWithEnding
+import utils.ext.asPriceInRubles
+import java.math.BigDecimal
 
 class RouteButtonUiModelMapper {
-    fun map(price: Int, distance: Double) = RouteButtonUiModel(
+
+    fun map(price: BigDecimal, distance: Double) = RouteButtonUiModel(
         text = buildString {
-            append(
-                price.toStringWithEnding(PRICE_ENDING) +
-                    distance.toStringWithEnding(DISTANCE_ENDING)
-            )
+            append(price.asPriceInRubles())
+            append(" / ")
+            append(distance, DISTANCE_ENDING)
         }
     )
 
     private companion object {
-        const val PRICE_ENDING = "₽ / "
         const val DISTANCE_ENDING = " км"
     }
 }

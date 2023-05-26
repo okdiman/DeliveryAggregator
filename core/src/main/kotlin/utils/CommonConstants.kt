@@ -46,7 +46,7 @@ object CommonConstants {
         const val SPACER = " "
         const val COMMA = ", "
         const val NUMBER = "№"
-        const val RUBBLES = " ₽"
+        const val RUBLES = " ₽"
     }
 
     object System {

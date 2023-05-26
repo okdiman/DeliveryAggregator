@@ -6,6 +6,8 @@ import root.data.model.response.OrderAddressDto
 import root.data.model.response.OrderExtrasDto
 import root.data.model.response.OrderMarketplaceDto
 import root.data.model.response.OrderStorageDto
+import utils.serializers.BigDecimalAsDoubleSerializer
+import java.math.BigDecimal
 
 /**
  * В приложении используются другие наименования полей: "load" - погрузка,
@@ -25,7 +27,8 @@ data class OrderDetailsDto(
     val id: Long,
     val marketplace: OrderMarketplaceDto,
     val pallets: Int,
-    val price: Int,
+    @Serializable(with = BigDecimalAsDoubleSerializer::class)
+    val price: BigDecimal,
     @SerialName("deliveryImages")
     val loadImages: List<String>?,
     @SerialName("doneImages")
