@@ -78,26 +78,22 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
             is NewOrderEvent.OnArrivalDateChanged -> onArrivalDateChanged(viewEvent.date)
             is NewOrderEvent.OnArrivalTimeChanged -> onArrivalTimeChanged(viewEvent.time)
             is NewOrderEvent.OnStorageChanged -> onStorageChanged(viewEvent.storage)
-            is NewOrderEvent.OnExtrasChanged -> onExtrasChanged(viewEvent.extras)
+            is NewOrderEvent.OnExtrasChanged -> onExtrasChanged(viewEvent.extra)
             is NewOrderEvent.OnExtrasCountChanged -> onExtrasCountChanged(viewEvent.extra)
             is NewOrderEvent.OnCommentChanged -> onCommentChanged(viewEvent.comment)
         }
     }
 
     private fun onExtrasCountChanged(extra: ExtrasUiModel) {
-        val isActive = viewState.extras.extrasActive.contains(extra)
+        val newExtrasList = viewState.extras.uiModel.map { currentExtra ->
+            if (extra.id == currentExtra.id && extra.count in 0..99) {
+                ExtrasUiModel(currentExtra.id, currentExtra.text, extra.count != 0, extra.count)
+            } else currentExtra
+        }
         viewState = viewState.copy(
             extras = viewState.extras.copy(
-                uiModel = viewState.extras.uiModel.map { currentExtra ->
-                    if (extra.id == currentExtra.id && extra.count in 0..99) {
-                        ExtrasUiModel(currentExtra.id, currentExtra.text, extra.count)
-                    } else currentExtra
-                },
-                extrasActive = when {
-                    isActive && extra.count == 0 -> viewState.extras.extrasActive - extra
-                    !isActive && extra.count > 0 -> viewState.extras.extrasActive + extra - ExtrasUiModel.Default
-                    else -> viewState.extras.extrasActive
-                }
+                uiModel = newExtrasList,
+                stateText = newExtrasList.joinToString(CommonConstants.Helpers.COMMA) { it.text },
             )
         )
         checkPrice()
@@ -182,12 +178,19 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
         viewState = viewState.copy(comment = NewOrderParamState.CommentState(stateText = comment))
     }
 
-    private fun onExtrasChanged(extras: List<ExtrasUiModel>) {
+    private fun onExtrasChanged(extra: ExtrasUiModel) {
+        val newExtrasList = viewState.extras.uiModel.map { updatedExtra ->
+            if (extra.id == updatedExtra.id) {
+                updatedExtra.copy(
+                    isActive = !updatedExtra.isActive,
+                    count = if (!updatedExtra.isActive && updatedExtra.count == 0) 1 else updatedExtra.count
+                )
+            } else updatedExtra
+        }
         viewState = viewState.copy(
             extras = ExtrasState(
-                stateText = extras.joinToString(CommonConstants.Helpers.COMMA) { it.text },
-                extrasActive = extras,
-                uiModel = viewState.extras.uiModel
+                stateText = newExtrasList.joinToString(CommonConstants.Helpers.COMMA) { it.text },
+                uiModel = newExtrasList
             )
         )
         checkPrice()
@@ -285,7 +288,7 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
     }
 
     private fun isFieldsFilled() = viewState.address.activeId != null && viewState.arrivalTime.stateText.isNotEmpty() &&
-        viewState.extras.extrasActive.isNotEmpty() && viewState.arrivalDate.stateText.isNotEmpty() &&
+        viewState.extras.uiModel.any { it.isActive } && viewState.arrivalDate.stateText.isNotEmpty() &&
         viewState.cargoType.stateText.isNotEmpty() && viewState.storage.storage?.id != null &&
         viewState.weight.stateText.isNotEmpty() && viewState.boxesCount.stateText.isNotEmpty() &&
         viewState.palletsCount.stateText.isNotEmpty()

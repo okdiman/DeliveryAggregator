@@ -33,7 +33,7 @@ import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 internal fun ExtrasScreen(
     state: ExtrasState,
     onExtraCountChanged: (ExtrasUiModel) -> Unit,
-    onExtrasClick: (List<ExtrasUiModel>) -> Unit
+    onExtrasClick: (ExtrasUiModel) -> Unit
 ) {
     val rootController = LocalRootController.current
     LazyColumn(
@@ -61,7 +61,7 @@ internal fun ExtrasScreen(
 private fun ExtrasCheckboxesView(
     state: ExtrasState,
     onExtraCountChanged: (ExtrasUiModel) -> Unit,
-    onExtrasClick: (List<ExtrasUiModel>) -> Unit
+    onExtrasClick: (ExtrasUiModel) -> Unit
 ) {
     state.uiModel.forEach { uiModel ->
         Row(
@@ -71,8 +71,7 @@ private fun ExtrasCheckboxesView(
                 .selectable(
                     selected = state.stateText.contains(uiModel.text),
                     onClick = {
-                        val result = getExtras(uiModel, state.extrasActive)
-                        onExtrasClick(result)
+                        onExtrasClick(uiModel)
                     },
                     role = Role.RadioButton
                 )
@@ -80,7 +79,7 @@ private fun ExtrasCheckboxesView(
             verticalAlignment = Alignment.CenterVertically
         ) {
             CheckboxView(
-                checked = state.extrasActive.contains(uiModel),
+                checked = uiModel.isActive,
                 colors = CheckboxDefaults.colors(
                     checkedColor = Theme.colors.radioButtonColor,
                     uncheckedColor = Theme.colors.radioButtonColor
@@ -124,13 +123,3 @@ private fun ExtraCountersView(uiModel: ExtrasUiModel, onItemClick: (Int) -> Unit
         }
     }
 }
-
-private fun getExtras(selectedExtra: ExtrasUiModel, activeExtrasList: List<ExtrasUiModel>) =
-    when {
-        selectedExtra == ExtrasUiModel.Default && !activeExtrasList.contains(selectedExtra) -> {
-            listOf(ExtrasUiModel.Default)
-        }
-
-        activeExtrasList.contains(selectedExtra) -> activeExtrasList - selectedExtra
-        else -> activeExtrasList + selectedExtra - ExtrasUiModel.Default
-    }

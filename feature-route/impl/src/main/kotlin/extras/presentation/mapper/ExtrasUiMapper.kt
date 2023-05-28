@@ -15,7 +15,8 @@ class ExtrasUiMapper {
                     append(it.name + CommonConstants.Helpers.COMMA + it.price + CommonConstants.Helpers.RUBBLES)
                 }
             },
-            count = it.count
+            count = it.count,
+            isActive = false
         )
     }
 }
