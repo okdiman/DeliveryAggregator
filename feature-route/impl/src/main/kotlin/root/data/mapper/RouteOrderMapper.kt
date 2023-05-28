@@ -72,7 +72,8 @@ class RouteOrderMapper {
         price = dto.price,
         id = dto.id,
         name = dto.name,
-        priceDescription = mapPriceDescriptionToDomain(dto.priceDescription)
+        priceDescription = mapPriceDescriptionToDomain(dto.priceDescription),
+        count = dto.count
     )
 
     private fun mapContractorToDomain(dto: ContractorDto) = OrderDetailsContractorModel(

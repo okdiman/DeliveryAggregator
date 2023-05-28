@@ -41,6 +41,7 @@ fun NewOrderScreen() {
                 }
                 viewModel.obtainEvent(NewOrderEvent.ResetAction)
             }
+
             NewOrderAction.OpenCargoTypeScreen -> {
                 OpenModalScreen {
                     CargoTypeScreen(state.value.cargoType) { type ->
@@ -49,6 +50,7 @@ fun NewOrderScreen() {
                 }
                 viewModel.obtainEvent(NewOrderEvent.ResetAction)
             }
+
             NewOrderAction.OpenDateScreen -> {
                 OpenModalScreen {
                     ArrivalDateScreen { date ->
@@ -57,18 +59,27 @@ fun NewOrderScreen() {
                 }
                 viewModel.obtainEvent(NewOrderEvent.ResetAction)
             }
+
             NewOrderAction.OpenExtrasScreen -> {
                 OpenModalScreen {
-                    ExtrasScreen(state.value.extras) { extras ->
-                        viewModel.obtainEvent(NewOrderEvent.OnExtrasChanged(extras))
-                    }
+                    ExtrasScreen(
+                        state = state.value.extras,
+                        onExtraCountChanged = { extra ->
+                            viewModel.obtainEvent(NewOrderEvent.OnExtrasCountChanged(extra))
+                        },
+                        onExtrasClick = { extras ->
+                            viewModel.obtainEvent(NewOrderEvent.OnExtrasChanged(extras))
+                        }
+                    )
                 }
                 viewModel.obtainEvent(NewOrderEvent.ResetAction)
             }
+
             NewOrderAction.OpenPreviousScreen -> {
                 OpenModalScreen { CancellationOrderScreen() }
                 viewModel.obtainEvent(NewOrderEvent.ResetAction)
             }
+
             NewOrderAction.OpenStorageScreen -> {
                 rootController.push(
                     screen = NavigationTree.NewOrder.Storages.name,
@@ -78,6 +89,7 @@ fun NewOrderScreen() {
                 )
                 viewModel.obtainEvent(NewOrderEvent.ResetAction)
             }
+
             is NewOrderAction.OpenSuccessScreen -> {
                 rootController.push(
                     screen = NavigationTree.NewOrder.OrderCreated.name,
@@ -86,12 +98,14 @@ fun NewOrderScreen() {
                     )
                 )
             }
+
             is NewOrderAction.OpenCreationErrorScreen -> {
                 rootController.findRootController().push(
                     NavigationTree.NewOrder.CreationError.name,
                     params = (action.value as NewOrderAction.OpenCreationErrorScreen).parameters
                 )
             }
+
             NewOrderAction.OpenTimeScreen -> {
                 OpenModalScreen {
                     ArrivalTimeScreen(state.value.arrivalTime) { arrivalTime ->
@@ -100,6 +114,7 @@ fun NewOrderScreen() {
                 }
                 viewModel.obtainEvent(NewOrderEvent.ResetAction)
             }
+
             else -> {}
         }
         val stack = rootController.findModalController().currentStack.observeAsState()

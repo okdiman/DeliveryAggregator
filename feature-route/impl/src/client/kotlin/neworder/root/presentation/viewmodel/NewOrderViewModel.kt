@@ -79,8 +79,28 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
             is NewOrderEvent.OnArrivalTimeChanged -> onArrivalTimeChanged(viewEvent.time)
             is NewOrderEvent.OnStorageChanged -> onStorageChanged(viewEvent.storage)
             is NewOrderEvent.OnExtrasChanged -> onExtrasChanged(viewEvent.extras)
+            is NewOrderEvent.OnExtrasCountChanged -> onExtrasCountChanged(viewEvent.extra)
             is NewOrderEvent.OnCommentChanged -> onCommentChanged(viewEvent.comment)
         }
+    }
+
+    private fun onExtrasCountChanged(extra: ExtrasUiModel) {
+        val isActive = viewState.extras.extrasActive.contains(extra)
+        viewState = viewState.copy(
+            extras = viewState.extras.copy(
+                uiModel = viewState.extras.uiModel.map { currentExtra ->
+                    if (extra.id == currentExtra.id && extra.count in 0..99) {
+                        ExtrasUiModel(currentExtra.id, currentExtra.text, extra.count)
+                    } else currentExtra
+                },
+                extrasActive = when {
+                    isActive && extra.count == 0 -> viewState.extras.extrasActive - extra
+                    !isActive && extra.count > 0 -> viewState.extras.extrasActive + extra - ExtrasUiModel.Default
+                    else -> viewState.extras.extrasActive
+                }
+            )
+        )
+        checkPrice()
     }
 
     private fun getContent() {
@@ -253,6 +273,7 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
                     )
                 }
             }
+
             viewState.createButton.isEnabled -> {
                 viewState = viewState.copy(
                     createButton = NewOrderParamState.CreateButtonState(

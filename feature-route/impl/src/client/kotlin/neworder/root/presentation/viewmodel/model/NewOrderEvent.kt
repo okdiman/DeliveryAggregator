@@ -12,6 +12,7 @@ sealed interface NewOrderEvent {
     data class OnPalletsCountChanged(val count: String) : NewOrderEvent
     data class OnCargoTypeChanged(val type: CargoType) : NewOrderEvent
     data class OnExtrasChanged(val extras: List<ExtrasUiModel>) : NewOrderEvent
+    data class OnExtrasCountChanged(val extra: ExtrasUiModel) : NewOrderEvent
     data class OnWeightChanged(val weight: String) : NewOrderEvent
     data class OnBSAddressChanged(val bsAddress: AddressUiModel) : NewOrderEvent
     data class OnArrivalDateChanged(val date: Date) : NewOrderEvent

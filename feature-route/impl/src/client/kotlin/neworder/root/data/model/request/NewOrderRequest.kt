@@ -14,5 +14,5 @@ data class NewOrderRequest(
     val pallets: Int,
     val storageId: Int,
     val weight: Int,
-    val extrasIds: List<Long>
+    val extrasIds: Set<Long>
 )

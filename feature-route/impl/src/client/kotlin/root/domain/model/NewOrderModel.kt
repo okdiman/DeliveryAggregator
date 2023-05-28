@@ -12,5 +12,5 @@ class NewOrderModel(
     val pallets: Int,
     val storageId: Int,
     val weight: Int,
-    val extras: List<Long>
+    val extras: Set<Long>
 )

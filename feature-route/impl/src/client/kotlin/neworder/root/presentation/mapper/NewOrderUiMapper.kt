@@ -20,7 +20,7 @@ class NewOrderUiMapper {
         storageId = state.storage.storage?.id ?: 0,
         weight = state.weight.stateText.toInt(),
         cargoType = state.cargoType.stateText,
-        extras = state.extras.extrasActive.filter { it != ExtrasUiModel.Default }.map { it.id }
+        extras = state.extras.extrasActive.filter { it != ExtrasUiModel.Default }.map { it.id }.toSet()
     )
 
     private fun getDate(date: Date?): String? {

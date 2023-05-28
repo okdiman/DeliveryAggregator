@@ -7,5 +7,6 @@ class OrderExtrasDto(
     val id: Long,
     val name: String,
     val price: Int,
-    val priceDescription: OrderPriceDescriptionDto
+    val priceDescription: OrderPriceDescriptionDto,
+    val count: Int = 0
 )

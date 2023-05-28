@@ -13,7 +13,8 @@ import trinity_monsters.delivery_aggregator.core_ui.R
 fun BackButtonView(onClick: () -> Unit) {
     IconButton(
         modifier = Modifier.size(24.dp),
-        onClick = { onClick() }) {
+        onClick = { onClick() })
+    {
         Icon(painter = painterResource(id = R.drawable.back_ic), contentDescription = "")
     }
 }

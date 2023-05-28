@@ -14,7 +14,8 @@ class ExtrasUiMapper {
                 buildString {
                     append(it.name + CommonConstants.Helpers.COMMA + it.price + CommonConstants.Helpers.RUBBLES)
                 }
-            }
+            },
+            count = it.count
         )
     }
 }
