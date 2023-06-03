@@ -9,13 +9,11 @@ class ResourceInteractor(
     private val resourceRepository: ResourceRepository
 ) {
 
-    fun getString(@StringRes resId: Int): String {
-        return resourceRepository.getString(resId)
-    }
+    fun getString(@StringRes resId: Int) = resourceRepository.getString(resId)
 
-    fun getStringFromRawResource(@RawRes resId: Int): String {
-        return resourceRepository.getStringFromRawResource(resId)
-    }
+    fun getStringFromRawResource(@RawRes resId: Int) = resourceRepository.getStringFromRawResource(resId)
+
+    fun getString(@StringRes resId: Int, vararg args: Any) = resourceRepository.getString(resId, *args)
 
     /**
      * Отличается от getString тем, что в качестве аргументов может принимать Spanned и нормально вставять в текст

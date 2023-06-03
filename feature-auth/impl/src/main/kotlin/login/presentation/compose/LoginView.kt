@@ -3,8 +3,6 @@ package login.presentation.compose
 import ActionButton
 import android.widget.Toast
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -19,7 +17,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -30,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import login.presentation.viewmodel.model.LoginEvent
 import login.presentation.viewmodel.model.LoginState
+import ru.alexgladkov.odyssey.compose.helpers.noRippleClickable
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_auth.impl.R
 import utils.CommonConstants.LIMITS.Common.MAX_PHONE_CHARS
@@ -99,7 +97,6 @@ private fun PhoneBlock(viewState: LoginState, eventHandler: (LoginEvent) -> Unit
 
 @Composable
 private fun AgreementBlock(viewState: LoginState, eventHandler: (LoginEvent) -> Unit) {
-    val interactionSource = remember { MutableInteractionSource() }
     Spacer(modifier = Modifier.height(8.dp))
     Row(
         modifier = Modifier.fillMaxWidth()
@@ -120,7 +117,7 @@ private fun AgreementBlock(viewState: LoginState, eventHandler: (LoginEvent) -> 
                 style = Theme.fonts.regular
             )
             Text(
-                modifier = Modifier.clickable(interactionSource, null) {
+                modifier = Modifier.noRippleClickable {
                     eventHandler(LoginEvent.OnOfferCLick)
                 },
                 text = stringResource(id = R.string.login_read_offer),

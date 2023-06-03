@@ -90,12 +90,8 @@ internal fun ConfirmOrderChangesView(
                         Spacer(modifier = Modifier.height(22.dp))
                         ChangedDetail(
                             title = stringResource(R.string.order_changes_extra),
-                            oldValue = state.changes?.before?.extras
-                                ?.joinToString(separator = "\n") { it.text }
-                                .orEmpty(),
-                            newValue = state.changes?.after?.extras
-                                ?.joinToString(separator = "\n") { it.text }
-                                .orEmpty()
+                            oldValue = state.changes?.before?.extras.orEmpty(),
+                            newValue = state.changes?.after?.extras.orEmpty()
                         )
                         Spacer(modifier = Modifier.height(22.dp))
                         ChangedDetail(

@@ -34,12 +34,19 @@ fun OrderLoadingScreen(parameters: OrderStatesParameters) {
                         cornerRadius = SCREEN_CORNER_RADIUS
                     )
                 ) {
-                    ExtrasScreen(state.value.extras) { extras ->
-                        viewModel.obtainEvent(OrderLoadingEvent.OnExtrasChanged(extras))
-                    }
+                    ExtrasScreen(
+                        state = state.value.extras,
+                        onExtraCountChanged = { extra ->
+                            viewModel.obtainEvent(OrderLoadingEvent.OnExtrasCountChanged(extra))
+                        },
+                        onExtrasClick = { extras ->
+                            viewModel.obtainEvent(OrderLoadingEvent.OnExtrasChanged(extras))
+                        }
+                    )
                 }
                 viewModel.obtainEvent(OrderLoadingEvent.ResetAction)
             }
+
             OrderLoadingAction.OpenCamera -> {
                 PermissionHandler(
                     permission = PermissionsConstants.Camera,
@@ -54,6 +61,7 @@ fun OrderLoadingScreen(parameters: OrderStatesParameters) {
                 )
                 viewModel.obtainEvent(OrderLoadingEvent.ResetAction)
             }
+
             OrderLoadingAction.OpenCargoTypeScreen -> {
                 rootController.findModalController().present(
                     modalSheetConfiguration = ModalSheetConfiguration(
@@ -66,6 +74,7 @@ fun OrderLoadingScreen(parameters: OrderStatesParameters) {
                 }
                 viewModel.obtainEvent(OrderLoadingEvent.ResetAction)
             }
+
             OrderLoadingAction.OpenPreviousScreen -> rootController.popBackStack()
             else -> {}
         }

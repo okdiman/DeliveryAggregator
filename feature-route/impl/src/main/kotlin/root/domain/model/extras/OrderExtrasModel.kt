@@ -7,5 +7,5 @@ data class OrderExtrasModel(
     val name: String,
     val price: BigDecimal,
     val priceDescription: OrderPriceDescriptionModel,
-    val count: Int
+    val count: Int = 0
 )

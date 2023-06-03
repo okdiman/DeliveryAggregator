@@ -5,4 +5,5 @@
     <string name="additional_info_dont_need">Не требуются</string>
     <string name="additional_info_comment_empty">Отсутствует</string>
     <string name="additional_info_back">Вернуться</string>
+    <string name="additional_info_factor">(x%s)</string>
 </resources>

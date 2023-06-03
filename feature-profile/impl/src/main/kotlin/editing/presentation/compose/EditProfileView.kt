@@ -1,8 +1,6 @@
 package editing.presentation.compose
 
 import ScrollScreenActionButton
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -28,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import editing.presentation.viewmodel.model.EditProfileEvent
 import editing.presentation.viewmodel.model.EditProfileState
 import modifiers.autoScrollInFocus
+import ru.alexgladkov.odyssey.compose.helpers.noRippleClickable
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_profile.impl.R
 import utils.CommonConstants
@@ -138,11 +137,10 @@ private fun EditProfileFieldsBlock(
         )
     )
     Spacer(modifier = Modifier.height(32.dp))
-    val interactionSource = remember { MutableInteractionSource() }
     Text(
         modifier = Modifier
             .clip(Theme.shapes.textFields)
-            .clickable(interactionSource, null) { eventHandler(EditProfileEvent.OnDeleteAccClick) },
+            .noRippleClickable { eventHandler(EditProfileEvent.OnDeleteAccClick) },
         text = stringResource(id = R.string.editing_delete_profile),
         style = Theme.fonts.bold
     )

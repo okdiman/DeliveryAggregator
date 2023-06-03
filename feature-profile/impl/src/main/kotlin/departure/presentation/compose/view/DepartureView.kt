@@ -3,7 +3,7 @@ package departure.presentation.compose.view
 import CommonErrorScreen
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
-import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -48,7 +48,7 @@ internal fun DepartureView(state: DepartureState, eventHandler: (DepartureEvent)
         val startState = remember { MutableTransitionState(false) }.also {
             it.targetState = true
         }
-        AnimatedVisibility(visibleState = startState, enter = slideInVertically()) {
+        AnimatedVisibility(visibleState = startState, enter = slideInHorizontally()) {
             LazyColumn(
                 modifier = Modifier
                     .padding(PaddingValues(start = 8.dp, end = 8.dp))

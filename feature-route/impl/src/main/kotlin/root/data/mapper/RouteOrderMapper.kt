@@ -11,7 +11,7 @@ import org.threeten.bp.format.DateTimeFormatter
 import root.data.model.response.ContractorDto
 import root.data.model.response.OrderAddressDto
 import root.data.model.response.OrderDto
-import root.data.model.response.OrderExtrasDto
+import root.data.model.response.OrderExtrasDetailsDto
 import root.data.model.response.OrderMarketplaceDto
 import root.data.model.response.OrderPriceDescriptionDto
 import root.data.model.response.OrderStorageDto
@@ -48,7 +48,7 @@ class RouteOrderMapper {
         comment = dto.comment,
         price = dto.price,
         extras = dto.extras?.map { extrasDto ->
-            mapExtrasToDomain(extrasDto)
+            mapExtrasToDomain(extrasDto.extra, extrasDto.quantity)
         },
         marketplace = mapMarketplaceToDomain(dto.marketplace),
         pallets = dto.pallets,
@@ -68,12 +68,12 @@ class RouteOrderMapper {
         street = dto.street
     )
 
-    internal fun mapExtrasToDomain(dto: OrderExtrasDto) = OrderExtrasModel(
+    internal fun mapExtrasToDomain(dto: OrderExtrasDetailsDto, count: Int = 0) = OrderExtrasModel(
         price = dto.price,
         id = dto.id,
         name = dto.name,
         priceDescription = mapPriceDescriptionToDomain(dto.priceDescription),
-        count = dto.count
+        count = count
     )
 
     private fun mapContractorToDomain(dto: ContractorDto) = OrderDetailsContractorModel(

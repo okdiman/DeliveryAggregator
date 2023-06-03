@@ -16,27 +16,28 @@ import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
 
 @Composable
-internal fun NotificationIconView(notificationsCount: Int, onClick: () -> Unit) {
+internal fun NotificationIconView(modifier: Modifier = Modifier, notificationsCount: Int, onClick: () -> Unit) {
     Box(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.then(Modifier.fillMaxWidth()),
         contentAlignment = Alignment.CenterEnd
     ) {
-        BadgedBox(
-            badge = {
-                if (notificationsCount > 0) {
-                    Badge(backgroundColor = Theme.colors.badgeBackgroundColor) {
-                        Text(
-                            text = notificationsCount.toString(),
-                            style = Theme.fonts.regular.copy(
-                                fontSize = 10.sp,
-                                color = Theme.colors.textSecondaryColor
+        IconButton(
+            onClick = { onClick() }
+        ) {
+            BadgedBox(
+                badge = {
+                    if (notificationsCount > 0) {
+                        Badge(backgroundColor = Theme.colors.badgeBackgroundColor) {
+                            Text(
+                                text = notificationsCount.toString(),
+                                style = Theme.fonts.regular.copy(
+                                    fontSize = 10.sp,
+                                    color = Theme.colors.textSecondaryColor
+                                )
                             )
-                        )
+                        }
                     }
                 }
-            }) {
-            IconButton(
-                onClick = { onClick() }
             ) {
                 Icon(
                     painter = painterResource(R.drawable.route_notifications_ic),

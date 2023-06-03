@@ -92,7 +92,7 @@ private fun ExtrasCheckboxesView(
                 text = uiModel.text,
                 style = Theme.fonts.regular
             )
-            if (uiModel != ExtrasUiModel.Default) {
+            if (uiModel.id != ExtrasUiModel.Default.id) {
                 ExtraCountersView(uiModel) { newCount ->
                     onExtraCountChanged(uiModel.copy(count = newCount))
                 }
