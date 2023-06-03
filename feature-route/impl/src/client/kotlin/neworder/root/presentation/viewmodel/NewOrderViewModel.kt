@@ -27,11 +27,10 @@ import root.domain.usecase.GetOrdersUseCase
 import root.presentation.compose.model.RouteStorageModel
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import utils.CommonConstants
-import utils.CommonConstants.Helpers.RUBBLES
 import utils.CommonConstants.Helpers.SPACER
 import utils.ext.DateFormats.DAY_MONTH_YEAR_FORMAT
 import utils.ext.DateFormats.FULL_DISPLAYED_DAY_MONTH
-import utils.ext.toStringWithEnding
+import utils.ext.asPriceInRubles
 import utils.resource.domain.ResourceInteractor
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -268,7 +267,7 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
                             subtitle = buildString {
                                 append(
                                     resourceInteractor.getString(R.string.new_order_price) + SPACER +
-                                        price.toStringWithEnding(RUBBLES)
+                                        price.asPriceInRubles()
                                 )
                             },
                             isEnabled = true

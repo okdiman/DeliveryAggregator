@@ -1,6 +1,7 @@
 package orderdetails.root.presentation.compose.model
 
 import root.domain.model.status.OrderStatusProgress
+import java.math.BigDecimal
 
 data class OrderDetailsUiModel(
     val id: Long,
@@ -14,7 +15,7 @@ data class OrderDetailsUiModel(
     val palletCount: String,
     val deliveryAddress: String,
     val isPaid: Boolean,
-    val price: Int,
+    val price: BigDecimal,
 ) {
     val isLoadedOrDelivered = (load != null && delivery != null)
 
@@ -34,7 +35,7 @@ data class OrderDetailsUiModel(
                 contractorName = "",
                 contractorPhone = "",
                 isPaid = false,
-                price = 0,
+                price = BigDecimal("0.00"),
             )
     }
 }

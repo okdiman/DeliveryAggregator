@@ -6,6 +6,7 @@ import root.domain.model.details.OrderMarketplaceModel
 import root.domain.model.extras.OrderExtrasModel
 import root.domain.model.status.OrderStatusProgress
 import root.presentation.compose.model.RouteStorageModel
+import java.math.BigDecimal
 
 data class OrderDetailsModel(
     val address: OrderAddressModel,
@@ -18,7 +19,7 @@ data class OrderDetailsModel(
     val id: Long,
     val marketplace: OrderMarketplaceModel,
     val pallets: Int,
-    val price: Int,
+    val price: BigDecimal,
     val status: OrderStatusProgress,
     val isPaid: Boolean,
     val storage: RouteStorageModel,

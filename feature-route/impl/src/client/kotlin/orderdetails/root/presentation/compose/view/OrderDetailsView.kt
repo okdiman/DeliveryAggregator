@@ -26,7 +26,7 @@ import root.domain.model.status.OrderStatusProgress
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
 import utils.UiConstants.SCROLL_SCREEN_ACTION_BUTTON_OCCUPIED_HEIGHT
-import utils.ext.toStringWithEnding
+import utils.ext.asPriceInRubles
 
 @Composable
 internal fun OrderDetailsView(state: OrderDetailsState, eventHandler: (OrderDetailsEvent) -> Unit) {
@@ -162,7 +162,7 @@ private fun PayButtonView(
         contentAlignment = Alignment.BottomCenter
     ) {
         ScrollScreenActionButton(
-            text = stringResource(R.string.order_details_pay, state.uiModel.price.toStringWithEnding()),
+            text = stringResource(R.string.order_details_pay, state.uiModel.price.asPriceInRubles()),
             enabled = !state.uiModel.isPaid && !state.isLoading && !state.isError,
             alignment = Alignment.BottomCenter,
             padding = PaddingValues(horizontal = 8.dp, vertical = 16.dp)

@@ -4,7 +4,7 @@ object Versions {
     const val coil = "2.2.2"
     const val androidxCore = "1.9.0"
     const val material = "1.7.0"
-    const val kotlinxConverter = "0.8.0"
+    const val kotlinxConverter = "1.0.0"
     const val splashScreen = "1.0.0"
     const val detekt = "1.22.0"
     const val compose = "1.3.1"
