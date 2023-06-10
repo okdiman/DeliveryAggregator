@@ -14,6 +14,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import trinity_monsters.delivery_aggregator.core_ui.R
+import view.calendar.constants.CalendarConstants.ID_ARROW_NEXT
 import view.calendar.constants.CalendarConstants.ID_ARROW_PAST
 
 @Composable
@@ -38,9 +39,9 @@ internal fun CalendarMonthView(
             textAlign = TextAlign.Center,
             style = textStyle
         )
-        IconButton(onClick = { onClick(ID_ARROW_PAST) }) {
+        IconButton(onClick = { onClick(ID_ARROW_NEXT) }) {
             Image(
-                modifier = Modifier.rotate(180f) ,
+                modifier = Modifier.rotate(180f),
                 painter = painterResource(id = R.drawable.calendar_arrow_ic),
                 contentDescription = ""
             )

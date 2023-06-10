@@ -3,6 +3,7 @@ package neworder.arrivaldate.presentation.compose
 import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.ViewModel
 import com.adeo.kviewmodel.compose.observeAsState
+import neworder.arrivaldate.presentation.ArrivalDateParameters
 import neworder.arrivaldate.presentation.viewmodel.ArrivalDateViewModel
 import neworder.arrivaldate.presentation.viewmodel.model.ArrivalDateAction
 import neworder.arrivaldate.presentation.viewmodel.model.ArrivalDateEvent
@@ -10,9 +11,9 @@ import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import java.util.Date
 
 @Composable
-internal fun ArrivalDateScreen(onDateClick: (Date) -> Unit) {
+internal fun ArrivalDateScreen(parameters: ArrivalDateParameters, onDateClick: (Date) -> Unit) {
     val rootController = LocalRootController.current
-    ViewModel(factory = { ArrivalDateViewModel() }) { viewModel ->
+    ViewModel(factory = { ArrivalDateViewModel(parameters) }) { viewModel ->
         val state = viewModel.viewStates().observeAsState()
         val action = viewModel.viewActions().observeAsState()
         ArrivalDateView(state.value) { event ->

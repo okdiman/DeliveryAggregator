@@ -64,7 +64,7 @@ internal fun CalendarDataView(
             ) {
                 Text(
                     color = when {
-                        date.isPastMonth -> inactiveDateColor
+                        date.isBlocked -> inactiveDateColor
                         date.isWeekend -> weekendDateColor
                         else -> activeDateColor
                     },

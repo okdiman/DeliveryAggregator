@@ -1,19 +1,24 @@
 package neworder.arrivaldate.presentation.viewmodel
 
 import BaseViewModel
+import neworder.arrivaldate.presentation.ArrivalDateParameters
 import neworder.arrivaldate.presentation.viewmodel.model.ArrivalDateAction
 import neworder.arrivaldate.presentation.viewmodel.model.ArrivalDateEvent
 import neworder.arrivaldate.presentation.viewmodel.model.ArrivalDateState
 import utils.CommonConstants.Helpers.SPACER
 import utils.ext.DateFormats
+import utils.ext.toLocalDate
 import view.calendar.constants.CalendarConstants
 import view.calendar.constants.CalendarConstants.DAYS_IN_WEEK
+import view.calendar.constants.CalendarConstants.DEFAULT_DAYS_ARRAY
 import view.calendar.model.CalendarDateUiModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class ArrivalDateViewModel : BaseViewModel<ArrivalDateState, ArrivalDateAction, ArrivalDateEvent>(
+class ArrivalDateViewModel(
+    private val parameters: ArrivalDateParameters
+) : BaseViewModel<ArrivalDateState, ArrivalDateAction, ArrivalDateEvent>(
     initialState = ArrivalDateState()
 ) {
     private var calendar = Calendar.getInstance()
@@ -33,6 +38,13 @@ class ArrivalDateViewModel : BaseViewModel<ArrivalDateState, ArrivalDateAction, 
     }
 
     private fun getContent() {
+        val blockedDates = parameters.unavailableDates.map { date ->
+            date.toLocalDate(DateFormats.YEAR_MONTH_DAY)
+        }.filter {
+            it.monthValue == calendar.get(Calendar.MONTH) + 1
+        }.map {
+            it.dayOfMonth
+        }
         val list = mutableListOf<CalendarDateUiModel>()
         val startDay = getStartDayOfWeek()
         val daysLastMonth = getMonthDaysCount(calendar.get(Calendar.MONTH).toPastMonth())
@@ -41,15 +53,21 @@ class ArrivalDateViewModel : BaseViewModel<ArrivalDateState, ArrivalDateAction, 
 
         if (startDay != 1) {
             for (i in 1 until startDay) {
-                list.add(CalendarDateUiModel(startDayLastMonth + i, isPastMonth = true))
+                list.add(CalendarDateUiModel(startDayLastMonth + i, isBlocked = true))
             }
         }
+        val unavailableWeekDays = DEFAULT_DAYS_ARRAY - parameters.weekWorkDays.map { it.toInt() }.toSet()
+        val auxiliaryCalendar = Calendar.getInstance()
         for (i in 1..daysCurrentMonth) {
+            auxiliaryCalendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), i)
+            val currentDayOfWeek = auxiliaryCalendar.get(Calendar.DAY_OF_WEEK)
+            val isBlocked = unavailableWeekDays.any { unavailableDay -> currentDayOfWeek - 1 == unavailableDay }
             list.add(
                 CalendarDateUiModel(
                     day = i,
                     isWeekend = (i + startDay) % DAYS_IN_WEEK == 0 || (i + startDay - 1) % DAYS_IN_WEEK == 0,
-                    isSelected = i == calendar.get(Calendar.DAY_OF_MONTH) + startDay - 2
+                    isSelected = i == calendar.get(Calendar.DAY_OF_MONTH) + startDay - 2,
+                    isBlocked = blockedDates.contains(i) || isBlocked
                 )
             )
         }
@@ -86,7 +104,7 @@ class ArrivalDateViewModel : BaseViewModel<ArrivalDateState, ArrivalDateAction, 
     }
 
     private fun onDateClick(date: CalendarDateUiModel) {
-        if (isAvailableDate(date.day) && !date.isPastMonth) {
+        if (isAvailableDate(date.day) && !date.isBlocked) {
             viewState = viewState.copy(
                 dates = viewState.dates.map {
                     it.isSelected = it.day == date.day

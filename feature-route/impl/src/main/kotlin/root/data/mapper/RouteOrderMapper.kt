@@ -109,7 +109,9 @@ class RouteOrderMapper {
     internal fun mapStorageToDomain(dto: OrderStorageDto) = RouteStorageModel(
         id = dto.id,
         address = dto.address,
-        name = dto.name
+        name = dto.name,
+        weekWorkDays = dto.weekWorkDays,
+        dayOffs = dto.dayOffs.values.map { it.toString().replace("\"", "") }
     )
 
     private fun mapPriceDescriptionToDomain(dto: OrderPriceDescriptionDto) =

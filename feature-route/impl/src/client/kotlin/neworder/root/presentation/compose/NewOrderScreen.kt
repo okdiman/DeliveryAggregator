@@ -51,15 +51,6 @@ fun NewOrderScreen() {
                 viewModel.obtainEvent(NewOrderEvent.ResetAction)
             }
 
-            NewOrderAction.OpenDateScreen -> {
-                OpenModalScreen {
-                    ArrivalDateScreen { date ->
-                        viewModel.obtainEvent(NewOrderEvent.OnArrivalDateChanged(date))
-                    }
-                }
-                viewModel.obtainEvent(NewOrderEvent.ResetAction)
-            }
-
             NewOrderAction.OpenExtrasScreen -> {
                 OpenModalScreen {
                     ExtrasScreen(
@@ -104,6 +95,16 @@ fun NewOrderScreen() {
                     NavigationTree.NewOrder.CreationError.name,
                     params = (action.value as NewOrderAction.OpenCreationErrorScreen).parameters
                 )
+            }
+
+            is NewOrderAction.OpenDateScreen -> {
+                val params = (action.value as NewOrderAction.OpenDateScreen).parameters
+                OpenModalScreen {
+                    ArrivalDateScreen(parameters = params) { date ->
+                        viewModel.obtainEvent(NewOrderEvent.OnArrivalDateChanged(date))
+                    }
+                }
+                viewModel.obtainEvent(NewOrderEvent.ResetAction)
             }
 
             NewOrderAction.OpenTimeScreen -> {

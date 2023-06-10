@@ -2,6 +2,7 @@ package neworder.root.presentation.compose.view
 
 import CommonErrorScreen
 import ScrollScreenActionButton
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -71,9 +73,9 @@ internal fun NewOrderView(state: NewOrderState, eventHandler: (NewOrderEvent) ->
                 PalletsItem(modifier, state, eventHandler)
                 WeightItem(modifier, state, eventHandler)
                 AddressItem(state, focusManager, eventHandler)
+                StorageItem(state, focusManager, eventHandler)
                 DateItem(state, focusManager, eventHandler)
                 TimeItem(state, focusManager, eventHandler)
-                StorageItem(state, focusManager, eventHandler)
                 ExtrasTextField(
                     modifier = modifier,
                     text = state.extras.stateText
@@ -218,12 +220,16 @@ private fun AddressItem(state: NewOrderState, focusManager: FocusManager, eventH
 
 @Composable
 private fun DateItem(state: NewOrderState, focusManager: FocusManager, eventHandler: (NewOrderEvent) -> Unit) {
+    val context = LocalContext.current
+    val toast = stringResource(id = R.string.new_order_date_error)
     StandardTextField(
         modifier = Modifier
             .clip(Theme.shapes.textFields)
             .clickable {
-                focusManager.clearFocus()
-                eventHandler(NewOrderEvent.OnArrivalDateClick)
+                if (state.storage.storage != null) {
+                    focusManager.clearFocus()
+                    eventHandler(NewOrderEvent.OnArrivalDateClick)
+                } else Toast.makeText(context, toast, Toast.LENGTH_SHORT).show()
             },
         title = stringResource(R.string.new_order_date_title),
         state = state.arrivalDate,

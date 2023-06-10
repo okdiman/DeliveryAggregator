@@ -10,6 +10,7 @@ import extras.presentation.model.ExtrasUiModel
 import kotlinx.coroutines.Job
 import network.domain.GetAuthTokenSyncUseCase
 import neworder.address.presentation.viewmodel.NewOrderAddressViewModel.Companion.NEW_ID
+import neworder.arrivaldate.presentation.ArrivalDateParameters
 import neworder.arrivaltime.domain.ArrivalTime
 import neworder.creationerror.presentation.CreationErrorParameters
 import neworder.payment.domain.GetPaymentUriUseCase
@@ -258,7 +259,9 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
     }
 
     private fun onArrivalDateClick() {
-        viewAction = NewOrderAction.OpenDateScreen
+        val dayOffs = viewState.storage.storage?.dayOffs ?: emptyList()
+        val weekWorkDays = viewState.storage.storage?.weekWorkDays ?: emptyList()
+        viewAction = NewOrderAction.OpenDateScreen(ArrivalDateParameters(dayOffs, weekWorkDays))
     }
 
     private fun onArrivalTimeClick() {
