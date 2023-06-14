@@ -8,6 +8,6 @@ class OrderStorageDto(
     val address: String,
     val id: Int,
     val name: String,
-    val weekWorkDays: List<String>,
-    val dayOffs: JsonObject
+    val weekWorkDays: List<String>?,
+    val dayOffs: JsonObject?
 )

@@ -110,8 +110,8 @@ class RouteOrderMapper {
         id = dto.id,
         address = dto.address,
         name = dto.name,
-        weekWorkDays = dto.weekWorkDays,
-        dayOffs = dto.dayOffs.values.map { it.toString().replace("\"", "") }
+        weekWorkDays = dto.weekWorkDays ?: emptyList(),
+        dayOffs = dto.dayOffs?.values?.map { it.toString().replace("\"", "") } ?: emptyList()
     )
 
     private fun mapPriceDescriptionToDomain(dto: OrderPriceDescriptionDto) =
