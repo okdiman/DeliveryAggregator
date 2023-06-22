@@ -3,7 +3,6 @@ package orderdetails.root.presentation.compose.view
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -22,15 +21,14 @@ internal fun OrderDetailsRowView(title: String, info: String) {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            modifier = Modifier
-                .fillMaxWidth(0.5f)
-                .padding(end = 8.dp),
+            modifier = Modifier.padding(end = 8.dp),
             text = title,
             style = Theme.fonts.regular.copy(color = Theme.colors.textPrimaryColor.copy(alpha = 0.7f))
         )
         Text(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
+                .weight(1f)
                 .padding(start = 8.dp),
             text = info,
             style = Theme.fonts.regular,

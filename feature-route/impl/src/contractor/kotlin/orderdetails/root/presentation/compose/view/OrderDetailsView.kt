@@ -69,12 +69,20 @@ internal fun OrderDetailsView(
                     info = state.uiModel.deliveryTime
                 )
                 OrderDetailsRowView(
-                    title = stringResource(id = R.string.order_details_pallet_count),
-                    info = state.uiModel.palletCount
+                    title = stringResource(id = R.string.order_details_storage_address),
+                    info = state.uiModel.storageAddress
                 )
                 OrderDetailsRowView(
                     title = stringResource(id = R.string.order_details_delivery_address),
                     info = state.uiModel.deliveryAddress
+                )
+                OrderDetailsRowView(
+                    title = stringResource(id = R.string.order_details_cargo_type),
+                    info = state.uiModel.cargoType
+                )
+                OrderDetailsRowView(
+                    title = stringResource(id = R.string.order_details_pallet_count),
+                    info = state.uiModel.palletCount
                 )
                 OrderDetailsAdditionalInfoView(eventHandler)
                 OrderDetailsStatusView(state, eventHandler)
@@ -181,6 +189,7 @@ private fun OrderDetailsStatusView(
         isEnabled = state.uiModel.status == OrderStatusProgress.DELIVERY,
         isCompleted = state.uiModel.status == OrderStatusProgress.DONE
     ) { eventHandler(OrderDetailsEvent.OnDeliveryStateClick) }
+    Spacer(modifier = Modifier.height(8.dp))
 }
 
 @Composable

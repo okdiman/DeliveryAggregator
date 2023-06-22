@@ -58,6 +58,7 @@ class RouteOrderMapper {
         isPaid = dto.isPaid,
         load = mapLoadToDomain(dto.loadTime, dto.loadImages),
         delivery = mapDeliveryToDomain(dto.deliveryTime, dto.deliveryImages),
+        cargoType = dto.cargoType
     )
 
     private fun mapAddressToDomain(dto: OrderAddressDto) = OrderAddressModel(

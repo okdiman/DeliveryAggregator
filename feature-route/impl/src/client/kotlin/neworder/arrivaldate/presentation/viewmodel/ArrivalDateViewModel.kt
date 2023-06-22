@@ -72,7 +72,10 @@ class ArrivalDateViewModel(
         for (i in 1..daysInCurrentMonth) {
             auxiliaryCalendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), i)
             val currentDayOfWeek = auxiliaryCalendar.get(Calendar.DAY_OF_WEEK)
-            val isBlocked = unavailableWeekDays.any { unavailableDay -> currentDayOfWeek - 1 == unavailableDay }
+
+            /** неделя у Андроида начинается с воскресенья, а у бэка с понедельника, отсюда такая старнная формула */
+            val realCurrentDay = if ((currentDayOfWeek - 1) == 0) 7 else currentDayOfWeek - 1
+            val isBlocked = unavailableWeekDays.any { unavailableDay -> realCurrentDay == unavailableDay }
             days.add(
                 CalendarDateUiModel(
                     day = i,
