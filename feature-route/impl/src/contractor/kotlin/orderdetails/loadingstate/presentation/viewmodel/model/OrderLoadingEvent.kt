@@ -10,7 +10,8 @@ sealed interface OrderLoadingEvent {
     data class OnBoxesCountChanged(val count: String) : OrderLoadingEvent
     data class OnPalletsCountChanged(val count: String) : OrderLoadingEvent
     data class OnCargoTypeChanged(val type: CargoType) : OrderLoadingEvent
-    data class OnExtrasChanged(val extras: List<ExtrasUiModel>) : OrderLoadingEvent
+    data class OnExtrasChanged(val extras: ExtrasUiModel) : OrderLoadingEvent
+    data class OnExtrasCountChanged(val extra: ExtrasUiModel) : OrderLoadingEvent
     data class OnPhotoAdded(val uri: Uri) : OrderLoadingEvent
     object OnBackClick : OrderLoadingEvent
     object OnDoneButtonClick : OrderLoadingEvent

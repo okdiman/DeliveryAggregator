@@ -26,4 +26,5 @@ data class OrderDetailsModel(
     val weight: Int,
     val load: OrderLoadModel?,
     val delivery: OrderDeliveryModel?,
+    val cargoType: String
 )

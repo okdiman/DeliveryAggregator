@@ -10,6 +10,7 @@ import extras.presentation.model.ExtrasUiModel
 import kotlinx.coroutines.Job
 import network.domain.GetAuthTokenSyncUseCase
 import neworder.address.presentation.viewmodel.NewOrderAddressViewModel.Companion.NEW_ID
+import neworder.arrivaldate.presentation.ArrivalDateParameters
 import neworder.arrivaltime.domain.ArrivalTime
 import neworder.creationerror.presentation.CreationErrorParameters
 import neworder.payment.domain.GetPaymentUriUseCase
@@ -77,9 +78,31 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
             is NewOrderEvent.OnArrivalDateChanged -> onArrivalDateChanged(viewEvent.date)
             is NewOrderEvent.OnArrivalTimeChanged -> onArrivalTimeChanged(viewEvent.time)
             is NewOrderEvent.OnStorageChanged -> onStorageChanged(viewEvent.storage)
-            is NewOrderEvent.OnExtrasChanged -> onExtrasChanged(viewEvent.extras)
+            is NewOrderEvent.OnExtrasChanged -> onExtrasChanged(viewEvent.extra)
+            is NewOrderEvent.OnExtrasCountChanged -> onExtrasCountChanged(viewEvent.extra)
             is NewOrderEvent.OnCommentChanged -> onCommentChanged(viewEvent.comment)
         }
+    }
+
+    private fun onExtrasCountChanged(extra: ExtrasUiModel) {
+        val newExtrasList = viewState.extras.uiModel.map { currentExtra ->
+            when {
+                currentExtra.id == extra.id && extra.count in 0..99 -> {
+                    ExtrasUiModel(currentExtra.id, currentExtra.text, extra.count != 0, extra.count)
+                }
+
+                currentExtra.id == ExtrasUiModel.Default.id -> currentExtra.copy(isActive = false)
+                else -> currentExtra
+            }
+        }
+        viewState = viewState.copy(
+            extras = viewState.extras.copy(
+                uiModel = newExtrasList,
+                stateText = newExtrasList.filter { it.isActive }
+                    .joinToString(CommonConstants.Helpers.COMMA) { it.text },
+            )
+        )
+        checkPrice()
     }
 
     private fun getContent() {
@@ -161,12 +184,34 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
         viewState = viewState.copy(comment = NewOrderParamState.CommentState(stateText = comment))
     }
 
-    private fun onExtrasChanged(extras: List<ExtrasUiModel>) {
+    private fun onExtrasChanged(changedExtra: ExtrasUiModel) {
+        val newExtrasList = if (changedExtra.id == ExtrasUiModel.Default.id) {
+            viewState.extras.uiModel.map { extra ->
+                when (extra.id) {
+                    ExtrasUiModel.Default.id -> extra.copy(isActive = !extra.isActive, count = 1)
+                    else -> extra.copy(isActive = false)
+                }
+            }
+        } else {
+            viewState.extras.uiModel.map { updatedExtra ->
+                when (updatedExtra.id) {
+                    ExtrasUiModel.Default.id -> updatedExtra.copy(isActive = false)
+                    changedExtra.id -> {
+                        updatedExtra.copy(
+                            isActive = !updatedExtra.isActive,
+                            count = if (!updatedExtra.isActive && updatedExtra.count == 0) 1 else updatedExtra.count
+                        )
+                    }
+
+                    else -> updatedExtra
+                }
+            }
+        }
         viewState = viewState.copy(
             extras = ExtrasState(
-                stateText = extras.joinToString(CommonConstants.Helpers.COMMA) { it.text },
-                extrasActive = extras,
-                uiModel = viewState.extras.uiModel
+                stateText = newExtrasList.filter { it.isActive }
+                    .joinToString(CommonConstants.Helpers.COMMA) { it.text },
+                uiModel = newExtrasList
             )
         )
         checkPrice()
@@ -214,7 +259,9 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
     }
 
     private fun onArrivalDateClick() {
-        viewAction = NewOrderAction.OpenDateScreen
+        val dayOffs = viewState.storage.storage?.dayOffs ?: emptyList()
+        val weekWorkDays = viewState.storage.storage?.weekWorkDays ?: emptyList()
+        viewAction = NewOrderAction.OpenDateScreen(ArrivalDateParameters(dayOffs, weekWorkDays))
     }
 
     private fun onArrivalTimeClick() {
@@ -252,6 +299,7 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
                     )
                 }
             }
+
             viewState.createButton.isEnabled -> {
                 viewState = viewState.copy(
                     createButton = NewOrderParamState.CreateButtonState(
@@ -263,9 +311,7 @@ class NewOrderViewModel : BaseViewModel<NewOrderState, NewOrderAction, NewOrderE
     }
 
     private fun isFieldsFilled() = viewState.address.activeId != null && viewState.arrivalTime.stateText.isNotEmpty() &&
-        viewState.extras.extrasActive.isNotEmpty() && viewState.arrivalDate.stateText.isNotEmpty() &&
+        viewState.arrivalDate.stateText.isNotEmpty() && viewState.palletsCount.stateText.isNotEmpty() &&
         viewState.cargoType.stateText.isNotEmpty() && viewState.storage.storage?.id != null &&
-        viewState.weight.stateText.isNotEmpty() && viewState.boxesCount.stateText.isNotEmpty() &&
-        viewState.palletsCount.stateText.isNotEmpty()
-
+        viewState.weight.stateText.isNotEmpty() && viewState.boxesCount.stateText.isNotEmpty()
 }

@@ -15,7 +15,9 @@ class ExtrasUiMapper {
                 buildString {
                     append(it.name + CommonConstants.Helpers.COMMA + it.price.asPriceInRubles())
                 }
-            }
+            },
+            count = it.count,
+            isActive = false
         )
     }
 }

@@ -5,7 +5,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +18,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -41,9 +41,11 @@ internal fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Un
         state.isLoading -> {
             ProfileLoadingView()
         }
+
         state.isError -> {
             CommonErrorScreen { eventHandler(ProfileEvent.OnRetryClick) }
         }
+
         else -> {
             val startState = remember { MutableTransitionState(false) }.also {
                 it.targetState = true
@@ -52,7 +54,7 @@ internal fun ProfileView(state: ProfileState, eventHandler: (ProfileEvent) -> Un
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(top = 54.dp, start = 8.dp, end = 8.dp)
+                        .padding(top = 46.dp, start = 8.dp, end = 8.dp)
                 ) {
                     item {
                         ProfileUserNameView(state, eventHandler)
@@ -81,7 +83,7 @@ private fun ProfileUserNameView(state: ProfileState, eventHandler: (ProfileEvent
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp)
+            .padding(start = 8.dp, end = 8.dp, top =  8.dp)
     ) {
         Column(modifier = Modifier.weight(1f)) {
             Text(
@@ -89,20 +91,16 @@ private fun ProfileUserNameView(state: ProfileState, eventHandler: (ProfileEvent
                 style = Theme.fonts.bold.copy(fontSize = 24.sp)
             )
         }
-        Box(
-            modifier = Modifier
-                .size(32.dp)
-                .clip(Theme.shapes.roundedButton)
-                .clickable {
-                    eventHandler(ProfileEvent.OnEditProfileClick)
-                },
-            contentAlignment = Alignment.Center
+        IconButton(
+            modifier = Modifier.size(32.dp),
+            onClick = { eventHandler(ProfileEvent.OnEditProfileClick) }
         ) {
             Icon(
                 painter = painterResource(id = R_core.drawable.edit_ic),
                 contentDescription = null
             )
         }
+
     }
 }
 

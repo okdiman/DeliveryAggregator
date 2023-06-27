@@ -1,5 +1,6 @@
 package neworder.root.data.model.request
 
+import extras.data.ExtrasDto
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -14,5 +15,5 @@ data class NewOrderRequest(
     val pallets: Int,
     val storageId: Int,
     val weight: Int,
-    val extrasIds: List<Long>
+    val extras: List<ExtrasDto>
 )

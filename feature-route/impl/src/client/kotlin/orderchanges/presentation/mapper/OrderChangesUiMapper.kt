@@ -6,9 +6,12 @@ import orderchanges.domain.model.OrderChangedValuesModel
 import orderchanges.domain.model.OrderChangesModel
 import orderchanges.presentation.compose.model.OrderChangedValuesUiModel
 import orderchanges.presentation.compose.model.OrderChangesUiModel
+import trinity_monsters.delivery_aggregator.feature_route.impl.R
+import utils.resource.domain.ResourceInteractor
 
 class OrderChangesUiMapper(
     private val extrasUiMapper: ExtrasUiMapper,
+    private val resourceInteractor: ResourceInteractor
 ) {
 
     fun map(model: OrderChangesModel) = OrderChangesUiModel(
@@ -22,6 +25,13 @@ class OrderChangesUiMapper(
         pallets = model.pallets,
         cargoType = model.cargoType,
         price = model.price,
-        extras = extrasUiMapper.map(model.extras).ifEmpty { listOf(ExtrasUiModel.Default) }
+        extras = extrasUiMapper.map(model.extras)
+            .ifEmpty { listOf(ExtrasUiModel.Default) }
+            .joinToString(separator = "\n") {
+                it.text + resourceInteractor.getString(
+                    R.string.additional_info_factor,
+                    it.count
+                )
+            }
     )
 }

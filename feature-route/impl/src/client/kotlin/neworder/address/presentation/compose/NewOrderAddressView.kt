@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Text
@@ -90,7 +91,7 @@ private fun DepartureAddressItemView(
             .clickable {
                 eventHandler(NewOrderAddressEvent.OnAddressClick(model))
             }
-            .padding(horizontal = 8.dp, vertical = 12.dp),
+            .padding(start = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         RadioButton(
@@ -110,15 +111,13 @@ private fun DepartureAddressItemView(
         ) {
             AddressView(model)
         }
-        Icon(
-            modifier = Modifier
-                .clip(Theme.shapes.roundedButton)
-                .clickable {
-                    eventHandler(NewOrderAddressEvent.OnEditClick(model))
-                },
-            painter = painterResource(id = R_core.drawable.edit_ic),
-            contentDescription = null
-        )
+        IconButton(
+            onClick = { eventHandler(NewOrderAddressEvent.OnEditClick(model)) }) {
+            Icon(
+                painter = painterResource(id = R_core.drawable.edit_ic),
+                contentDescription = null
+            )
+        }
     }
 }
 
@@ -135,7 +134,7 @@ private fun DepartureAddNewAddressView(eventHandler: (NewOrderAddressEvent) -> U
             text = stringResource(id = R_core.string.common_add_new_address)
         )
         Icon(
-            modifier = Modifier.padding(start = 16.dp),
+            modifier = Modifier.padding(start = 16.dp, end = 4.dp),
             painter = painterResource(id = R_core.drawable.add_ic),
             contentDescription = null
         )

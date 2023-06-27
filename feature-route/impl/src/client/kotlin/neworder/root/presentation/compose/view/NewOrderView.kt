@@ -2,6 +2,7 @@ package neworder.root.presentation.compose.view
 
 import CommonErrorScreen
 import ScrollScreenActionButton
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,11 +10,13 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -24,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -56,7 +60,7 @@ internal fun NewOrderView(state: NewOrderState, eventHandler: (NewOrderEvent) ->
     } else {
         Column(
             modifier = Modifier
-                .padding(PaddingValues(start = 16.dp, end = 16.dp, top = 4.dp))
+                .padding(PaddingValues(horizontal = 16.dp))
                 .verticalScroll(scrollState)
         ) {
             TitleView(eventHandler)
@@ -69,9 +73,9 @@ internal fun NewOrderView(state: NewOrderState, eventHandler: (NewOrderEvent) ->
                 PalletsItem(modifier, state, eventHandler)
                 WeightItem(modifier, state, eventHandler)
                 AddressItem(state, focusManager, eventHandler)
+                StorageItem(state, focusManager, eventHandler)
                 DateItem(state, focusManager, eventHandler)
                 TimeItem(state, focusManager, eventHandler)
-                StorageItem(state, focusManager, eventHandler)
                 ExtrasTextField(
                     modifier = modifier,
                     text = state.extras.stateText
@@ -97,15 +101,15 @@ private fun TitleView(eventHandler: (NewOrderEvent) -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 4.dp)
+            .offset(x = (-16).dp)
     ) {
-        Icon(
-            modifier = Modifier
-                .clip(Theme.shapes.roundedButton)
-                .clickable { eventHandler(NewOrderEvent.OnBackClick) },
-            painter = painterResource(id = R_core.drawable.close_ic),
-            contentDescription = null
-        )
+        IconButton(
+            onClick = { eventHandler(NewOrderEvent.OnBackClick) }) {
+            Icon(
+                painter = painterResource(id = R_core.drawable.close_ic),
+                contentDescription = ""
+            )
+        }
         Text(
             modifier = Modifier.align(Alignment.Center),
             text = stringResource(id = R.string.new_order_title),
@@ -216,12 +220,16 @@ private fun AddressItem(state: NewOrderState, focusManager: FocusManager, eventH
 
 @Composable
 private fun DateItem(state: NewOrderState, focusManager: FocusManager, eventHandler: (NewOrderEvent) -> Unit) {
+    val context = LocalContext.current
+    val toast = stringResource(id = R.string.new_order_date_error)
     StandardTextField(
         modifier = Modifier
             .clip(Theme.shapes.textFields)
             .clickable {
-                focusManager.clearFocus()
-                eventHandler(NewOrderEvent.OnArrivalDateClick)
+                if (state.storage.storage != null) {
+                    focusManager.clearFocus()
+                    eventHandler(NewOrderEvent.OnArrivalDateClick)
+                } else Toast.makeText(context, toast, Toast.LENGTH_SHORT).show()
             },
         title = stringResource(R.string.new_order_date_title),
         state = state.arrivalDate,

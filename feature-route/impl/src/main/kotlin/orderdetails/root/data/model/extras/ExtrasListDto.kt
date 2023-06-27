@@ -2,10 +2,10 @@ package orderdetails.root.data.model.extras
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import root.data.model.response.OrderExtrasDto
+import root.data.model.response.OrderExtrasDetailsDto
 
 @Serializable
-class ExtrasDto(
+class ExtrasListDto(
     @SerialName("Extras")
-    val extras: List<OrderExtrasDto>
+    val extras: List<OrderExtrasDetailsDto>
 )

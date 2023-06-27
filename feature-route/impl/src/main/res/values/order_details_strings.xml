@@ -5,7 +5,8 @@
     <string name="order_details_delivery_date">Дата поставки</string>
     <string name="order_details_cargo_type">Тип груза</string>
     <string name="order_details_pallet_count">Колличество паллет</string>
-    <string name="order_details_delivery_address">Адрес склада</string>
+    <string name="order_details_delivery_address">Адрес отгрузки</string>
+    <string name="order_details_storage_address">Адрес склада</string>
     <string name="order_details_additional_info">Дополнительная информация</string>
     <string name="order_details_status">Статусы доставки</string>
 </resources>

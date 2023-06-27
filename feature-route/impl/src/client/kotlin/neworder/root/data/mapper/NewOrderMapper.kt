@@ -1,5 +1,6 @@
 package neworder.root.data.mapper
 
+import extras.data.ExtrasDto
 import neworder.root.data.model.request.NewOrderRequest
 import root.domain.model.NewOrderModel
 
@@ -15,6 +16,6 @@ class NewOrderMapper {
         pallets = model.pallets,
         storageId = model.storageId,
         weight = model.weight,
-        extrasIds = model.extras
+        extras = model.extras.map { ExtrasDto(it.id, it.quantity) }
     )
 }

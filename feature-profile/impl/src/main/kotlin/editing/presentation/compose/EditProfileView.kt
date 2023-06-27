@@ -1,7 +1,6 @@
 package editing.presentation.compose
 
 import ScrollScreenActionButton
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -27,10 +26,11 @@ import androidx.compose.ui.unit.sp
 import editing.presentation.viewmodel.model.EditProfileEvent
 import editing.presentation.viewmodel.model.EditProfileState
 import modifiers.autoScrollInFocus
+import ru.alexgladkov.odyssey.compose.helpers.noRippleClickable
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_profile.impl.R
 import utils.CommonConstants
-import view.BackButton
+import view.BackButtonView
 import view.StandardTextField
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
@@ -48,11 +48,9 @@ internal fun EditProfileView(state: EditProfileState, eventHandler: (EditProfile
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 4.dp)
+                .padding(top = 12.dp)
         ) {
-            BackButton(modifier = Modifier.padding(top = 3.dp)) {
-                eventHandler(EditProfileEvent.OnBackClick)
-            }
+            BackButtonView { eventHandler(EditProfileEvent.OnBackClick) }
             Text(
                 modifier = Modifier.align(Alignment.Center),
                 text = stringResource(R.string.editing_profile),
@@ -142,7 +140,7 @@ private fun EditProfileFieldsBlock(
     Text(
         modifier = Modifier
             .clip(Theme.shapes.textFields)
-            .clickable { eventHandler(EditProfileEvent.OnDeleteAccClick) },
+            .noRippleClickable { eventHandler(EditProfileEvent.OnDeleteAccClick) },
         text = stringResource(id = R.string.editing_delete_profile),
         style = Theme.fonts.bold
     )

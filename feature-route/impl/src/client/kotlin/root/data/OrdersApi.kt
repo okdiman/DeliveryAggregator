@@ -4,7 +4,7 @@ import neworder.root.data.model.request.NewOrderRequest
 import neworder.root.data.model.response.PriceDto
 import neworder.storage.data.StorageWrapperDto
 import orderchanges.data.model.response.OrderChangesDto
-import orderdetails.root.data.model.extras.ExtrasDto
+import orderdetails.root.data.model.extras.ExtrasListDto
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -29,7 +29,7 @@ interface OrdersApi {
     ): OrderRequestDto
 
     @GET("api/users/extras")
-    suspend fun getExtras(): ExtrasDto
+    suspend fun getExtras(): ExtrasListDto
 
     @POST("api/clients/requests/price")
     suspend fun getOrderPrice(

@@ -1,5 +1,6 @@
 package neworder.root.presentation.mapper
 
+import extras.domain.ExtrasModel
 import extras.presentation.model.ExtrasUiModel
 import neworder.root.presentation.viewmodel.model.NewOrderState
 import root.domain.model.NewOrderModel
@@ -20,7 +21,8 @@ class NewOrderUiMapper {
         storageId = state.storage.storage?.id ?: 0,
         weight = state.weight.stateText.toInt(),
         cargoType = state.cargoType.stateText,
-        extras = state.extras.extrasActive.filter { it != ExtrasUiModel.Default }.map { it.id }
+        extras = state.extras.uiModel.filter { it.id != ExtrasUiModel.Default.id && it.isActive }
+            .map { ExtrasModel(it.id, it.count) }
     )
 
     private fun getDate(date: Date?): String? {

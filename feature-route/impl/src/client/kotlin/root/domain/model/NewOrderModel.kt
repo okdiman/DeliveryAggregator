@@ -1,5 +1,7 @@
 package root.domain.model
 
+import extras.domain.ExtrasModel
+
 @Suppress("LongParameterList")
 class NewOrderModel(
     val addressId: Long,
@@ -12,5 +14,5 @@ class NewOrderModel(
     val pallets: Int,
     val storageId: Int,
     val weight: Int,
-    val extras: List<Long>
+    val extras: List<ExtrasModel>
 )
