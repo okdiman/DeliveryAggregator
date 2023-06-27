@@ -26,7 +26,6 @@ import modifiers.autoScrollInFocus
 import organization.company.presentation.viewmodel.model.CompanyEvent
 import organization.company.presentation.viewmodel.model.CompanyState
 import root.RegistrationConstants
-import root.RegistrationConstants.Limits.Company.INN_CHARS
 import root.RegistrationConstants.Limits.Company.KPP_CHARS
 import root.RegistrationConstants.Limits.Company.OGRN_CHARS
 import root.presentation.RegistrationTitleView
@@ -79,20 +78,20 @@ private fun CompanyTextFieldsBlock(
 ) {
     StandardTextField(
         modifier = modifier,
-        title = stringResource(R_core.string.common_company_name),
-        state = state.companyName,
-        hint = stringResource(R.string.company_name_hint),
-        maxChar = MAX_NAME_CHARS
-    ) { eventHandler(CompanyEvent.OnCompanyNameChanged(it)) }
-    StandardTextField(
-        modifier = modifier,
         title = stringResource(R.string.company_inn),
         state = state.inn,
         isDigits = true,
         hint = stringResource(R.string.company_inn_hint),
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-        maxChar = INN_CHARS
+        maxChar = RegistrationConstants.Limits.Company.INN_CHARS
     ) { eventHandler(CompanyEvent.OnInnChanged(it)) }
+    StandardTextField(
+        modifier = modifier,
+        title = stringResource(R_core.string.common_company_name),
+        state = state.companyName,
+        hint = stringResource(R.string.company_name_hint),
+        maxChar = MAX_NAME_CHARS
+    ) { eventHandler(CompanyEvent.OnCompanyNameChanged(it)) }
     StandardTextField(
         modifier = modifier,
         title = stringResource(R.string.company_kpp),

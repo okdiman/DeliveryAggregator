@@ -12,6 +12,7 @@ import kotlinx.coroutines.delay
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.qualifier.named
+import organization.company.domain.GetCompanyInfoUseCase
 import organization.company.presentation.viewmodel.model.CompanyAction
 import organization.company.presentation.viewmodel.model.CompanyEvent
 import organization.company.presentation.viewmodel.model.CompanyState
@@ -36,8 +37,10 @@ class CompanyViewModel(
     private val appDispatchers by inject<AppDispatchers>()
     private val addressUiMapper by inject<AddressSuggestUiMapper>()
     private val namingValidator by inject<TextFieldValidator>(named(NAMING_VALIDATOR_QUALIFIER))
+    private val getCompanyInfoUseCase by inject<GetCompanyInfoUseCase>()
 
     private var suggestJob: Job? = null
+    private var innJob: Job? = null
 
     override fun obtainEvent(viewEvent: CompanyEvent) {
         when (viewEvent) {
@@ -159,6 +162,20 @@ class CompanyViewModel(
                 viewState.copy(inn = viewState.inn.copy(stateText = newInn))
             )
         )
+        if (newInn.isTextFieldFilled(INN_MIN_CHARS)) {
+            innJob?.cancel()
+            innJob = launchJob(appDispatchers.network) {
+                delay(INN_DELAY)
+                getCompanyInfoUseCase(newInn, parameters.user.code.toInt(), parameters.user.phone)?.let { company ->
+                    viewState = viewState.copy(
+                        kpp = viewState.kpp.copy(stateText = company.kpp),
+                        ogrn = viewState.ogrn.copy(stateText = company.ogrn),
+                        companyName = viewState.companyName.copy(stateText = company.name),
+                        legalAddress = viewState.legalAddress.copy(stateText = company.legalAddress)
+                    )
+                }
+            }
+        }
     }
 
     private fun onNameChanged(newName: String) {
@@ -222,4 +239,8 @@ class CompanyViewModel(
             (state.ogrn.stateText.isTextFieldFilled(OGRN_CHARS) || !isOgrnConsidered(state.inn.stateText))
 
     private fun isOgrnConsidered(inn: String) = inn.length != INN_CHARS
+
+    private companion object {
+        const val INN_DELAY = 500L
+    }
 }

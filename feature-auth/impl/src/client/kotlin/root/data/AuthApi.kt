@@ -6,7 +6,9 @@ import retrofit2.http.POST
 import root.data.model.AuthSignUpRequest
 import root.data.model.request.AuthSendVerifyCodeRequest
 import root.data.model.request.AuthSignInRequest
+import root.data.model.request.InnCompanyRequest
 import root.data.model.response.AuthSuccessDto
+import root.data.model.response.companyinfo.CompanyInfoDto
 
 interface AuthApi {
     @POST("/auth/send-code")
@@ -25,8 +27,13 @@ interface AuthApi {
     ): AuthSuccessDto
 
     /**
-     * возвращает инфу о токене, но пока она не нужна
+     * возвращает инфу о токене, но пока она не нужна и просто проверяем 200 или нет
      */
     @GET("/auth/me")
     suspend fun getAuthInfo()
+
+    @POST("/auth/suggest/party")
+    suspend fun getCompanyInfoByInn(
+        @Body request: InnCompanyRequest
+    ): ArrayList<CompanyInfoDto>
 }

@@ -7,14 +7,17 @@ import domain.model.AuthSignUpModel
 import domain.model.AuthVerifyCodeModel
 import network.exceptions.UserAlreadyExistException
 import root.data.mapper.AuthSignUpMapper
+import root.data.mapper.CompanyInfoMapper
 import root.data.model.request.AuthSendVerifyCodeRequest
 import root.data.model.request.AuthSignInRequest
+import root.data.model.request.InnCompanyRequest
 import trinity_monsters.delivery_aggregator.core.BuildConfig
 
 class AuthRepositoryImpl(
     private val api: AuthApi,
     private val localDataSource: AuthLocalDataSource,
-    private val mapper: AuthSignUpMapper
+    private val authMapper: AuthSignUpMapper,
+    private val companyInfoMapper: CompanyInfoMapper
 ) : AuthRepository {
     override suspend fun clearToken() = localDataSource.clearToken()
 
@@ -35,9 +38,12 @@ class AuthRepositoryImpl(
     }
 
     override suspend fun signUp(model: AuthSignUpModel) {
-        val response = api.signUp(mapper.map(model))
+        val response = api.signUp(authMapper.map(model))
         localDataSource.saveAccessToken(response.token)
     }
+
+    override suspend fun getCompanyInfoByInn(inn: String, code: Int, phone: String) =
+        api.getCompanyInfoByInn(InnCompanyRequest(code, phone, inn)).firstOrNull()?.let { companyInfoMapper.map(it) }
 
     override suspend fun getAuthInfo() {
         api.getAuthInfo()

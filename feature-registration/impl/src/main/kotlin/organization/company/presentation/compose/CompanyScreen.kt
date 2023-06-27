@@ -39,13 +39,14 @@ fun CompanyScreen(parameters: CompanyParameters) {
                             inn = state.value.inn.stateText,
                             kpp = state.value.kpp.stateText,
                             ogrn = state.value.ogrn.stateText,
-                            legalAddress = state.value.legalAddress.address?.value,
-                            actualAddress = state.value.actualAddress.address?.value
+                            legalAddress = state.value.legalAddress.stateText,
+                            actualAddress = state.value.actualAddress.stateText
                         )
                     )
                 )
                 viewModel.obtainEvent(CompanyEvent.ResetAction)
             }
+
             CompanyAction.OpenSelectLegalAddress -> {
                 ObtainBSScreenAction(
                     state = state,
@@ -56,6 +57,7 @@ fun CompanyScreen(parameters: CompanyParameters) {
                     }
                 )
             }
+
             CompanyAction.OpenSelectActualAddress -> {
                 ObtainBSScreenAction(
                     state = state,
@@ -66,6 +68,7 @@ fun CompanyScreen(parameters: CompanyParameters) {
                     }
                 )
             }
+
             else -> {}
         }
     }
