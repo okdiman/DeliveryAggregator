@@ -20,7 +20,7 @@ import comment.presentation.viewmodel.model.AddressCommentState
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_address.impl.R
 import utils.CommonConstants.LIMITS.Common.MAX_DESCRIPTION_CHARS
-import view.BackButton
+import view.BackButtonView
 import view.StandardTextField
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
@@ -36,9 +36,7 @@ fun AddressCommentView(state: AddressCommentState, eventHandler: (AddressComment
                 Box(
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    BackButton(modifier = Modifier.padding(top = 3.dp)) {
-                        eventHandler(AddressCommentEvent.OnBackClick)
-                    }
+                    BackButtonView { eventHandler(AddressCommentEvent.OnBackClick) }
                     Text(
                         modifier = Modifier.align(Alignment.Center),
                         text = stringResource(id = R_core.string.common_info_comment),

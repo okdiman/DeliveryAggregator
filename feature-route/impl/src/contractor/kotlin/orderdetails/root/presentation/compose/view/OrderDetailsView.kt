@@ -31,7 +31,7 @@ import orderdetails.root.presentation.viewmodel.model.OrderDetailsState
 import root.domain.model.status.OrderStatusProgress
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
-import view.BackButton
+import view.BackButtonView
 
 @Composable
 internal fun OrderDetailsView(
@@ -69,12 +69,20 @@ internal fun OrderDetailsView(
                     info = state.uiModel.deliveryTime
                 )
                 OrderDetailsRowView(
-                    title = stringResource(id = R.string.order_details_pallet_count),
-                    info = state.uiModel.palletCount
+                    title = stringResource(id = R.string.order_details_storage_address),
+                    info = state.uiModel.storageAddress
                 )
                 OrderDetailsRowView(
                     title = stringResource(id = R.string.order_details_delivery_address),
                     info = state.uiModel.deliveryAddress
+                )
+                OrderDetailsRowView(
+                    title = stringResource(id = R.string.order_details_cargo_type),
+                    info = state.uiModel.cargoType
+                )
+                OrderDetailsRowView(
+                    title = stringResource(id = R.string.order_details_pallet_count),
+                    info = state.uiModel.palletCount
                 )
                 OrderDetailsAdditionalInfoView(eventHandler)
                 OrderDetailsStatusView(state, eventHandler)
@@ -91,13 +99,9 @@ private fun OrderDetailsTitleView(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 4.dp)
+            .padding(top = 12.dp)
     ) {
-        BackButton(modifier = Modifier.padding(top = 3.dp)) {
-            eventHandler(
-                OrderDetailsEvent.OnBackClick
-            )
-        }
+        BackButtonView { eventHandler(OrderDetailsEvent.OnBackClick) }
         if (!state.isLoading) {
             Text(
                 modifier = Modifier.align(Alignment.Center),
@@ -185,6 +189,7 @@ private fun OrderDetailsStatusView(
         isEnabled = state.uiModel.status == OrderStatusProgress.DELIVERY,
         isCompleted = state.uiModel.status == OrderStatusProgress.DONE
     ) { eventHandler(OrderDetailsEvent.OnDeliveryStateClick) }
+    Spacer(modifier = Modifier.height(8.dp))
 }
 
 @Composable

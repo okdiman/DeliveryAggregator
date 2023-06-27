@@ -11,7 +11,9 @@ data class OrderDetailsUiModel(
     val deliveryDate: String,
     val deliveryTime: String,
     val palletCount: String,
-    val deliveryAddress: String
+    val deliveryAddress: String,
+    val storageAddress: String,
+    val cargoType: String
 ) {
     companion object {
         val Default =
@@ -24,7 +26,9 @@ data class OrderDetailsUiModel(
                 palletCount = "",
                 index = "",
                 clientName = "",
-                clientPhone = ""
+                clientPhone = "",
+                cargoType = "",
+                storageAddress = ""
             )
     }
 }

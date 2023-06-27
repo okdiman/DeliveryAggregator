@@ -5,6 +5,7 @@ import android.net.Uri
 import cargotype.domain.model.CargoType
 import coroutines.AppDispatchers
 import domain.LoadImageUseCase
+import extras.domain.ExtrasModel
 import extras.domain.GetExtrasUseCase
 import extras.presentation.mapper.ExtrasUiMapper
 import extras.presentation.model.ExtrasState
@@ -57,6 +58,7 @@ class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
     override fun obtainEvent(viewEvent: OrderLoadingEvent) {
         when (viewEvent) {
             is OrderLoadingEvent.OnExtrasChanged -> onExtrasChanged(viewEvent.extras)
+            is OrderLoadingEvent.OnExtrasCountChanged -> onExtrasCountChanged(viewEvent.extra)
             is OrderLoadingEvent.OnBoxesCountChanged -> onBoxesCountChanged(viewEvent.count)
             is OrderLoadingEvent.OnCargoTypeChanged -> onCargoTypeChanged(viewEvent.type)
             is OrderLoadingEvent.OnPalletsCountChanged -> onPalletsCountChanged(viewEvent.count)
@@ -72,14 +74,55 @@ class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
         }
     }
 
-    private fun onExtrasChanged(extras: List<ExtrasUiModel>) {
+    private fun onExtrasCountChanged(extra: ExtrasUiModel) {
+        val newExtrasList = viewState.extras.uiModel.map { currentExtra ->
+            when {
+                currentExtra.id == extra.id && extra.count in 0..99 -> {
+                    ExtrasUiModel(currentExtra.id, currentExtra.text, extra.count != 0, extra.count)
+                }
+
+                currentExtra.id == ExtrasUiModel.Default.id -> currentExtra.copy(isActive = false)
+                else -> currentExtra
+            }
+        }
+        viewState = viewState.copy(
+            extras = viewState.extras.copy(
+                uiModel = newExtrasList,
+                stateText = newExtrasList.filter { it.isActive }.joinToString(COMMA) { it.text },
+            ),
+            isDoneButtonVisible = inDoneButtonVisible(extras = newExtrasList.filter { it.isActive }.map { it.id })
+        )
+    }
+
+    private fun onExtrasChanged(changedExtra: ExtrasUiModel) {
+        val newExtrasList = if (changedExtra.id == ExtrasUiModel.Default.id) {
+            viewState.extras.uiModel.map { extra ->
+                when (extra.id) {
+                    ExtrasUiModel.Default.id -> extra.copy(isActive = !extra.isActive, count = 1)
+                    else -> extra.copy(isActive = false)
+                }
+            }
+        } else {
+            viewState.extras.uiModel.map { updatedExtra ->
+                when (updatedExtra.id) {
+                    ExtrasUiModel.Default.id -> updatedExtra.copy(isActive = false)
+                    changedExtra.id -> {
+                        updatedExtra.copy(
+                            isActive = !updatedExtra.isActive,
+                            count = if (!updatedExtra.isActive && updatedExtra.count == 0) 1 else updatedExtra.count
+                        )
+                    }
+
+                    else -> updatedExtra
+                }
+            }
+        }
         viewState = viewState.copy(
             extras = ExtrasState(
-                stateText = extras.joinToString(COMMA) { it.text },
-                extrasActive = extras,
-                uiModel = viewState.extras.uiModel
+                stateText = newExtrasList.filter { it.isActive }.joinToString(COMMA) { it.text },
+                uiModel = newExtrasList
             ),
-            isDoneButtonVisible = inDoneButtonVisible(extras = extras.map { it.id })
+            isDoneButtonVisible = inDoneButtonVisible(extras = newExtrasList.filter { it.isActive }.map { it.id })
         )
     }
 
@@ -161,6 +204,7 @@ class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
                         viewState = viewState.copy(cameraPermissionState = state)
                     }
                 }
+
                 else -> {
                     viewState = viewState.copy(cameraPermissionState = state)
                 }
@@ -180,14 +224,15 @@ class OrderLoadingViewModel(private val parameters: OrderStatesParameters) :
         pallets = viewState.palletsCount.stateText.toInt(),
         cargoType = viewState.cargoType.cargoType?.text.orEmpty(),
         images = listOf(viewState.photo?.remoteLink.orEmpty()),
-        extras = viewState.extras.extrasActive.filterNot { it == ExtrasUiModel.Default }.map { it.id }
+        extras = viewState.extras.uiModel.filter { it.isActive && it.id != ExtrasUiModel.Default.id }
+            .map { ExtrasModel(it.id, it.count) }
     )
 
     private fun inDoneButtonVisible(
         boxesCount: String = viewState.boxesCount.stateText,
         palletsCount: String = viewState.palletsCount.stateText,
         cargoType: CargoType? = viewState.cargoType.cargoType,
-        extras: List<Long> = viewState.extras.extrasActive.map { it.id },
+        extras: List<Long> = viewState.extras.uiModel.filter { it.isActive }.map { it.id },
         remoteLink: String? = viewState.photo?.remoteLink
     ) = boxesCount.isNotEmpty() && palletsCount.isNotEmpty() && cargoType != null && extras.isNotEmpty() &&
         remoteLink != null

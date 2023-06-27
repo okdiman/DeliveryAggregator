@@ -1,7 +1,6 @@
 package root.presentation
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +14,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextFieldDefaults
@@ -26,7 +26,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
@@ -105,24 +104,19 @@ fun AddressBSScreen(
 @Composable
 private fun AddressTitleView(@StringRes titleRes: Int) {
     val rootController = LocalRootController.current
-    Row(modifier = Modifier.padding(top = 40.dp)) {
+    Row(modifier = Modifier.padding(top = 32.dp), verticalAlignment = Alignment.CenterVertically) {
         Text(
             modifier = Modifier.weight(1f),
             text = stringResource(id = titleRes),
             style = Theme.fonts.bold.copy(fontSize = 24.sp)
         )
-        Icon(
-            modifier = Modifier
-                .padding(top = 8.dp)
-                .clip(Theme.shapes.roundedButton)
-                .clickable {
-                    rootController
-                        .findModalController()
-                        .popBackStack(null)
-                },
-            painter = painterResource(id = R_core.drawable.close_ic),
-            contentDescription = null
-        )
+        IconButton(
+            onClick = { rootController.findModalController().popBackStack(null) }) {
+            Icon(
+                painter = painterResource(id = R_core.drawable.close_ic),
+                contentDescription = null
+            )
+        }
     }
 }
 
@@ -141,7 +135,7 @@ private fun AddressTextFieldView(
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 24.dp)
+                .padding(top = 16.dp)
                 .focusRequester(focusRequester),
             value = textFieldValue.value,
             textStyle = Theme.fonts.regular.copy(
@@ -159,13 +153,12 @@ private fun AddressTextFieldView(
             ),
             shape = Theme.shapes.textFields,
             trailingIcon = {
-                Icon(
-                    modifier = Modifier
-                        .clip(Theme.shapes.roundedButton)
-                        .clickable { onClearClick() },
-                    painter = painterResource(id = R_core.drawable.delete_ic),
-                    contentDescription = null
-                )
+                IconButton(onClick = { onClearClick() }) {
+                    Icon(
+                        painter = painterResource(id = R_core.drawable.delete_ic),
+                        contentDescription = null
+                    )
+                }
             },
             placeholder = {
                 Text(

@@ -9,6 +9,6 @@ import org.koin.dsl.module
 internal fun orderChangesModule() = module {
     factory { GetOrderChangesUseCase(get()) }
     factory { ConfirmOrderChangesUseCase(get()) }
-    factory { OrderChangesUiMapper(get()) }
+    factory { OrderChangesUiMapper(get(), get()) }
     factory { OrderChangesMapper(get()) }
 }

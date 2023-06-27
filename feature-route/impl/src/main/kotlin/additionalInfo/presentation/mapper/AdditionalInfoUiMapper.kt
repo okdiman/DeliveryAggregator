@@ -42,11 +42,25 @@ class AdditionalInfoUiMapper(
         )
     )
 
-    private fun mapExtras(extrasModel: List<OrderExtrasModel>?): List<String> {
-        return extrasModel?.map {
-            if (it.priceDescription.isValid) {
-                buildString { append(it.name + COMMA + it.priceDescription.text) }
-            } else buildString { append(it.name + COMMA + it.price) }
-        } ?: listOf(resourceInteractor.getString(R.string.additional_info_dont_need))
-    }
+    private fun mapExtras(extrasModel: List<OrderExtrasModel>?) = extrasModel?.map {
+        if (it.priceDescription.isValid) {
+            buildString {
+                append(
+                    it.name + COMMA + it.priceDescription.text + resourceInteractor.getString(
+                        R.string.additional_info_factor,
+                        it.count
+                    )
+                )
+            }
+        } else {
+            buildString {
+                append(
+                    it.name + COMMA + it.price.toInt() + resourceInteractor.getString(
+                        R.string.additional_info_factor,
+                        it.count
+                    )
+                )
+            }
+        }
+    } ?: listOf(resourceInteractor.getString(R.string.additional_info_dont_need))
 }

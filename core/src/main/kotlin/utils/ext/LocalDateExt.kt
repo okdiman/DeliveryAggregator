@@ -1,6 +1,7 @@
 package utils.ext
 
 import org.threeten.bp.Instant
+import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZoneOffset
@@ -22,6 +23,8 @@ fun String.toLocalZonedDateTime(formatter: DateTimeFormatter): LocalDateTime {
 fun String.toLocalDateTime(formatter: DateTimeFormatter): LocalDateTime {
     return LocalDateTime.parse(this, formatter)
 }
+
+fun String.toLocalDate(pattern: String): LocalDate = LocalDate.parse(this, DateTimeFormatter.ofPattern(pattern))
 
 fun ZonedDateTime.toLocalLocalDateTime(): LocalDateTime {
     return withZoneSameInstant(ZoneId.systemDefault())

@@ -6,7 +6,7 @@
     <string name="new_order_pallet_title">Количество паллет</string>
     <string name="new_order_weight_hint">50</string>
     <string name="new_order_address_title">Ваш адрес</string>
-    <string name="new_order_date_title">Дата прибытия</string>
+    <string name="new_order_date_title">Дата отгрузки</string>
     <string name="new_order_date_button_text">Применить</string>
     <string name="new_order_date_reset">Сбросить</string>
     <string name="new_order_date_hint">Назначьте</string>
@@ -21,4 +21,5 @@
     <string name="new_order_payment_button">Вернуться в заказы</string>
     <string name="new_order_payment_title">Заказ оплачен!</string>
     <string name="new_order_payment_subtitle">Оплачено %1s</string>
+    <string name="new_order_date_error">Сначала необходимо выбрать склад</string>
 </resources>

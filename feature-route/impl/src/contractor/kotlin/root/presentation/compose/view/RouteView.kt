@@ -5,9 +5,7 @@ import ScrollScreenActionButton
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.animation.slideInHorizontally
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -67,9 +65,7 @@ internal fun RouteView(state: RouteState, eventHandler: (RouteEvent) -> Unit) {
                 val isAcceptButtonAvailable =
                     state.status == RouteStatusProgress.NEW && !state.isLoading
                 LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 0.dp)
+                    modifier = Modifier.fillMaxSize()
                 ) {
                     item {
                         NotificationIconView(notificationsCount = state.notificationsCount) {
@@ -85,6 +81,7 @@ internal fun RouteView(state: RouteState, eventHandler: (RouteEvent) -> Unit) {
                                 RouteLoadingView()
                             }
                         }
+
                         state.orders.isNotEmpty() -> {
                             item { Spacer(modifier = Modifier.height(16.dp)) }
                             itemsIndexed(state.orders) { index, item ->
@@ -99,18 +96,17 @@ internal fun RouteView(state: RouteState, eventHandler: (RouteEvent) -> Unit) {
                                 Spacer(modifier = Modifier.height(height))
                             }
                         }
+
                         else -> {
                             item {
-                                Column(
-                                    modifier = Modifier.fillParentMaxHeight(0.75f),
-                                    verticalArrangement = Arrangement.Center
-                                ) {
-                                    PlaceholderView(
-                                        modifier = Modifier.height(IntrinsicSize.Min),
-                                        placeHolderTitle = R.string.route_will_be_here,
-                                        placeHolderSubtitle = R.string.route_can_includes_some_orders
-                                    )
-                                }
+                                PlaceholderView(
+                                    modifier = Modifier
+                                        .padding(horizontal = 16.dp)
+                                        .fillParentMaxHeight(0.75f)
+                                        .height(IntrinsicSize.Min),
+                                    placeHolderTitle = R.string.route_will_be_here,
+                                    placeHolderSubtitle = R.string.route_can_includes_some_orders
+                                )
                             }
                         }
                     }
@@ -128,6 +124,7 @@ internal fun RouteView(state: RouteState, eventHandler: (RouteEvent) -> Unit) {
 private fun RouteTitleView() {
     Spacer(Modifier.height(14.dp))
     Text(
+        modifier = Modifier.padding(horizontal = 16.dp),
         text = stringResource(R_core.string.navigation_route),
         style = Theme.fonts.bold.copy(fontSize = 24.sp)
     )

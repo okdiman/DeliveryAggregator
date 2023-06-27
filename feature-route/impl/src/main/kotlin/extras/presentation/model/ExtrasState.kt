@@ -4,6 +4,5 @@ import view.model.DefaultParamState
 
 data class ExtrasState(
     override val stateText: String = "",
-    val uiModel: List<ExtrasUiModel> = emptyList(),
-    val extrasActive: List<ExtrasUiModel> = emptyList()
+    val uiModel: List<ExtrasUiModel> = emptyList()
 ) : DefaultParamState(stateText)

@@ -39,7 +39,7 @@ import notifications.presentation.viewmodel.model.NotificationsState
 import root.domain.model.status.OrderStatusProgress
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
-import view.BackButton
+import view.BackButtonView
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
 
 @Composable
@@ -53,11 +53,7 @@ internal fun NotificationsView(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(
-                    top = 16.dp,
-                    start = 16.dp,
-                    end = 16.dp
-                )
+                .padding(horizontal = 16.dp)
         ) {
             item {
                 NotificationsTitle(eventHandler)
@@ -68,6 +64,7 @@ internal fun NotificationsView(
                         NotificationLoadingView()
                     }
                 }
+
                 else -> {
                     items(state.notifications) { uiModel ->
                         NotificationItemView(
@@ -85,8 +82,12 @@ internal fun NotificationsView(
 
 @Composable
 private fun NotificationsTitle(eventHandler: (NotificationsEvent) -> Unit) {
-    Box(modifier = Modifier.fillMaxWidth()) {
-        BackButton { eventHandler(NotificationsEvent.OnBackClick) }
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 12.dp)
+    ) {
+        BackButtonView { eventHandler(NotificationsEvent.OnBackClick) }
         Text(
             modifier = Modifier.align(Alignment.Center),
             text = stringResource(id = R_core.string.notifications_title),
