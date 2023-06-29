@@ -3,7 +3,7 @@ package flow
 import bank.presentation.BankScreen
 import navigation.NavigationTree
 import organization.bank.presentation.BankParameters
-import organization.company.presentation.compose.CompanyScreen
+import company.presentation.CompanyScreen
 import presentation.parameters.CompanyParameters
 import ru.alexgladkov.odyssey.compose.extensions.flow
 import ru.alexgladkov.odyssey.compose.extensions.screen

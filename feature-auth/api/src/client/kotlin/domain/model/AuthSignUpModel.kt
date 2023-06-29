@@ -18,4 +18,5 @@ class AuthSignUpModel(
     val correspondentAccount: String,
     val bank: String,
     val organisationName: String,
+    val address: AuthAddressSignUpModel
 )

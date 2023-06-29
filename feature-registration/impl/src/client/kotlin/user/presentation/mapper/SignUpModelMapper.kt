@@ -1,5 +1,6 @@
 package user.presentation.mapper
 
+import domain.model.AuthAddressSignUpModel
 import domain.model.AuthSignUpModel
 import user.presentation.UserParameters
 import user.presentation.viewmodel.model.UserState
@@ -22,7 +23,14 @@ class SignUpModelMapper {
             checkingAccount = parameters.bank.paymentAcc,
             correspondentAccount = parameters.bank.corrAcc,
             organisationName = parameters.company.companyName,
-            bank = parameters.bank.bankName
+            bank = parameters.bank.bankName,
+            address = AuthAddressSignUpModel(
+                geoLon = parameters.company.fullAddress.geoLon,
+                geoLat = parameters.company.fullAddress.geoLat,
+                city = parameters.company.fullAddress.city,
+                street = parameters.company.fullAddress.street,
+                house = parameters.company.fullAddress.house
+            )
         )
     }
 }

@@ -1,5 +1,6 @@
 package root.data.model
 
+import domain.model.AuthAddressSignUpModel
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -19,5 +20,6 @@ data class AuthSignUpRequest(
     val checkingAccount: String,
     val correspondentAccount: String,
     val bank: String,
-    val organisationName: String
+    val organisationName: String,
+    val address: AuthAddressSignUpModel
 )

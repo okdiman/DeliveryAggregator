@@ -1,8 +1,8 @@
 package organization.bank.presentation
 
 import androidx.compose.runtime.Immutable
-import root.presentation.model.RegistrationCompanyModel
 import presentation.parameters.model.RegistrationStartUserModel
+import root.presentation.RegistrationCompanyModel
 
 @Immutable
 class BankParameters(

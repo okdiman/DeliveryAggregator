@@ -3,7 +3,7 @@ package root.presentation.model
 import androidx.compose.runtime.Immutable
 
 @Immutable
-class RegistrationDepartureAddressModel(
+class RegistrationFullAddressModel(
     val geoLat: String,
     val geoLon: String,
     val city: String,

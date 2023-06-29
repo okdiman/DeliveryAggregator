@@ -21,7 +21,8 @@ class AuthSignUpMapper {
             checkingAccount = model.checkingAccount,
             correspondentAccount = model.correspondentAccount,
             organisationName = model.organisationName,
-            bank = model.bank
+            bank = model.bank,
+            address = model.address
         )
     }
 }

@@ -2,8 +2,8 @@ package transport
 
 import androidx.compose.runtime.Immutable
 import presentation.parameters.model.RegistrationStartUserModel
+import root.presentation.RegistrationCompanyModel
 import root.presentation.model.RegistrationBankModel
-import root.presentation.model.RegistrationCompanyModel
 
 @Immutable
 class TransportParameters(

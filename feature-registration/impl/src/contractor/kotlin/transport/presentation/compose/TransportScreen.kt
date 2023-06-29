@@ -5,7 +5,7 @@ import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
 import navigation.NavigationTree
 import root.presentation.AddressBSScreen
-import root.presentation.model.RegistrationDepartureAddressModel
+import root.presentation.model.RegistrationFullAddressModel
 import root.presentation.model.RegistrationTransportModel
 import ru.alexgladkov.odyssey.compose.extensions.present
 import ru.alexgladkov.odyssey.compose.extensions.push
@@ -77,7 +77,7 @@ private fun getUserParameters(parameters: TransportParameters, state: TransportS
         bank = parameters.bank,
         transport = RegistrationTransportModel(
             licencePlate = state.licencePlate.stateText,
-            departureAddress = RegistrationDepartureAddressModel(
+            departureAddress = RegistrationFullAddressModel(
                 geoLon = state.departureAddress.address?.geoLon.orEmpty(),
                 geoLat = state.departureAddress.address?.geoLat.orEmpty(),
                 city = state.departureAddress.address?.city.orEmpty(),

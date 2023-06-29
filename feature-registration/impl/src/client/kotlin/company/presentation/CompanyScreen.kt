@@ -1,4 +1,4 @@
-package organization.company.presentation.compose
+package company.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -6,6 +6,7 @@ import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
 import navigation.NavigationTree
 import organization.bank.presentation.BankParameters
+import organization.company.presentation.compose.CompanyView
 import organization.company.presentation.viewmodel.CompanyViewModel
 import organization.company.presentation.viewmodel.model.CompanyAction
 import organization.company.presentation.viewmodel.model.CompanyEvent
@@ -13,7 +14,8 @@ import organization.company.presentation.viewmodel.model.CompanyState
 import presentation.AddressSuggestUiModel
 import presentation.parameters.CompanyParameters
 import root.presentation.AddressBSScreen
-import root.presentation.model.RegistrationCompanyModel
+import root.presentation.RegistrationCompanyModel
+import root.presentation.model.RegistrationFullAddressModel
 import ru.alexgladkov.odyssey.compose.extensions.push
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
 import utils.UiConstants.BottomSheet.SCREEN_MAX_HEIGHT
@@ -40,7 +42,14 @@ fun CompanyScreen(parameters: CompanyParameters) {
                             kpp = state.value.kpp.stateText,
                             ogrn = state.value.ogrn.stateText,
                             legalAddress = state.value.legalAddress.stateText,
-                            actualAddress = state.value.actualAddress.stateText
+                            actualAddress = state.value.actualAddress.stateText,
+                            fullAddress = RegistrationFullAddressModel(
+                                geoLon = state.value.actualAddress.address?.geoLon.orEmpty(),
+                                geoLat = state.value.actualAddress.address?.geoLat.orEmpty(),
+                                city = state.value.actualAddress.address?.city.orEmpty(),
+                                street = state.value.actualAddress.address?.street.orEmpty(),
+                                house = state.value.actualAddress.address?.house.orEmpty()
+                            )
                         )
                     )
                 )
