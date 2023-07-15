@@ -41,4 +41,6 @@ dependencies {
     implementation(project(Modules.registration_impl))
     implementation(project(Modules.route_api))
     implementation(project(Modules.route_impl))
+    implementation(project(Modules.pdf_api))
+    implementation(project(Modules.pdf_impl))
 }

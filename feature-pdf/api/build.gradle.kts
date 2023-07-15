@@ -1,20 +1,13 @@
 plugins {
     id(Plugins.kotlin)
     id(Plugins.library)
-    id(Plugins.serialization)
 }
 
 android {
     compileSdk = Settings.targetSdk
-    namespace = "trinity_monsters.delivery_aggregator.feature_auth.impl"
+    namespace = "trinity_monsters.delivery_aggregator.feature_pdf.api"
     defaultConfig {
         minSdk = Settings.minSdk
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = Settings.composeCompiler
     }
     flavorDimensions.add(Settings.Flavors.name)
     productFlavors {
@@ -28,17 +21,7 @@ android {
 }
 
 dependencies {
-    koin()
-    coil()
     compose()
-    navigation()
-    network()
-    security()
-    viewModel()
-    pdf()
-    implementation(project(Modules.auth_api))
-    implementation(project(Modules.pdf_api))
-    implementation(project(Modules.registration_api))
     implementation(project(Modules.core))
     implementation(project(Modules.core_ui))
 }

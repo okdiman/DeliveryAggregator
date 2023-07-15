@@ -1,5 +1,7 @@
 package root.presentation.compose
 
+import PdfScreenParameters
+import PdfType
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import com.adeo.kviewmodel.compose.observeAsState
@@ -39,11 +41,13 @@ fun ProfileScreen() {
                 }
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
+
             ProfileAction.OpenDepartureAddress -> {
                 rootController.findRootController()
                     .push(NavigationTree.Profile.DepartureAddress.name)
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
+
             ProfileAction.OpenTransport -> {
                 rootController.findRootController().push(
                     screen = NavigationTree.Profile.Transport.name,
@@ -51,28 +55,37 @@ fun ProfileScreen() {
                 )
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
+
             ProfileAction.OpenSupport -> {
                 rootController.findModalController().presentStandardBS { SupportScreen() }
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
+
             ProfileAction.OpenNotificationsSettings -> {
                 openNotificationSettings(context)
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
+
             ProfileAction.OpenOffer -> {
-                rootController.findRootController().push(NavigationTree.Profile.Offer.name)
+                rootController.findRootController().push(
+                    screen = NavigationTree.Profile.Pdf.name,
+                    params = PdfScreenParameters(PdfType.Offer)
+                )
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
+
             ProfileAction.OpenExitFromAccount -> {
                 rootController.findModalController().presentStandardBS { ExitScreen() }
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
+
             ProfileAction.OpenDevMenu -> {
                 rootController.findRootController().push(
                     screen = NavigationTree.Main.DevMenu.name
                 )
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
+
             else -> {}
         }
     }

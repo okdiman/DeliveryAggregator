@@ -1,12 +1,11 @@
 plugins {
     id(Plugins.kotlin)
     id(Plugins.library)
-    id(Plugins.serialization)
 }
 
 android {
     compileSdk = Settings.targetSdk
-    namespace = "trinity_monsters.delivery_aggregator.feature_auth.impl"
+    namespace = "trinity_monsters.delivery_aggregator.feature_pdf.impl"
     defaultConfig {
         minSdk = Settings.minSdk
     }
@@ -29,16 +28,11 @@ android {
 
 dependencies {
     koin()
-    coil()
     compose()
     navigation()
-    network()
-    security()
     viewModel()
     pdf()
-    implementation(project(Modules.auth_api))
-    implementation(project(Modules.pdf_api))
-    implementation(project(Modules.registration_api))
     implementation(project(Modules.core))
     implementation(project(Modules.core_ui))
+    implementation(project(Modules.pdf_api))
 }

@@ -30,5 +30,7 @@ include(
     ":feature-route:impl",
     ":feature-image-uploading:api",
     ":feature-image-uploading:impl",
+    ":feature-pdf:api",
+    ":feature-pdf:impl",
     ":feature-splash-screen"
 )

@@ -17,4 +17,6 @@ object Modules {
     const val route_impl = ":feature-route:impl"
     const val image_uploading_api = ":feature-image-uploading:api"
     const val image_uploading_impl = ":feature-image-uploading:impl"
+    const val pdf_api = ":feature-pdf:api"
+    const val pdf_impl = ":feature-pdf:impl"
 }

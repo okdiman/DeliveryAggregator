@@ -1,16 +1,17 @@
 package flow
 
+import PdfScreenParameters
 import departure.presentation.compose.DepartureScreen
 import editing.presentation.EditProfileParameters
 import editing.presentation.compose.EditProfileScreen
 import navigation.NavigationTree
 import notifications.presentation.compose.NotificationsScreen
-import offer.presentation.compose.OfferScreen
 import orderdetails.deliverystate.presentation.compose.OrderDeliveryScreen
 import orderdetails.loadingstate.presentation.compose.OrderLoadingScreen
 import orderdetails.root.presentation.OrderDetailsParameters
 import orderdetails.root.presentation.OrderStatesParameters
 import orderdetails.root.presentation.compose.OrderDetailsScreen
+import pdf.presentation.compose.PdfScreen
 import presentation.DeeplinkParameters
 import root.presentation.compose.ProfileScreen
 import root.presentation.compose.RouteScreen
@@ -52,8 +53,8 @@ fun RootComposeBuilder.mainFlow(deeplinkParameters: DeeplinkParameters?) {
             }
         }
     }
-    screen(NavigationTree.Profile.Offer.name) {
-        OfferScreen()
+    screen(NavigationTree.Profile.Pdf.name) { parameters ->
+        PdfScreen(parameters as PdfScreenParameters)
     }
     screen(NavigationTree.Profile.Edit.name) { parameters ->
         EditProfileScreen(parameters as EditProfileParameters)

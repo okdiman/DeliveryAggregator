@@ -90,4 +90,8 @@ object Libraries {
     object LeakCanary {
         const val core = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
     }
+
+    object Pdf {
+        const val core = "io.github.grizzi91:bouquet:${Versions.pdf}"
+    }
 }

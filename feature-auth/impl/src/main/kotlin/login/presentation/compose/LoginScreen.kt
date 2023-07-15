@@ -1,5 +1,7 @@
 package login.presentation.compose
 
+import PdfScreenParameters
+import PdfType
 import androidx.compose.runtime.Composable
 import com.adeo.kviewmodel.compose.observeAsState
 import com.adeo.kviewmodel.odyssey.StoredViewModel
@@ -28,10 +30,23 @@ fun LoginScreen() {
                 )
                 viewModel.obtainEvent(LoginEvent.ResetAction)
             }
+
             LoginAction.OpenOffer -> {
-                rootController.push(NavigationTree.Auth.Offer.name)
+                rootController.push(
+                    screen = NavigationTree.Auth.Pdf.name,
+                    params = PdfScreenParameters(PdfType.Offer)
+                )
                 viewModel.obtainEvent(LoginEvent.ResetAction)
             }
+
+            LoginAction.OpenPrivacyPolicy -> {
+                rootController.push(
+                    screen = NavigationTree.Auth.Pdf.name,
+                    params = PdfScreenParameters(PdfType.PrivacyPolicy)
+                )
+                viewModel.obtainEvent(LoginEvent.ResetAction)
+            }
+
             else -> {}
         }
     }

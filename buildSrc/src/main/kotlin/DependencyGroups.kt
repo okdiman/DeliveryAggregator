@@ -81,3 +81,7 @@ fun DependencyHandler.navigation() {
 fun DependencyHandler.leakCanary() {
     add(DEBUG_IMPLEMENTATION, Libraries.LeakCanary.core)
 }
+
+fun DependencyHandler.pdf() {
+    add(IMPLEMENTATION, Libraries.Pdf.core)
+}

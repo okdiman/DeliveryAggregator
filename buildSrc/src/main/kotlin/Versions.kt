@@ -7,8 +7,8 @@ object Versions {
     const val kotlinxConverter = "1.0.0"
     const val splashScreen = "1.0.0"
     const val detekt = "1.22.0"
-    const val compose = "1.3.1"
-    const val activityCompose = "1.6.1"
+    const val compose = "1.4.3"
+    const val activityCompose = "1.7.1"
     const val lifecycle = "2.5.1"
     const val lifecycleExt = "2.2.0"
     const val kViewModel = "0.11"
@@ -24,4 +24,5 @@ object Versions {
     const val accompanist = "0.28.0"
     const val browser = "1.5.0"
     const val leakCanary = "2.10"
+    const val pdf = "1.1.2"
 }
