@@ -15,7 +15,7 @@ import root.data.AuthApi
 import root.data.AuthLocalDataSourceImpl
 import root.data.AuthRepositoryImpl
 import root.data.mapper.AuthSignUpMapper
-import root.data.mapper.CompanyInfoMapper
+import root.data.mapper.DtoInfoMapper
 import root.domain.GetAuthTokenSyncUseCaseImpl
 import root.domain.GetPushTokenSyncUseCaseImpl
 import root.domain.IsAuthorizedUseCaseImpl
@@ -30,5 +30,5 @@ internal fun authRootModule() = module {
     factory<GetAuthTokenSyncUseCase> { GetAuthTokenSyncUseCaseImpl(get()) }
     factory<GetPushTokenSyncUseCase> { GetPushTokenSyncUseCaseImpl(get()) }
     factory<IsAuthorizedUseCase> { IsAuthorizedUseCaseImpl(get()) }
-    factoryOf(::CompanyInfoMapper)
+    factoryOf(::DtoInfoMapper)
 }

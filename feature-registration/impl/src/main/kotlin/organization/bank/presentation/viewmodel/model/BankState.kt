@@ -7,5 +7,6 @@ data class BankState(
     val corrAcc: BankParamState.CorrAccState = BankParamState.CorrAccState(),
     val bik: BankParamState.BikState = BankParamState.BikState(),
     val bankName: BankParamState.BankNameState = BankParamState.BankNameState(),
+    val isBankInfoLoaded: Boolean = false,
     val isContinueButtonEnabled: Boolean = false
 )

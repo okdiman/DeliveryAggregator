@@ -69,6 +69,7 @@ class ProfileViewModel : BaseViewModel<ProfileState, ProfileAction, ProfileEvent
             ProfileItemType.Offer -> ProfileAction.OpenOffer
             ProfileItemType.Exit -> ProfileAction.OpenExitFromAccount
             ProfileItemType.DevMenu -> ProfileAction.OpenDevMenu
+            ProfileItemType.PrivacyPolicy -> ProfileAction.OpenPrivacyPolicy
         }
     }
 }

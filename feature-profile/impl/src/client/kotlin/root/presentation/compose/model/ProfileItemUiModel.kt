@@ -28,6 +28,11 @@ class ProfileItemUiModel(
                 type = ProfileItemType.Notifications
             ),
             ProfileItemUiModel(
+                icon = R.drawable.profile_privacy_policy,
+                title = R.string.profile_privacy_policy,
+                type = ProfileItemType.PrivacyPolicy
+            ),
+            ProfileItemUiModel(
                 icon = R.drawable.profile_offer_ic,
                 title = R.string.profile_offer,
                 type = ProfileItemType.Offer

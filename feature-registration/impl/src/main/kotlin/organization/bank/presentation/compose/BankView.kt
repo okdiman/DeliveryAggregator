@@ -24,10 +24,9 @@ import organization.bank.presentation.viewmodel.model.BankEvent
 import organization.bank.presentation.viewmodel.model.BankState
 import root.RegistrationConstants
 import root.RegistrationConstants.Limits.Bank.BANK_ACC_CHARS
-import root.RegistrationConstants.Limits.Bank.BIK_CHARS
 import root.presentation.RegistrationTitleView
+import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_registration.impl.R
-import utils.CommonConstants.LIMITS.Common.MAX_NAME_CHARS
 import view.StandardTextField
 
 @Composable
@@ -75,21 +74,33 @@ private fun BankTextFieldsBlock(
 ) {
     StandardTextField(
         modifier = modifier,
+        title = stringResource(R.string.bank_bik),
+        state = state.bik,
+        hint = stringResource(R.string.bank_bik_hint),
+        isDigits = true,
+        keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+        maxChar = RegistrationConstants.Limits.Bank.BIK_CHARS
+    ) { eventHandler(BankEvent.OnBikChanged(it)) }
+    StandardTextField(
+        modifier = modifier,
         title = stringResource(R.string.bank_payment_acc),
         state = state.paymentAcc,
         hint = stringResource(R.string.bank_payment_acc_hint),
         isDigits = true,
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = BANK_ACC_CHARS
-    ) {
-        eventHandler(BankEvent.OnPaymentAccChanged(it))
-    }
+    ) { eventHandler(BankEvent.OnPaymentAccChanged(it)) }
     StandardTextField(
         modifier = modifier,
         title = stringResource(R.string.bank_corr_acc),
         state = state.corrAcc,
-        isDigits = true,
         hint = stringResource(R.string.bank_corr_acc_hint),
+        enabled = !state.isBankInfoLoaded,
+        textStyle = if (state.isBankInfoLoaded) {
+            Theme.fonts.regular.copy(color = Theme.colors.disabledTextColor)
+        } else {
+            Theme.fonts.regular.copy(platformStyle = null, lineHeightStyle = null)
+        },
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
         maxChar = BANK_ACC_CHARS
     ) {
@@ -97,21 +108,15 @@ private fun BankTextFieldsBlock(
     }
     StandardTextField(
         modifier = modifier,
-        title = stringResource(R.string.bank_bik),
-        state = state.bik,
-        hint = stringResource(R.string.bank_bik_hint),
-        isDigits = true,
-        keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-        maxChar = BIK_CHARS
-    ) {
-        eventHandler(BankEvent.OnBikChanged(it))
-    }
-    StandardTextField(
-        modifier = modifier,
         title = stringResource(R.string.bank_name),
         state = state.bankName,
         hint = stringResource(R.string.bank_name_hint),
-        maxChar = MAX_NAME_CHARS
+        enabled = !state.isBankInfoLoaded,
+        textStyle = if (state.isBankInfoLoaded) {
+            Theme.fonts.regular.copy(color = Theme.colors.disabledTextColor)
+        } else {
+            Theme.fonts.regular.copy(platformStyle = null, lineHeightStyle = null)
+        }
     ) {
         eventHandler(BankEvent.OnBankNameChanged(it))
     }

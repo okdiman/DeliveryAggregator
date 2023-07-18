@@ -7,7 +7,7 @@ object NavigationTree {
     }
 
     enum class Auth {
-        AuthFlow, Login, Offer, Verify
+        AuthFlow, Login, Pdf, Verify
     }
 
     enum class Registration {
@@ -23,7 +23,7 @@ object NavigationTree {
     }
 
     enum class Profile {
-        Offer, Edit, DepartureAddress, Transport
+        Pdf, Edit, DepartureAddress, Transport
     }
 
     enum class Routes {

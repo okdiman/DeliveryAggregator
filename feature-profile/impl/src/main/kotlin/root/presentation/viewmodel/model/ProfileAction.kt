@@ -5,6 +5,7 @@ sealed interface ProfileAction {
     object OpenDepartureAddress : ProfileAction
     object OpenTransport : ProfileAction
     object OpenOffer : ProfileAction
+    object OpenPrivacyPolicy: ProfileAction
     object OpenDevMenu : ProfileAction
     object OpenNotificationsSettings : ProfileAction
     object OpenSupport : ProfileAction

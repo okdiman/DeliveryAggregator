@@ -74,6 +74,14 @@ fun ProfileScreen() {
                 viewModel.obtainEvent(ProfileEvent.ResetAction)
             }
 
+            ProfileAction.OpenPrivacyPolicy -> {
+                rootController.findRootController().push(
+                    screen = NavigationTree.Profile.Pdf.name,
+                    params = PdfScreenParameters(PdfType.PrivacyPolicy)
+                )
+                viewModel.obtainEvent(ProfileEvent.ResetAction)
+            }
+
             ProfileAction.OpenExitFromAccount -> {
                 rootController.findModalController().presentStandardBS { ExitScreen() }
                 viewModel.obtainEvent(ProfileEvent.ResetAction)

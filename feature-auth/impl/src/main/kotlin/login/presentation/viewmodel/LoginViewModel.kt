@@ -22,7 +22,8 @@ class LoginViewModel : BaseViewModel<LoginState, LoginAction, LoginEvent>(
         when (viewEvent) {
             is LoginEvent.PhoneChanged -> onPhoneChanged(viewEvent.phone)
             LoginEvent.OnAgreementClick -> onAgreementClick()
-            LoginEvent.OnOfferCLick -> onOfferClick()
+            LoginEvent.OnOfferClick -> onOfferClick()
+            LoginEvent.OnPrivacyPolicyClick -> onPrivacyPolicyClick()
             LoginEvent.OnEntranceButtonCLick -> onEntranceButtonClick()
             LoginEvent.ResetAction -> onResetAction()
         }
@@ -44,6 +45,10 @@ class LoginViewModel : BaseViewModel<LoginState, LoginAction, LoginEvent>(
 
     private fun onOfferClick() {
         viewAction = LoginAction.OpenOffer
+    }
+
+    private fun onPrivacyPolicyClick() {
+        viewAction = LoginAction.OpenPrivacyPolicy
     }
 
     private fun onEntranceButtonClick() {

@@ -4,5 +4,6 @@
     <string name="profile_transport">Транспорт</string>
     <string name="profile_support">Поддержка</string>
     <string name="profile_notifications">Настройки уведомлений</string>
+    <string name="profile_privacy_policy">Политика конфиденциальности</string>
     <string name="profile_offer">Оферта</string>
 </resources>

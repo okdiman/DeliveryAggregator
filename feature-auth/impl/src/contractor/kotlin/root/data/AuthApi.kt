@@ -6,8 +6,10 @@ import retrofit2.http.POST
 import root.data.model.AuthSignUpRequest
 import root.data.model.request.AuthSendVerifyCodeRequest
 import root.data.model.request.AuthSignInRequest
+import root.data.model.request.BikBankRequest
 import root.data.model.request.InnCompanyRequest
 import root.data.model.response.AuthSuccessDto
+import root.data.model.response.bankinfo.BankInfoDto
 import root.data.model.response.companyinfo.CompanyInfoDto
 
 interface AuthApi {
@@ -36,4 +38,9 @@ interface AuthApi {
     suspend fun getCompanyInfoByInn(
         @Body request: InnCompanyRequest
     ): ArrayList<CompanyInfoDto>
+
+    @POST("/auth/suggest/bank")
+    suspend fun getBankInfoByBik(
+        @Body request: BikBankRequest
+    ): ArrayList<BankInfoDto>
 }

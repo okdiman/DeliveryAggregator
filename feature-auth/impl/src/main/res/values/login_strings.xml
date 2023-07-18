@@ -3,7 +3,10 @@
     <string name="login_enter_phone">Введите номер телефона</string>
     <string name="login_phone_prefix">+7</string>
     <string name="login_phone_hint">(985)111-22-33</string>
-    <string name="login_agreement">Я соглашаюсь с условиями оферты</string>
+    <string name="login_agreement_part_1">Я соглашаюсь с\u0020</string>
+    <string name="login_agreement_part_2">условиями оферты</string>
+    <string name="login_agreement_part_3">\u0020и\u0020</string>
+    <string name="login_agreement_part_4">политики конфиденциальности</string>
     <string name="login_read_offer">Прочитать условия</string>
     <string name="login_entrance">Войти</string>
 </resources>

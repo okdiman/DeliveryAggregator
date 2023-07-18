@@ -17,7 +17,7 @@ import user.presentation.UserParameters
 @Composable
 fun BankScreen(parameters: BankParameters) {
     val rootController = LocalRootController.current
-    StoredViewModel(factory = { BankViewModel() }) { viewModel ->
+    StoredViewModel(factory = { BankViewModel(parameters) }) { viewModel ->
         val state = viewModel.viewStates().observeAsState()
         val action = viewModel.viewActions().observeAsState()
         BankView(state = state.value) { event ->
