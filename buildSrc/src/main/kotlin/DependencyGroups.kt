@@ -33,7 +33,7 @@ fun DependencyHandler.kotlin() {
 fun DependencyHandler.compose() {
     add(IMPLEMENTATION, Libraries.Compose.composeActivity)
     add(IMPLEMENTATION, Libraries.Compose.ui)
-    add(IMPLEMENTATION, Libraries.Compose.tooling)
+    add(DEBUG_IMPLEMENTATION, Libraries.Compose.tooling)
     add(IMPLEMENTATION, Libraries.Compose.material)
 }
 

@@ -49,6 +49,9 @@
 ├── feature-image-uploading    # Модуль для выгрузки фото на сервер
 │   ├── api                    
 │   └── impl    
+├── feature-pdf                # Модуль работы с pdf
+│   ├── api                    
+│   └── impl    
 ├── feature-profile            # Модуль для работы с профилем пользователя
 │   ├── api                    
 │   └── impl    

@@ -33,12 +33,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import presentation.AddressSuggestUiModel
 import root.presentation.model.AddressState
 import root.presentation.view.SuggestItemView
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
+import theme.DeliveryAggregatorTheme
 import theme.Theme
 import view.ProgressIndicator
 import trinity_monsters.delivery_aggregator.core_ui.R as R_core
@@ -56,7 +58,14 @@ fun AddressBSScreen(
 ) {
     val scrollState = rememberLazyListState()
     val focusRequester = remember { FocusRequester() }
-    val textFieldValue = remember { mutableStateOf(TextFieldValue(state.stateText, TextRange(state.stateText.length))) }
+    val textFieldValue = remember {
+        mutableStateOf(
+            TextFieldValue(
+                state.stateText,
+                TextRange(state.stateText.length)
+            )
+        )
+    }
     LazyColumn(
         state = scrollState,
         modifier = Modifier.padding(start = 16.dp, end = 16.dp),
@@ -174,4 +183,17 @@ private fun AddressTextFieldView(
         )
     }
     Spacer(modifier = Modifier.height(24.dp))
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Composable
+private fun AddressBSScreenPreview() {
+    DeliveryAggregatorTheme {
+        AddressBSScreen(
+            state = AddressState(),
+            suggests = emptyList(),
+            onClearClick = {},
+            onSuggestClick = {},
+            onTextFieldChanged = {})
+    }
 }

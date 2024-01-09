@@ -15,9 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
+import theme.DeliveryAggregatorTheme
 import theme.Theme
 import view.ProgressBarConstants.DefaultAnimationDelay
 import view.ProgressBarConstants.DefaultAnimationDuration
@@ -40,7 +42,7 @@ fun ProgressIndicator(
     minBallDiameter: Dp = DefaultMinBallDiameter,
     spacing: Dp = DefaultSpacing
 ) {
-    val transition = rememberInfiniteTransition()
+    val transition = rememberInfiniteTransition(label = "")
     val duration = startDelay + animationDuration + animationDelay
 
     val diameters = arrayListOf<Float>().apply {
@@ -57,7 +59,8 @@ fun ProgressIndicator(
                         0f at animationDuration + delay
                         0f at duration
                     },
-                )
+                ),
+                label = ""
             )
             add(diameter)
         }
@@ -116,4 +119,12 @@ private object ProgressBarConstants {
     val DefaultMaxBallDiameter = 12.dp
     val DefaultMinBallDiameter = 8.dp
     val DefaultSpacing = 6.dp
+}
+
+@Composable
+@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+private fun ProgressIndicator_Preview() {
+    DeliveryAggregatorTheme {
+        ProgressIndicator()
+    }
 }

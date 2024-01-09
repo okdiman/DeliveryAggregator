@@ -106,6 +106,7 @@ internal fun TitledTextField(
                     isDigits -> {
                         onValueChanged(value.filter { it.isDigit() }.take(maxChar))
                     }
+
                     else -> {
                         onValueChanged(value.take(maxChar))
                     }
@@ -127,6 +128,7 @@ internal fun TitledTextField(
                     )
                 )
             }
+
             discription != null -> {
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(

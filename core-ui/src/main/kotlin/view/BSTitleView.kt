@@ -10,9 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.alexgladkov.odyssey.compose.local.LocalRootController
+import theme.DeliveryAggregatorTheme
 import theme.Theme
 import trinity_monsters.delivery_aggregator.core_ui.R
 
@@ -40,5 +42,13 @@ fun BSTitleView(title: String) {
                 contentDescription = null
             )
         }
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Composable
+private fun BSTitleView_Preview() {
+    DeliveryAggregatorTheme {
+        BSTitleView("Test title")
     }
 }

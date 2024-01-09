@@ -9,8 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import theme.DeliveryAggregatorTheme
 import theme.Theme
+import trinity_monsters.delivery_aggregator.core_ui.R
 import utils.UiConstants.HINT_ALPHA
 import view.model.DefaultParamState
 
@@ -69,4 +72,18 @@ fun StandardTextField(
         discription = discription,
         maxLines = maxLines
     )
+}
+
+@Composable
+@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+private fun StandardTextField_Preview() {
+    DeliveryAggregatorTheme {
+        StandardTextField(
+            state = DefaultParamState(
+                "test error text",
+                isFillingError = true,
+                fillingErrorDiscription = R.string.common_empty_error
+            )
+        )
+    }
 }

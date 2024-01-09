@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.center
 import androidx.compose.ui.unit.toOffset
 
+/** контейнер, внутри которого можно зумить вью*/
 @Composable
 fun ZoomableBox(
     modifier: Modifier = Modifier,
@@ -94,6 +95,8 @@ private data class ZoomableBoxScopeImpl(
     override val offset: Offset,
     private val boxScope: BoxScope,
 ) : ZoomableBoxScope {
-    override fun Modifier.align(alignment: Alignment): Modifier = with(boxScope) { align(alignment) }
+    override fun Modifier.align(alignment: Alignment): Modifier =
+        with(boxScope) { align(alignment) }
+
     override fun Modifier.matchParentSize(): Modifier = with(boxScope) { matchParentSize() }
 }

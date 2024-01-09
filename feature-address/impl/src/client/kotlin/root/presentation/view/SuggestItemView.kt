@@ -50,11 +50,13 @@ internal fun SuggestItemView(
                         item.house.isNotEmpty() && isNeedComment -> {
                             navigateToCommentScreen(rootController, item, onSuggestClick)
                         }
+
                         item.house.isNotEmpty() -> {
                             rootController
                                 .findModalController()
                                 .popBackStack(null)
                         }
+
                         else -> {
                             coroutineScope.launch {
                                 scrollState.animateScrollToItem(0)

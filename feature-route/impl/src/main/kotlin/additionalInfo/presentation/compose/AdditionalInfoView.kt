@@ -15,8 +15,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import theme.DeliveryAggregatorTheme
 import theme.Theme
 import trinity_monsters.delivery_aggregator.feature_route.impl.R
 
@@ -68,4 +70,12 @@ private fun AdditionalInfoBlock(title: String, text: String) {
         text = text,
         style = Theme.fonts.regular.copy(fontSize = 18.sp)
     )
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Composable
+private fun AdditionalInfoView_Preview() {
+    DeliveryAggregatorTheme {
+        AdditionalInfoView(AdditionalInfoState()) {}
+    }
 }

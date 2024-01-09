@@ -7,9 +7,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import modifiers.shimmerEffect
 import presentation.AddressUiConstants.ADDRESSES_MAX_COUNT
+import theme.DeliveryAggregatorTheme
 import theme.Theme
 
 @Composable
@@ -23,5 +25,13 @@ fun AddressLoadingView() {
                 .clip(Theme.shapes.textFields)
                 .shimmerEffect()
         )
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Composable
+private fun AddressLoadingView_Preview() {
+    DeliveryAggregatorTheme {
+        AddressLoadingView()
     }
 }

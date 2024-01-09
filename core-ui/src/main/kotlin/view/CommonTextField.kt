@@ -16,8 +16,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import theme.DeliveryAggregatorTheme
 import theme.Theme
 import utils.CommonConstants.MASK.CODE
 import utils.CommonConstants.MASK.PHONE
@@ -59,10 +61,12 @@ fun CommonTextField(
             mask = PHONE,
             maxChar = maxChar
         )
+
         isCode -> DigitVisualTransformation(
             mask = CODE,
             maxChar = maxChar
         )
+
         else -> VisualTransformation.None
     }
     BasicTextField(
@@ -79,6 +83,7 @@ fun CommonTextField(
                 isPhone || isCode -> {
                     onValueChanged(value.filter { it.isDigit() }.take(maxChar))
                 }
+
                 else -> {
                     onValueChanged(value.take(maxChar))
                 }
@@ -102,5 +107,16 @@ fun CommonTextField(
                 )
             }
         )
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Composable
+private fun CommonTextField_Preview() {
+    DeliveryAggregatorTheme {
+        CommonTextField(
+            text = "Test text",
+            hint = "Test hint"
+        ) {}
     }
 }

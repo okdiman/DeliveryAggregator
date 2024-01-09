@@ -5,6 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
+import theme.DeliveryAggregatorTheme
 import theme.Theme
 import view.calendar.model.CalendarDateUiModel
 import view.calendar.model.CalendarState
@@ -40,5 +42,15 @@ fun CalendarView(
             activeDateColor = activeDateColor,
             weekendDateColor = weekendDateColor,
         ) { onClickDate(it) }
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF, showSystemUi = true)
+@Composable
+private fun CalendarView_Preview() {
+    DeliveryAggregatorTheme {
+        CalendarView(
+            state = CalendarState(listOf(), month = "April", defaultIndex = 10),
+            onMonthClick = {}) {}
     }
 }
